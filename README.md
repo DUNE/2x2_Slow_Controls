@@ -13,7 +13,7 @@ This repository contains the code used for setting up the slow controls monitori
 
 This is the architecture for the Slow Controls GUI:
 
-![image](https://github.com/rvizarreta/Mx2_SlowControlsDisplay/assets/34606228/5ad2391b-7a69-4a3b-a731-de15dd602a69)
+<img width="668" alt="image" src="https://github.com/DUNE/2x2_Slow_Controls/assets/34606228/ed7319db-f185-44a1-8e65-71a036a768d8">
 
 ## How to Start this App?
 Go to /home/acd/acdemo/SLOW-CONTROLS-GUI on srv04 and run (as admin):
