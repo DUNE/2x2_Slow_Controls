@@ -1,0 +1,8 @@
+pydantic==1.9.2
+uvicorn==0.16.0
+influxdb
+fastapi==0.83
+pysnmp==4.4.12
+numpy
+paramiko
+email-validator

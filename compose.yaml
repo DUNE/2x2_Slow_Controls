@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  fastapi-app:
+    build:
+      context: .
+      dockerfile: Backend/Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      IP_LOCAL: 172.30.0.1
+      
+  react-app:
+    build:
+      context: ./Frontend
+    ports:
+      - "3006:3006"

@@ -1,0 +1,18 @@
+{
+    "gizmo" : {
+        "class" : "GIZMO",
+        "host-name" : "192.168.197.30",
+        "username" : "root",
+        "password" : "",
+        "port" : 22,
+        "powering" :{
+            "resistance" : {"measurements" : "resistance"},
+            "threshold" : {"measurements" : "threshold"},
+            "magnitude" : {"measurements" : "magnitude"},
+            "current" : {"measurements" : "current"},
+            "charge" : {"measurements" : "charge"}
+        },
+        "on_message" : "Turn GIZMO off manually only.",
+        "off_message" : "GIZMO SSH error state. Turn on manually."
+    }
+}
