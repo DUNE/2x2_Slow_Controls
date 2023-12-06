@@ -5,10 +5,10 @@ services:
     build:
       context: .
       dockerfile: Backend/Dockerfile
+    environment:
+      IP_LOCAL : ${LOCAL_IP}
     ports:
       - "8000:8000"
-    environment:
-      IP_LOCAL: 172.30.0.1
       
   react-app:
     build:
