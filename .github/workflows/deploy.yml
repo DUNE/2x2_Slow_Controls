@@ -1,24 +1,42 @@
 name: Deploy to Remote Server
 
 on:
-  push:
-    branches:
-      - main # Changes in this branch triggers the deployment
+  #push:
+  #  branches:
+  #    - main # Changes in this branch triggers the deployment
+
+  workflow_dispatch:
 
 jobs:
-  deploy:
-    runs-on: ubuntu-latest
+  
+  build:
+
+    runs-on:
+      - self-hosted
 
     steps:
-    - name: Checkout Repository
-      uses: actions/checkout@v2
 
-    - name: Set up Docker
-      uses: docker/setup-docker@v2
+      - uses: actions/checkout@v2
 
-    - name: Build and Push Docker Image
-      run: |
-        export LOCAL_IP=$(bash -c 'hostname -I | cut -d" " -f5')
-        docker compose up --build
+      - name: Run a one-line script
+        run: |
+          echo Hello World!
+          sleep 15
+          echo Goodbye!
+
+  #deploy:
+  #  runs-on: ubuntu-latest
+
+  #  steps:
+  #  - name: Checkout Repository
+  #    uses: actions/checkout@v2
+
+  #  - name: Set up Docker
+  #    uses: docker/setup-docker@v2
+
+  #  - name: Build and Push Docker Image
+  #    run: |
+  #      export LOCAL_IP=$(bash -c 'hostname -I | cut -d" " -f5')
+  #      docker compose up --build
 
 
