@@ -21,7 +21,7 @@ jobs:
       
       - name: Build and Push Docker Images
         run: |
-          export LOCAL_IP=$(bash -c 'hostname -I | cut -d" " -f5')
+          export LOCAL_IP=$(bash -c 'hostname -I | cut -d" " -f4')
           docker compose up --build -d
 
   #deploy:
