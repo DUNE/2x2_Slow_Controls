@@ -18,17 +18,11 @@ jobs:
     
       - name: Checkout Repository
         uses: actions/checkout@v2
-
-      - name: Authenticanting as root
+      
+      - name: Build and Push Docker Images
         run: |
           export LOCAL_IP=$(bash -c 'hostname -I | cut -d" " -f5')
-          ksu -c 'docker compose up --build'
-      
-     # - name: Build and Push Docker Images
-     #   run: |
-     #     whoami
-     #     export LOCAL_IP=$(bash -c 'hostname -I | cut -d" " -f5')
-     #     docker compose up --build
+          docker compose up --build
 
   #deploy:
   #  runs-on: ubuntu-latest
