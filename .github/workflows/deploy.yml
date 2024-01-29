@@ -16,13 +16,13 @@ jobs:
 
     steps:
 
-      - uses: actions/checkout@v2
+      - name: Checkout Repository
+        uses: actions/checkout@v2
 
-      - name: Run a one-line script
+      - name: Build and Push Docker Images
         run: |
-          echo Hello World!
-          sleep 15
-          echo Goodbye!
+          docker compose up --build
+
 
   #deploy:
   #  runs-on: ubuntu-latest

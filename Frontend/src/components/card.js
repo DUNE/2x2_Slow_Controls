@@ -72,6 +72,11 @@ const Card = ({ id, title, on_message, off_message, crate_status }) => {
         </div>
         <p className={clicked ? 'card-text-off' : 'card-text-on'}>
         {clicked ? off_message : on_message}
+        <iframe src="http://localhost:3000/d-solo/PgnNuQSIz/gizmo-minos?orgId=1&from=1706551252427&to=1706554852427&panelId=8" width="180" height="100" frameborder="0"></iframe>
+        <iframe src="http://localhost:3000/d-solo/PgnNuQSIz/gizmo-minos?orgId=1&from=1706549605348&to=1706553205348&panelId=6" width="180" height="100" frameborder="0"></iframe>
+        <iframe src="http://localhost:3000/d-solo/PgnNuQSIz/gizmo-minos?orgId=1&from=1706553251222&to=1706556851223&panelId=4" width="180" height="100" frameborder="0"></iframe>
+        <iframe src="http://localhost:3000/d-solo/PgnNuQSIz/gizmo-minos?orgId=1&from=1706553278073&to=1706556878073&panelId=10" width="180" height="100" frameborder="0"></iframe>
+        <iframe src="http://localhost:3000/d-solo/PgnNuQSIz/gizmo-minos?orgId=1&from=1706553300710&to=1706556900711&panelId=12" width="180" height="100" frameborder="0"></iframe>
         </p>
       </div>
     );

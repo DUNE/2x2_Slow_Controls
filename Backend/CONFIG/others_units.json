@@ -12,7 +12,7 @@
             "current" : {"measurements" : "current"},
             "charge" : {"measurements" : "charge"}
         },
-        "on_message" : "Turn GIZMO off manually only.",
+        "on_message" : "Measuring resistance, threshold, magnitude, current, and charge.",
         "off_message" : "GIZMO SSH error state. Turn on manually."
     }
 }
