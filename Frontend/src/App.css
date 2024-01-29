@@ -51,7 +51,6 @@
 .card-on {
   background-color: var(--green_background);
   border-radius: 10px;
-  height: 96px;
   width: 220px;
   margin-left: 4px;
   margin-right: 4px;
@@ -60,7 +59,6 @@
 .card-off {
   background-color: var(--red_background);
   border-radius: 10px;
-  height: 96px;
   width: 220px;
   margin-left: 4px;
   margin-right: 4px;

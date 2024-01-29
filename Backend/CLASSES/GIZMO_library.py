@@ -117,7 +117,7 @@ class GIZMO(UNIT):
 
         while self.crate_status:
             try:
-                time.sleep(2)
+                time.sleep(10)
                 line = self.measure(chan)
                 #li= self.chan.recv(1000).decode('ASCII').strip()
                 if 'RES' == line[0:3]:

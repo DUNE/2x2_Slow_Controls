@@ -15,7 +15,6 @@ jobs:
       - self-hosted
 
     steps:
-    
       - name: Checkout Repository
         uses: actions/checkout@v2
       
