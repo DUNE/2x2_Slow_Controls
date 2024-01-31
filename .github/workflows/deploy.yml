@@ -15,14 +15,13 @@ jobs:
       - self-hosted
 
     steps:
-
       - name: Checkout Repository
         uses: actions/checkout@v2
-
+      
       - name: Build and Push Docker Images
         run: |
-          docker compose up --build
-
+          export LOCAL_IP=$(bash -c 'hostname -I | cut -d" " -f4')
+          docker compose up --build -d
 
   #deploy:
   #  runs-on: ubuntu-latest

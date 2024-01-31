@@ -16,11 +16,14 @@ This is the architecture for the Slow Controls GUI:
 <img width="668" alt="image" src="https://github.com/DUNE/2x2_Slow_Controls/assets/34606228/ed7319db-f185-44a1-8e65-71a036a768d8">
 
 ## How to Start this App?
-Go to /home/acd/acdemo/SLOW-CONTROLS-GUI on srv04 and run (as admin):
+Go to /home/acd/acdemo/SLOW-CONTROLS-GUI on srv04 and run:
 
 ```bash
+export LOCAL_IP=$(bash -c 'hostname -I | cut -d" " -f5')
 docker compose up --build
 ```
+In case you get a permission denied error, contact the server admin to add you to the docker group.
+
 Then just go to noVNC04:
 
 ```bash
