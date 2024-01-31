@@ -15,3 +15,7 @@ services:
       context: ./Frontend
     ports:
       - "3006:3006"
+    volumes:
+      - ./Frontend/src:/app/src
+
+

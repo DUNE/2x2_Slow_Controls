@@ -19,24 +19,62 @@ function App() {
         const dict = Object.keys(data);
         // Create modulesData based on modules_names,
         const newOthersData2 = [];
+        const Others_left = [];
+        const Others_right = [];
+
         for (let i = 0; i < dict.length; i += 2) {
-          newOthersData2.push([
+          const cardLeft = (
+            <Card
+              id={i}
+              title={data[i]["unit"].toUpperCase()}
+              on_message={data[i]["dictionary"]["on_message"]}
+              off_message={data[i]["dictionary"]["off_message"]}
+              crate_status={data[i]["crate_status"]}
+            />
+          );
+        
+          // const cardRight = (
+          //   <Card
+          //     id={i + 1}
+          //     title={data[i + 1]["unit"].toUpperCase()}
+          //     on_message={data[i + 1]["dictionary"]["on_message"]}
+          //     off_message={data[i + 1]["dictionary"]["off_message"]}
+          //     crate_status={data[i + 1]["crate_status"]}
+          //   />
+          // );
+        
+          // Check the title and push into the appropriate array
+          if (data[i]["unit"].toUpperCase() === 'GIZMO' || data[i]["unit"].toUpperCase() === 'MPOD') {
+            Others_left.push(cardLeft);
+          } 
+          
+          // Don't forget to change this to newOthersData2.push([cardLeft, cardRight]);  
+          newOthersData2.push([cardLeft]);
+        }
+
+        setOthersData2(newOthersData2);
+      });
+  };
+
+
+        //for (let i = 0; i < dict.length; i += 2) {
+        //  newOthersData2.push([
             //console.log(JSON.stringify(othersNames.length))
-            <Card id={i}
-                  title={data[i]["unit"].toUpperCase()}
-                  on_message={data[i]["dictionary"]["on_message"]}
-                  off_message={data[i]["dictionary"]["off_message"]}
-                  crate_status={data[i]["crate_status"]}/>,
+         //   <Card id={i}
+         //         title={data[i]["unit"].toUpperCase()}
+         //         on_message={data[i]["dictionary"]["on_message"]}
+         //         off_message={data[i]["dictionary"]["off_message"]}
+         //         crate_status={data[i]["crate_status"]}/>,
             //<Card id={i+1}
             //      title={data[i+1]["unit"].toUpperCase()}
             //      on_message={data[i+1]["dictionary"]["on_message"]}
             //      off_message={data[i+1]["dictionary"]["off_message"]}
             //      crate_status={data[i+1]["crate_status"]}/>,
-          ]);
-        }
-        setOthersData2(newOthersData2);
-      });
-  }
+         // ]);
+        //}
+        //setOthersData2(newOthersData2);
+      //});
+  //}
 
   // CONTINUOS JSON AQUISITION ATTACHED UNITS
   const [modulesData2, setModulesData2] = React.useState([]);
@@ -91,16 +129,12 @@ function App() {
   //#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
     return (
       <div className="mother_container">
-        <Header />
-        <div className='title-container'>
-          <div className='modules_group'>
-            <div className='circle'>
-              <CardList cardData={modulesData2}/>
-            </div>
-          </div>
-          <div className='other_units_group'>
-            <CardList cardData={othersData2}/>
-          </div>
+        <div className="main_column">
+          <Header />
+          <CardList cardData={othersData2}/>
+        </div>
+        <div className="main_column">
+          <p style={{ color: 'white' }}>In this column we will see all the units monitored.</p>
         </div>
       </div>
     )

@@ -5,7 +5,7 @@
 FROM python:3.10
 
 # Set the current working directory to /code.
-# This is where we'll put the requirements.txt file and the MyApp directory.
+# This is where we'll put the requirements.txt file.
 WORKDIR /code
 
 # Copy the file with the requirements to the /code directory.
