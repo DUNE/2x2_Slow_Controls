@@ -30,6 +30,7 @@ function App() {
               on_message={data[i]["dictionary"]["on_message"]}
               off_message={data[i]["dictionary"]["off_message"]}
               crate_status={data[i]["crate_status"]}
+              grafana_links={data[i]["dictionary"]["powering"]}
             />
           );
         

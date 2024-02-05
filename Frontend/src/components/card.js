@@ -20,7 +20,7 @@ const theme = createTheme({
 })
 
 // COMPONENT CONSTANT
-const Card = ({ id, title, on_message, off_message, crate_status }) => {
+const Card = ({ id, title, on_message, off_message, crate_status, grafana_links }) => {
 
   //#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
   //# BUTTON STATUS CONFIGURATION
@@ -72,14 +72,18 @@ const Card = ({ id, title, on_message, off_message, crate_status }) => {
         </div>
         <p className={clicked ? 'card-text-off' : 'card-text-on'}>
         {clicked ? off_message : on_message}
-        <div className="grafana-card">
-        <iframe src="http://localhost:3000/d/PgnNuQSIz/gizmo-minos?orgId=1&from=now-15m&to=now&refresh=10s&viewPanel=8&kiosk" width="180" height="120" frameborder="0"></iframe>
-        </div>
-        <iframe src="http://localhost:3000/d/PgnNuQSIz/gizmo-minos?orgId=1&from=now-15m&to=now&refresh=10s&viewPanel=6&kiosk" width="180" height="120" frameborder="0"></iframe>
-        <iframe src="http://localhost:3000/d/PgnNuQSIz/gizmo-minos?orgId=1&from=now-15m&to=now&refresh=10s&viewPanel=4&kiosk" width="180" height="120" frameborder="0"></iframe>
-        <iframe src="http://localhost:3000/d/PgnNuQSIz/gizmo-minos?orgId=1&from=now-15m&to=now&refresh=10s&viewPanel=10&kiosk" width="180" height="120" frameborder="0"></iframe>
-        <iframe src="http://localhost:3000/d/PgnNuQSIz/gizmo-minos?orgId=1&from=now-15m&to=now&refresh=10s&viewPanel=12&kiosk" width="180" height="120" frameborder="0"></iframe>
         </p>
+
+      <div className="grafana-card">
+        {/* Map over the grafana_links and render only the links */}
+        {Object.values(grafana_links).map(item => (
+          <div key={item.measurements}>
+            <div href={item["grafana-link"]} target="_blank" rel="noopener noreferrer">
+              <iframe src={item["grafana-link"]} frameborder="0"></iframe>
+            </div>
+          </div>
+        ))}
+      </div>
       </div>
     );
   };

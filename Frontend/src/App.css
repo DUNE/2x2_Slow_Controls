@@ -45,7 +45,7 @@
 .card-on {
   background-color: var(--green_background);
   border-radius: 10px;
-  width: 220px;
+  width: 100%;
   margin-left: 4px;
   margin-right: 4px;
 }
@@ -205,7 +205,9 @@
 }
 
 .grafana-card {
-  border-radius: 10px;
-  margin-top: 5px;
+  margin-top: -5px;
   overflow: hidden;
+  width: 100%;
+  height: 130;
+  text-align: center;
 }
