@@ -49,7 +49,7 @@ for unit in othersDB.keys():
     id += 1
 
 # REMOTE MONITORING FOR GIZMO
-threading.Thread(target=others_dict[0].CONTINUOUS_monitoring, args=(), kwargs={}).start()
+threading.Thread(target=others_dict[1].CONTINUOUS_monitoring, args=(), kwargs={}).start()
 
 #---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
 # FAST API CONFIGURATION

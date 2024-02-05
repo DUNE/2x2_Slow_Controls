@@ -22,7 +22,7 @@ function App() {
         const Others_left = [];
         const Others_right = [];
 
-        for (let i = 0; i < dict.length; i += 2) {
+        for (let i = 0; i < dict.length; i += 1) {
           const cardLeft = (
             <Card
               id={i}
@@ -48,9 +48,9 @@ function App() {
           if (data[i]["unit"].toUpperCase() === 'GIZMO' || data[i]["unit"].toUpperCase() === 'MPOD') {
             Others_left.push(cardLeft);
           } 
-          
           // Don't forget to change this to newOthersData2.push([cardLeft, cardRight]);  
           newOthersData2.push([cardLeft]);
+          //newOthersData2.push([cardLeft, cardRight]);
         }
 
         setOthersData2(newOthersData2);
@@ -88,7 +88,7 @@ function App() {
         const dict = Object.keys(data);
         // Create modulesData based on modules_names,
         const newModulesData2 = [];
-        for (let i = 0; i < dict.length; i += 2) {
+        for (let i = 0; i < dict.length; i += 1) {
           const numericPart = dict[i].match(/\d+/)[0]
           const numericValue = parseInt(numericPart, 10)
           //const formattedString = `Module ${numericValue}`;
@@ -97,12 +97,13 @@ function App() {
                   title={`Module ${numericValue}`}
                   units={[data[dict[i]][i]["unit"]]}
                   crate_status={data[dict[i]][i]["crate_status"]}
-                  measuring={data[dict[i]][i]["measuring_status"]}/>,
-            <ModuleBox id={i+1}
-            title={`Module ${numericValue+1}`}
-            units={[data[dict[i+1]][i+1]["unit"]]}
-            crate_status={data[dict[i+1]][i+1]["crate_status"]}
-            measuring={data[dict[i+1]][i+1]["measuring_status"]}/>,
+                  measuring={data[dict[i]][i]["measuring_status"]}
+                  grafana_links={data[dict[i]][i]["dictionary"]["powering"]}/>,
+            //<ModuleBox id={i+1}
+            //title={`Module ${numericValue+1}`}
+            //units={[data[dict[i+1]][i+1]["unit"]]}
+            //crate_status={data[dict[i+1]][i+1]["crate_status"]}
+            //measuring={data[dict[i+1]][i+1]["measuring_status"]}/>,
           ])
         }
         setModulesData2(newModulesData2);
@@ -134,9 +135,17 @@ function App() {
           <Header />
           <CardList cardData={othersData2}/>
         </div>
+
         <div className="main_column">
-          <p style={{ color: 'white' }}>In this column we will see all the units monitored.</p>
+          <div className="modules-row">
+            {modulesData2.map((item, index) => (
+            <div key={index} className="module-item">
+              {item}
+            </div>
+            ))}
+          </div>
         </div>
+
       </div>
     )
 }

@@ -56,8 +56,11 @@ class MPOD(UNIT):
     def getMeasurementSenseVoltage(self, channel):
         data = os.popen("snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " outputMeasurementSenseVoltage" + channel)
         ret = data.read().split('\n')
-        return ret[0].split(" ")[-2]
-    
+        if ret and ret[0]:
+            return ret[0].split(" ")[-2]
+        else:
+            raise ValueError("Failed to retrieve measurement sense voltage")
+        
     def getStatus(self, channel):
         data = os.popen("snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " outputStatus" + channel)  
         #return data.read().split('= ')[1].split('\n')[0]
@@ -69,9 +72,12 @@ class MPOD(UNIT):
         return ret[0].split(" ")[-2]
     
     def getCrateStatus(self):
-        return False if  "No Such Instance" in self.measure('charge')[0][0][0] else True
+        return True
+        #return False if  "No Such Instance" in self.measure('charge')[0][0][0] else True
     
     def getMeasuringStatus(self):
+        return {"charge": False}
+        '''
         if self.unit != "mpod_crate":
             self.measuring_status = {}
             for key in self.dictionary['powering'].keys():
@@ -82,6 +88,7 @@ class MPOD(UNIT):
         else:
             self.measuring_status = None
         return self.measuring_status
+        '''
 
     #---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
     # SET METHODS

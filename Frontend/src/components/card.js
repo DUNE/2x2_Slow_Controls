@@ -11,10 +11,10 @@ const theme = createTheme({
       main: colors.green[700]
     },
     secondary:{
-      main: colors.red[700]
+      main: colors.grey[500]
     },
     disabled:{
-      main: colors.red[700]
+      main: colors.grey[700]
     }
   }
 })
@@ -25,6 +25,7 @@ const Card = ({ id, title, on_message, off_message, crate_status, grafana_links 
   //#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
   //# BUTTON STATUS CONFIGURATION
   //#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
+  console.log(grafana_links);
 
   //const [status, setStatus] = React.useState(false); // Initialize status
   const [clicked, setClicked] = React.useState();
@@ -55,7 +56,7 @@ const Card = ({ id, title, on_message, off_message, crate_status, grafana_links 
     return (
       <div className={clicked ? 'card-off' : 'card-on'}>
         <div style={{display : 'flex', justifyContent : 'space-between', width : '100%'}}>
-          <div className="card-title">{title}</div>
+          <div className="card-title">{title.replace(/_/g, ' ')}</div>
           <div style={{marginTop : '8px', paddingRight : '8px'}}>
             <ThemeProvider theme={theme}>
               <div>
@@ -73,17 +74,21 @@ const Card = ({ id, title, on_message, off_message, crate_status, grafana_links 
         <p className={clicked ? 'card-text-off' : 'card-text-on'}>
         {clicked ? off_message : on_message}
         </p>
-
-      <div className="grafana-card">
-        {/* Map over the grafana_links and render only the links */}
-        {Object.values(grafana_links).map(item => (
+      
+      {/* Map over the grafana_links and render only the links */}
+      {Object.values(grafana_links).map(item => (
           <div key={item.measurements}>
-            <div href={item["grafana-link"]} target="_blank" rel="noopener noreferrer">
-              <iframe src={item["grafana-link"]} frameborder="0"></iframe>
+            <div className="grafana-card">
+              {item["grafana-link"] && (
+                <a href={item["grafana-link"]} target="_blank" rel="noopener noreferrer">
+                  <iframe src={item["grafana-link"]} frameBorder="0"></iframe>
+                </a>
+              )}
             </div>
           </div>
-        ))}
-      </div>
+        ))
+      }
+
       </div>
     );
   };

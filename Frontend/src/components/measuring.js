@@ -11,13 +11,16 @@ const theme = createTheme({
         main: colors.green[700]
       },
       secondary:{
-        main: colors.red[700]
+        main: colors.grey[500]
+      },
+      disabled:{
+        main: colors.grey[700]
       }
     }
   })
 
 // COMPONENT CONSTANT
-const Measuring= ({ id, title, status, button_status }) => {
+const Measuring= ({ id, title, status, button_status, grafana_link }) => {
 
   //#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
   //# BUTTON STATUS CONFIGURATION
@@ -53,6 +56,7 @@ const Measuring= ({ id, title, status, button_status }) => {
   //# RETURN MEASURING ROW
   //#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
   return (
+      <div>
       <div className={clicked ? 'measuring-row-off' : 'measuring-row-on'}>
         <div className='measuring'>
           {newTitle}
@@ -69,6 +73,10 @@ const Measuring= ({ id, title, status, button_status }) => {
           </div>
         </ThemeProvider>
       </div>
+      <iframe src={grafana_link} frameBorder="0"></iframe>
+
+      </div>
+
   )
 }
 
