@@ -112,6 +112,6 @@
             "charge" : {"measurements" : "charge","grafana-link" : "http://localhost:3000/d/PgnNuQSIz/gizmo-minos?orgId=1&from=now-15m&to=now&refresh=10s&viewPanel=12&kiosk"}
         },
         "on_message" : "Measuring resistance, threshold, magnitude, current, and charge.",
-        "off_message" : "GIZMO SSH error state. Turn on manually."
+        "off_message" : "GIZMO error state. Turn ON/OFF manually or review local IP address."
     }
 }

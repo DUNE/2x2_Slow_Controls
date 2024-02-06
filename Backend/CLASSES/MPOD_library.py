@@ -72,23 +72,35 @@ class MPOD(UNIT):
         return ret[0].split(" ")[-2]
     
     def getCrateStatus(self):
-        return True
-        #return False if  "No Such Instance" in self.measure('charge')[0][0][0] else True
-    
+        #return True
+        try:
+            return False if  "No Such Instance" in self.measure('charge')[0][0][0] else True
+        except Exception as e:
+            print("Exception Found Getting Crate Status: ", e)
+            #self.error_status = True
+            return True
+
     def getMeasuringStatus(self):
-        return {"charge": False}
-        '''
-        if self.unit != "mpod_crate":
-            self.measuring_status = {}
-            for key in self.dictionary['powering'].keys():
-                if self.measure(key)[0][0]=="ON":
-                    self.measuring_status[key] = True 
-                else:
-                    self.measuring_status[key] = False
-        else:
-            self.measuring_status = None
-        return self.measuring_status
-        '''
+        #return {"charge": False}
+        try:
+            if self.unit != "mpod_crate":
+                self.measuring_status = {}
+                for key in self.dictionary['powering'].keys():
+                    if self.measure(key)[0][0]=="ON":
+                        self.measuring_status[key] = True 
+                    else:
+                        self.measuring_status[key] = False
+            else:
+                self.measuring_status = None
+            return self.measuring_status
+        
+        except Exception as e:
+            print("Exception Found Measuring Status: ", e)
+            self.error_status = True     
+            self.measuring_status = None  
+            # Why is this not working? 
+            #return self.measuring_status
+            return {"charge": False}
 
     #---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
     # SET METHODS
@@ -260,7 +272,7 @@ class MPOD(UNIT):
         Description:    Continuously record timestamp on InfluxDB
         '''
         try:
-            print("Continuous DAQ Activated: " + powering + ". Taking data in real time")
+            print("MPOD Continuous DAQ Activated: " + powering + ". Taking data in real time")
             while self.getCrateStatus():
                 data = self.measure(powering)
                 self.INFLUX_write(powering,data)

@@ -31,6 +31,7 @@ function App() {
               off_message={data[i]["dictionary"]["off_message"]}
               crate_status={data[i]["crate_status"]}
               grafana_links={data[i]["dictionary"]["powering"]}
+              error_status={data[i]["error_status"]}
             />
           );
         

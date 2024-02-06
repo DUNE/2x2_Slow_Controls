@@ -15,6 +15,7 @@ class UNIT():
         #Unit device constructor
         self.module = module
         self.unit = unit
+        self.error_status = False
 
     #---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
     # GET METHODS

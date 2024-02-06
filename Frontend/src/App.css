@@ -61,6 +61,23 @@
   padding-bottom: 15px;
 }
 
+.card-error {
+  border-radius: 10px;
+  width: 100%;
+  margin-left: 4px;
+  margin-right: 4px;
+  animation: colorOscillation 1s infinite alternate; /* Oscillate the color */
+}
+
+@keyframes colorOscillation {
+  50% {
+    background-color: rgba(255, 0, 0, 0.3); /* Start with red */
+  }
+  100% {
+    background-color: rgba(255, 255, 255, 0.1); /* End with gray */
+  }
+}
+
 .card-title {
   color: #FFF;
   font-family : 'Open Sans', sans-serif;
@@ -91,6 +108,20 @@
 .card-text-off {
   font-family : 'Open Sans', sans-serif;
   color: #9C9C9C;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.32px;
+  padding-left: 24px;
+  padding-right: 24px;
+  margin-top: -5px;
+  width: 100%;
+}
+
+.card-text-error {
+  font-family : 'Open Sans', sans-serif;
+  color: red;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
