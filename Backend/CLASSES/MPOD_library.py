@@ -13,7 +13,7 @@ class MPOD(UNIT):
     '''
     This class represents the template for an MPOD.
     '''
-    def __init__(self, module, unit, dict_unit, miblib='CONFIG/mibs/'):
+    def __init__(self, module, unit, dict_unit, miblib='app/CONFIG/mibs_mpod'):
         '''
         Unit constructor
         '''
@@ -77,7 +77,7 @@ class MPOD(UNIT):
             return False if  "No Such Instance" in self.measure('charge')[0][0][0] else True
         except Exception as e:
             print("Exception Found Getting Crate Status: ", e)
-            #self.error_status = True
+            self.error_status = True
             return True
 
     def getMeasuringStatus(self):
@@ -98,9 +98,7 @@ class MPOD(UNIT):
             print("Exception Found Measuring Status: ", e)
             self.error_status = True     
             self.measuring_status = None  
-            # Why is this not working? 
-            #return self.measuring_status
-            return {"charge": False}
+            return self.measuring_status
 
     #---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
     # SET METHODS

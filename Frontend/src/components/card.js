@@ -23,7 +23,7 @@ const theme = createTheme({
 })
 
 // COMPONENT CONSTANT
-const Card = ({ id, title, on_message, off_message, crate_status, grafana_links, error_status }) => {
+const Card = ({ id, title, on_message, off_message, error_message, crate_status, grafana_links, error_status }) => {
 
   //#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
   //# BUTTON STATUS CONFIGURATION
@@ -57,7 +57,7 @@ const Card = ({ id, title, on_message, off_message, crate_status, grafana_links,
   //# RETURN CARD
   //#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
     return (
-      <div className={`${clicked ? 'card-off' : 'card-on'} ${error_status ? 'card-error' : ''}`}>
+      <div className={error_status ? 'card-error' : (clicked ? 'card-off' : 'card-on')}>
         <div style={{display : 'flex', justifyContent : 'space-between', width : '100%'}}>
           <div className="card-title">{title.replace(/_/g, ' ')}</div>
           <div style={{marginTop : '8px', paddingRight : '8px'}}>
@@ -75,7 +75,7 @@ const Card = ({ id, title, on_message, off_message, crate_status, grafana_links,
           </div>
         </div>
         <p className={`${clicked ? 'card-text-off' : 'card-text-on'} ${error_status ? 'card-text-error' : ''}`}>
-        {clicked ? off_message : on_message}
+        {error_status ? error_message : (clicked ? off_message : on_message)}
         </p>
       
       {/* Map over the grafana_links and render only the links */}
