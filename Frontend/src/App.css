@@ -1,6 +1,7 @@
 :root{
   --background_blue : #00070D;
   --light_blue : #7CAED5;
+  --strong_blue: #001AFF;
   --orange : #F3A054;
   --green_background : rgba(87, 164, 80, 0.2);
   --red_background : rgba(164, 80, 80, 0.2);
@@ -48,14 +49,30 @@
   width: 100%;
   margin-left: 4px;
   margin-right: 4px;
+  padding-bottom: 15px;
 }
 
 .card-off {
-  background-color: var(--red_background);
+  background-color: rgba(255, 255, 255, 0.1);
   border-radius: 10px;
-  width: 220px;
+  width: 100%;
   margin-left: 4px;
   margin-right: 4px;
+  padding-bottom: 15px;
+}
+
+.card-error {
+  border-radius: 10px;
+  width: 100%;
+  margin-left: 4px;
+  margin-right: 4px;
+  animation: colorOscillation 1s infinite alternate; /* Oscillate the color */
+}
+
+@keyframes colorOscillation {
+  100% {
+    background-color: rgba(162, 0, 0, 0.366); 
+  }
 }
 
 .card-title {
@@ -68,7 +85,7 @@
   letter-spacing: 0.15px;
   padding-left: 24px;
   padding-top: 16px;
-  width: 20px;
+  width: 100%;
 }
 
 .card-text-on {
@@ -86,6 +103,20 @@
 }
 
 .card-text-off {
+  font-family : 'Open Sans', sans-serif;
+  color: #9C9C9C;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.32px;
+  padding-left: 24px;
+  padding-right: 24px;
+  margin-top: -5px;
+  width: 100%;
+}
+
+.card-text-error {
   font-family : 'Open Sans', sans-serif;
   color: red;
   font-size: 14px;
@@ -136,33 +167,46 @@
 .module-container {
   background-color: var(--background_blue);
   border-radius: 10px;
-  width: 210px;
+  width: 100%;
   flex-shrink: 0; 
-  margin-left: 8px; /* Adjust spacing between rows */
-  margin-right: 8px;
   border: 1px solid #333; 
 }
+
+.modules-row{
+  display: flex;
+  flex-wrap: nowrap; /* Ensure items stay in a single row */
+}
+
 .module-title {
   color: #FFF;
+  background-color: var(--strong_blue);
   font-family : 'Open Sans', sans-serif;
   font-size: 16px;
+  padding-bottom: 4px;
   font-style: normal;
   text-align: center;
   font-weight: 800;
-  line-height: 24px; 
   letter-spacing: 0.15px;
   padding-top: 8px;
+}
+
+.module-item{
+  margin-right: 10px; 
+  width: 100%;
 }
 
 .unit-name {
   font-family : 'Open Sans', sans-serif;
   font-size: 15px;
   font-style: normal;
-  font-weight: 800;
-  color: var(--light_blue);
+  font-weight: 600;
+  color: black;
+  background-color: var(--light_blue); 
   padding-left: 16px;
-  margin-bottom: 5px;
-  margin-top: 5px;
+  margin-top: -7px;
+  height: 30px;
+  align-items: center;
+  display: flex;
 }
 
 .measuring-row-on {
@@ -174,7 +218,7 @@
 .measuring-row-off {
   display : flex;
   justify-content: space-between;
-  background-color: var(--red_background);
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .measuring {
@@ -192,7 +236,6 @@
 .main_column{
   flex: 1;
   padding: 16px;
-  border: 1px solid #ccc;
   box-sizing: border-box;
 }
 

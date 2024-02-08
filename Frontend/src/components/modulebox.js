@@ -17,13 +17,13 @@ const theme = createTheme({
 })
 
 // COMPONENT FUNCTION
-function ModuleBox({ id, title, units, crate_status, measuring }) {
+function ModuleBox({ id, title, units, crate_status, measuring, grafana_links }) {
 
   const [status, setStatus] = useState();
   useEffect(() => {
     setStatus(crate_status);
   }, [crate_status]);
-  
+  console.log(grafana_links)
   //#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
   //# RETURN CARD
   //#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
@@ -33,17 +33,18 @@ function ModuleBox({ id, title, units, crate_status, measuring }) {
         {units.map((unitName, index) => (
           <React.Fragment key={index}>
             <div className='unit-name'>{unitName.slice(0, -1).toUpperCase() + '-' + unitName.slice(-1).toUpperCase()}</div>
-            <div>
-            {Object.keys(measuring).map((readoutName, index2) => (
-              <React.Fragment key={index2}>
-                <Measuring id={id}
-                           title={readoutName}
-                           status={Boolean(measuring[readoutName])}
-                           button_status={status}/>
-                <hr style={{margin : '0.5px'}}></hr>
-              </React.Fragment>
-            ))}  
-            </div>
+              <div>
+              {Object.keys(measuring).map((readoutName, index2) => (
+                <React.Fragment key={index2}>
+                  <Measuring id={id}
+                            title={readoutName}
+                            status={Boolean(measuring[readoutName])}
+                            button_status={status}
+                            grafana_link={grafana_links[readoutName]["grafana-link"]}/>
+                  <hr style={{margin : '0.5px'}}></hr>
+                </React.Fragment>
+              ))}  
+              </div>
           </React.Fragment>
         ))}
       </div>

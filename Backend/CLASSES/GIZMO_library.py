@@ -106,7 +106,7 @@ class GIZMO(UNIT):
         Description:    Continuously record timestamp on InfluxDB
         '''
         powering_list = self.dictionary["powering"].keys()
-        print("Continuous DAQ Activated. Taking data in real time")
+        print("GIZMO Continuous DAQ Activated. Taking data in real time")
 
         # Setting up GIZMO client
         client = paramiko.SSHClient()
@@ -130,10 +130,12 @@ class GIZMO(UNIT):
                     for powering, value in zip(powering_list, data):
                         self.INFLUX_write(powering, value)
                     self.crate_status = True
+                    self.error_status = False
 
             except Exception as e:
                 print("Something is wrong!")
                 self.crate_status = False
+                self.error_status = True
                 print('*** Caught exception: %s: %s' % (e.__class__, e))
                 chan.close()
                 client.close()

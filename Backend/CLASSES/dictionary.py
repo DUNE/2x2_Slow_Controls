@@ -4,6 +4,7 @@ from app.CLASSES.TTI_library import TTI
 
 classes_dictionary = {
     "MPOD" : MPOD,
+    "MPOD_CRATE": MPOD,
     "GIZMO" : GIZMO,
     "TTI" : TTI
 }
