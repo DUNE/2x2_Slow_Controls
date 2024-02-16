@@ -100,7 +100,7 @@ function App() {
                   units={[data[dict[i]][i]["unit"]]}
                   crate_status={data[dict[i]][i]["crate_status"]}
                   measuring={data[dict[i]][i]["measuring_status"]}
-                  grafana_links={data[dict[i]][i]["dictionary"]["powering"]}/>,
+                  powering_dict={data[dict[i]][i]["dictionary"]["powering"]}/>,
             //<ModuleBox id={i+1}
             //title={`Module ${numericValue+1}`}
             //units={[data[dict[i+1]][i+1]["unit"]]}

@@ -17,13 +17,15 @@ const theme = createTheme({
 })
 
 // COMPONENT FUNCTION
-function ModuleBox({ id, title, units, crate_status, measuring, grafana_links }) {
+function ModuleBox({ id, title, units, crate_status, measuring, powering_dict }) {
 
   const [status, setStatus] = useState();
   useEffect(() => {
     setStatus(crate_status);
   }, [crate_status]);
-  console.log(grafana_links)
+
+  const device_names = Object.values(powering_dict.charge.channels).map(channel => channel.name);
+
   //#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
   //# RETURN CARD
   //#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
@@ -38,9 +40,10 @@ function ModuleBox({ id, title, units, crate_status, measuring, grafana_links })
                 <React.Fragment key={index2}>
                   <Measuring id={id}
                             title={readoutName}
+                            device_names = {Object.values(powering_dict[readoutName].channels).map(channel => channel.name)}
                             status={Boolean(measuring[readoutName])}
-                            button_status={status}
-                            grafana_link={grafana_links[readoutName]["grafana-link"]}/>
+                            button_status={status} 
+                            grafana_link={powering_dict[readoutName]["grafana-link"]}/>
                   <hr style={{margin : '0.5px'}}></hr>
                 </React.Fragment>
               ))}  

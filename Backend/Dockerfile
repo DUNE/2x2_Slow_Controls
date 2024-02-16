@@ -5,10 +5,7 @@
 FROM python:3.10
 
 # Install SNMP tools and utilities
-RUN apt-get update && \
-    apt-get install -y \
-    snmp \
-    snmpd 
+RUN apt-get update && apt-get install -y snmp snmpd
 
 # Set the current working directory to /code.
 # This is where we'll put the requirements.txt file.
@@ -23,8 +20,6 @@ COPY ./Backend/requirements.txt /code/requirements.txt
 # Because the previous step copying the file could be detected by the Docker cache, this step will also use the Docker cache when available.
 # Using the cache in this step will save you a lot of time when building the image again and again during development, instead of downloading and installing all the dependencies every time.
 RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
-# Getting the local server IP address
-RUN export LOCAL_IP=$(bash -c 'hostname -I | cut -d" " -f5')
 
 # Copy the ./app directory inside the /code directory.
 # As this has all the code which is what changes most frequently the Docker cache won't be used for this or any following steps easily.

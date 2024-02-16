@@ -1,3 +1,4 @@
 /__pycache__
 /actions-runner
-
+.storage.conf.swp
+.storage.conf.swp.swp
