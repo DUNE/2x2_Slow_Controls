@@ -21,7 +21,7 @@ jobs:
       - name: Build and Push Docker Images
         run: |
           export LOCAL_IP=$(bash -c 'hostname -I | cut -d" " -f4')
-          docker compose up --build -d
+          podman-compose up --build -d
 
   #deploy:
   #  runs-on: ubuntu-latest
