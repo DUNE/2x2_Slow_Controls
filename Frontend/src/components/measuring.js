@@ -20,7 +20,7 @@ const theme = createTheme({
   })
 
 // COMPONENT CONSTANT
-const Measuring= ({ id, title, status, button_status, grafana_link }) => {
+const Measuring= ({ id, title, device_names, status, button_status, grafana_link }) => {
 
   //#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
   //# BUTTON STATUS CONFIGURATION
@@ -49,12 +49,19 @@ const Measuring= ({ id, title, status, button_status, grafana_link }) => {
   const firstWord = title;
   const capitalizedFirstLetter = firstWord.charAt(0).toUpperCase();
   const restOfWord = firstWord.slice(1);
-  const newTitle = `${capitalizedFirstLetter}${restOfWord} readout`;
+  const deviceNamesString = device_names.join(', '); 
+  const newTitle = `${capitalizedFirstLetter}${restOfWord} (${deviceNamesString})`;
 
   
   //#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
   //# RETURN MEASURING ROW
   //#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
+  
+  // Add this to the grafana link section
+  // {grafana_link.map((link, index) => (
+  //   <iframe key={index} src={link} frameBorder="0"></iframe>
+  // ))}
+  
   return (
       <div>
       <div className={clicked ? 'measuring-row-off' : 'measuring-row-on'}>

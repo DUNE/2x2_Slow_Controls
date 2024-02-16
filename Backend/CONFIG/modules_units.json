@@ -6,7 +6,7 @@
             "powering" :{
                 "charge" : {
                     "measurements" : ["voltage", "current"],
-                    "grafana-link" : "http://localhost:3000/d/PgnNuQSIz/gizmo-minos?orgId=1&from=now-15m&to=now&refresh=10s&viewPanel=8&kiosk",
+                    "grafana-link" : [],
                     "channels" : {
                         ".u100" : {
                             "name" : "PACMAN_C",
@@ -30,7 +30,7 @@
                 },
                 "light" : {
                     "measurements" : ["voltage", "current"],
-                    "grafana-link" : "http://localhost:3000/d/PgnNuQSIz/gizmo-minos?orgId=1&from=now-15m&to=now&refresh=10s&viewPanel=8&kiosk",
+                    "grafana-link" : [],
                     "channels" : {
                         ".u200" : {
                             "name" : "VGA_12_pos",
@@ -72,7 +72,7 @@
                 },
                 "rtd" : {
                     "measurements" : ["voltage", "current"],
-                    "grafana-link" : "http://localhost:3000/d/PgnNuQSIz/gizmo-minos?orgId=1&from=now-15m&to=now&refresh=10s&viewPanel=8&kiosk",
+                    "grafana-link" : [],
                     "channels" : {
                         ".u104" : {
                             "name" : "RTD_1",
@@ -107,7 +107,7 @@
             "powering" :{
                 "charge" : {
                     "measurements" : ["voltage", "current"],
-                    "grafana-link" : "http://localhost:3000/d/PgnNuQSIz/gizmo-minos?orgId=1&from=now-15m&to=now&refresh=10s&viewPanel=8&kiosk",
+                    "grafana-link" : [],
                     "channels" : {
                         ".u100" : {
                             "name" : "PACMAN_C",
@@ -131,7 +131,7 @@
                 },
                 "light" : {
                     "measurements" : ["voltage", "current"],
-                    "grafana-link" : "http://localhost:3000/d/PgnNuQSIz/gizmo-minos?orgId=1&from=now-15m&to=now&refresh=10s&viewPanel=8&kiosk",
+                    "grafana-link" : [],
                     "channels" : {
                         ".u200" : {
                             "name" : "VGA_12_pos",
@@ -173,7 +173,7 @@
                 },
                 "rtd" : {
                     "measurements" : ["voltage", "current"],
-                    "grafana-link" : "http://localhost:3000/d/PgnNuQSIz/gizmo-minos?orgId=1&from=now-15m&to=now&refresh=10s&viewPanel=8&kiosk",
+                    "grafana-link" : [],
                     "channels" : {
                         ".u104" : {
                             "name" : "RTD_1",
@@ -208,7 +208,7 @@
             "powering" :{
                 "charge" : {
                     "measurements" : ["voltage", "current"],
-                    "grafana-link" : "http://localhost:3000/d/PgnNuQSIz/gizmo-minos?orgId=1&from=now-15m&to=now&refresh=10s&viewPanel=8&kiosk",
+                    "grafana-link" : [],
                     "channels" : {
                         ".u100" : {
                             "name" : "PACMAN_C",
@@ -232,7 +232,7 @@
                 },
                 "light" : {
                     "measurements" : ["voltage", "current"],
-                    "grafana-link" : "http://localhost:3000/d/PgnNuQSIz/gizmo-minos?orgId=1&from=now-15m&to=now&refresh=10s&viewPanel=8&kiosk",
+                    "grafana-link" : [],
                     "channels" : {
                         ".u200" : {
                             "name" : "VGA_12_pos",
@@ -274,7 +274,7 @@
                 },
                 "rtd" : {
                     "measurements" : ["voltage", "current"],
-                    "grafana-link" : "http://localhost:3000/d/PgnNuQSIz/gizmo-minos?orgId=1&from=now-15m&to=now&refresh=10s&viewPanel=8&kiosk",
+                    "grafana-link" : [],
                     "channels" : {
                         ".u104" : {
                             "name" : "RTD_1",
@@ -309,7 +309,7 @@
             "powering" :{
                 "charge" : {
                     "measurements" : ["voltage", "current"],
-                    "grafana-link" : "http://localhost:3000/d/PgnNuQSIz/gizmo-minos?orgId=1&from=now-15m&to=now&refresh=10s&viewPanel=8&kiosk",
+                    "grafana-link" : [],
                     "channels" : {
                         ".u100" : {
                             "name" : "PACMAN_C",
@@ -333,7 +333,7 @@
                 },
                 "light" : {
                     "measurements" : ["voltage", "current"],
-                    "grafana-link" : "http://localhost:3000/d/PgnNuQSIz/gizmo-minos?orgId=1&from=now-15m&to=now&refresh=10s&viewPanel=8&kiosk",
+                    "grafana-link" : [],
                     "channels" : {
                         ".u200" : {
                             "name" : "VGA_12_pos",
@@ -375,7 +375,7 @@
                 },
                 "rtd" : {
                     "measurements" : ["voltage", "current"],
-                    "grafana-link" : "http://localhost:3000/d/PgnNuQSIz/gizmo-minos?orgId=1&from=now-15m&to=now&refresh=10s&viewPanel=8&kiosk",
+                    "grafana-link" : [],
                     "channels" : {
                         ".u104" : {
                             "name" : "RTD_1",

@@ -106,11 +106,11 @@
         "password" : "",
         "port" : 22,
         "powering" :{
-            "resistance" : {"measurements" : "resistance", "grafana-link" : "http://localhost:3000/d/PgnNuQSIz/gizmo-minos?orgId=1&from=now-15m&to=now&refresh=10s&viewPanel=8&kiosk"},
-            "threshold" : {"measurements" : "threshold", "grafana-link" : "http://localhost:3000/d/PgnNuQSIz/gizmo-minos?orgId=1&from=now-15m&to=now&refresh=10s&viewPanel=6&kiosk"},
-            "magnitude" : {"measurements" : "magnitude", "grafana-link" : "http://localhost:3000/d/PgnNuQSIz/gizmo-minos?orgId=1&from=now-15m&to=now&refresh=10s&viewPanel=4&kiosk"},
-            "current" : {"measurements" : "current", "grafana-link" : "http://localhost:3000/d/PgnNuQSIz/gizmo-minos?orgId=1&from=now-15m&to=now&refresh=10s&viewPanel=10&kiosk"},
-            "charge" : {"measurements" : "charge","grafana-link" : "http://localhost:3000/d/PgnNuQSIz/gizmo-minos?orgId=1&from=now-15m&to=now&refresh=10s&viewPanel=12&kiosk"}
+            "resistance" : {"measurements" : "resistance", "grafana-link" : "http://localhost:3000/d/W6fcPQhSk/gizmo-impedance-monitor?orgId=1&from=now-15m&to=now&refresh=10s&viewPanel=8&kiosk"},
+            "threshold" : {"measurements" : "threshold", "grafana-link" : "http://localhost:3000/d/W6fcPQhSk/gizmo-impedance-monitor?orgId=1&from=now-15m&to=now&refresh=10s&viewPanel=10&kiosk"},
+            "magnitude" : {"measurements" : "magnitude", "grafana-link" : "http://localhost:3000/d/W6fcPQhSk/gizmo-impedance-monitor?orgId=1&from=now-15m&to=now&refresh=10s&viewPanel=6&kiosk"},
+            "current" : {"measurements" : "current", "grafana-link" : "http://localhost:3000/d/W6fcPQhSk/gizmo-impedance-monitors?orgId=1&from=now-15m&to=now&refresh=10s&viewPanel=4&kiosk"},
+            "charge" : {"measurements" : "charge","grafana-link" : "http://localhost:3000/d/W6fcPQhSk/gizmo-impedance-monitor?orgId=1&from=now-15m&to=now&refresh=10s&viewPanel=2&kiosk"}
         },
         "on_message" : "Measuring resistance, threshold, magnitude, current, and charge.",
         "off_message" : "Turn ON/OFF GIZMO manually.",

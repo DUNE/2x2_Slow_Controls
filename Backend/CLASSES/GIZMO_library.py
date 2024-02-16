@@ -109,11 +109,17 @@ class GIZMO(UNIT):
         print("GIZMO Continuous DAQ Activated. Taking data in real time")
 
         # Setting up GIZMO client
-        client = paramiko.SSHClient()
-        client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        client.connect(self.dictionary["host-name"], self.dictionary["port"], self.dictionary["username"], self.dictionary["password"], timeout=200)
-        chan = client.invoke_shell()
-        chan.send('./GIZMO.elf 1\n')
+        try:
+            client = paramiko.SSHClient()
+            client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+            client.connect(self.dictionary["host-name"], self.dictionary["port"], self.dictionary["username"], self.dictionary["password"], timeout=200)
+            chan = client.invoke_shell()
+            chan.send('./GIZMO.elf 1\n')
+        except Exception as e:
+            print("Something is wrong!")
+            self.crate_status = False
+            self.error_status = True
+            print('*** Caught exception: %s: %s' % (e.__class__, e))
 
         while self.crate_status:
             try:
