@@ -24,4 +24,3 @@ jobs:
           podman-compose down 
           loginctl enable-linger
           podman-compose up --build --detach
-          loginctl disable-linger
