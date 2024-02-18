@@ -22,4 +22,6 @@ jobs:
         run: |
           export LOCAL_IP=$(bash -c 'hostname -I | cut -d" " -f3')
           podman-compose down 
+          loginctl enable-linger
           podman-compose up --build --detach
+          loginctl disable-linger
