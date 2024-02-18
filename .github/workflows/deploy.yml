@@ -20,7 +20,7 @@ jobs:
       
       - name: Build and Push Docker Images
         run: |
-          export LOCAL_IP=$(bash -c 'hostname -I | cut -d" " -f4')
+          export LOCAL_IP=$(bash -c 'hostname -I | cut -d" " -f3')
           podman-compose up --build -d
 
   #deploy:
