@@ -22,5 +22,7 @@ jobs:
         run: |
           export LOCAL_IP=$(bash -c 'hostname -I | cut -d" " -f3')
           podman-compose down 
-          loginctl enable-linger
           podman-compose up --build --detach
+        # There seems to be a bug here, detach mode cannot be used on a runner.
+        # https://github.com/containers/podman/blob/main/troubleshooting.md
+
