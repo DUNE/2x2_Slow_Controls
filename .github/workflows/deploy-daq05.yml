@@ -22,4 +22,4 @@ jobs:
         run: |
           export LOCAL_IP=$(bash -c 'hostname -I | cut -d" " -f3')
           podman-compose down 
-          podman-compose up --build 
+          podman-compose up --build -d
