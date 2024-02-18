@@ -19,8 +19,9 @@ This is the architecture for the Slow Controls GUI:
 Go to /home/acd/acdemo/SLOW-CONTROLS-GUI on srv04 and run:
 
 ```bash
+podman-compose down
 export LOCAL_IP=$(bash -c 'hostname -I | cut -d" " -f5')
-docker compose up --build
+podman-compose up --build -d
 ```
 In case you get a permission denied error, contact the server admin to add you to the docker group.
 
