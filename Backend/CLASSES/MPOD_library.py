@@ -72,9 +72,10 @@ class MPOD(UNIT):
         return ret[0].split(" ")[-2]
     
     def getCrateStatus(self):
-        #return True
+        return True
+        
         try:
-            return False if  "No Such Instance" in self.measure('charge')[0][0][0] else True
+            return False if  "No Such Instance" in self.measure('PACMAN&FANS')[0][0][0] else True
         except Exception as e:
             print("Exception Found Getting Crate Status: ", e)
             self.error_status = True
@@ -83,16 +84,20 @@ class MPOD(UNIT):
     def getMeasuringStatus(self):
         #return {"charge": False}
         try:
+            '''
             if self.unit != "mpod_crate":
                 self.measuring_status = {}
                 for key in self.dictionary['powering'].keys():
+                    print(key)
+                    print(self.measure(key))
                     if self.measure(key)[0][0]=="ON":
                         self.measuring_status[key] = True 
                     else:
                         self.measuring_status[key] = False
             else:
                 self.measuring_status = None
-            return self.measuring_status
+            '''
+            return {"PACMAN&FANS": False, "VGAs" : False, "RTDs" : False}
         
         except Exception as e:
             print("Exception Found Measuring Status: ", e)
@@ -163,6 +168,23 @@ class MPOD(UNIT):
             #print(str(channel), str(self.getMeasurementSenseVoltage(channel)), selected_channel['V'])
         self.measuring_status[powering] = True
         
+    def powerON_channel(self, powering, channel):
+        '''
+        Power-ON specific channel
+        '''
+        channels = self.getChannelDict(powering)
+        selected_channel = channels[channel]
+        self.setMaxCurrent(selected_channel['max_current'], channel)
+        self.setCurrent(selected_channel['current'], channel)
+        self.setMaxSenseVoltage(selected_channel['max_sense_voltage'], channel)
+        self.setMaxVoltage(selected_channel['max_voltage'], channel)
+        # Ramping up voltage of channel
+        self.setVoltageRiseRate(selected_channel['rate'], channel)
+        self.channelSwitch(1, channel)
+        self.setVoltage(selected_channel['V'], channel)
+        #print(str(channel), str(self.getMeasurementSenseVoltage(channel)), selected_channel['V'])
+        self.measuring_status[powering] = True
+
     def powerOFF(self, powering):
         '''
         Power-OFF all channels
@@ -177,13 +199,50 @@ class MPOD(UNIT):
             self.channelSwitch(0, channel)
         self.measuring_status[powering] = False
 
+    def powerOFF_channel(self, powering, channel):
+        '''
+        Power-OFF single channel
+        '''
+        channels = self.getChannelDict(powering)
+        selected_channel = channels[channel]
+        # Ramping down voltage of channel
+        self.setVoltageFallRate(selected_channel['rate'], channel)
+        self.setVoltage(selected_channel['V'], channel)
+        #print(str(channel), str(self.getMeasurementSenseVoltage(channel)), selected_channel['V'])
+        self.channelSwitch(0, channel)
+        self.measuring_status[powering] = False
+
     #---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
     # MEASURING METHODS
     #---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
     def measure(self, powering):
+        '''
+        Measures all channels in powering category
+        '''
         Svalues, Vvalues, Ivalues = [], [], []
         channels = self.getChannelDict(powering)
         for channel in channels.keys():
+            print(channel)
+            if self.getStatus(channel)[0] == "WIENER-CRATE-MIB::outputStatus"+channel+" = BITS: 80 outputOn(0) ":
+                Svalues += ["ON"]
+            elif self.getStatus(channel)[0] == "WIENER-CRATE-MIB::outputStatus"+channel+" = BITS: 00 ":
+                Svalues += ["OFF"]
+            elif self.getStatus(channel)[0] == "WIENER-CRATE-MIB::outputStatus"+channel+" = BITS: 40 outputInhibit(1) ":
+                Svalues += ["ILOCK"]
+            else:
+                Svalues += [self.getStatus(channel)]
+            Vvalues += [self.getMeasurementSenseVoltage(channel)]
+            Ivalues += [self.getMeasurementCurrent(channel)]
+        return Svalues,Vvalues,Ivalues
+    
+    def measure_single_channel(self, powering):
+        '''
+        TBD
+        '''
+        Svalues, Vvalues, Ivalues = [], [], []
+        channels = self.getChannelDict(powering)
+        for channel in channels.keys():
+            print(channel)
             if self.getStatus(channel)[0] == "WIENER-CRATE-MIB::outputStatus"+channel+" = BITS: 80 outputOn(0) ":
                 Svalues += ["ON"]
             elif self.getStatus(channel)[0] == "WIENER-CRATE-MIB::outputStatus"+channel+" = BITS: 00 ":
