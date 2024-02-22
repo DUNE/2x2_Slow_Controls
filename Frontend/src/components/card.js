@@ -46,7 +46,7 @@ const Card = ({ id, title, on_message, off_message, error_message, crate_status,
   const buttonStyle = {
     width: 82,
     height: 30,
-    borderRadius: 0,
+    borderRadius: 5,
   };
 
   if (off_message === "Disabled") {

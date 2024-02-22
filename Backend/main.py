@@ -19,8 +19,14 @@ import threading
 # GENERATING OBJECT MODELS
 #---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
 # Reading modules JSON file
-with open('app/CONFIG/modules_units.json', "r") as json_file:
+with open('app/CONFIG/module0.json', "r") as json_file:
     moduleDB = json.load(json_file)
+with open('app/CONFIG/module1.json', "r") as json_file:
+    moduleDB.update(json.load(json_file))  
+with open('app/CONFIG/module2.json', "r") as json_file:
+    moduleDB.update(json.load(json_file))  
+with open('app/CONFIG/module3.json', "r") as json_file:
+    moduleDB.update(json.load(json_file))   
 
 # Reading other units JSON file
 with open('app/CONFIG/others_units.json', "r") as json_file:
@@ -203,7 +209,7 @@ import time
 @app.put("/attached_units/{unit_id}/{measuring}/turn-on", tags=["Update"])
 async def turnON_attached_by_id(unit_id: int, measuring: str):
     '''
-    Turn on measuring from unit connected to module (i.e. light readout from MPOD)
+    Turn on ALL CHANNELS of measuring from unit connected to module (i.e. light readout from MPOD)
     '''
     attached_units_dict[unit_id].powerON(measuring) 
     # Continuous monitoring
@@ -211,6 +217,18 @@ async def turnON_attached_by_id(unit_id: int, measuring: str):
     if attached_units_dict[unit_id].getClass() == "TTI":
         threading.Thread(target=attached_units_dict[unit_id].ramp_up(100,1), args=([measuring]), kwargs={}).start()
     return {"message" : attached_units_dict[unit_id].getOnMessage() + " Measuring: " + measuring} 
+
+@app.put("/attached_units/{unit_id}/{measuring}/{channel}/turn-on", tags=["Update"])
+async def turnON_single_channel(unit_id: int, measuring: str, channel: str):
+    '''
+    Turn on SINGLE CHANNEL of measuring from unit connected to module (i.e. Pacman 1 of charge readout from MPOD)
+    '''
+    attached_units_dict[unit_id].powerON_channel(measuring, channel) 
+    # Continuous monitoring (TBD)
+    threading.Thread(target=attached_units_dict[unit_id].CONTINUOUS_monitoring, args=([measuring]), kwargs={}).start()
+    if attached_units_dict[unit_id].getClass() == "TTI":
+        threading.Thread(target=attached_units_dict[unit_id].ramp_up(100,1), args=([measuring]), kwargs={}).start()
+    return {"message" : attached_units_dict[unit_id].getOnMessage() + ". Measuring: " + measuring + ", channel: " + channel} 
 
 #loop.create_task(turnON_attached_by_id)
 
@@ -221,6 +239,14 @@ def turnOFF_attached_by_id(unit_id: int, measuring: str):
     '''
     attached_units_dict[unit_id].powerOFF(measuring)
     return {"message" : attached_units_dict[unit_id].getOffMessage()} 
+
+@app.put("/attached_units/{unit_id}/{measuring}/{channel}/turn-off", tags=["Update"])
+def turnOFF_attached_by_id(unit_id: int, measuring: str, channel : str):
+    '''
+    Turn off SINGLE CHANNEL of measuring from unit connected to module (i.e. Pacman 1 of charge readout from MPOD)
+    '''
+    attached_units_dict[unit_id].powerOFF_channel(measuring, channel)
+    return {"message" : attached_units_dict[unit_id].getOffMessage()+ ". Measuring: " + measuring + ", channel: " + channel} 
 
 @app.put("/other_units/{unit_id}/turn-on", tags=["Update"])
 def turnON_other_by_id(unit_id: int):

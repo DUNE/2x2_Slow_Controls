@@ -20,7 +20,7 @@ const theme = createTheme({
   })
 
 // COMPONENT CONSTANT
-const Measuring= ({ id, title, device_names, status, button_status, grafana_link }) => {
+const Measuring= ({ id, powering, channel, device_names, status, button_status, grafana_link }) => {
 
   //#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
   //# BUTTON STATUS CONFIGURATION
@@ -40,17 +40,10 @@ const Measuring= ({ id, title, device_names, status, button_status, grafana_link
 
   const handleClick = () => {
     setClicked((prevClicked) => !prevClicked);
-    const endpoint = clicked ? `http://localhost:8000/attached_units/${id}/${title}/turn-on` : `http://localhost:8000/attached_units/${id}/${title}/turn-off`;
+    const endpoint = clicked ? `http://localhost:8000/attached_units/${id}/${powering}/${channel}/turn-on` : `http://localhost:8000/attached_units/${id}/${powering}/${channel}/turn-off`;
     fetch(endpoint, {method: "PUT"})
     .then(response => response.json())
     }
-
-  // Setting up readout name
-  const firstWord = title;
-  const capitalizedFirstLetter = firstWord.charAt(0).toUpperCase();
-  const restOfWord = firstWord.slice(1);
-  const deviceNamesString = device_names.join(', '); 
-  const newTitle = `${capitalizedFirstLetter}${restOfWord} (${deviceNamesString})`;
 
   
   //#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
@@ -61,26 +54,28 @@ const Measuring= ({ id, title, device_names, status, button_status, grafana_link
   // {grafana_link.map((link, index) => (
   //   <iframe key={index} src={link} frameBorder="0"></iframe>
   // ))}
+  // This was at the beggining
+  // <iframe src={grafana_link} frameBorder="0"></iframe>
   
   return (
       <div>
       <div className={clicked ? 'measuring-row-off' : 'measuring-row-on'}>
         <div className='measuring'>
-          {newTitle}
+          {device_names}
         </div>
         <ThemeProvider theme={theme}>
-          <div style={{paddingLeft : '10px'}}> 
-            <Button color={clicked ? 'secondary' : 'primary'}
-                    variant="contained"
-                    style={{width: 82, height: 30, borderRadius: 0}}
-                    onClick={handleClick}
-                    disabled={!button_status}>
-                    {clicked ? 'OFF' : 'ON'}
-            </Button>
-          </div>
+        <div> 
+          <Button color={clicked ? 'secondary' : 'primary'}
+                  variant="contained"
+                  style={{minWidth: '20px', height: 30, borderRadius: 0, fontSize: 10}}
+                  onClick={handleClick}
+                  disabled={!button_status}>
+                  {clicked ? 'OFF' : 'ON'}
+          </Button>
+        </div>
         </ThemeProvider>
       </div>
-      <iframe src={grafana_link} frameBorder="0"></iframe>
+     
 
       </div>
 

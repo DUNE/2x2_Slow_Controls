@@ -24,8 +24,6 @@ function ModuleBox({ id, title, units, crate_status, measuring, powering_dict })
     setStatus(crate_status);
   }, [crate_status]);
 
-  const device_names = Object.values(powering_dict.charge.channels).map(channel => channel.name);
-
   //#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
   //# RETURN CARD
   //#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
@@ -38,13 +36,26 @@ function ModuleBox({ id, title, units, crate_status, measuring, powering_dict })
               <div>
               {Object.keys(measuring).map((readoutName, index2) => (
                 <React.Fragment key={index2}>
-                  <Measuring id={id}
-                            title={readoutName}
-                            device_names = {Object.values(powering_dict[readoutName].channels).map(channel => channel.name)}
-                            status={Boolean(measuring[readoutName])}
-                            button_status={status} 
-                            grafana_link={powering_dict[readoutName]["grafana-link"]}/>
-                  <hr style={{margin : '0.5px'}}></hr>
+                  <div className='readout-group-title'>{readoutName}</div>
+
+                  <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                  {Object.keys(powering_dict[readoutName].channels).map((channel, index3) => (
+                    <React.Fragment key={index3}>
+                      <div style={{ width: '50%' }}>
+                        <Measuring
+                          id={id}
+                          powering={readoutName}
+                          channel={channel}
+                          device_names={powering_dict[readoutName]["channels"][channel]["name"]}
+                          status={Boolean(measuring[readoutName])}
+                          button_status={status}
+                          grafana_link={powering_dict[readoutName]["grafana-link"]}
+                        />
+                        <hr style={{ margin: '0.5px' }}></hr>
+                      </div>
+                    </React.Fragment>
+                  ))}
+                </div>
                 </React.Fragment>
               ))}  
               </div>
