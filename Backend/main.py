@@ -14,19 +14,17 @@ from app.CLASSES.MPOD_library import UNIT
 from app.CLASSES.dictionary import classes_dictionary
 import json
 import threading
+import os
 
 #---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
 # GENERATING OBJECT MODELS
 #---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
 # Reading modules JSON file
-with open('app/CONFIG/module0.json', "r") as json_file:
-    moduleDB = json.load(json_file)
-with open('app/CONFIG/module1.json', "r") as json_file:
-    moduleDB.update(json.load(json_file))  
-with open('app/CONFIG/module2.json', "r") as json_file:
-    moduleDB.update(json.load(json_file))  
-with open('app/CONFIG/module3.json', "r") as json_file:
-    moduleDB.update(json.load(json_file))   
+moduleDB = {}
+for i in range(4):
+    file_path = f'app/CONFIG/module{i}.json'
+    with open(file_path, "r") as json_file:
+        moduleDB.update(json.load(json_file))
 
 # Reading other units JSON file
 with open('app/CONFIG/others_units.json', "r") as json_file:
@@ -110,7 +108,8 @@ app = FastAPI(
 from fastapi.middleware.cors import CORSMiddleware
 # Adding cors urls
 origins = [
-    'http://localhost:3006' # This is where the react application lives
+    'http://localhost:3006', # PRODUCTION REACT APP
+    'http://localhost:3002', # TEST REACT APP
 ]
 # Add middleware
 app.add_middleware(

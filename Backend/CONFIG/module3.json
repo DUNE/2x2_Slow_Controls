@@ -1,6 +1,6 @@
 {
     "module3" : {
-        "mpod1" : {
+        "mpod2" : {
             "ip" : "192.168.197.34",
             "class" : "MPOD",
             "powering" :{

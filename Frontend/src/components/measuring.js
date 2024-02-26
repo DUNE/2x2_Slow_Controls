@@ -4,6 +4,9 @@ import Button from '@mui/material/Button';
 import { createTheme, colors, ThemeProvider } from '@mui/material';
 import { useEffect } from 'react';
 
+// GETTING SERVER NAME FROM PODMAN COMPOSE FILE
+const prodServer = process.env.PROD_SERVER;
+
 // SETTING UP BUTTON THEME
 const theme = createTheme({
     palette : {
@@ -21,7 +24,6 @@ const theme = createTheme({
 
 // COMPONENT CONSTANT
 const Measuring= ({ id, powering, channel, device_names, status, button_status, grafana_link }) => {
-
   //#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
   //# BUTTON STATUS CONFIGURATION
   //#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---

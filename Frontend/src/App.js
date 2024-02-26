@@ -8,6 +8,15 @@ import React, { useEffect } from 'react';
 // SETTING UP MAIN FUNCTION APP
 function App() {
 
+  const isTestEnvironment = () => {  
+    console.log("Environment variables:", process.env);
+    return process.env.NODE_ENV.includes("test");
+  };
+
+  useEffect(() => {
+    document.title = isTestEnvironment() ? "[TEST] 2x2 Slow Controls" : "2x2 Slow Controls";
+  }, []);
+
   // CONTINUOS JSON AQUISITION OTHER UNITS
   const [othersData2, setOthersData2] = React.useState([]);
 

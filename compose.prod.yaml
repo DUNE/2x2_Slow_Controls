@@ -1,20 +1,23 @@
 version: '3.8'
 
 services:
-  fastapi-app:
+  fastapi-app-prod:
     build:
       context: .
       dockerfile: Backend/Dockerfile
     environment:
       IP_LOCAL : ${LOCAL_IP}
+      PROD_SERVER : "acd-daq05"
     ports:
       - "8000:8000"
       
-  react-app:
+  react-app-prod:
     build:
       context: ./Frontend
     ports:
       - "3006:3006"
+    environment:
+      PROD_SERVER : "acd-daq05"
     volumes:
       - ./Frontend/src:/app/src
 
