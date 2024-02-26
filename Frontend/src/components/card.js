@@ -4,6 +4,9 @@ import Button from '@mui/material/Button';
 import { createTheme, colors, ThemeProvider } from '@mui/material';
 import { useEffect } from 'react';
 
+// GETTING SERVER NAME FROM PODMAN COMPOSE FILE
+const prodServer = process.env.PROD_SERVER;
+
 // SETTING UP BUTTON THEME
 const theme = createTheme({
   palette : {
