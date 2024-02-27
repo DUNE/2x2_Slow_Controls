@@ -10,11 +10,11 @@ function App() {
 
   const isTestEnvironment = () => {  
     console.log("Environment variables:", process.env);
-    return process.env.NODE_ENV.includes("test");
+    return process.env.REACT_APP_ENV.includes("test");
   };
 
   useEffect(() => {
-    document.title = isTestEnvironment() ? "[TEST] 2x2 Slow Controls" : "2x2 Slow Controls";
+    document.title = isTestEnvironment() ? "[DEV] 2x2 Slow Controls" : "2x2 Slow Controls";
   }, []);
 
   // CONTINUOS JSON AQUISITION OTHER UNITS

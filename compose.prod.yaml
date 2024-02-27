@@ -7,7 +7,6 @@ services:
       dockerfile: Backend/Dockerfile
     environment:
       IP_LOCAL : ${LOCAL_IP}
-      PROD_SERVER : "acd-daq05"
     ports:
       - "8000:8000"
       
@@ -17,7 +16,7 @@ services:
     ports:
       - "3006:3006"
     environment:
-      PROD_SERVER : "acd-daq05"
+      - REACT_APP_ENV=prod
     volumes:
       - ./Frontend/src:/app/src
 
