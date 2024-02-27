@@ -10,9 +10,11 @@ services:
     ports:
       - "8000:8000"
       
-  react-app-test:
+  react-app-dev:
     build:
       context: ./Frontend
+    environment:
+      - REACT_APP_ENV=dev
     ports:
       - "3002:3006"
     volumes:
