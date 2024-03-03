@@ -8,7 +8,7 @@
                     "measurements" : ["voltage", "current"],
                     "grafana-link" : [],
                     "channels" : {
-                        ".u002" : {
+                        ".u2" : {
                             "name" : "PACMAN_A",
                             "max_current" : 0.65,
                             "current" : 0.6,
@@ -17,7 +17,7 @@
                             "rate" : 1000,
                             "V" : 7.5
                         },
-                        ".u003" : {
+                        ".u3" : {
                             "name" : "PACMAN_B",
                             "max_current" : 0.65,
                             "current" : 0.6,

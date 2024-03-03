@@ -1,14 +1,14 @@
 {
     "module0" : {
         "mpod1" : {
-            "ip" : "192.168.197.34",
+            "ip" : "192.168.197.83",
             "class" : "MPOD",
             "powering" :{
                 "PACMAN&FANS" : {
                     "measurements" : ["voltage", "current"],
                     "grafana-link" : [],
                     "channels" : {
-                        ".u000" : {
+                        ".u0" : {
                             "name" : "PACMAN_A",
                             "max_current" : 0.65,
                             "current" : 0.6,
@@ -17,7 +17,7 @@
                             "rate" : 1000,
                             "V" : 7.5
                         },
-                        ".u001" : {
+                        ".u1" : {
                             "name" : "PACMAN_B",
                             "max_current" : 0.65,
                             "current" : 0.6,

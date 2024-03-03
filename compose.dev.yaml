@@ -1,14 +1,17 @@
 version: '3.8'
 
 services:
-  fastapi-app-test:
+  fastapi-app-dev:
     build:
       context: .
       dockerfile: Backend/Dockerfile
     environment:
       IP_LOCAL : ${LOCAL_IP}
     ports:
-      - "8000:8000"
+      - "8001:8000"
+    volumes:
+      - ./Backend/CLASSES:/code/app/CLASSES
+      - ./Backend/CONFIG:/code/app/CONFIG
       
   react-app-dev:
     build:

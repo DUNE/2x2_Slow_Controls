@@ -31,7 +31,6 @@ const Card = ({ id, title, on_message, off_message, error_message, crate_status,
   //#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
   //# BUTTON STATUS CONFIGURATION
   //#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
-  console.log(grafana_links);
 
   //const [status, setStatus] = React.useState(false); // Initialize status
   const [clicked, setClicked] = React.useState();
@@ -84,8 +83,9 @@ const Card = ({ id, title, on_message, off_message, error_message, crate_status,
       {/* Map over the grafana_links and render only the links */}
       {Object.values(grafana_links).map(item => (
           <div key={item.measurements}>
+
             <div className="grafana-card">
-              {item["grafana-link"] && (
+              {item["grafana-link"] && item["grafana-link"].length > 0 && (
                 <a href={item["grafana-link"]} target="_blank" rel="noopener noreferrer">
                   <iframe src={item["grafana-link"]} frameBorder="0"></iframe>
                 </a>
@@ -94,6 +94,7 @@ const Card = ({ id, title, on_message, off_message, error_message, crate_status,
           </div>
         ))
       }
+
 
       </div>
     );

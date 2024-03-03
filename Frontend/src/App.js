@@ -9,8 +9,7 @@ import React, { useEffect } from 'react';
 function App() {
 
   const isTestEnvironment = () => {  
-    console.log("Environment variables:", process.env);
-    return process.env.REACT_APP_ENV.includes("test");
+    return process.env.REACT_APP_ENV.includes("dev");
   };
 
   useEffect(() => {
@@ -21,7 +20,7 @@ function App() {
   const [othersData2, setOthersData2] = React.useState([]);
 
   const loadOthers = () => {
-    fetch("http://localhost:8000/other_units")
+    fetch("http://localhost:8001/other_units")
       .then(response => response.json())
       .then(data => {
         // Get response JSON
@@ -92,7 +91,7 @@ function App() {
   const [modulesData2, setModulesData2] = React.useState([]);
 
   const loadAttached = () => {
-    fetch("http://localhost:8000/attached_units2")
+    fetch("http://localhost:8001/attached_units2")
       .then(response => response.json())
       .then(data => {
         // Get response JSON

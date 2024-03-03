@@ -63,7 +63,7 @@ const Measuring= ({ id, powering, channel, device_names, status, button_status, 
       <div>
       <div className={clicked ? 'measuring-row-off' : 'measuring-row-on'}>
         <div className='measuring'>
-          {device_names}
+          {device_names.split('_').join(' ')}
         </div>
         <ThemeProvider theme={theme}>
         <div> 

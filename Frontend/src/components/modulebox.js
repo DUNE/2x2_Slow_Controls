@@ -3,6 +3,7 @@ import * as React from 'react';
 import Measuring from './measuring';
 import { createTheme, colors, ThemeProvider } from '@mui/material';
 import { useState, useEffect } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 // SETTING UP BUTTON THEME
 const theme = createTheme({
@@ -30,16 +31,16 @@ function ModuleBox({ id, title, units, crate_status, measuring, powering_dict })
     return (
       <div className="module-container">
         <h2 className="module-title">{title}</h2>
-        {units.map((unitName, index) => (
-          <React.Fragment key={index}>
+        {units.map((unitName, index1) => (
+          <React.Fragment key={index1}>
             <div className='unit-name'>{unitName.slice(0, -1).toUpperCase() + '-' + unitName.slice(-1).toUpperCase()}</div>
               <div>
-              {Object.keys(measuring).map((readoutName, index2) => (
+              {Object.keys(powering_dict).map((readoutName, index2) => (
                 <React.Fragment key={index2}>
                   <div className='readout-group-title'>{readoutName}</div>
 
                   <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-                  {Object.keys(powering_dict[readoutName].channels).map((channel, index3) => (
+                  {Object.keys((measuring[readoutName])).map((channel, index3) => (
                     <React.Fragment key={index3}>
                       <div style={{ width: '50%' }}>
                         <Measuring
@@ -56,6 +57,7 @@ function ModuleBox({ id, title, units, crate_status, measuring, powering_dict })
                     </React.Fragment>
                   ))}
                 </div>
+
                 </React.Fragment>
               ))}  
               </div>

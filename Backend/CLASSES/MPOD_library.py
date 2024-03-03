@@ -73,7 +73,7 @@ class MPOD(UNIT):
     
     def getCrateStatus(self):
         return True
-        
+
         try:
             return False if  "No Such Instance" in self.measure('PACMAN&FANS')[0][0][0] else True
         except Exception as e:
@@ -82,9 +82,27 @@ class MPOD(UNIT):
             return True
 
     def getMeasuringStatus(self):
-        #return {"charge": False}
+        return { # TEST OUTPUT FOR MOD0
+            "PACMAN&FANS" : {
+                ".u0" : False,
+                ".u1" : False,
+                ".u100" : False,
+                ".u101" : False,
+                ".u102" : False
+            },
+            "VGAs" : {
+                ".u300" : False,
+                ".u301" : False,
+                ".u302" : False,
+                ".u303" : False
+            },
+            "RTDs" : {
+                ".u200" : False,
+                ".u201" : False
+            }
+        }
+    
         try:
-            '''
             if self.unit != "mpod_crate":
                 self.measuring_status = {}
                 for key in self.dictionary['powering'].keys():
@@ -96,8 +114,7 @@ class MPOD(UNIT):
                         self.measuring_status[key] = False
             else:
                 self.measuring_status = None
-            '''
-            return {"PACMAN&FANS": False, "VGAs" : False, "RTDs" : False}
+            return self.measuring_status
         
         except Exception as e:
             print("Exception Found Measuring Status: ", e)
@@ -153,7 +170,7 @@ class MPOD(UNIT):
     def powerON(self, powering):
         '''
         Power-ON all channels
-        '''
+        '''    
         channels = self.getChannelDict(powering)
         for channel in channels.keys():
             selected_channel = channels[channel]
@@ -222,7 +239,7 @@ class MPOD(UNIT):
         Svalues, Vvalues, Ivalues = [], [], []
         channels = self.getChannelDict(powering)
         for channel in channels.keys():
-            print(channel)
+            print("CHANNEL:" + channel)
             if self.getStatus(channel)[0] == "WIENER-CRATE-MIB::outputStatus"+channel+" = BITS: 80 outputOn(0) ":
                 Svalues += ["ON"]
             elif self.getStatus(channel)[0] == "WIENER-CRATE-MIB::outputStatus"+channel+" = BITS: 00 ":

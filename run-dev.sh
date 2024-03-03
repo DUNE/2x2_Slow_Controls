@@ -24,4 +24,4 @@ done
 
 ###############################################################
 # Start podman container
-podman-compose -f compose.test.yaml up --build -d
+podman-compose -f compose.dev.yaml up --build 
