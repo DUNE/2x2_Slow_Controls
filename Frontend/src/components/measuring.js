@@ -42,7 +42,7 @@ const Measuring= ({ id, powering, channel, device_names, status, button_status, 
 
   const handleClick = () => {
     setClicked((prevClicked) => !prevClicked);
-    const endpoint = clicked ? `http://localhost:8000/attached_units/${id}/${powering}/${channel}/turn-on` : `http://localhost:8000/attached_units/${id}/${powering}/${channel}/turn-off`;
+    const endpoint = clicked ? `http://192.168.197.46:8000/attached_units/${id}/${powering}/${channel}/turn-on` : `http://localhost:8000/attached_units/${id}/${powering}/${channel}/turn-off`;
     fetch(endpoint, {method: "PUT"})
     .then(response => response.json())
     }

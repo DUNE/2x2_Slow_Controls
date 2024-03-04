@@ -36,7 +36,7 @@ const Card = ({ id, title, on_message, off_message, error_message, crate_status,
   const [clicked, setClicked] = React.useState();
   const handleClick = () => {
     setClicked((prevClicked) => !prevClicked);
-    const endpoint = clicked ? `http://localhost:8000/other_units/${id}/turn-on` : `http://localhost:8000/other_units/${id}/turn-off`;
+    const endpoint = clicked ? `http://192.168.197.46:8000/other_units/${id}/turn-on` : `http://localhost:8000/other_units/${id}/turn-off`;
     fetch(endpoint, {method: "PUT"})
     .then(response => response.json())
     }

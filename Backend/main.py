@@ -108,8 +108,8 @@ app = FastAPI(
 from fastapi.middleware.cors import CORSMiddleware
 # Adding cors urls
 origins = [
-    'http://localhost:3006', # PRODUCTION REACT APP
-    'http://localhost:3002', # TEST REACT APP
+    'http://192.168.197.46:3006', # PRODUCTION REACT APP
+    'http://192.168.197.46:3002', # TEST REACT APP
 ]
 # Add middleware
 app.add_middleware(

@@ -20,7 +20,7 @@ function App() {
   const [othersData2, setOthersData2] = React.useState([]);
 
   const loadOthers = () => {
-    fetch("http://localhost:8000/other_units")
+    fetch("http://192.168.197.46:8001/other_units")
       .then(response => response.json())
       .then(data => {
         // Get response JSON
@@ -91,7 +91,7 @@ function App() {
   const [modulesData2, setModulesData2] = React.useState([]);
 
   const loadAttached = () => {
-    fetch("http://localhost:8000/attached_units2")
+    fetch("http://192.168.197.46:8001/attached_units2")
       .then(response => response.json())
       .then(data => {
         // Get response JSON
