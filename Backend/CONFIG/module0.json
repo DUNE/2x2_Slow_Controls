@@ -1,7 +1,7 @@
 {
     "module0" : {
         "mpod1" : {
-            "ip" : "192.168.197.83",
+            "ip" : "192.168.197.34",
             "class" : "MPOD",
             "powering" :{
                 "PACMAN&FANS" : {

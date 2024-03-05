@@ -69,7 +69,7 @@ const Measuring= ({ id, powering, channel, device_names, status, button_status, 
         <div> 
           <Button color={clicked ? 'secondary' : 'primary'}
                   variant="contained"
-                  style={{minWidth: '20px', height: 30, borderRadius: 0, fontSize: 10}}
+                  style={{Width: '30px', height: 30, borderRadius: 0, fontSize: 10}}
                   onClick={handleClick}
                   disabled={!button_status}>
                   {clicked ? 'OFF' : 'ON'}

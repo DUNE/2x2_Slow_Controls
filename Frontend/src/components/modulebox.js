@@ -48,7 +48,7 @@ function ModuleBox({ id, title, units, crate_status, measuring, powering_dict })
                           powering={readoutName}
                           channel={channel}
                           device_names={powering_dict[readoutName]["channels"][channel]["name"]}
-                          status={Boolean(measuring[readoutName])}
+                          status={Boolean(measuring[readoutName][channel])}
                           button_status={status}
                           grafana_link={powering_dict[readoutName]["grafana-link"]}
                         />

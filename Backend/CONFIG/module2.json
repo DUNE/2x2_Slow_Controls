@@ -1,7 +1,7 @@
 {
     "module2" : {
         "mpod2" : {
-            "ip" : "192.168.197.34",
+            "ip" : "192.168.197.83",
             "class" : "MPOD",
             "powering" :{
                 "PACMAN&FANS" : {
@@ -92,7 +92,7 @@
                     "measurements" : ["voltage", "current"],
                     "grafana-link" : [],
                     "channels" : {
-                        ".u104" : {
+                        ".u200" : {
                             "name" : "RTD_SC31",
                             "max_current" : 1.05,
                             "current" : 1.0,

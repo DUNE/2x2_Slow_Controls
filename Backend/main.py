@@ -21,7 +21,7 @@ import os
 #---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
 # Reading modules JSON file
 moduleDB = {}
-for i in range(1): # JUST MODULE 0 FOR NOW
+for i in range(4): # JUST MODULE 0 FOR NOW
     file_path = f'app/CONFIG/module{i}.json'
     with open(file_path, "r") as json_file:
         moduleDB.update(json.load(json_file))
