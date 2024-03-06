@@ -64,7 +64,14 @@ class GIZMO(UNIT):
             print("SSH Connection Error")
         
         return line
-
+    
+    def CalculatePhase(self, qq, ii):
+        '''
+        Inputs:         - ii (in phase projection)
+                        - qq (out of phase projection)
+        Description:    Calculates arctan(qq/ii)
+        '''
+        return np.degrees(np.arctan(qq/ii))
 
     #---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
     # INFLUXDB METHODS
@@ -133,8 +140,18 @@ class GIZMO(UNIT):
                     line = line.replace(', ', ' ')
                     sl = line.split() # split line
                     data = [float(sl[i].split('=')[1]) for i in range(0,5)]
+                    data.append(0)
+                    ii, qq = 0, 0
+                    # Pushing gizmo variables to influxDB 
                     for powering, value in zip(powering_list, data):
+                        if powering == "charge":
+                            qq = value
+                        if powering == "current":
+                            ii = value
+                        if powering == "phase":
+                            value = self.CalculatePhase(qq, ii)
                         self.INFLUX_write(powering, value)
+                    
                     self.crate_status = True
                     self.error_status = False
 

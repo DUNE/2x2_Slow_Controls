@@ -7,6 +7,7 @@ import numpy as np
 from influxdb import InfluxDBClient
 import traceback
 import sys
+import threading
 from configparser import ConfigParser
 
 class MPOD(UNIT):
@@ -22,6 +23,13 @@ class MPOD(UNIT):
         self.dictionary = dict_unit
         self.crate_status = self.getCrateStatus()
         self.measuring_status = self.getMeasuringStatus()
+        
+        # START CONTINUOUS MONITORING ON OBJECT CREATION
+        if self.crate_status:
+            for powering in self.getPoweringList():
+                for channel in self.getChannelList(powering):
+                    threading.Thread(target=self.CONTINUOUS_monitoring, args=([[powering, channel]]), kwargs={}).start()
+
 
     #---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
     # GET METHODS
@@ -72,35 +80,55 @@ class MPOD(UNIT):
         return ret[0].split(" ")[-2]
     
     def getCrateStatus(self):
-        return True
-        
+        #return True
+
         try:
-            return False if  "No Such Instance" in self.measure('PACMAN&FANS')[0][0][0] else True
+            return False if  "No Such Instance" in self.measure(['PACMAN&FANS','.u0'])[0][0][0] else True
         except Exception as e:
             print("Exception Found Getting Crate Status: ", e)
             self.error_status = True
             return True
 
     def getMeasuringStatus(self):
-        #return {"charge": False}
+        '''
+        return { # TEST OUTPUT FOR MOD0
+            "PACMAN&FANS" : {
+                ".u0" : False,
+                ".u1" : False,
+                ".u100" : False,
+                ".u101" : False,
+                ".u102" : False
+            },
+            "VGAs" : {
+                ".u300" : False,
+                ".u301" : False,
+                ".u302" : False,
+                ".u303" : False
+            },
+            "RTDs" : {
+                ".u200" : False,
+                ".u201" : False
+            }
+        }
+        '''
         try:
-            '''
             if self.unit != "mpod_crate":
                 self.measuring_status = {}
                 for key in self.dictionary['powering'].keys():
-                    print(key)
-                    print(self.measure(key))
-                    if self.measure(key)[0][0]=="ON":
-                        self.measuring_status[key] = True 
-                    else:
-                        self.measuring_status[key] = False
+                    self.measuring_status[key] = {}
+                    for channel in self.dictionary['powering'][key]['channels'].keys():
+                        #print(key)
+                        #print(self.measure([key, channel]))
+                        if self.measure([key, channel])[0][0]=="ON":
+                            self.measuring_status[key][channel] = True 
+                        else:
+                            self.measuring_status[key][channel] = False
             else:
                 self.measuring_status = None
-            '''
-            return {"PACMAN&FANS": False, "VGAs" : False, "RTDs" : False}
+            return self.measuring_status
         
         except Exception as e:
-            print("Exception Found Measuring Status: ", e)
+            print("Exception Found Measuring Status: " + key + ", " + channel, e)
             self.error_status = True     
             self.measuring_status = None  
             return self.measuring_status
@@ -153,7 +181,7 @@ class MPOD(UNIT):
     def powerON(self, powering):
         '''
         Power-ON all channels
-        '''
+        '''    
         channels = self.getChannelDict(powering)
         for channel in channels.keys():
             selected_channel = channels[channel]
@@ -215,24 +243,23 @@ class MPOD(UNIT):
     #---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
     # MEASURING METHODS
     #---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
-    def measure(self, powering):
+    def measure(self, powering_array):
         '''
         Measures all channels in powering category
         '''
         Svalues, Vvalues, Ivalues = [], [], []
-        channels = self.getChannelDict(powering)
-        for channel in channels.keys():
-            print(channel)
-            if self.getStatus(channel)[0] == "WIENER-CRATE-MIB::outputStatus"+channel+" = BITS: 80 outputOn(0) ":
-                Svalues += ["ON"]
-            elif self.getStatus(channel)[0] == "WIENER-CRATE-MIB::outputStatus"+channel+" = BITS: 00 ":
-                Svalues += ["OFF"]
-            elif self.getStatus(channel)[0] == "WIENER-CRATE-MIB::outputStatus"+channel+" = BITS: 40 outputInhibit(1) ":
-                Svalues += ["ILOCK"]
-            else:
-                Svalues += [self.getStatus(channel)]
-            Vvalues += [self.getMeasurementSenseVoltage(channel)]
-            Ivalues += [self.getMeasurementCurrent(channel)]
+        powering, channel = powering_array[0], powering_array[1]
+        print("POWERING: " + powering + ", CHANNEL:" + channel)
+        if self.getStatus(channel)[0] == "WIENER-CRATE-MIB::outputStatus"+channel+" = BITS: 80 outputOn(0) ":
+            Svalues += ["ON"]
+        elif self.getStatus(channel)[0] == "WIENER-CRATE-MIB::outputStatus"+channel+" = BITS: 00 ":
+            Svalues += ["OFF"]
+        elif self.getStatus(channel)[0] == "WIENER-CRATE-MIB::outputStatus"+channel+" = BITS: 40 outputInhibit(1) ":
+            Svalues += ["ILOCK"]
+        else:
+            Svalues += [self.getStatus(channel)]
+        Vvalues += [self.getMeasurementSenseVoltage(channel)]
+        Ivalues += [self.getMeasurementCurrent(channel)]
         return Svalues,Vvalues,Ivalues
     
     def measure_single_channel(self, powering):
@@ -271,23 +298,28 @@ class MPOD(UNIT):
     #---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
     # INFLUXDB METHODS
     #---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
-    def INFLUX_write(self, powering, data):
+    def INFLUX_write(self, powering, channel, data):
         '''
-        Inputs:         - Powering (i.e. light)
+        Inputs:         - Powering (i.e. PACMAN&FANS)
+                        - Channel (i.e. .u100)
                         - Data (measurement array)
 
         Description:    Record timestamp on InfluxDB
         '''
         client = self.InitializeInfluxDB()
-        channels = self.getChannelDict(powering)
+        #channels = self.getChannelDict(powering)
         measurements_list = self.getMeasurementsList(powering)
-        data = np.array(data)
-        keys = list(channels.keys())
+        if "No Such Instance" or "BITS" in data[0][0][0]: 
+            data = np.array((['OFF'], ['0.00000'], ['0.00000']))
+        elif "Failure" or "Limited" in data[0][0][0]:
+            data = np.array([['OFF'], [data[1][0]], [data[2][0]]])
+        else:
+            data = np.array(data)
         for i in range(0,data.shape[1]) :
             data_column = data[:,i]
             client.write_points(self.JSON_setup(
                 measurement = powering,
-                channel_name = channels[keys[i]]["name"],
+                channel_name = channel,
                 status = data_column[0],
                 fields = zip(measurements_list, 
                              [float(element) for element in data_column[1:]])
@@ -296,8 +328,8 @@ class MPOD(UNIT):
 
     def JSON_setup(self, measurement, channel_name, status, fields):
             '''
-            Inputs:         - Measurement (i.e. light)
-                            - Channel name (i.e. VGA_12_POS)
+            Inputs:         - Measurement (i.e. PACMAN&FANS)
+                            - Channel name (i.e. .u100)
                             - Status (i.e. OFF)
                             - Fields (i.e. Voltage & current)
 
@@ -322,17 +354,18 @@ class MPOD(UNIT):
             json_payload.append(data)
             return json_payload
     
-    def CONTINUOUS_monitoring(self, powering):
+    def CONTINUOUS_monitoring(self, powering_array):
         '''
-        Inputs:         - Powering (i.e. light)
+        Inputs:         - Powering (i.e. [PACMAN&FANS, .u100])
 
         Description:    Continuously record timestamp on InfluxDB
         '''
+        powering, channel = powering_array[0], powering_array[1]
         try:
-            print("MPOD Continuous DAQ Activated: " + powering + ". Taking data in real time")
+            print("MPOD Continuous DAQ Activated: " + powering + ", " + channel+ ". Taking data in real time")
             while self.getCrateStatus():
-                data = self.measure(powering)
-                self.INFLUX_write(powering,data)
+                data = self.measure(powering_array)
+                self.INFLUX_write(powering,channel,data)
                 #self.write_log()
                 time.sleep(2)
 

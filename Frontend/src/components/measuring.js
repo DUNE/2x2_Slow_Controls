@@ -42,7 +42,7 @@ const Measuring= ({ id, powering, channel, device_names, status, button_status, 
 
   const handleClick = () => {
     setClicked((prevClicked) => !prevClicked);
-    const endpoint = clicked ? `http://localhost:8000/attached_units/${id}/${powering}/${channel}/turn-on` : `http://localhost:8000/attached_units/${id}/${powering}/${channel}/turn-off`;
+    const endpoint = clicked ? `http://192.168.197.46:8000/attached_units/${id}/${powering}/${channel}/turn-on` : `http://localhost:8000/attached_units/${id}/${powering}/${channel}/turn-off`;
     fetch(endpoint, {method: "PUT"})
     .then(response => response.json())
     }
@@ -63,13 +63,13 @@ const Measuring= ({ id, powering, channel, device_names, status, button_status, 
       <div>
       <div className={clicked ? 'measuring-row-off' : 'measuring-row-on'}>
         <div className='measuring'>
-          {device_names}
+          {device_names.split('_').join(' ')}
         </div>
         <ThemeProvider theme={theme}>
         <div> 
           <Button color={clicked ? 'secondary' : 'primary'}
                   variant="contained"
-                  style={{minWidth: '20px', height: 30, borderRadius: 0, fontSize: 10}}
+                  style={{Width: '30px', height: 30, borderRadius: 0, fontSize: 10}}
                   onClick={handleClick}
                   disabled={!button_status}>
                   {clicked ? 'OFF' : 'ON'}

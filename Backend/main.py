@@ -21,7 +21,7 @@ import os
 #---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
 # Reading modules JSON file
 moduleDB = {}
-for i in range(4):
+for i in range(4): # JUST MODULE 0 FOR NOW
     file_path = f'app/CONFIG/module{i}.json'
     with open(file_path, "r") as json_file:
         moduleDB.update(json.load(json_file))
@@ -108,8 +108,8 @@ app = FastAPI(
 from fastapi.middleware.cors import CORSMiddleware
 # Adding cors urls
 origins = [
-    'http://localhost:3006', # PRODUCTION REACT APP
-    'http://localhost:3002', # TEST REACT APP
+    'http://192.168.197.46:3006', # PRODUCTION REACT APP
+    'http://192.168.197.46:3002', # TEST REACT APP
 ]
 # Add middleware
 app.add_middleware(
