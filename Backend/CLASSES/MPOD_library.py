@@ -117,8 +117,8 @@ class MPOD(UNIT):
                 for key in self.dictionary['powering'].keys():
                     self.measuring_status[key] = {}
                     for channel in self.dictionary['powering'][key]['channels'].keys():
-                        print(key)
-                        print(self.measure([key, channel]))
+                        #print(key)
+                        #print(self.measure([key, channel]))
                         if self.measure([key, channel])[0][0]=="ON":
                             self.measuring_status[key][channel] = True 
                         else:
@@ -309,14 +309,16 @@ class MPOD(UNIT):
         client = self.InitializeInfluxDB()
         #channels = self.getChannelDict(powering)
         measurements_list = self.getMeasurementsList(powering)
-        print(data)
-        data = np.array(data)
-        #keys = list(channels.keys())
+        if "No Such Instance" or "BITS" in data[0][0][0]: 
+            data = np.array((['OFF'], ['0.00000'], ['0.00000']))
+        elif "Failure" or "Limited" in data[0][0][0]:
+            data = np.array([['OFF'], [data[1][0]], [data[2][0]]])
+        else:
+            data = np.array(data)
         for i in range(0,data.shape[1]) :
             data_column = data[:,i]
             client.write_points(self.JSON_setup(
                 measurement = powering,
-                #channel_name = channels[keys[i]]["name"],
                 channel_name = channel,
                 status = data_column[0],
                 fields = zip(measurements_list, 
