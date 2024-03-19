@@ -2,7 +2,6 @@ from pysnmp.hlapi import *
 from datetime import datetime
 import numpy as np
 from influxdb import InfluxDBClient
-from configparser import ConfigParser
 import os
 
 #from pydantic import BaseModel
@@ -33,17 +32,19 @@ class UNIT():
         '''
         Create InfluxDB client
         '''
-        conf = ConfigParser()
-        conf.read("app/CONFIG/config.ini")
-        db = conf["DATABASE"]
+        # Setup InfluxDB client
         IP = os.environ.get("IP_LOCAL")
-        # Run hostname -I to get local ip addresses
-        client = InfluxDBClient(IP, db.get('PORT'), self.unit)
+        INFLUX_PORT = os.environ.get("INFLUX_PORT")
+        client = InfluxDBClient(IP, INFLUX_PORT, self.unit)
+
+        # Create database
         if self.module == None:
             db_name = self.unit
         else:
             db_name = self.module + "_" + self.unit
         client.create_database(db_name)
+
+        # Switch to created database
         client.switch_database(db_name)
         return client 
     

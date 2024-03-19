@@ -9,19 +9,21 @@ import React, { useEffect } from 'react';
 function App() {
 
   const isTestEnvironment = () => {  
-    console.log("Environment variables:", process.env);
-    return process.env.NODE_ENV.includes("test");
+    return process.env.REACT_APP_ENV.includes("dev");
   };
 
   useEffect(() => {
-    document.title = isTestEnvironment() ? "[TEST] 2x2 Slow Controls" : "2x2 Slow Controls";
+    document.title = isTestEnvironment() ? "[DEV] 2x2 Slow Controls" : "2x2 Slow Controls";
   }, []);
+
+  // GET BACKEND URL
+  const BACKEND_URL = process.env.REACT_APP_HOST_IP_ADDRESS;
 
   // CONTINUOS JSON AQUISITION OTHER UNITS
   const [othersData2, setOthersData2] = React.useState([]);
 
   const loadOthers = () => {
-    fetch("http://localhost:8000/other_units")
+    fetch(`${BACKEND_URL}/other_units`)
       .then(response => response.json())
       .then(data => {
         // Get response JSON
@@ -92,7 +94,7 @@ function App() {
   const [modulesData2, setModulesData2] = React.useState([]);
 
   const loadAttached = () => {
-    fetch("http://localhost:8000/attached_units2")
+    fetch(`${BACKEND_URL}/attached_units2`)
       .then(response => response.json())
       .then(data => {
         // Get response JSON

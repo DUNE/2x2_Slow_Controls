@@ -7,7 +7,6 @@ import numpy as np
 from influxdb import InfluxDBClient
 import traceback
 import sys
-from configparser import ConfigParser
 
 class VME(UNIT):
     '''

@@ -4,8 +4,8 @@ import Button from '@mui/material/Button';
 import { createTheme, colors, ThemeProvider } from '@mui/material';
 import { useEffect } from 'react';
 
-// GETTING SERVER NAME FROM PODMAN COMPOSE FILE
-const prodServer = process.env.PROD_SERVER;
+// GET BACKEND URL
+const BACKEND_URL = process.env.REACT_APP_HOST_IP_ADDRESS;
 
 // SETTING UP BUTTON THEME
 const theme = createTheme({
@@ -23,7 +23,7 @@ const theme = createTheme({
   })
 
 // COMPONENT CONSTANT
-const Measuring= ({ id, powering, channel, device_names, status, button_status, grafana_link }) => {
+const Measuring= ({ id, powering, channel, device_names, status, button_status }) => {
   //#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
   //# BUTTON STATUS CONFIGURATION
   //#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
@@ -42,7 +42,7 @@ const Measuring= ({ id, powering, channel, device_names, status, button_status, 
 
   const handleClick = () => {
     setClicked((prevClicked) => !prevClicked);
-    const endpoint = clicked ? `http://localhost:8000/attached_units/${id}/${powering}/${channel}/turn-on` : `http://localhost:8000/attached_units/${id}/${powering}/${channel}/turn-off`;
+    const endpoint = clicked ? `${BACKEND_URL}/attached_units/${id}/${powering}/${channel}/turn-on` : `${BACKEND_URL}/attached_units/${id}/${powering}/${channel}/turn-off`;
     fetch(endpoint, {method: "PUT"})
     .then(response => response.json())
     }
@@ -63,13 +63,13 @@ const Measuring= ({ id, powering, channel, device_names, status, button_status, 
       <div>
       <div className={clicked ? 'measuring-row-off' : 'measuring-row-on'}>
         <div className='measuring'>
-          {device_names}
+          {device_names.split('-')[1].split('_').join(' ')}
         </div>
         <ThemeProvider theme={theme}>
         <div> 
           <Button color={clicked ? 'secondary' : 'primary'}
                   variant="contained"
-                  style={{minWidth: '20px', height: 30, borderRadius: 0, fontSize: 10}}
+                  style={{Width: '30px', height: 30, borderRadius: 0, fontSize: 10}}
                   onClick={handleClick}
                   disabled={!button_status}>
                   {clicked ? 'OFF' : 'ON'}

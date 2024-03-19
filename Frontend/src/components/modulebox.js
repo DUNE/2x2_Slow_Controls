@@ -2,6 +2,7 @@ import '../App.css';
 import * as React from 'react';
 import Measuring from './measuring';
 import { createTheme, colors, ThemeProvider } from '@mui/material';
+import Button from '@mui/material/Button';
 import { useState, useEffect } from 'react';
 
 // SETTING UP BUTTON THEME
@@ -29,17 +30,31 @@ function ModuleBox({ id, title, units, crate_status, measuring, powering_dict })
   //#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
     return (
       <div className="module-container">
-        <h2 className="module-title">{title}</h2>
-        {units.map((unitName, index) => (
-          <React.Fragment key={index}>
-            <div className='unit-name'>{unitName.slice(0, -1).toUpperCase() + '-' + unitName.slice(-1).toUpperCase()}</div>
+        <div className="module-title">{title}</div>
+
+        {units.map((unitName, index1) => (
+          <React.Fragment key={index1}>
+              <div className='unit-row'>
+              <div className='unit-name'>{unitName.slice(0, -1).toUpperCase() + '-' + unitName.slice(-1).toUpperCase()}</div>
+              <ThemeProvider theme={theme}>
+                <div> 
+                  <Button color={!status ? 'secondary' : 'primary'}
+                          variant="contained"
+                          style={{Width: '30px', height: 30, borderRadius: 0, fontSize: 10}}
+                          onClick={true}
+                          disabled={false}>
+                          {!status ? 'Crate OFF' : 'Crate ON'}
+                  </Button>
+                </div>
+              </ThemeProvider>
+              </div>
               <div>
-              {Object.keys(measuring).map((readoutName, index2) => (
+              {Object.keys(powering_dict).map((readoutName, index2) => (
                 <React.Fragment key={index2}>
                   <div className='readout-group-title'>{readoutName}</div>
 
                   <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-                  {Object.keys(powering_dict[readoutName].channels).map((channel, index3) => (
+                  {Object.keys((measuring[readoutName])).map((channel, index3) => (
                     <React.Fragment key={index3}>
                       <div style={{ width: '50%' }}>
                         <Measuring
@@ -47,15 +62,23 @@ function ModuleBox({ id, title, units, crate_status, measuring, powering_dict })
                           powering={readoutName}
                           channel={channel}
                           device_names={powering_dict[readoutName]["channels"][channel]["name"]}
-                          status={Boolean(measuring[readoutName])}
+                          status={Boolean(measuring[readoutName][channel])}
                           button_status={status}
-                          grafana_link={powering_dict[readoutName]["grafana-link"]}
                         />
                         <hr style={{ margin: '0.5px' }}></hr>
                       </div>
                     </React.Fragment>
-                  ))}
+                    ))
+                  }
                 </div>
+                <div className="grafana-card-module">
+                  {powering_dict[readoutName]["grafana-link"] && powering_dict[readoutName]["grafana-link"].length > 0 && (
+                    <a href={powering_dict[readoutName]["grafana-link"]} target="_blank" rel="noopener noreferrer">
+                      <iframe src={powering_dict[readoutName]["grafana-link"]} frameBorder="0"></iframe>
+                    </a>
+                  )}
+                </div>
+
                 </React.Fragment>
               ))}  
               </div>

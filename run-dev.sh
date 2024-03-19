@@ -7,7 +7,7 @@
 
 ###############################################################
 # Make sure all containers are stopped
-podman-compose -f compose.test.yaml down
+podman-compose -f compose.dev.yaml down
 
 ###############################################################
 # Find local ip address for ssh connection with gizmo
@@ -24,4 +24,4 @@ done
 
 ###############################################################
 # Start podman container
-podman-compose -f compose.test.yaml up --build -d
+podman-compose -f compose.dev.yaml up --build 

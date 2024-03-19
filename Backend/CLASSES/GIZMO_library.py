@@ -3,7 +3,6 @@ import time
 from datetime import datetime
 import numpy as np
 from influxdb import InfluxDBClient
-from configparser import ConfigParser
 import paramiko
 import warnings 
 import traceback
@@ -64,7 +63,14 @@ class GIZMO(UNIT):
             print("SSH Connection Error")
         
         return line
-
+    
+    def CalculatePhase(self, qq, ii):
+        '''
+        Inputs:         - ii (in phase projection)
+                        - qq (out of phase projection)
+        Description:    Calculates arctan(qq/ii)
+        '''
+        return np.degrees(np.arctan(qq/ii))
 
     #---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
     # INFLUXDB METHODS
@@ -121,22 +127,48 @@ class GIZMO(UNIT):
             self.error_status = True
             print('*** Caught exception: %s: %s' % (e.__class__, e))
 
+        # Take data while gizmo is ON
         while self.crate_status:
             try:
-                time.sleep(10)
-                line = self.measure(chan)
-                #li= self.chan.recv(1000).decode('ASCII').strip()
-                if 'RES' == line[0:3]:
-                    line = line.replace('(', ' ')
-                    line = line.replace(')', ' ')
-                    line = line.replace('= ', '=')
-                    line = line.replace(', ', ' ')
-                    sl = line.split() # split line
-                    data = [float(sl[i].split('=')[1]) for i in range(0,5)]
-                    for powering, value in zip(powering_list, data):
-                        self.INFLUX_write(powering, value)
+                # Creating arrays for data 
+                sampled_values = {}
+                for powering in powering_list:
+                        sampled_values[powering] = []    
+                # Record data for 5 seconds
+                elapsed_time = 0
+                start_time = time.time()
+                while elapsed_time < 5:
+                    # Measuring from gizmo
+                    line = self.measure(chan)
+                    if 'RES' == line[0:3]:
+                        line = line.replace('(', ' ')
+                        line = line.replace(')', ' ')
+                        line = line.replace('= ', '=')
+                        line = line.replace(', ', ' ')
+                        sl = line.split() 
+                        data = [float(sl[i].split('=')[1]) for i in range(0,5)]
+                        data.append(0)
+                        ii, qq = 0, 0
+                        # Sending data to corresponding arrays
+                        for powering, value in zip(powering_list, data):
+                            if powering == "charge":
+                                qq = value
+                            if powering == "current":
+                                ii = value
+                            if powering == "phase":
+                                value = self.CalculatePhase(qq, ii)
+                            sampled_values[powering].append(value)
+                    # Send data to influxDB
+                    for powering in powering_list:
+                        mean, RMS = np.mean(sampled_values[powering]), np.sqrt(np.mean(np.square(sampled_values[powering])))
+                        self.INFLUX_write(powering, mean)
+                    # Set crate status if no error
                     self.crate_status = True
                     self.error_status = False
+                    # Calculate operation time
+                    elapsed_time = time.time() - start_time
+                    print("ELAPSED TIME : " + str(elapsed_time))
+                print(len(sampled_values["resistance"]))
 
             except Exception as e:
                 print("Something is wrong!")
