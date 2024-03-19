@@ -4,8 +4,8 @@ import Button from '@mui/material/Button';
 import { createTheme, colors, ThemeProvider } from '@mui/material';
 import { useEffect } from 'react';
 
-// GETTING SERVER NAME FROM PODMAN COMPOSE FILE
-const prodServer = process.env.PROD_SERVER;
+// GET BACKEND URL
+const BACKEND_URL = process.env.REACT_APP_HOST_IP_ADDRESS;
 
 // SETTING UP BUTTON THEME
 const theme = createTheme({
@@ -36,7 +36,7 @@ const Card = ({ id, title, on_message, off_message, error_message, crate_status,
   const [clicked, setClicked] = React.useState();
   const handleClick = () => {
     setClicked((prevClicked) => !prevClicked);
-    const endpoint = clicked ? `http://192.168.197.46:8000/other_units/${id}/turn-on` : `http://localhost:8000/other_units/${id}/turn-off`;
+    const endpoint = clicked ? `${BACKEND_URL}/other_units/${id}/turn-on` : `${BACKEND_URL}/other_units/${id}/turn-off`;
     fetch(endpoint, {method: "PUT"})
     .then(response => response.json())
     }

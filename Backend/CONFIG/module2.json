@@ -1,15 +1,15 @@
 {
     "module2" : {
-        "mpod2" : {
+        "mpod0" : {
             "ip" : "192.168.197.83",
             "class" : "MPOD",
             "powering" :{
                 "PACMAN&FANS" : {
                     "measurements" : ["voltage", "current"],
-                    "grafana-link" : [],
+                    "grafana-link" : "http://192.168.197.46:3000/d/aJnWQK0Sk/mpods?orgId=1&from=now-15m&to=now&refresh=10s&viewPanel=20&kiosk",
                     "channels" : {
                         ".u0" : {
-                            "name" : "PACMAN_A",
+                            "name" : "Mod2-TPC1_PACMAN",
                             "max_current" : 0.65,
                             "current" : 0.6,
                             "max_sense_voltage" : 13.2,
@@ -18,7 +18,7 @@
                             "V" : 7.5
                         },
                         ".u1" : {
-                            "name" : "PACMAN_B",
+                            "name" : "Mod2-TPC2_PACMAN",
                             "max_current" : 0.65,
                             "current" : 0.6,
                             "max_sense_voltage" : 13.2,
@@ -27,7 +27,7 @@
                             "V" : 7.5
                         },
                         ".u100" : {
-                            "name" : "PAC-FAN_A",
+                            "name" : "Mod2-TPC1_pacFAN",
                             "max_current" : 0.65,
                             "current" : 0.6,
                             "max_sense_voltage" : 13.2,
@@ -36,7 +36,7 @@
                             "V" : 7.5
                         },
                         ".u101" : {
-                            "name" : "PAC-FAN_B",
+                            "name" : "Mod2-TPC2_pacFAN",
                             "max_current" : 0.65,
                             "current" : 0.6,
                             "max_sense_voltage" : 13.2,
@@ -48,10 +48,10 @@
                 },
                 "VGAs" : {
                     "measurements" : ["voltage", "current"],
-                    "grafana-link" : [],
+                    "grafana-link" : "http://192.168.197.46:3000/d/aJnWQK0Sk/mpods?orgId=1&from=now-15m&to=now&refresh=10s&viewPanel=21&kiosk",
                     "channels" : {
                         ".u300" : {
-                            "name" : "VGA_Card_1",
+                            "name" : "Mod2-VGA_Card_1",
                             "max_current" : 1.55,
                             "current" : 1.5,
                             "max_sense_voltage" : 5.5,
@@ -60,7 +60,7 @@
                             "V" : 5
                         },
                         ".u301" : {
-                            "name" : "VGA_Card_2",
+                            "name" : "Mod2-VGA_Card_2",
                             "max_current" : 1.55,
                             "current" : 1.5,
                             "max_sense_voltage" : 5.5,
@@ -69,7 +69,7 @@
                             "V" : 5
                         },
                         ".u302" : {
-                            "name" : "VGA_Card_3",
+                            "name" : "Mod2-VGA_Card_3",
                             "max_current" : 1.55,
                             "current" : 1.5,
                             "max_sense_voltage" : 5.5,
@@ -78,7 +78,7 @@
                             "V" : 5
                         },
                         ".u303" : {
-                            "name" : "VGA_Card_4",
+                            "name" : "Mod2-VGA_Card_4",
                             "max_current" : 1.55,
                             "current" : 1.5,
                             "max_sense_voltage" : 5.5,
@@ -90,10 +90,10 @@
                 },
                 "RTDs" : {
                     "measurements" : ["voltage", "current"],
-                    "grafana-link" : [],
+                    "grafana-link" : "http://192.168.197.46:3000/d/aJnWQK0Sk/mpods?orgId=1&from=now-15m&to=now&refresh=10s&viewPanel=23&kiosk",
                     "channels" : {
                         ".u200" : {
-                            "name" : "RTD_SC31",
+                            "name" : "Mod2-RTD",
                             "max_current" : 1.05,
                             "current" : 1.0,
                             "max_sense_voltage" : 6,
