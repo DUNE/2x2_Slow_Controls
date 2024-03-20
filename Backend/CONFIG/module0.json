@@ -1,123 +1,123 @@
 {
     "module0" : {
-        "mpod1" : {
+        "mpod0" : {
             "ip" : "192.168.197.34",
             "class" : "MPOD",
             "powering" :{
                 "PACMAN&FANS" : {
                     "measurements" : ["voltage", "current"],
-                    "grafana-link" : "http://192.168.197.46:3000/d/aJnWQK0Sk/mpods?orgId=1&from=now-15m&to=now&refresh=10s&viewPanel=9&kiosk",
+                    "grafana-link" : "",
                     "channels" : {
-                        ".u0" : {
+                        ".u300" : {
                             "name" : "Mod0-TPC1_PACMAN",
-                            "max_current" : 0.65,
-                            "current" : 0.6,
-                            "max_sense_voltage" : 13.2,
-                            "max_voltage" : 13.2,
+                            "max_current" : 2.75,
+                            "current_limit" : 2.5,
+                            "max_sense_voltage" : 28,
+                            "max_terminal_voltage" : 28,
                             "rate" : 1000,
-                            "V" : 7.5
+                            "sense_voltage" : 24.01
                         },
-                        ".u1" : {
+                        ".u301" : {
                             "name" : "Mod0-TPC2_PACMAN",
-                            "max_current" : 0.65,
-                            "current" : 0.6,
-                            "max_sense_voltage" : 13.2,
-                            "max_voltage" : 13.2,
+                            "max_current" : 2.75,
+                            "current_limit" : 2.5,
+                            "max_sense_voltage" : 28,
+                            "max_terminal_voltage" : 28,
                             "rate" : 1000,
-                            "V" : 7.5
+                            "sense_voltage" : 24.01
                         },
-                        ".u100" : {
+                        ".u200" : {
                             "name" : "Mod0-TPC1_pacFAN",
                             "max_current" : 0.65,
-                            "current" : 0.6,
-                            "max_sense_voltage" : 13.2,
-                            "max_voltage" : 13.2,
+                            "current_limit" : 0.6,
+                            "max_sense_voltage" : 12.5,
+                            "max_terminal_voltage" : 12.5,
                             "rate" : 1000,
-                            "V" : 7.5
+                            "sense_voltage" : 7.0
                         },
-                        ".u101" : {
+                        ".u201" : {
                             "name" : "Mod0-TPC2_pacFAN",
                             "max_current" : 0.65,
-                            "current" : 0.6,
-                            "max_sense_voltage" : 13.2,
-                            "max_voltage" : 13.2,
+                            "current_limit" : 0.6,
+                            "max_sense_voltage" : 12.5,
+                            "max_terminal_voltage" : 12.5,
                             "rate" : 1000,
-                            "V" : 7.5
+                            "sense_voltage" : 7.0
                         },
-                        ".u102" : {
+                        ".u202" : {
                             "name" : "Mod0-Interlock",
                             "max_current" : 0.65,
-                            "current" : 0.6,
-                            "max_sense_voltage" : 13.2,
-                            "max_voltage" : 13.2,
+                            "current_limit" : 0.5,
+                            "max_sense_voltage" : 5.2,
+                            "max_terminal_voltage" : 5.5,
                             "rate" : 1000,
-                            "V" : 7.5
+                            "sense_voltage" : 5.0
                         }
                     }
                 },
                 "VGAs" : {
                     "measurements" : ["voltage", "current"],
-                    "grafana-link" : "http://192.168.197.46:3000/d/aJnWQK0Sk/mpods?orgId=1&from=now-15m&to=now&refresh=10s&viewPanel=18&kiosk",
+                    "grafana-link" : "",
                     "channels" : {
-                        ".u300" : {
+                        ".u0" : {
                             "name" : "Mod0-VGA_Card_1",
                             "max_current" : 1.55,
-                            "current" : 1.5,
+                            "current_limit" : 1.5,
                             "max_sense_voltage" : 5.5,
-                            "max_voltage" : 6,
+                            "max_terminal_voltage" : 6,
                             "rate" : 1000,
-                            "V" : 5
+                            "sense_voltage" : 5
                         },
-                        ".u301" : {
+                        ".u1" : {
                             "name" : "Mod0-VGA_Card_2",
                             "max_current" : 1.55,
-                            "current" : 1.5,
+                            "current_limit" : 1.5,
                             "max_sense_voltage" : 5.5,
-                            "max_voltage" : 6,
+                            "max_terminal_voltage" : 6,
                             "rate" : 1000,
-                            "V" : 5
+                            "sense_voltage" : 5
                         },
-                        ".u302" : {
+                        ".u2" : {
                             "name" : "Mod0-VGA_Card_3",
                             "max_current" : 1.55,
-                            "current" : 1.5,
+                            "current_limit" : 1.5,
                             "max_sense_voltage" : 5.5,
-                            "max_voltage" : 6,
+                            "max_terminal_voltage" : 6,
                             "rate" : 1000,
-                            "V" : 5
+                            "sense_voltage" : 5
                         },
-                        ".u303" : {
+                        ".u3" : {
                             "name" : "Mod0-VGA_Card_4",
                             "max_current" : 1.55,
-                            "current" : 1.5,
+                            "current_limit" : 1.5,
                             "max_sense_voltage" : 5.5,
-                            "max_voltage" : 6,
+                            "max_terminal_voltage" : 6,
                             "rate" : 1000,
-                            "V" : 5
+                            "sense_voltage" : 5
                         }
                     }
                 },
                 "RTDs" : {
                     "measurements" : ["voltage", "current"],
-                    "grafana-link" : "http://192.168.197.46:3000/d/aJnWQK0Sk/mpods?orgId=1&from=now-15m&to=now&refresh=10s&viewPanel=11&kiosk",
+                    "grafana-link" : "",
                     "channels" : {
-                        ".u200" : {
+                        ".u100" : {
                             "name" : "Mod0-RTD_1",
                             "max_current" : 1.05,
-                            "current" : 1.0,
-                            "max_sense_voltage" : 6,
-                            "max_voltage" : 6,
+                            "current_limit" : 1.0,
+                            "max_sense_voltage" : 5.2,
+                            "max_terminal_voltage" : 6,
                             "rate" : 1000,
-                            "V" : 5
+                            "sense_voltage" : 5
                         },
-                        ".u201" : {
+                        ".u101" : {
                             "name" : "Mod0-RTD_2",
                             "max_current" : 1.05,
-                            "current" : 1.0,
-                            "max_sense_voltage" : 6,
-                            "max_voltage" : 6,
+                            "current_limit" : 1.0,
+                            "max_sense_voltage" : 5.2,
+                            "max_terminal_voltage" : 6,
                             "rate" : 1000,
-                            "V" : 5
+                            "sense_voltage" : 5
                         }
                     }
                 
