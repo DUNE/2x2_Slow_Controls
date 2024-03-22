@@ -53,7 +53,7 @@ for unit in othersDB.keys():
     id += 1
 
 # REMOTE MONITORING FOR GIZMO
-threading.Thread(target=others_dict[1].CONTINUOUS_monitoring, args=(), kwargs={}).start()
+#threading.Thread(target=others_dict[0].CONTINUOUS_monitoring, args=(), kwargs={}).start()
 
 #---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
 # FAST API CONFIGURATION
@@ -228,9 +228,9 @@ async def turnON_single_channel(unit_id: int, measuring: str, channel: str):
     '''
     attached_units_dict[unit_id].powerON_channel(measuring, channel) 
     # Continuous monitoring (TBD)
-    threading.Thread(target=attached_units_dict[unit_id].CONTINUOUS_monitoring, args=([measuring]), kwargs={}).start()
-    if attached_units_dict[unit_id].getClass() == "TTI":
-        threading.Thread(target=attached_units_dict[unit_id].ramp_up(100,1), args=([measuring]), kwargs={}).start()
+    #threading.Thread(target=attached_units_dict[unit_id].CONTINUOUS_monitoring, args=([measuring]), kwargs={}).start()
+    #if attached_units_dict[unit_id].getClass() == "TTI":
+    #    threading.Thread(target=attached_units_dict[unit_id].ramp_up(100,1), args=([measuring]), kwargs={}).start()
     return {"message" : attached_units_dict[unit_id].getOnMessage() + ". Measuring: " + measuring + ", channel: " + channel} 
 
 #loop.create_task(turnON_attached_by_id)

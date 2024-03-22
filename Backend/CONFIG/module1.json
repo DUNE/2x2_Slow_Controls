@@ -36,6 +36,7 @@
                             "sense_voltage" : 7.0
                         },
                         ".u205" : {
+                            "name" : "Mod1-TPC2_pacFAN",
                             "max_current" : 0.65,
                             "current_limit" : 0.6,
                             "max_sense_voltage" : 12.5,
