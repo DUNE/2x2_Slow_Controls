@@ -1,67 +1,4 @@
 {
-    "mpod_crate" : {
-        "class" : "MPOD_CRATE",
-        "modules" : {
-            "module0" : 0
-        },
-        "ip" : "192.168.197.34",
-        "powering" :{
-            "PACMAN&FANS" : {
-                "measurements" : ["voltage", "current"],
-                "grafana-link" : [],
-                "channels" : {
-                    ".u0" : {
-                        "name" : "PACMAN_A",
-                        "max_current" : 0.65,
-                        "current" : 0.6,
-                        "max_sense_voltage" : 13.2,
-                        "max_voltage" : 13.2,
-                        "rate" : 1000,
-                        "V" : 7.5
-                    },
-                    ".u1" : {
-                        "name" : "PACMAN_B",
-                        "max_current" : 0.65,
-                        "current" : 0.6,
-                        "max_sense_voltage" : 13.2,
-                        "max_voltage" : 13.2,
-                        "rate" : 1000,
-                        "V" : 7.5
-                    },
-                    ".u100" : {
-                        "name" : "PAC-FAN_A",
-                        "max_current" : 0.65,
-                        "current" : 0.6,
-                        "max_sense_voltage" : 13.2,
-                        "max_voltage" : 13.2,
-                        "rate" : 1000,
-                        "V" : 7.5
-                    },
-                    ".u101" : {
-                        "name" : "PAC-FAN_B",
-                        "max_current" : 0.65,
-                        "current" : 0.6,
-                        "max_sense_voltage" : 13.2,
-                        "max_voltage" : 13.2,
-                        "rate" : 1000,
-                        "V" : 7.5
-                    },
-                    ".u102" : {
-                        "name" : "Intlk",
-                        "max_current" : 0.65,
-                        "current" : 0.6,
-                        "max_sense_voltage" : 13.2,
-                        "max_voltage" : 13.2,
-                        "rate" : 1000,
-                        "V" : 7.5
-                    }
-                }
-            }
-        },
-        "on_message" : "MPOD crate is ON. Turning it off will affect all modules.",
-        "off_message" : "MPOD crate is OFF. Nothing is supplied to the modules.",
-        "error_message" : "Error: Cannot stablish connection with crate."
-    },
     "gizmo" : {
         "class" : "GIZMO",
         "host-name" : "192.168.197.30",
@@ -69,12 +6,12 @@
         "password" : "",
         "port" : 22,
         "powering" :{
-            "resistance" : {"measurements" : "resistance", "grafana-link" : "http://192.168.197.46:3000/d/W6fcPQhSk/gizmo-impedance-monitor?orgId=1&from=now-15m&to=now&refresh=10s&viewPanel=8&kiosk"},
+            "resistance" : {"measurements" : "resistance", "grafana-link" : "http://acd-daq05.fnal.gov/:3000/d/W6fcPQhSk/gizmo-impedance-monitor?orgId=1&from=now-15m&to=now&refresh=10s&viewPanel=8&kiosk"},
             "threshold" : {"measurements" : "threshold", "grafana-link" : ""},
-            "magnitude" : {"measurements" : "magnitude", "grafana-link" : "http://192.168.197.46:3000/d/W6fcPQhSk/gizmo-impedance-monitor?orgId=1&from=now-15m&to=now&refresh=10s&viewPanel=26&kiosk"},
+            "magnitude" : {"measurements" : "magnitude", "grafana-link" : "http://acd-daq05.fnal.gov/:3000/d/W6fcPQhSk/gizmo-impedance-monitor?orgId=1&from=now-15m&to=now&refresh=10s&viewPanel=26&kiosk"},
             "current" : {"measurements" : "current", "grafana-link" : ""},
             "charge" : {"measurements" : "charge","grafana-link" : ""},
-            "phase" : {"measurements" : "phase","grafana-link" : "http://192.168.197.46:3000/d/W6fcPQhSk/gizmo-impedance-monitor?orgId=1&from=now-15m&to=now&refresh=10s&viewPanel=6&kiosk"}
+            "phase" : {"measurements" : "phase","grafana-link" : "http://acd-daq05:3000/d/W6fcPQhSk/gizmo-impedance-monitor?orgId=1&refresh=5s&from=1711044199576&to=1711065799576&panelId=6"}
         },
         "on_message" : "Measuring resistance, threshold, magnitude, current, and charge.",
         "off_message" : "Turn ON/OFF GIZMO manually.",

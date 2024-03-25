@@ -27,6 +27,7 @@ function ModuleBox({ id, title, units, crate_status, measuring, powering_dict })
 
   //#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
   //# RETURN CARD
+  //# Note: Crate status has been disabled temporarilly
   //#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
     return (
       <div className="module-container">
@@ -41,8 +42,8 @@ function ModuleBox({ id, title, units, crate_status, measuring, powering_dict })
                   <Button color={!status ? 'secondary' : 'primary'}
                           variant="contained"
                           style={{Width: '30px', height: 30, borderRadius: 0, fontSize: 10}}
-                          onClick={true}
-                          disabled={false}>
+                          onClick={() => setStatus(!status)}
+                          disabled={true}>
                           {!status ? 'Crate OFF' : 'Crate ON'}
                   </Button>
                 </div>
@@ -63,7 +64,7 @@ function ModuleBox({ id, title, units, crate_status, measuring, powering_dict })
                           channel={channel}
                           device_names={powering_dict[readoutName]["channels"][channel]["name"]}
                           status={Boolean(measuring[readoutName][channel])}
-                          button_status={status}
+                          button_status={status}    
                         />
                         <hr style={{ margin: '0.5px' }}></hr>
                       </div>
