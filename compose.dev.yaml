@@ -7,7 +7,7 @@ services:
       dockerfile: Backend/Dockerfile
     environment:
       IP_LOCAL : ${LOCAL_IP}
-      INFLUX_PORT: "18086"
+      INFLUX_PORT: "8086"
     ports:
       - "${LOCAL_IP}:8001:8000"
       

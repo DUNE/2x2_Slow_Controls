@@ -181,52 +181,22 @@ class MPOD(UNIT):
         Individual Channel Switch
         '''
         os.popen("snmpset -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c guru " + self.dictionary['ip'] + " outputSwitch" + channel + " i " + str(switch))
-
-    def powerON(self, powering):
-        '''
-        Power-ON all channels
-        '''    
-        channels = self.getChannelDict(powering)
-        for channel in channels.keys():
-            selected_channel = channels[channel]
-            self.setMaxCurrent(selected_channel['max_current'], channel)
-            self.setCurrent(selected_channel['current'], channel)
-            self.setMaxSenseVoltage(selected_channel['max_sense_voltage'], channel)
-            self.setMaxVoltage(selected_channel['max_voltage'], channel)
-            # Ramping up voltage of channel
-            self.setVoltageRiseRate(selected_channel['rate'], channel)
-            self.channelSwitch(1, channel)
-            self.setVoltage(selected_channel['V'], channel)
-        self.measuring_status[powering] = True
         
     def powerON_channel(self, powering, channel):
         '''
-        Power-ON specific channel
+        Power-ON single channel
         '''
         channels = self.getChannelDict(powering)
         selected_channel = channels[channel]
         self.setMaxCurrent(selected_channel['max_current'], channel)
-        self.setCurrent(selected_channel['current'], channel)
+        self.setCurrent(selected_channel['current_limit'], channel)
         self.setMaxSenseVoltage(selected_channel['max_sense_voltage'], channel)
-        self.setMaxVoltage(selected_channel['max_voltage'], channel)
+        self.setMaxVoltage(selected_channel['max_terminal_voltage'], channel)
         # Ramping up voltage of channel
         self.setVoltageRiseRate(selected_channel['rate'], channel)
         self.channelSwitch(1, channel)
-        self.setVoltage(selected_channel['V'], channel)
-        self.measuring_status[powering] = True
-
-    def powerOFF(self, powering):
-        '''
-        Power-OFF all channels
-        '''
-        channels = self.getChannelDict(powering)
-        for channel in channels.keys():
-            selected_channel = channels[channel]
-            # Ramping down voltage of channel
-            self.setVoltageFallRate(selected_channel['rate'], channel)
-            self.setVoltage(selected_channel['V'], channel)
-            self.channelSwitch(0, channel)
-        self.measuring_status[powering] = False
+        self.setVoltage(selected_channel['sense_voltage'], channel)
+        self.measuring_status[powering][channel] = True
 
     def powerOFF_channel(self, powering, channel):
         '''
@@ -236,9 +206,9 @@ class MPOD(UNIT):
         selected_channel = channels[channel]
         # Ramping down voltage of channel
         self.setVoltageFallRate(selected_channel['rate'], channel)
-        self.setVoltage(selected_channel['V'], channel)
+        self.setVoltage(selected_channel['sense_voltage'], channel)
         self.channelSwitch(0, channel)
-        self.measuring_status[powering] = False
+        self.measuring_status[powering][channel] = False
 
     #---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
     # MEASURING METHODS

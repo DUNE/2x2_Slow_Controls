@@ -5,6 +5,7 @@ import numpy as np
 from influxdb import InfluxDBClient
 import paramiko
 import warnings 
+import threading
 import traceback
 import sys
 import os
@@ -25,6 +26,10 @@ class GIZMO(UNIT):
         # utf-8 encoding. 
         #self.client = None
         #self.chan = None
+
+        # START CONTINUOUS MONITORING ON OBJECT CREATION
+        if self.crate_status:
+            threading.Thread(target=self.CONTINUOUS_monitoring, args=([]), kwargs={}).start()
 
     #---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
     # GET METHODS
