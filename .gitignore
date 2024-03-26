@@ -1,8 +1,9 @@
-/__pycache__
-/actions-runner
-.storage.conf.swp
-.storage.conf.swp.swp
-/Backend/MPOD_test.ipynb
-/Backend/GIZMO_test.ipynb
-/Backend/TTI_test.ipynb
-slowcontrolsenv
+/GUI/__pycache__
+/GUI/actions-runner
+/GUI/.storage.conf.swp
+/GUI/.storage.conf.swp.swp
+/GUI/Backend/MPOD_test.ipynb
+/GUI/Backend/GIZMO_test.ipynb
+/GUI/Backend/TTI_test.ipynb
+/GUI/slowcontrolsenv
+/GUI-old

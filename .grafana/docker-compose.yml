@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  grafana:
+    image: docker.io/grafana/grafana-oss
+    container_name: acd-daq05-grafana
+    ports:
+      - "131.225.195.84:3000:3000"
+    networks:
+      - acd-daq05-network
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=argoncube
+    restart: unless-stopped
+    volumes:
+      - /data/grafana/Mx2:/usr/share/grafana/public/img/Mx2
+      - /data/grafana/lib:/var/lib/grafana
+      - /data/grafana/config:/etc/grafana
+    user: 'root'
+
+networks:
+  acd-daq05-network:
+    external: true
