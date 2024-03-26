@@ -7,3 +7,5 @@
 /GUI/Backend/TTI_test.ipynb
 /GUI/slowcontrolsenv
 /GUI-old
+/.grafana
+/.influxdb
