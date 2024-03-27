@@ -1,0 +1,28 @@
+name: Deploy to acd-daq05 server
+
+on:
+  #push:
+  #  branches:
+  #    - main # Changes in this branch triggers the deployment
+
+  workflow_dispatch:
+
+jobs:
+  
+  build:
+
+    runs-on:
+      - self-hosted
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      
+      - name: Build and Push Docker Images
+        run: |
+          export LOCAL_IP=$(bash -c 'hostname -I | cut -d" " -f3')
+          podman-compose down 
+          podman-compose up --build --detach
+        # There seems to be a bug here, detach mode cannot be used on a runner.
+        # https://github.com/containers/podman/blob/main/troubleshooting.md
+
