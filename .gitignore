@@ -9,4 +9,5 @@
 /GUI-old
 .grafana
 .influxdb
+.prometheus
 /SpellmanHV/SPELLMAN/config.ini
