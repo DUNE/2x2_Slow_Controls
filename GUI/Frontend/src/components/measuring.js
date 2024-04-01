@@ -41,10 +41,14 @@ const Measuring= ({ id, powering, channel, device_names, status, button_status }
   }, [status]);
 
   const handleClick = () => {
-    setClicked((prevClicked) => !prevClicked);
-    const endpoint = clicked ? `${BACKEND_URL}/attached_units/${id}/${powering}/${channel}/turn-on` : `${BACKEND_URL}/attached_units/${id}/${powering}/${channel}/turn-off`;
-    fetch(endpoint, {method: "PUT"})
-    .then(response => response.json())
+    const message = "Are you sure you want to turn " + (status ? "OFF" : "ON") + " the " + device_names.split('-')[1].split('_').join(' ');
+    const confirmed = window.confirm(message);
+    if (confirmed) {
+      setClicked((prevClicked) => !prevClicked);
+      const endpoint = clicked ? `${BACKEND_URL}/attached_units/${id}/${powering}/${channel}/turn-on` : `${BACKEND_URL}/attached_units/${id}/${powering}/${channel}/turn-off`;
+      fetch(endpoint, {method: "PUT"})
+      .then(response => response.json())
+      }
     }
 
   
@@ -77,8 +81,6 @@ const Measuring= ({ id, powering, channel, device_names, status, button_status }
         </div>
         </ThemeProvider>
       </div>
-     
-
       </div>
 
   )
