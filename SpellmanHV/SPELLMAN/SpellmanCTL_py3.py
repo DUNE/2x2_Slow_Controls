@@ -17,9 +17,9 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 #Get SpellmanIP
 conf = ConfigParser()
 try:
-     conf.read("config_spell.ini")
+     conf.read("config.ini")
 except FileNotFoundError:
-     conf.read("./SPELLMAN/config_spell.ini")
+     conf.read("./SPELLMAN/config.ini")
 
 Spellman = conf['SpellMan']
 # Connect the socket to the port where the server is listening

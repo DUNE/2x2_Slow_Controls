@@ -143,22 +143,24 @@ function App() {
   //# RETURN DISPLAY
   //#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
     return (
-      <div className="mother_container">
-        <div className="main_column">
-          <Header />
-          <CardList cardData={othersData2}/>
-        </div>
-
-        <div className="main_column">
-          <div className="modules-row">
-            {modulesData2.map((item, index) => (
-            <div key={index} className="module-item">
-              {item}
-            </div>
-            ))}
+      <div>
+        <Header />
+        <div className="mother_container">
+          <div className="main_column">
+            <CardList cardData={othersData2}/>
           </div>
-        </div>
 
+          <div className="main_column">
+            <div className="modules-row">
+              {modulesData2.map((item, index) => (
+              <div key={index} className="module-item">
+                {item}
+              </div>
+              ))}
+            </div>
+          </div>
+
+        </div>
       </div>
     )
 }

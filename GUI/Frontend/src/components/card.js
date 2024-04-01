@@ -87,7 +87,7 @@ const Card = ({ id, title, on_message, off_message, error_message, crate_status,
             <div className="grafana-card">
               {item["grafana-link"] && item["grafana-link"].length > 0 && (
                 <a href={item["grafana-link"]} target="_blank" rel="noopener noreferrer">
-                  <iframe src={item["grafana-link"]} frameBorder="0"></iframe>
+                  <iframe src={item["grafana-link"]} frameBorder="0" height="210px"></iframe>
                 </a>
               )}
             </div>
