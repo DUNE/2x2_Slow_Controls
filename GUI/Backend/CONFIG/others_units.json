@@ -6,14 +6,14 @@
         "password" : "",
         "port" : 22,
         "powering" :{
-            "resistance" : {"measurements" : "resistance", "grafana-link" : "http://acd-daq05.fnal.gov/:3000/d/W6fcPQhSk/gizmo-impedance-monitor?orgId=1&from=now-15m&to=now&refresh=10s&viewPanel=8&kiosk"},
+            "resistance" : {"measurements" : "resistance", "grafana-link" : "http://192.168.197.46:3001/d-solo/W6fcPQhSk/gizmo-impedance-monitor?orgId=1&from=now-15m&to=now&refresh=10s&panelId=29"},
             "threshold" : {"measurements" : "threshold", "grafana-link" : ""},
-            "magnitude" : {"measurements" : "magnitude", "grafana-link" : "http://acd-daq05.fnal.gov/:3000/d/W6fcPQhSk/gizmo-impedance-monitor?orgId=1&from=now-15m&to=now&refresh=10s&viewPanel=26&kiosk"},
+            "magnitude" : {"measurements" : "magnitude", "grafana-link" : "http://192.168.197.46:3001/d-solo/W6fcPQhSk/gizmo-impedance-monitor?orgId=1&from=now-15m&to=now&refresh=10s&panelId=28"},
             "current" : {"measurements" : "current", "grafana-link" : ""},
             "charge" : {"measurements" : "charge","grafana-link" : ""},
-            "phase" : {"measurements" : "phase","grafana-link" : "http://acd-daq05:3000/d/W6fcPQhSk/gizmo-impedance-monitor?orgId=1&refresh=5s&from=1711044199576&to=1711065799576&panelId=6"}
+            "phase" : {"measurements" : "phase","grafana-link" : "http://192.168.197.46:3001/d-solo/W6fcPQhSk/gizmo-impedance-monitor?orgId=1&from=now-15m&to=now&refresh=10s&panelId=6"}
         },
-        "on_message" : "Measuring resistance, threshold, magnitude, current, and charge.",
+        "on_message" : "Measuring impedance, magnitude, and phase.",
         "off_message" : "Turn ON/OFF GIZMO manually.",
         "error_message" : "Error: Cannot make ssh connection with unit. Review local IP address."
     }
