@@ -123,16 +123,24 @@ class MPOD(UNIT):
                 for key in self.dictionary['powering'].keys():
                     self.measuring_status[key] = {}
                     for channel in self.dictionary['powering'][key]['channels'].keys():
+                        data = self.measure([key, channel])
                         if self.measure([key, channel])[0][0]=="ON":
                             self.measuring_status[key][channel] = True 
+                        #elif self.measure([key, channel])[0][0]=="OFF":
                         else:
                             self.measuring_status[key][channel] = False
+                        #elif any(s in data[0][0][0] for s in ["No Such Instance"]):
+                        #    self.measuring_status[key][channel] = False
+                        #elif any(s in data[0][0][0] for s in ["BITS"]):
+                        #    self.measuring_status[key][channel] = True 
+                        #elif any(s in data[0][0][0] for s in ["Limited", "Failure"]):
+                        #    self.measuring_status[key][channel] = False
             else:
                 self.measuring_status = None
             return self.measuring_status
         
         except Exception as e:
-            print("Exception Found Measuring Status: " + key + ", " + channel, e)
+            print("Exception Found in Measuring Status: " + key + ", " + channel, e)
             self.error_status = True     
             self.measuring_status = None  
             return self.measuring_status
@@ -219,37 +227,30 @@ class MPOD(UNIT):
         '''
         Svalues, Vvalues, Ivalues = [], [], []
         powering, channel = powering_array[0], powering_array[1]
-        #("POWERING: " + powering + ", CHANNEL:" + channel)
-        if self.getStatus(channel)[0] == "WIENER-CRATE-MIB::outputStatus"+channel+" = BITS: 80 outputOn(0) ":
-            Svalues += ["ON"]
-        elif self.getStatus(channel)[0] == "WIENER-CRATE-MIB::outputStatus"+channel+" = BITS: 00 ":
-            Svalues += ["OFF"]
-        elif self.getStatus(channel)[0] == "WIENER-CRATE-MIB::outputStatus"+channel+" = BITS: 40 outputInhibit(1) ":
-            Svalues += ["ILOCK"]
-        else:
-            Svalues += [self.getStatus(channel)]
+
+        # Measuring voltage and current
         Vvalues += [self.getMeasurementSenseVoltage(channel)]
         Ivalues += [self.getMeasurementCurrent(channel)]
-        return Svalues,Vvalues,Ivalues
+
+        # Measuring status
+        status = self.getStatus(channel)[0]
+        if status == "WIENER-CRATE-MIB::outputStatus"+channel+" = BITS: 80 outputOn(0) ":
+            Svalues += ["ON"]
+        elif status == "WIENER-CRATE-MIB::outputStatus"+channel+" = BITS: 00 ":
+            Svalues += ["OFF"]
+        elif status == "WIENER-CRATE-MIB::outputStatus"+channel+" = BITS: 40 outputInhibit(1) ":
+            Svalues += ["ILOCK"]
+        elif any(s in status for s in ["No Such Instance"]):
+            Svalues += ["OFF"]
+            Vvalues += ["0.000"]
+            Ivalues += ["0.000"]
+        elif any(s in status for s in ["BITS"]):
+            Svalues += ["ON"]
+        elif any(s in status for s in ["Limited", "Failure"]):
+            Svalues += ["OFF"]
+        else:
+            Svalues += [self.getStatus(channel)]            
     
-    def measure_single_channel(self, powering):
-        '''
-        TBD
-        '''
-        Svalues, Vvalues, Ivalues = [], [], []
-        channels = self.getChannelDict(powering)
-        for channel in channels.keys():
-            print(channel)
-            if self.getStatus(channel)[0] == "WIENER-CRATE-MIB::outputStatus"+channel+" = BITS: 80 outputOn(0) ":
-                Svalues += ["ON"]
-            elif self.getStatus(channel)[0] == "WIENER-CRATE-MIB::outputStatus"+channel+" = BITS: 00 ":
-                Svalues += ["OFF"]
-            elif self.getStatus(channel)[0] == "WIENER-CRATE-MIB::outputStatus"+channel+" = BITS: 40 outputInhibit(1) ":
-                Svalues += ["ILOCK"]
-            else:
-                Svalues += [self.getStatus(channel)]
-            Vvalues += [self.getMeasurementSenseVoltage(channel)]
-            Ivalues += [self.getMeasurementCurrent(channel)]
         return Svalues,Vvalues,Ivalues
 
     def write_log(self):
@@ -259,9 +260,7 @@ class MPOD(UNIT):
         for powering in powering_list:
             channels = list(self.getChannelDict(powering).keys())
             log_data = self.measure(powering)
-            #print(powering,channels,log_data)
             for i in range(len(log_data[0])):
-                #print(str(channels[i]) +"\t"+ str(log_data[0][i]) + "\t" + str(log_data[1][i]) + " V \t" + str(log_data[2][i]) + " A\n")
                 f.write(str(channels[i]) +"\t"+ str(log_data[0][i]) + "\t" + str(log_data[1][i]) + " V \t" + str(log_data[2][i]) + " A\n")
         f.close()
     
@@ -279,25 +278,7 @@ class MPOD(UNIT):
         '''
         client = self.InitializeInfluxDB()
         measurements_list = self.getMeasurementsList(powering)
-        #print("BEFORE FILTERING")
-        #print(data)
-        if any(s in data[0][0][0] for s in ["No Such Instance"]):
-            #print("Error Found in " + powering + " - " + channel_number)
-            #print(data)
-            data = np.array((['OFF'], ['0.00000'], ['0.00000']))
-        elif any(s in data[0][0][0] for s in ["BITS"]):
-            #print("Error Found in " + powering + " - " + channel_number)
-            #print(data)
-            data = np.array([['ON'], [data[1][0]], [data[2][0]]])  
-        elif any(s in data[0][0][0] for s in ["Limited", "Failure"]):
-            #print("Error Found in " + powering + " - " + channel_number)
-            #print(data)
-            data = np.array([['OFF'], [data[1][0]], [data[2][0]]])
-        else:
-            #data = np.array([[data[0][0]], [float(data[1][0])], [float(data[2][0])]])
-            data = np.array(data)
-        #print("AFTER FILTERING")
-        #print(data)
+        data = np.array(data)
         channel_temperature = self.getMeasurementTemperature(channel_number)
         if channel_temperature=='this':
             channel_temperature = None
@@ -360,7 +341,6 @@ class MPOD(UNIT):
             while self.getCrateStatus():
                 data = self.measure(powering_array)
                 self.INFLUX_write(powering,channel_number,channel_name,data)
-                #self.write_log()
                 time.sleep(2)
 
         except Exception as e:

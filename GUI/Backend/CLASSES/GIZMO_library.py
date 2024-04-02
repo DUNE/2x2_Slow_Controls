@@ -172,8 +172,7 @@ class GIZMO(UNIT):
                     self.error_status = False
                     # Calculate operation time
                     elapsed_time = time.time() - start_time
-                    print("ELAPSED TIME : " + str(elapsed_time))
-                print(len(sampled_values["resistance"]))
+                    #print("ELAPSED TIME : " + str(elapsed_time))
 
             except Exception as e:
                 print("Something is wrong!")
