@@ -105,7 +105,7 @@ class MPOD(UNIT):
         #    return True
         
         '''
-        Powering ON/OFF power supply
+        Getting MPOD crate status
         '''
         #os.popen("snmpset -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " sysMainSwitch" + ".0")
         if switch == 0:
@@ -234,7 +234,7 @@ class MPOD(UNIT):
         '''
         Measures all channels in powering category
         '''
-        Svalues, V_sense_values, V_terminal_values, Ivalues = [], [], [], []
+        Svalues, Status_message, V_sense_values, V_terminal_values, Ivalues = [], [], [], [], []
         powering, channel = powering_array[0], powering_array[1]
 
         # Measuring sense voltage, terminal voltage, and current
@@ -244,6 +244,7 @@ class MPOD(UNIT):
 
         # Measuring status
         status = self.getStatus(channel)[0]
+        Status_message = [status]
         if status == "WIENER-CRATE-MIB::outputStatus"+channel+" = BITS: 80 outputOn(0) ":
             Svalues += ["ON"]
         elif status == "WIENER-CRATE-MIB::outputStatus"+channel+" = BITS: 00 ":
@@ -254,20 +255,20 @@ class MPOD(UNIT):
             Svalues += ["OFF"]
             Vvalues += ["0.000"]
             Ivalues += ["0.000"]
-        elif any(s in status for s in ["BITS"]):
-            Svalues += ["ON"]
         elif any(s in status for s in ["Limited", "Failure"]):
-            Svalues += ["OFF"]
+            #Svalues += ["OFF"]
+            Svalues += ["WARN"]
         else:
             Svalues += [self.getStatus(channel)] 
+            Status_message = [self.getStatus(channel)] 
 
-        # Setting object status
-        if Svalues[0]=="ON":
+        # Setting object status (this is for GUI, not influxDB)
+        if Svalues[0]=="ON" or Svalues[0]=="WARN":
             self.measuring_status[powering][channel] = True 
         else:
             self.measuring_status[powering][channel] = False           
-    
-        return Svalues,V_sense_values,V_terminal_values,Ivalues
+
+        return Svalues,Status_message,V_sense_values,V_terminal_values,Ivalues
 
     def write_log(self):
         powering_list = self.getPoweringList()
@@ -307,18 +308,20 @@ class MPOD(UNIT):
                 channel_number = channel_number,
                 channel_name = channel_name,
                 channel_temperature = channel_temperature,
+                status_message = data_column[1],
                 status = data_column[0],
                 fields = zip(measurements_list, 
-                             [float(element) for element in data_column[1:]])
+                             [float(element) for element in data_column[2:]])
             ))
         client.close()
 
-    def JSON_setup(self, measurement, channel_number, channel_name, channel_temperature, status, fields):
+    def JSON_setup(self, measurement, channel_number, channel_name, channel_temperature, status_message, status, fields):
             '''
             Inputs:         - Measurement (i.e. PACMAN&FANS)
                             - Channel name (i.e. .u100)
                             - Channel name (i.e. Mod0-TPC2_PACMAN)
                             - Status (i.e. OFF)
+                            - Status message (i.e WIENER-CRATE-MIB::outputStatus ...)
                             - Fields (i.e. Voltage & current)
 
             Outputs:        - JSON file ready to be added to InfluxDB
@@ -334,7 +337,8 @@ class MPOD(UNIT):
                 "tags" : { 
                     "channel_number" : channel_number,
                     "channel_name" : channel_name,
-                    "status" : status
+                    "status" : status,
+                    "status_message" : status_message
                 },
                 # Time stamp
                 "time" : datetime.utcnow().strftime('%Y%m%d %H:%M:%S'),
@@ -361,5 +365,14 @@ class MPOD(UNIT):
 
         except Exception as e:
             print('*** Caught exception: %s: %s' % (e.__class__, e))
+            print('restarting monitoring:')
+            while True:
+                try:
+                    self.CONTINUOUS_monitoring([[powering, channel_number, channel_name]])
+                except Exception as e:
+                    print('*** Caught exception: %s: %s' % (e.__class__, e))
+                    print("Exception found when trying to measure: " + powering + ", " + channel_number + ", " + channel_name)
+                    print('Retry after 2 seconds...')
+                    time.sleep(2)
             traceback.print_exc()
             sys.exit(1)
