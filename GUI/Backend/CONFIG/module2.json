@@ -5,7 +5,7 @@
             "class" : "MPOD",
             "powering" :{
                 "PACMAN&FANS" : {
-                    "measurements" : ["voltage_sense", "voltage_terminal", "current"],
+                    "measurements" : ["voltage", "voltage_terminal", "current"],
                     "grafana-link" : "",
                     "channels" : {
                         ".u300" : {
@@ -47,7 +47,7 @@
                     }
                 },
                 "VGAs" : {
-                    "measurements" : ["voltage_sense", "voltage_terminal", "current"],
+                    "measurements" : ["voltage", "voltage_terminal", "current"],
                     "grafana-link" : "",
                     "channels" : {
                         ".u0" : {
@@ -89,7 +89,7 @@
                     }
                 },
                 "RTDs" : {
-                    "measurements" : ["voltage_sense", "voltage_terminal", "current"],
+                    "measurements" : ["voltage", "voltage_terminal", "current"],
                     "grafana-link" : "",
                     "channels" : {
                         ".u100" : {
