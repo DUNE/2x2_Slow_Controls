@@ -75,6 +75,14 @@ class MPOD(UNIT):
         else:
             raise ValueError("Failed to retrieve measurement sense voltage")
         
+    def getMeasurementTerminalVoltage(self, channel):
+        data = os.popen("snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " outputMeasurementTerminalVoltage" + channel)
+        ret = data.read().split('\n')
+        if ret and ret[0]:
+            return ret[0].split(" ")[-2]
+        else:
+            raise ValueError("Failed to retrieve measurement terminal voltage")
+        
     def getStatus(self, channel):
         data = os.popen("snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " outputStatus" + channel)  
         #return data.read().split('= ')[1].split('\n')[0]
@@ -86,14 +94,26 @@ class MPOD(UNIT):
         return ret[0].split(" ")[-2]
     
     def getCrateStatus(self):
-        #return True
-        first_channel = next(iter(self.getChannelList('PACMAN&FANS')))
-        try:
-            return False if  "No Such Instance" in self.measure(['PACMAN&FANS',first_channel])[0][0][0] else True
-        except Exception as e:
-            print("Exception Found Getting Crate Status: ", e)
-            self.error_status = True
-            return True
+        return True
+        #first_channel = next(iter(self.getChannelList('PACMAN&FANS')))
+        #try:
+        #    return False if  "No Such Instance" in self.measure(['PACMAN&FANS',first_channel])[0][0][0] else True
+        #except Exception as e:
+        #    print("Exception Found Getting Crate Status: ", e)
+        #    print(first_channel)
+        #    self.error_status = True
+        #    return True
+        
+        '''
+        Powering ON/OFF power supply
+        '''
+        #os.popen("snmpset -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " sysMainSwitch" + ".0")
+        if switch == 0:
+            self.crate_status = False # OFF
+            self.measuring_status = {key: False for key in self.dictionary['powering'].keys()}
+        else:
+            self.crate_status = True # ON
+        time.sleep(2)
 
     def getMeasuringStatus(self):
         '''
@@ -124,17 +144,6 @@ class MPOD(UNIT):
                     self.measuring_status[key] = {}
                     for channel in self.dictionary['powering'][key]['channels'].keys():
                         data = self.measure([key, channel])
-                        if self.measure([key, channel])[0][0]=="ON":
-                            self.measuring_status[key][channel] = True 
-                        #elif self.measure([key, channel])[0][0]=="OFF":
-                        else:
-                            self.measuring_status[key][channel] = False
-                        #elif any(s in data[0][0][0] for s in ["No Such Instance"]):
-                        #    self.measuring_status[key][channel] = False
-                        #elif any(s in data[0][0][0] for s in ["BITS"]):
-                        #    self.measuring_status[key][channel] = True 
-                        #elif any(s in data[0][0][0] for s in ["Limited", "Failure"]):
-                        #    self.measuring_status[key][channel] = False
             else:
                 self.measuring_status = None
             return self.measuring_status
@@ -178,7 +187,7 @@ class MPOD(UNIT):
         '''
         os.popen("snmpset -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c guru " + self.dictionary['ip'] + " sysMainSwitch" + ".0 i " + str(switch))
         if switch == 0:
-            self.crate_status = False # ON
+            self.crate_status = False # OFF
             self.measuring_status = {key: False for key in self.dictionary['powering'].keys()}
         else:
             self.crate_status = True # ON
@@ -225,11 +234,12 @@ class MPOD(UNIT):
         '''
         Measures all channels in powering category
         '''
-        Svalues, Vvalues, Ivalues = [], [], []
+        Svalues, V_sense_values, V_terminal_values, Ivalues = [], [], [], []
         powering, channel = powering_array[0], powering_array[1]
 
-        # Measuring voltage and current
-        Vvalues += [self.getMeasurementSenseVoltage(channel)]
+        # Measuring sense voltage, terminal voltage, and current
+        V_terminal_values += [self.getMeasurementSenseVoltage(channel)]
+        V_sense_values += [self.getMeasurementSenseVoltage(channel)]
         Ivalues += [self.getMeasurementCurrent(channel)]
 
         # Measuring status
@@ -249,9 +259,15 @@ class MPOD(UNIT):
         elif any(s in status for s in ["Limited", "Failure"]):
             Svalues += ["OFF"]
         else:
-            Svalues += [self.getStatus(channel)]            
+            Svalues += [self.getStatus(channel)] 
+
+        # Setting object status
+        if Svalues[0]=="ON":
+            self.measuring_status[powering][channel] = True 
+        else:
+            self.measuring_status[powering][channel] = False           
     
-        return Svalues,Vvalues,Ivalues
+        return Svalues,V_sense_values,V_terminal_values,Ivalues
 
     def write_log(self):
         powering_list = self.getPoweringList()
