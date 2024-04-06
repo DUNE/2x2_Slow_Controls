@@ -238,7 +238,7 @@ class MPOD(UNIT):
         powering, channel = powering_array[0], powering_array[1]
 
         # Measuring sense voltage, terminal voltage, and current
-        V_terminal_values += [self.getMeasurementSenseVoltage(channel)]
+        V_terminal_values += [self.getMeasurementTerminalVoltage(channel)]
         V_sense_values += [self.getMeasurementSenseVoltage(channel)]
         Ivalues += [self.getMeasurementCurrent(channel)]
 
