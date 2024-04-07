@@ -235,12 +235,13 @@ class MPOD(UNIT):
         Measures all channels in powering category
         '''
         Svalues, Status_message, V_sense_values, V_terminal_values, Ivalues = [], [], [], [], []
+        V_sense_values_RMS, V_terminal_values_RMS, Ivalues_RMS = [], [], []
         powering, channel = powering_array[0], powering_array[1]
 
         # Measuring sense voltage, terminal voltage, and current
-        V_terminal_values += [self.getMeasurementTerminalVoltage(channel)]
-        V_sense_values += [self.getMeasurementSenseVoltage(channel)]
-        Ivalues += [self.getMeasurementCurrent(channel)]
+        V_terminal_values += [float(self.getMeasurementTerminalVoltage(channel))]
+        V_sense_values += [float(self.getMeasurementSenseVoltage(channel))]
+        Ivalues += [float(self.getMeasurementCurrent(channel))]
 
         # Measuring status
         status = self.getStatus(channel)[0]
@@ -266,9 +267,13 @@ class MPOD(UNIT):
         if Svalues[0]=="ON" or Svalues[0]=="WARN":
             self.measuring_status[powering][channel] = True 
         else:
-            self.measuring_status[powering][channel] = False           
+            self.measuring_status[powering][channel] = False  
 
-        return Svalues,Status_message,V_sense_values,V_terminal_values,Ivalues
+        V_sense_values_RMS += [0.000]      
+        V_terminal_values_RMS += [0.000]   
+        Ivalues_RMS += [0.000]   
+
+        return Svalues,Status_message,V_sense_values,V_sense_values_RMS,V_terminal_values,V_terminal_values_RMS,Ivalues,Ivalues_RMS
 
     def write_log(self):
         powering_list = self.getPoweringList()
@@ -322,7 +327,7 @@ class MPOD(UNIT):
                             - Channel name (i.e. Mod0-TPC2_PACMAN)
                             - Status (i.e. OFF)
                             - Status message (i.e WIENER-CRATE-MIB::outputStatus ...)
-                            - Fields (i.e. Voltage & current)
+                            - Fields (i.e. Voltages & current)
 
             Outputs:        - JSON file ready to be added to InfluxDB
 
@@ -353,26 +358,44 @@ class MPOD(UNIT):
         '''
         Inputs:         - Powering (i.e. [PACMAN&FANS, .u100, Mod0-TPC2_PACMAN])
 
-        Description:    Continuously record timestamp on InfluxDB
+        Description:    Continuously record timestamp on InfluxDB only if MPOD crate is powered.
         '''
         powering, channel_number, channel_name = powering_array[0], powering_array[1], powering_array[2]
-        try:
+        if self.getCrateStatus():
             print("MPOD Continuous DAQ Activated: " + str(self.module) + ", " + powering + ", " + channel_number+ ". Taking data in real time")
-            while self.getCrateStatus():
-                data = self.measure(powering_array)
-                self.INFLUX_write(powering,channel_number,channel_name,data)
-                time.sleep(2)
+        measurements_list = self.getMeasurementsList(powering)
 
-        except Exception as e:
-            print('*** Caught exception: %s: %s' % (e.__class__, e))
-            print('restarting monitoring:')
-            while True:
-                try:
-                    self.CONTINUOUS_monitoring([[powering, channel_number, channel_name]])
-                except Exception as e:
-                    print('*** Caught exception: %s: %s' % (e.__class__, e))
-                    print("Exception found when trying to measure: " + powering + ", " + channel_number + ", " + channel_name)
-                    print('Retry after 2 seconds...')
-                    time.sleep(2)
-            traceback.print_exc()
-            sys.exit(1)
+        # Run monitoring while MPOD is ON
+        while self.getCrateStatus():
+            try:
+                # Creating dict for data 
+                sampled_values = {}  
+                for measurement in measurements_list:
+                    sampled_values[measurement] = [] 
+
+                # Record data for 5 seconds
+                elapsed_time = 0
+                start_time = time.time()
+                while elapsed_time < 5:
+                    measurement_values = self.measure(powering_array)[2:]
+                    for index, measurement in enumerate(measurements_list):
+                        sampled_values[measurement].append(measurement_values[index])
+                    elapsed_time = time.time() - start_time
+
+                # Make array of mean and RMS values
+                data = np.array(self.measure(powering_array))
+                filtered_list = [element for element in measurements_list if "_RMS" not in element]
+                for index, measurement in enumerate(filtered_list): 
+                    mean = np.mean(sampled_values[measurement])
+                    RMS = np.sqrt(np.mean(np.square(sampled_values[measurement])))
+                    data[2*index+2] = str(mean) 
+                    data[2*index+3] = str(RMS) 
+
+                # Push data to InfluxDB
+                self.INFLUX_write(powering,channel_number,channel_name,data)
+
+            except Exception as e:
+                print('*** Caught exception: %s: %s' % (e.__class__, e))
+                print(powering)
+                traceback.print_exc()
+            
