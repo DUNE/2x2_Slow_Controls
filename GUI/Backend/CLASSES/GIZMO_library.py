@@ -138,7 +138,7 @@ class GIZMO(UNIT):
                 # Creating arrays for data 
                 sampled_values = {}
                 for powering in powering_list:
-                        sampled_values[powering] = []    
+                    sampled_values[powering] = []    
                 # Record data for 5 seconds
                 elapsed_time = 0
                 start_time = time.time()
