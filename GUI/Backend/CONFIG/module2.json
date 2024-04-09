@@ -30,7 +30,7 @@
                             "name" : "Mod2-TPC1_pacFAN",
                             "max_current" : 0.085,
                             "current_limit" : 0.08,
-                            "max_sense_voltage" : 24,
+                            "max_sense_voltage" : 25,
                             "max_terminal_voltage" : 24,
                             "rate" : 1000,
                             "sense_voltage" : 24
@@ -39,7 +39,7 @@
                             "name" : "Mod2-TPC2_pacFAN",
                             "max_current" : 0.085,
                             "current_limit" : 0.08,
-                            "max_sense_voltage" : 24,
+                            "max_sense_voltage" : 25,
                             "max_terminal_voltage" : 24,
                             "rate" : 1000,
                             "sense_voltage" : 24
