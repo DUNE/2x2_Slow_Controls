@@ -5,7 +5,7 @@
             "class" : "MPOD",
             "powering" :{
                 "PACMAN&FANS" : {
-                    "measurements" : ["voltage", "voltage_RMS", "voltage_terminal", "voltage_terminal_RMS", "current", "current_RMS"],
+                    "measurements" : ["voltage", "voltage_STD", "voltage_terminal", "voltage_terminal_STD", "current", "current_STD"],
                     "grafana-link" : "",
                     "channels" : {
                         ".u300" : {
@@ -31,7 +31,7 @@
                             "max_current" : 0.085,
                             "current_limit" : 0.08,
                             "max_sense_voltage" : 25,
-                            "max_terminal_voltage" : 24,
+                            "max_terminal_voltage" : 25,
                             "rate" : 1000,
                             "sense_voltage" : 24
                         },
@@ -40,14 +40,14 @@
                             "max_current" : 0.085,
                             "current_limit" : 0.08,
                             "max_sense_voltage" : 25,
-                            "max_terminal_voltage" : 24,
+                            "max_terminal_voltage" : 25,
                             "rate" : 1000,
                             "sense_voltage" : 24
                         }
                     }
                 },
                 "VGAs" : {
-                    "measurements" : ["voltage", "voltage_RMS", "voltage_terminal", "voltage_terminal_RMS", "current", "current_RMS"],
+                    "measurements" : ["voltage", "voltage_STD", "voltage_terminal", "voltage_terminal_STD", "current", "current_STD"],
                     "grafana-link" : "",
                     "channels" : {
                         ".u0" : {
@@ -89,7 +89,7 @@
                     }
                 },
                 "RTDs" : {
-                    "measurements" : ["voltage", "voltage_RMS", "voltage_terminal", "voltage_terminal_RMS", "current", "current_RMS"],
+                    "measurements" : ["voltage", "voltage_STD", "voltage_terminal", "voltage_terminal_STD", "current", "current_STD"],
                     "grafana-link" : "",
                     "channels" : {
                         ".u100" : {

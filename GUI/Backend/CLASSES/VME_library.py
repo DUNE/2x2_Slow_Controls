@@ -6,13 +6,15 @@ from datetime import datetime
 import numpy as np
 from influxdb import InfluxDBClient
 import traceback
+import threading
 import sys
+import re
 
 class VME(UNIT):
     '''
     This class represents the template for a VME.
     '''
-    def __init__(self, module, unit, dict_unit, miblib='CONFIG/mibs_vme'):
+    def __init__(self, module, unit, dict_unit, miblib='app/CONFIG/mibs_vme'):
         '''
         Unit constructor
         '''
@@ -22,70 +24,163 @@ class VME(UNIT):
         self.crate_status = self.getCrateStatus()
         self.measuring_status = self.getMeasuringStatus()
 
+        # START CONTINUOUS MONITORING ON OBJECT CREATION
+        if self.crate_status:
+            for powering in self.getPoweringList():
+                for channel in self.getChannelList(powering):
+                    threading.Thread(target=self.CONTINUOUS_monitoring, args=([[powering, channel, self.dictionary['powering'][powering]['channels'][channel]["name"]]]), kwargs={}).start()
+
+
     #---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
     # CONFIGURATION METHODS
     #---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
-    def vmeSwitch(self, vmen, switch):
-        os.popen("snmpset -v 2c -M " + str(self.miblib) + " -m +WIENER-CRATE-MIB -c guru " + str(self.ip[vmen]) + " sysMainSwitch.0 i " + str(switch))
+    #def vmeSwitch(self, vmen, switch):
+    #    os.popen("snmpset -v 2c -M " + str(self.miblib) + " -m +WIENER-CRATE-MIB -c guru " + str(self.ip[vmen]) + " sysMainSwitch.0 i " + str(switch))
         #os.popen("snmpset -v 2c -M ./mibs -m +WIENER-CRATE-MIB -c guru " + self.ip[0] + " sysMainSwitch.0 i " + str(switch))
+
+    #---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
+    # GET METHODS
+    #---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#--- 
+
+    def getCrateStatus(self):            
+        os.popen("snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " sysMainSwitch" + ".0")
+        output_file = os.popen("snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " sysMainSwitch" + ".0")
+        output = output_file.read()
+        status = True if "on(1)" in output else False
+        return status 
+
+    def getPoweringList(self):
+        return self.dictionary['powering'].keys()    
+
+    def getChannelList(self, powering):
+        return self.dictionary['powering'][powering]['channels'].keys()  
+    
+    def getMeasurementsList(self, powering):
+        return self.dictionary['powering'][powering]['measurements']
+
+    def getMeasuringStatus(self):
+        try:
+            self.measuring_status = {}
+            for key in self.dictionary['powering'].keys():
+                self.measuring_status[key] = {}
+                for channel in self.dictionary['powering'][key]['channels'].keys():
+                    data = self.measure([key, channel])
+            return self.measuring_status
+        
+        except Exception as e:
+            print("Exception Found in Measuring Status: " + key + ", " + channel, e)
+            self.error_status = True     
+            self.measuring_status = None  
+            return self.measuring_status
 
     #---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
     # MEASURING METHODS
     #---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
-    def getTemperature(self, vmen, sensor):
+    def getTemperature(self, sensor):
         '''
-        Returns the Temperature of the sensor
-        '''
-        data = os.popen("snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.ip[vmen] + " sensorTemperature" + sensor)
+        Returns the Temperature of the sensor 
+        ''' 
+        data = os.popen("snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " sensorTemperature" + sensor)
         ret = data.read().split('\n')
-		
-        return ret[0].split(" ")[-2]
+        return float(ret[0].split(" ")[-2])
+    
+    def measure(self, powering_array):
+        '''
+        Measures all channels in powering category
+        '''
+        #Svalues, Status_message, V_sense_values, V_terminal_values, Ivalues = [], [], [], [], []
+        #V_sense_values_RMS, V_terminal_values_RMS, Ivalues_RMS = [], [], []
+        powering, channel = powering_array[0], powering_array[1]
+
+        # Measuring sense voltage, terminal voltage, and current
+        #V_terminal_values += [float(self.getMeasurementTerminalVoltage(channel))]
+        #V_sense_values += [float(self.getMeasurementSenseVoltage(channel))]
+        #Ivalues += [float(self.getMeasurementCurrent(channel))]
+
+        # Measuring status
+        #status = self.getStatus(channel)[0]
+        #Status_message = [status]
+        #if status == "WIENER-CRATE-MIB::outputStatus"+channel+" = BITS: 80 outputOn(0) ":
+        #    Svalues += ["ON"]
+        #elif status == "WIENER-CRATE-MIB::outputStatus"+channel+" = BITS: 00 ":
+        #    Svalues += ["OFF"]
+        #elif status == "WIENER-CRATE-MIB::outputStatus"+channel+" = BITS: 40 outputInhibit(1) ":
+        #    Svalues += ["ILOCK"]
+        #elif any(s in status for s in ["No Such Instance"]):
+        #    Svalues += ["OFF"]
+        #    Vvalues += ["0.000"]
+        #    Ivalues += ["0.000"]
+        #elif any(s in status for s in ["Limited", "Failure"]):
+            #Svalues += ["OFF"]
+        #    Svalues += ["WARN"]
+        #else:
+        #    Svalues += [self.getStatus(channel)] 
+        #    Status_message = [self.getStatus(channel)] 
+
+        # Setting object status (this is for GUI, not influxDB)
+        #if Svalues[0]=="ON" or Svalues[0]=="WARN":
+        #    self.measuring_status[powering][channel] = True 
+        #else:
+        #    self.measuring_status[powering][channel] = False  
+        temperature_value_RMS, temperature_value = [], []
+        temperature_value += [self.getTemperature(channel)]
+        self.measuring_status[powering][channel] = True 
+        temperature_value_RMS += [0.000]  
+
+        return temperature_value, temperature_value_RMS
+
     
     #---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
     # INFLUXDB METHODS
     #---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
-    def INFLUX_write(self, powering, data):
+    def INFLUX_write(self, powering, channel_number, channel_name, data):
         '''
-        Inputs:         - Powering (i.e. light)
+        Inputs:         - Powering (i.e. PACMAN&FANS)
+                        - Channel number (i.e. .u100)
+                        - Channel name (i.e. Mod0-TPC2_PACMAN)
                         - Data (measurement array)
 
         Description:    Record timestamp on InfluxDB
         '''
         client = self.InitializeInfluxDB()
-        channels = self.getChannelDict(powering)
         measurements_list = self.getMeasurementsList(powering)
         data = np.array(data)
-        keys = list(channels.keys())
         for i in range(0,data.shape[1]) :
             data_column = data[:,i]
             client.write_points(self.JSON_setup(
                 measurement = powering,
-                channel_name = channels[keys[i]]["name"],
-                status = data_column[0],
+                channel_number = channel_number,
+                channel_name = channel_name,
+                #status = data_column[0],
                 fields = zip(measurements_list, 
-                             [float(element) for element in data_column[1:]])
+                             [float(element) for element in data_column])
             ))
         client.close()
 
-    def JSON_setup(self, measurement, channel_name, status, fields):
+    def JSON_setup(self, measurement, channel_number, channel_name, fields):
             '''
-            Inputs:         - Measurement (i.e. light)
-                            - Channel name (i.e. VGA_12_POS)
+            Inputs:         - Measurement (i.e. PACMAN&FANS)
+                            - Channel name (i.e. .u100)
+                            - Channel name (i.e. Mod0-TPC2_PACMAN)
                             - Status (i.e. OFF)
-                            - Fields (i.e. Voltage & current)
+                            - Status message (i.e WIENER-CRATE-MIB::outputStatus ...)
+                            - Fields (i.e. Voltages & current)
 
             Outputs:        - JSON file ready to be added to InfluxDB
 
             Description:    Provides new timestamp ready to be added to InfluxDB
             '''
             json_payload = []
+            
             data = {
                 # Table name
                 "measurement" : measurement, 
                 # Organization tags
                 "tags" : { 
+                    "channel_number" : channel_number,
                     "channel_name" : channel_name,
-                    "status" : status
+                    #"status" : status,
+                    #"status_message" : status_message
                 },
                 # Time stamp
                 "time" : datetime.utcnow().strftime('%Y%m%d %H:%M:%S'),
@@ -95,21 +190,46 @@ class VME(UNIT):
             json_payload.append(data)
             return json_payload
     
-    def CONTINUOUS_monitoring(self, powering):
+    def CONTINUOUS_monitoring(self, powering_array):
         '''
-        Inputs:         - Powering (i.e. light)
+        Inputs:         - Powering (i.e. [PACMAN&FANS, .u100, Mod0-TPC2_PACMAN])
 
-        Description:    Continuously record timestamp on InfluxDB
+        Description:    Continuously record timestamp on InfluxDB only if MPOD crate is powered.
         '''
-        try:
-            print("Continuous DAQ Activated: " + powering + ". Taking data in real time")
-            while self.getCrateStatus():
-                data = self.measure(powering)
-                self.INFLUX_write(powering,data)
-                #self.write_log()
-                time.sleep(2)
+        powering, channel_number, channel_name = powering_array[0], powering_array[1], powering_array[2]
+        if self.getCrateStatus():
+            print("VME Continuous DAQ Activated: " + powering + ", " + channel_number+ ". Taking data in real time")
+        measurements_list = self.getMeasurementsList(powering)
 
-        except Exception as e:
-            print('*** Caught exception: %s: %s' % (e.__class__, e))
-            traceback.print_exc()
-            sys.exit(1)
+        # Run monitoring while MPOD is ON
+        while self.getCrateStatus():
+            try:
+                # Creating dict for data 
+                sampled_values = {}  
+                for measurement in measurements_list:
+                    sampled_values[measurement] = [] 
+
+                # Record data for 5 seconds
+                elapsed_time = 0
+                start_time = time.time()
+                while elapsed_time < 10:
+                    measurement_values = self.measure(powering_array)
+                    for index, measurement in enumerate(measurements_list):
+                        sampled_values[measurement].append(measurement_values[index])
+                    elapsed_time = time.time() - start_time
+
+                # Make array of mean and RMS values
+                data = np.array(self.measure(powering_array))
+                filtered_list = [element for element in measurements_list if "_STD" not in element]
+                for index, measurement in enumerate(filtered_list): 
+                    mean = np.mean(sampled_values[measurement])
+                    STD = np.std(sampled_values[measurement])
+                    data[2*index] = str(mean) 
+                    data[2*index+1] = str(STD) 
+                # Push data to InfluxDB
+                self.INFLUX_write(powering,channel_number,channel_name,data)
+
+            except Exception as e:
+                print('*** Caught exception: %s: %s' % (e.__class__, e))
+                print(powering)
+                traceback.print_exc()

@@ -16,5 +16,65 @@
         "on_message" : "Measuring impedance, magnitude, and phase.",
         "off_message" : "Turn ON/OFF GIZMO manually.",
         "error_message" : "Error: Cannot make ssh connection with unit. Review local IP address."
+    },
+    "ADC_crate" : {
+        "class" : "VME",
+        "ip" : "192.168.197.78",
+        "powering" : {
+            "temperature" : {
+                "measurements" : ["temperature","temperature_STD"], 
+                "grafana-link" : "",
+                "channels" : {
+                    ".temp1" : {"name" : "Sensor1"},
+                    ".temp2" : {"name" : "Sensor2"},
+                    ".temp3" : {"name" : "Sensor3"},
+                    ".temp4" : {"name" : "Sensor4"},
+                    ".temp5" : {"name" : "Sensor5"},
+                    ".temp6" : {"name" : "Sensor6"},
+                    ".temp7" : {"name" : "Sensor7"},
+                    ".temp8" : {"name" : "Sensor8"}
+                }
+            }
+        }
+    },
+    "VME_crate01" : {
+        "class" : "VME",
+        "ip" : "192.168.197.80",
+        "powering" : {
+            "temperature" : {
+                "measurements" : ["temperature","temperature_STD"], 
+                "grafana-link" : "",
+                "channels" : {
+                    ".temp1" : {"name" : "Sensor1"},
+                    ".temp2" : {"name" : "Sensor2"},
+                    ".temp3" : {"name" : "Sensor3"},
+                    ".temp4" : {"name" : "Sensor4"},
+                    ".temp5" : {"name" : "Sensor5"},
+                    ".temp6" : {"name" : "Sensor6"},
+                    ".temp7" : {"name" : "Sensor7"},
+                    ".temp8" : {"name" : "Sensor8"}
+                }
+            }
+        }
+    },
+    "VME_crate23" : {
+        "class" : "VME",
+        "ip" : "192.168.197.79",
+        "powering" : {
+            "temperature" : {
+                "measurements" : ["temperature","temperature_STD"], 
+                "grafana-link" : "",
+                "channels" : {
+                    ".temp1" : {"name" : "Sensor1"},
+                    ".temp2" : {"name" : "Sensor2"},
+                    ".temp3" : {"name" : "Sensor3"},
+                    ".temp4" : {"name" : "Sensor4"},
+                    ".temp5" : {"name" : "Sensor5"},
+                    ".temp6" : {"name" : "Sensor6"},
+                    ".temp7" : {"name" : "Sensor7"},
+                    ".temp8" : {"name" : "Sensor8"}
+                }
+            }
+        }
     }
 }
