@@ -107,7 +107,7 @@ class MPOD(UNIT):
         '''
         Getting MPOD crate status
         '''
-        #os.popen("snmpset -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " sysMainSwitch" + ".0")
+        #os.popen("snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " sysMainSwitch" + ".0")
         if switch == 0:
             self.crate_status = False # OFF
             self.measuring_status = {key: False for key in self.dictionary['powering'].keys()}
@@ -342,7 +342,7 @@ class MPOD(UNIT):
                 "tags" : { 
                     "channel_number" : channel_number,
                     "channel_name" : channel_name,
-                    "status" : status,
+                    #"status" : status,
                     "status_message" : status_message
                 },
                 # Time stamp
@@ -351,6 +351,7 @@ class MPOD(UNIT):
                 "fields" : dict(fields)
             }
             data["fields"]["channel_temperature"] = channel_temperature
+            data["fields"]["status"] = status
             json_payload.append(data)
             return json_payload
     
@@ -376,7 +377,7 @@ class MPOD(UNIT):
                 # Record data for 5 seconds
                 elapsed_time = 0
                 start_time = time.time()
-                while elapsed_time < 5:
+                while elapsed_time < 10:
                     measurement_values = self.measure(powering_array)[2:]
                     for index, measurement in enumerate(measurements_list):
                         sampled_values[measurement].append(measurement_values[index])
@@ -384,13 +385,12 @@ class MPOD(UNIT):
 
                 # Make array of mean and RMS values
                 data = np.array(self.measure(powering_array))
-                filtered_list = [element for element in measurements_list if "_RMS" not in element]
+                filtered_list = [element for element in measurements_list if "_STD" not in element]
                 for index, measurement in enumerate(filtered_list): 
                     mean = np.mean(sampled_values[measurement])
-                    RMS = np.sqrt(np.mean(np.square(sampled_values[measurement])))
+                    STD = np.std(sampled_values[measurement])
                     data[2*index+2] = str(mean) 
-                    data[2*index+3] = str(RMS) 
-
+                    data[2*index+3] = str(STD) 
                 # Push data to InfluxDB
                 self.INFLUX_write(powering,channel_number,channel_name,data)
 
