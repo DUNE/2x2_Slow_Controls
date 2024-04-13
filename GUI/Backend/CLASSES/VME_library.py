@@ -9,6 +9,7 @@ import traceback
 import threading
 import sys
 import re
+import subprocess
 
 class VME(UNIT):
     '''
@@ -25,10 +26,9 @@ class VME(UNIT):
         self.measuring_status = self.getMeasuringStatus()
 
         # START CONTINUOUS MONITORING ON OBJECT CREATION
-        if self.crate_status:
-            for powering in self.getPoweringList():
-                for channel in self.getChannelList(powering):
-                    threading.Thread(target=self.CONTINUOUS_monitoring, args=([[powering, channel, self.dictionary['powering'][powering]['channels'][channel]["name"]]]), kwargs={}).start()
+        for powering in self.getPoweringList():
+            for channel in self.getChannelList(powering):
+                threading.Thread(target=self.CONTINUOUS_monitoring, args=([[powering, channel, self.dictionary['powering'][powering]['channels'][channel]["name"]]]), kwargs={}).start()
 
 
     #---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
@@ -42,10 +42,13 @@ class VME(UNIT):
     # GET METHODS
     #---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#--- 
 
-    def getCrateStatus(self):            
-        os.popen("snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " sysMainSwitch" + ".0")
+    def getCrateStatus(self): 
+        #return True           
+        command = os.popen("snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " sysMainSwitch" + ".0")
+        command.close()
         output_file = os.popen("snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " sysMainSwitch" + ".0")
         output = output_file.read()
+        output_file.close()
         status = True if "on(1)" in output else False
         return status 
 
@@ -81,7 +84,12 @@ class VME(UNIT):
         Returns the Temperature of the sensor 
         ''' 
         data = os.popen("snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " sensorTemperature" + sensor)
+        #command = "snmpget -v 2c -M {} -m +WIENER-CRATE-MIB -c public {} sensorTemperature {}".format(self.miblib, self.dictionary['ip'], sensor)
+        #process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
+        #output, _ = process.communicate()
+        #ret = output.decode().split('\n')
         ret = data.read().split('\n')
+        data.close()
         return float(ret[0].split(" ")[-2])
     
     def measure(self, powering_array):
@@ -135,9 +143,9 @@ class VME(UNIT):
     #---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
     def INFLUX_write(self, powering, channel_number, channel_name, data):
         '''
-        Inputs:         - Powering (i.e. PACMAN&FANS)
-                        - Channel number (i.e. .u100)
-                        - Channel name (i.e. Mod0-TPC2_PACMAN)
+        Inputs:         - Powering (i.e. temperatures)
+                        - Channel number (i.e. .temp1)
+                        - Channel name (i.e. sensor1)
                         - Data (measurement array)
 
         Description:    Record timestamp on InfluxDB
@@ -151,7 +159,6 @@ class VME(UNIT):
                 measurement = powering,
                 channel_number = channel_number,
                 channel_name = channel_name,
-                #status = data_column[0],
                 fields = zip(measurements_list, 
                              [float(element) for element in data_column])
             ))
@@ -187,6 +194,7 @@ class VME(UNIT):
                 # Data fields 
                 "fields" : dict(fields)
             }
+            data["fields"]["crate_status"] = self.getCrateStatus()
             json_payload.append(data)
             return json_payload
     
@@ -201,35 +209,36 @@ class VME(UNIT):
             print("VME Continuous DAQ Activated: " + powering + ", " + channel_number+ ". Taking data in real time")
         measurements_list = self.getMeasurementsList(powering)
 
-        # Run monitoring while MPOD is ON
-        while self.getCrateStatus():
-            try:
-                # Creating dict for data 
-                sampled_values = {}  
-                for measurement in measurements_list:
-                    sampled_values[measurement] = [] 
+        # Run monitoring 
+        while True:
+            if self.getCrateStatus():
+                try:
+                    # Creating dict for data 
+                    sampled_values = {}  
+                    for measurement in measurements_list:
+                        sampled_values[measurement] = [] 
 
-                # Record data for 5 seconds
-                elapsed_time = 0
-                start_time = time.time()
-                while elapsed_time < 10:
-                    measurement_values = self.measure(powering_array)
-                    for index, measurement in enumerate(measurements_list):
-                        sampled_values[measurement].append(measurement_values[index])
-                    elapsed_time = time.time() - start_time
+                    # Record data for 5 seconds
+                    elapsed_time = 0
+                    start_time = time.time()
+                    while elapsed_time < 10:
+                        measurement_values = self.measure(powering_array)
+                        for index, measurement in enumerate(measurements_list):
+                            sampled_values[measurement].append(measurement_values[index])
+                        elapsed_time = time.time() - start_time
 
-                # Make array of mean and RMS values
-                data = np.array(self.measure(powering_array))
-                filtered_list = [element for element in measurements_list if "_STD" not in element]
-                for index, measurement in enumerate(filtered_list): 
-                    mean = np.mean(sampled_values[measurement])
-                    STD = np.std(sampled_values[measurement])
-                    data[2*index] = str(mean) 
-                    data[2*index+1] = str(STD) 
-                # Push data to InfluxDB
-                self.INFLUX_write(powering,channel_number,channel_name,data)
+                    # Make array of mean and RMS values
+                    data = np.array(self.measure(powering_array))
+                    filtered_list = [element for element in measurements_list if "_STD" not in element]
+                    for index, measurement in enumerate(filtered_list): 
+                        mean = np.mean(sampled_values[measurement])
+                        STD = np.std(sampled_values[measurement])
+                        data[2*index] = str(mean) 
+                        data[2*index+1] = str(STD) 
+                    # Push data to InfluxDB
+                    self.INFLUX_write(powering,channel_number,channel_name,data)
 
-            except Exception as e:
-                print('*** Caught exception: %s: %s' % (e.__class__, e))
-                print(powering)
-                traceback.print_exc()
+                except Exception as e:
+                    print('*** Caught exception: %s: %s' % (e.__class__, e))
+                    print(powering)
+                    traceback.print_exc()

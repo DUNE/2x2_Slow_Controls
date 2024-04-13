@@ -10,6 +10,11 @@ services:
       INFLUX_PORT: "8086"
     ports:
       - "${LOCAL_IP}:8001:8000"
+    ulimits:
+      nproc: 65535
+      nofile:
+        soft: 20000
+        hard: 40000
       
   react-app-dev:
     build:

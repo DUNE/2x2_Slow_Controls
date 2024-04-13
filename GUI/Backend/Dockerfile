@@ -5,7 +5,7 @@
 FROM python:3.10
 
 # Install SNMP tools and utilities
-RUN apt-get update && apt-get install -y snmp snmpd
+RUN apt-get update && apt-get install -y snmp snmpd 
 
 # Set the current working directory to /code.
 # This is where we'll put the requirements.txt file.
