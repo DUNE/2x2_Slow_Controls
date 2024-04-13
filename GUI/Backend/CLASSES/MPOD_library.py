@@ -26,7 +26,7 @@ class MPOD(UNIT):
         self.measuring_status = self.getMeasuringStatus()
         
         # START CONTINUOUS MONITORING ON OBJECT CREATION
-        if self.crate_status and self.module != None:
+        if self.module != None:
             for powering in self.getPoweringList():
                 for channel in self.getChannelList(powering):
                     threading.Thread(target=self.CONTINUOUS_monitoring, args=([[powering, channel, self.dictionary['powering'][powering]['channels'][channel]["name"]]]), kwargs={}).start()
@@ -65,11 +65,13 @@ class MPOD(UNIT):
     def getMeasurementTemperature(self, channel):
         data = os.popen("snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " outputMeasurementTemperature" + channel)
         ret = data.read().split('\n')
+        data.close()
         return ret[0].split(" ")[-2]
 
     def getMeasurementSenseVoltage(self, channel):
         data = os.popen("snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " outputMeasurementSenseVoltage" + channel)
         ret = data.read().split('\n')
+        data.close()
         if ret and ret[0]:
             return ret[0].split(" ")[-2]
         else:
@@ -78,6 +80,7 @@ class MPOD(UNIT):
     def getMeasurementTerminalVoltage(self, channel):
         data = os.popen("snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " outputMeasurementTerminalVoltage" + channel)
         ret = data.read().split('\n')
+        data.close()
         if ret and ret[0]:
             return ret[0].split(" ")[-2]
         else:
@@ -85,12 +88,16 @@ class MPOD(UNIT):
         
     def getStatus(self, channel):
         data = os.popen("snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " outputStatus" + channel)  
+        ret = data.read().split('\n')
+        data.read().split('\n')
+        data.close()
         #return data.read().split('= ')[1].split('\n')[0]
-        return data.read().split('\n')
+        return ret
     
     def getMeasurementCurrent(self, channel):
         data = os.popen("snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " outputMeasurementCurrent" + channel)
         ret = data.read().split('\n')
+        data.close()
         return ret[0].split(" ")[-2]
     
     def getCrateStatus(self):
@@ -362,40 +369,41 @@ class MPOD(UNIT):
         Description:    Continuously record timestamp on InfluxDB only if MPOD crate is powered.
         '''
         powering, channel_number, channel_name = powering_array[0], powering_array[1], powering_array[2]
-        if self.getCrateStatus():
-            print("MPOD Continuous DAQ Activated: " + str(self.module) + ", " + powering + ", " + channel_number+ ". Taking data in real time")
+        #if self.getCrateStatus():
+        print("MPOD Continuous DAQ Activated: " + str(self.module) + ", " + powering + ", " + channel_number+ ". Taking data in real time")
         measurements_list = self.getMeasurementsList(powering)
 
         # Run monitoring while MPOD is ON
-        while self.getCrateStatus():
-            try:
-                # Creating dict for data 
-                sampled_values = {}  
-                for measurement in measurements_list:
-                    sampled_values[measurement] = [] 
+        while True:
+            if self.getCrateStatus():
+                try:
+                    # Creating dict for data 
+                    sampled_values = {}  
+                    for measurement in measurements_list:
+                        sampled_values[measurement] = [] 
 
-                # Record data for 5 seconds
-                elapsed_time = 0
-                start_time = time.time()
-                while elapsed_time < 10:
-                    measurement_values = self.measure(powering_array)[2:]
-                    for index, measurement in enumerate(measurements_list):
-                        sampled_values[measurement].append(measurement_values[index])
-                    elapsed_time = time.time() - start_time
+                    # Record data for 5 seconds
+                    elapsed_time = 0
+                    start_time = time.time()
+                    while elapsed_time < 10:
+                        measurement_values = self.measure(powering_array)[2:]
+                        for index, measurement in enumerate(measurements_list):
+                            sampled_values[measurement].append(measurement_values[index])
+                        elapsed_time = time.time() - start_time
 
-                # Make array of mean and RMS values
-                data = np.array(self.measure(powering_array))
-                filtered_list = [element for element in measurements_list if "_STD" not in element]
-                for index, measurement in enumerate(filtered_list): 
-                    mean = np.mean(sampled_values[measurement])
-                    STD = np.std(sampled_values[measurement])
-                    data[2*index+2] = str(mean) 
-                    data[2*index+3] = str(STD) 
-                # Push data to InfluxDB
-                self.INFLUX_write(powering,channel_number,channel_name,data)
+                    # Make array of mean and RMS values
+                    data = np.array(self.measure(powering_array))
+                    filtered_list = [element for element in measurements_list if "_STD" not in element]
+                    for index, measurement in enumerate(filtered_list): 
+                        mean = np.mean(sampled_values[measurement])
+                        STD = np.std(sampled_values[measurement])
+                        data[2*index+2] = str(mean) 
+                        data[2*index+3] = str(STD) 
+                    # Push data to InfluxDB
+                    self.INFLUX_write(powering,channel_number,channel_name,data)
 
-            except Exception as e:
-                print('*** Caught exception: %s: %s' % (e.__class__, e))
-                print(powering)
-                traceback.print_exc()
+                except Exception as e:
+                    print('*** Caught exception: %s: %s' % (e.__class__, e))
+                    print(powering)
+                    traceback.print_exc()
             
