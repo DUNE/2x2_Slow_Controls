@@ -18,7 +18,7 @@ source SpellmanEnv/bin/activate
 
 The python script to control the Spellman is SpellmanCTL_py3.py. Do python SpellmanCTL_py3.py to see all of the commands you can use to control the Spellman.
 
-There will be 12 commands.
+There will be 12 commands to give:
 
   1. Clear - disables HV.
   2. IsON - returns 1 if HV is on, 0 if off.
@@ -33,14 +33,17 @@ There will be 12 commands.
   11. Status - print status flags.
   12. RampTo - Ramps HV up/down to given voltage [kV].
 
-To use any of these commands run,
+To use any of these commands besides SetSP_V, SetSP_I, or RampTo, run:
 
 ```bash
 python SpellmanCTL_py3.py <command>
 ```
-If you are setting a voltage, setting a current, or ramping up/down the Spellman, you must enter a voltage/current after the command.
 
-For setting voltage/current or ramping up/down run,
+For setting a voltage, setting a current, or ramping up/down the Spellman, you will have to enter two arguments after python SpellmanCTL_py3.py. The argument will have to be in the order command then value. The units for the value you enter will either be in kV or mA depending on whether you are setting the voltage, setting the current, or ramping the voltage.
+
+To run the commands SetSP_V, SetSP_I, or RampTo:
+
 ```bash
-python SpellmanCTL_py3.py <command> <voltage/current value>
+python SpellmanCTL_py3.py <command> <value>
 ```
+
