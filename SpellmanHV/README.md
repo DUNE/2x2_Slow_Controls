@@ -40,7 +40,7 @@ python SpellmanCTL_py3.py <command>
 ```
 If you are setting a voltage, setting a current, or ramping up/down the Spellman, you must enter a voltage/current after the command.
 
-For setting voltage/current or ramping up/down
+For setting voltage/current or ramping up/down run
 ```bash
 python SpellmanCTL_py3.py <command> <voltage/current value>
 ```
