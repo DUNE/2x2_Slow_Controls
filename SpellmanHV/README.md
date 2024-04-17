@@ -33,14 +33,14 @@ There will be 12 commands.
   11. Status - print status flags.
   12. RampTo - Ramps HV up/down to given voltage [kV].
 
-To use any of these commands run
+To use any of these commands run,
 
 ```bash
 python SpellmanCTL_py3.py <command>
 ```
 If you are setting a voltage, setting a current, or ramping up/down the Spellman, you must enter a voltage/current after the command.
 
-For setting voltage/current or ramping up/down run
+For setting voltage/current or ramping up/down run,
 ```bash
 python SpellmanCTL_py3.py <command> <voltage/current value>
 ```
