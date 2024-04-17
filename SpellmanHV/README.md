@@ -11,7 +11,10 @@ Go to /home/acd/acdcs/SlowControls2x2/SpellmanHV on acd-daq05 logged as acdcs an
 
 Go to /home/acd/acdcs/SlowControls2x2/SpellmanHV/SPELLMAN
 
-To control the Spellman, the SpellmanEnv must be activated. Do source SpellmanEnv/bin/activate.
+To control the Spellman, the SpellmanEnv must be activated. 
+```bash
+source SpellmanEnv/bin/activate
+```
 
 The python script to control the Spellman is SpellmanCTL_py3.py. Do python SpellmanCTL_py3.py to see all of the commands you can use to control the Spellman.
 
@@ -30,4 +33,14 @@ There will be 12 commands.
   11. Status - print status flags.
   12. RampTo - Ramps HV up/down to given voltage [kV].
 
-To use any of these commands, python SpellmanCTL_py3.py <command>. If you are setting a voltage, setting a current, or ramping up/down the Spellman, you must enter a voltage/current after the command. For example, python SpellmanCTL_py3.py RampTo 1. This will ramp the Spellman to 1 kV.
+To use any of these commands run
+
+```bash
+python SpellmanCTL_py3.py <command>
+```
+If you are setting a voltage, setting a current, or ramping up/down the Spellman, you must enter a voltage/current after the command.
+
+For setting voltage/current or ramping up/down
+```bash
+python SpellmanCTL_py3.py <command> <voltage/current value>
+```
