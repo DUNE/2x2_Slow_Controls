@@ -63,41 +63,60 @@ class MPOD(UNIT):
         return self.dictionary['powering'][powering]['channels']
     
     def getMeasurementTemperature(self, channel):
-        data = os.popen("snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " outputMeasurementTemperature" + channel)
-        ret = data.read().split('\n')
-        data.close()
+        #data = os.popen("snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " outputMeasurementTemperature" + channel)
+        command = "snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " outputMeasurementTemperature" + channel
+        output = self.execute_command(command)
+        ret = output.split('\n')
+        #ret = data.read().split('\n')
+        #data.close()
         return ret[0].split(" ")[-2]
 
     def getMeasurementSenseVoltage(self, channel):
-        data = os.popen("snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " outputMeasurementSenseVoltage" + channel)
-        ret = data.read().split('\n')
-        data.close()
+        #data = os.popen("snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " outputMeasurementSenseVoltage" + channel)
+        command = "snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " outputMeasurementSenseVoltage" + channel
+        output = self.execute_command(command)
+        ret = output.split('\n')
+        
+        #ret = data.read().split('\n')
+        #data.close()
         if ret and ret[0]:
             return ret[0].split(" ")[-2]
         else:
             raise ValueError("Failed to retrieve measurement sense voltage")
         
     def getMeasurementTerminalVoltage(self, channel):
-        data = os.popen("snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " outputMeasurementTerminalVoltage" + channel)
-        ret = data.read().split('\n')
-        data.close()
+        #data = os.popen("snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " outputMeasurementTerminalVoltage" + channel)
+        #ret = data.read().split('\n')
+        #data.close()
+
+        command = "snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " outputMeasurementTerminalVoltage" + channel
+        output = self.execute_command(command)
+        ret = output.split('\n')
         if ret and ret[0]:
             return ret[0].split(" ")[-2]
         else:
             raise ValueError("Failed to retrieve measurement terminal voltage")
         
     def getStatus(self, channel):
-        data = os.popen("snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " outputStatus" + channel)  
-        ret = data.read().split('\n')
-        data.read().split('\n')
-        data.close()
+        #data = os.popen("snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " outputStatus" + channel)  
+        #ret = data.read().split('\n')
+        #data.read().split('\n')
+        #data.close()
+
+        command = "snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " outputStatus" + channel
+        output = self.execute_command(command)
+        ret = output.split('\n')
         #return data.read().split('= ')[1].split('\n')[0]
         return ret
     
     def getMeasurementCurrent(self, channel):
-        data = os.popen("snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " outputMeasurementCurrent" + channel)
-        ret = data.read().split('\n')
-        data.close()
+        #data = os.popen("snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " outputMeasurementCurrent" + channel)
+        #ret = data.read().split('\n')
+        #data.close()
+
+        command = "snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " outputMeasurementCurrent" + channel
+        output = self.execute_command(command)
+        ret = output.split('\n')
         return ret[0].split(" ")[-2]
     
     def getCrateStatus(self):
@@ -253,11 +272,11 @@ class MPOD(UNIT):
         # Measuring status
         status = self.getStatus(channel)[0]
         Status_message = [status]
-        if status == "WIENER-CRATE-MIB::outputStatus"+channel+" = BITS: 80 outputOn(0) ":
+        if status == "WIENER-CRATE-MIB::outputStatus"+channel+" = BITS: 80 outputOn(0)":
             Svalues += ["ON"]
-        elif status == "WIENER-CRATE-MIB::outputStatus"+channel+" = BITS: 00 ":
+        elif status == "WIENER-CRATE-MIB::outputStatus"+channel+" = BITS: 00":
             Svalues += ["OFF"]
-        elif status == "WIENER-CRATE-MIB::outputStatus"+channel+" = BITS: 40 outputInhibit(1) ":
+        elif status == "WIENER-CRATE-MIB::outputStatus"+channel+" = BITS: 40 outputInhibit(1)":
             Svalues += ["ILOCK"]
         elif any(s in status for s in ["No Such Instance"]):
             Svalues += ["OFF"]

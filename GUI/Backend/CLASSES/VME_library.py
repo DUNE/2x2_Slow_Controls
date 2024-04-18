@@ -44,12 +44,14 @@ class VME(UNIT):
 
     def getCrateStatus(self): 
         #return True           
-        command = os.popen("snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " sysMainSwitch" + ".0")
-        command.close()
-        output_file = os.popen("snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " sysMainSwitch" + ".0")
-        output = output_file.read()
-        output_file.close()
+        #command = os.popen("snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " sysMainSwitch" + ".0")
+        #command.close()
+        #output_file = os.popen("snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " sysMainSwitch" + ".0")
+        #output = output_file.read()
+        command = "snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " sysMainSwitch" + ".0"
+        output = self.execute_command(command)
         status = True if "on(1)" in output else False
+        #output_file.close()
         return status 
 
     def getPoweringList(self):
@@ -83,14 +85,50 @@ class VME(UNIT):
         '''
         Returns the Temperature of the sensor 
         ''' 
-        data = os.popen("snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " sensorTemperature" + sensor)
+        #data = os.popen("snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " sensorTemperature" + sensor)
+        command = "snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " sensorTemperature" + sensor
+        output = self.execute_command(command)
         #command = "snmpget -v 2c -M {} -m +WIENER-CRATE-MIB -c public {} sensorTemperature {}".format(self.miblib, self.dictionary['ip'], sensor)
         #process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
         #output, _ = process.communicate()
         #ret = output.decode().split('\n')
-        ret = data.read().split('\n')
-        data.close()
+        ret = output.split('\n')
+        #ret = data.read().split('\n')
+        #data.close()
         return float(ret[0].split(" ")[-2])
+    
+    def getMeasurementSenseVoltage(self, channel):
+        #data = os.popen("snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " outputMeasurementSenseVoltage" + channel)
+        command = "snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " outputMeasurementSenseVoltage" + channel
+        output = self.execute_command(command)
+        ret = output.split('\n')
+        #ret = data.read().split('\n')
+        #data.close()
+        if ret and ret[0]:
+            return ret[0].split(" ")[-2]
+        else:
+            raise ValueError("Failed to retrieve measurement sense voltage")
+        
+    def getMeasurementTerminalVoltage(self, channel):
+        #data = os.popen("snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " outputSupervisionMaxTerminalVoltage" + channel)
+        command = "snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " outputSupervisionMaxTerminalVoltage" + channel
+        output = self.execute_command(command)
+        ret = output.split('\n')
+        #ret = data.read().split('\n')
+        #data.close()
+        if ret and ret[0]:
+            return ret[0].split(" ")[-2]
+        else:
+            raise ValueError("Failed to retrieve measurement terminal voltage")
+        
+    def getMeasurementCurrent(self, channel):
+        #data = os.popen("snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " outputMeasurementCurrent" + channel)
+        command = "snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " outputMeasurementCurrent" + channel
+        output = self.execute_command(command)
+        ret = output.split('\n')
+        #ret = data.read().split('\n')
+        #data.close()
+        return ret[0].split(" ")[-2]
     
     def measure(self, powering_array):
         '''
@@ -99,6 +137,26 @@ class VME(UNIT):
         #Svalues, Status_message, V_sense_values, V_terminal_values, Ivalues = [], [], [], [], []
         #V_sense_values_RMS, V_terminal_values_RMS, Ivalues_RMS = [], [], []
         powering, channel = powering_array[0], powering_array[1]
+        # Measuring sense voltage, terminal voltage, and current
+        if powering == "electrical_params":
+            V_sense_values, V_terminal_values, Ivalues = [], [], []
+            V_sense_values_RMS, V_terminal_values_RMS, Ivalues_RMS = [], [], []
+            V_terminal_values += [float(self.getMeasurementTerminalVoltage(channel))]
+            V_sense_values += [float(self.getMeasurementSenseVoltage(channel))]
+            Ivalues += [float(self.getMeasurementCurrent(channel))]
+            V_sense_values_RMS += [0.000]      
+            V_terminal_values_RMS += [0.000]   
+            Ivalues_RMS += [0.000]   
+            return V_terminal_values, V_terminal_values_RMS, V_sense_values, V_sense_values_RMS, Ivalues, Ivalues_RMS
+            
+        elif powering == "temperature":
+            temperature_value_RMS, temperature_value = [], []
+            temperature_value += [self.getTemperature(channel)]
+            temperature_value_RMS += [0.000]  
+            return temperature_value, temperature_value_RMS
+        
+        # Measuring crate status
+        #self.measuring_status[powering][channel] = True 
 
         # Measuring sense voltage, terminal voltage, and current
         #V_terminal_values += [float(self.getMeasurementTerminalVoltage(channel))]
@@ -130,10 +188,6 @@ class VME(UNIT):
         #    self.measuring_status[powering][channel] = True 
         #else:
         #    self.measuring_status[powering][channel] = False  
-        temperature_value_RMS, temperature_value = [], []
-        temperature_value += [self.getTemperature(channel)]
-        self.measuring_status[powering][channel] = True 
-        temperature_value_RMS += [0.000]  
 
         return temperature_value, temperature_value_RMS
 
