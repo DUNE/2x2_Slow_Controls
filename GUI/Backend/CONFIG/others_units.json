@@ -34,6 +34,16 @@
                     ".temp7" : {"name" : "Sensor7"},
                     ".temp8" : {"name" : "Sensor8"}
                 }
+            },
+            "electrical_params" : {
+                "measurements" : ["voltage_sense", "voltage_sense_STD", "voltage_terminal", "voltage_terminal_STD", "current", "current_STD"],
+                "grafana-link" : "",
+                "channels" : {
+                    ".u0" : {"name" : "Channel0"},
+                    ".u1" : {"name" : "Channel1"},
+                    ".u3" : {"name" : "Channel3"},
+                    ".u5" : {"name" : "Channel5"}
+                }
             }
         }
     },
@@ -54,6 +64,15 @@
                     ".temp7" : {"name" : "Sensor7"},
                     ".temp8" : {"name" : "Sensor8"}
                 }
+            },
+            "electrical_params" : {
+                "measurements" : ["voltage_sense", "voltage_sense_STD", "voltage_terminal", "voltage_terminal_STD", "current", "current_STD"],
+                "grafana-link" : "",
+                "channels" : {
+                    ".u0" : {"name" : "Channel0"},
+                    ".u1" : {"name" : "Channel1"},
+                    ".u5" : {"name" : "Channel5"}
+                }
             }
         }
     },
@@ -73,6 +92,15 @@
                     ".temp6" : {"name" : "Sensor6"},
                     ".temp7" : {"name" : "Sensor7"},
                     ".temp8" : {"name" : "Sensor8"}
+                }
+            },
+            "electrical_params" : {
+                "measurements" : ["voltage_sense", "voltage_sense_STD", "voltage_terminal", "voltage_terminal_STD", "current", "current_STD"],
+                "grafana-link" : "",
+                "channels" : {
+                    ".u0" : {"name" : "Channel0"},
+                    ".u1" : {"name" : "Channel1"},
+                    ".u5" : {"name" : "Channel5"}
                 }
             }
         }
