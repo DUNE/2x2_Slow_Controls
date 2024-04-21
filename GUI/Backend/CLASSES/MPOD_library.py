@@ -30,7 +30,7 @@ class MPOD(UNIT):
             for powering in self.getPoweringList():
                 for channel in self.getChannelList(powering):
                     threading.Thread(target=self.CONTINUOUS_monitoring, args=([[powering, channel, self.dictionary['powering'][powering]['channels'][channel]["name"]]]), kwargs={}).start()
-
+                    time.sleep(1)
 
     #---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
     # GET METHODS
@@ -270,13 +270,14 @@ class MPOD(UNIT):
         Ivalues += [float(self.getMeasurementCurrent(channel))]
 
         # Measuring status
-        status = self.getStatus(channel)[0]
+        status_answer = self.getStatus(channel)
+        status = status_answer[0]
         Status_message = [status]
-        if status == "WIENER-CRATE-MIB::outputStatus"+channel+" = BITS: 80 outputOn(0)":
+        if "WIENER-CRATE-MIB::outputStatus"+channel+" = BITS: 80 outputOn(0)" in status:
             Svalues += ["ON"]
-        elif status == "WIENER-CRATE-MIB::outputStatus"+channel+" = BITS: 00":
+        elif "WIENER-CRATE-MIB::outputStatus"+channel+" = BITS: 00" in status:
             Svalues += ["OFF"]
-        elif status == "WIENER-CRATE-MIB::outputStatus"+channel+" = BITS: 40 outputInhibit(1)":
+        elif "WIENER-CRATE-MIB::outputStatus"+channel+" = BITS: 40 outputInhibit(1)" in status:
             Svalues += ["ILOCK"]
         elif any(s in status for s in ["No Such Instance"]):
             Svalues += ["OFF"]
@@ -286,8 +287,8 @@ class MPOD(UNIT):
             #Svalues += ["OFF"]
             Svalues += ["WARN"]
         else:
-            Svalues += [self.getStatus(channel)] 
-            Status_message = [self.getStatus(channel)] 
+            Svalues += [status_answer] 
+            Status_message = [status_answer] 
 
         # Setting object status (this is for GUI, not influxDB)
         if Svalues[0]=="ON" or Svalues[0]=="WARN":
@@ -388,8 +389,8 @@ class MPOD(UNIT):
         Description:    Continuously record timestamp on InfluxDB only if MPOD crate is powered.
         '''
         powering, channel_number, channel_name = powering_array[0], powering_array[1], powering_array[2]
-        #if self.getCrateStatus():
-        print("MPOD Continuous DAQ Activated: " + str(self.module) + ", " + powering + ", " + channel_number+ ". Taking data in real time")
+        if self.getCrateStatus():
+            print("MPOD Continuous DAQ Activated: " + str(self.module) + ", " + powering + ", " + channel_number+ ". Taking data in real time")
         measurements_list = self.getMeasurementsList(powering)
 
         # Run monitoring while MPOD is ON
@@ -405,6 +406,7 @@ class MPOD(UNIT):
                     elapsed_time = 0
                     start_time = time.time()
                     while elapsed_time < 10:
+                        time.sleep(2)
                         measurement_values = self.measure(powering_array)[2:]
                         for index, measurement in enumerate(measurements_list):
                             sampled_values[measurement].append(measurement_values[index])
