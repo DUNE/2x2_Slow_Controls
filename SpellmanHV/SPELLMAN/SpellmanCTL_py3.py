@@ -42,7 +42,7 @@ try:
         print(" SetSP_I [mA] - set current limit (remote mode only)")
         print(" OpMode - print operation mode (voltage/current limit)")
         print(" Status - prints status flags")
-        print(" RampTo - Ramps HV up/down to given voltage [kV]")
+        print("RampTo [kV] - Ramps HV up to voltage given [kV]")
     
     elif str(sys.argv[1]) == 'IsON':
         message = b"\x02"+b'22,'+b"\x03"
