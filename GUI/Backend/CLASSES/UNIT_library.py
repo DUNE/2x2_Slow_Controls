@@ -3,7 +3,9 @@ from datetime import datetime
 import numpy as np
 from influxdb import InfluxDBClient
 import os
-import subprocess
+import subprocess,time
+from subprocess import check_output
+
 
 #from pydantic import BaseModel
 
@@ -28,12 +30,12 @@ class UNIT():
     
     def execute_command(self, command):
         try:
-            result = subprocess.run(command, shell=True, capture_output=True, text=True, check=True)
-            return result.stdout.strip()  # Return the output of the command
+            output = check_output(command, shell=True, text=True)
+            return output
         except subprocess.CalledProcessError as e:
             print(f"Error executing command: {e}")
-            self.execute_command(command)
-            #return None
+            output = self.execute_command(command)
+            return output
         
     #---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
     # INFLUXDB METHODS
