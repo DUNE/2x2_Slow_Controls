@@ -16,9 +16,14 @@ WORKDIR /code
 # As this file doesn't change often, Docker will detect it and use the cache for this step, enabling the cache for the next step too.
 COPY ./Backend/requirements.txt /code/requirements.txt
 
+#COPY ./Backend/set_ulimit.sh /code/set_ulimit.sh
+
 # Install the package dependencies in the requirements file.
 # Because the previous step copying the file could be detected by the Docker cache, this step will also use the Docker cache when available.
 # Using the cache in this step will save you a lot of time when building the image again and again during development, instead of downloading and installing all the dependencies every time.
+#USER root
+#RUN /code/set_ulimit.sh
+
 RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
 
 # Copy the ./app directory inside the /code directory.

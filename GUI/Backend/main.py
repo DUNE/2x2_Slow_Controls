@@ -14,7 +14,7 @@ from app.CLASSES.MPOD_library import UNIT
 from app.CLASSES.dictionary import classes_dictionary
 import json
 import threading
-import os
+import os, time
 
 #---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
 # GENERATING OBJECT MODELS
@@ -50,6 +50,7 @@ for unit in othersDB.keys():
     kind = othersDB[unit]["class"]
     object = classes_dictionary[kind]
     others_dict[id] = object(None, unit, othersDB[unit])
+    time.sleep(1)
     id += 1
 
 # REMOTE MONITORING FOR GIZMO
