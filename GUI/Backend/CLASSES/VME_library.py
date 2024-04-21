@@ -1,15 +1,10 @@
 from app.CLASSES.UNIT_library import UNIT
 from pysnmp.hlapi import *
-import os
 import time 
 from datetime import datetime
 import numpy as np
-from influxdb import InfluxDBClient
 import traceback
 import threading
-import sys
-import re
-import subprocess
 
 class VME(UNIT):
     '''
@@ -29,6 +24,7 @@ class VME(UNIT):
         for powering in self.getPoweringList():
             for channel in self.getChannelList(powering):
                 threading.Thread(target=self.CONTINUOUS_monitoring, args=([[powering, channel, self.dictionary['powering'][powering]['channels'][channel]["name"]]]), kwargs={}).start()
+                time.sleep(1)
 
 
     #---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
@@ -81,18 +77,30 @@ class VME(UNIT):
     #---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
     # MEASURING METHODS
     #---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
+    def getStatus(self, channel):
+        command = "snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " outputStatus" + channel
+        try:
+            output = self.execute_command(command)
+            ret = output.split('\n')
+        except AttributeError as e:
+            return None
+        return ret
+    
     def getTemperature(self, sensor):
         '''
         Returns the Temperature of the sensor 
         ''' 
         #data = os.popen("snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " sensorTemperature" + sensor)
         command = "snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " sensorTemperature" + sensor
-        output = self.execute_command(command)
+        try:
+            output = self.execute_command(command)
+            ret = output.split('\n')
+        except AttributeError as e:
+            return None
         #command = "snmpget -v 2c -M {} -m +WIENER-CRATE-MIB -c public {} sensorTemperature {}".format(self.miblib, self.dictionary['ip'], sensor)
         #process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE)
         #output, _ = process.communicate()
         #ret = output.decode().split('\n')
-        ret = output.split('\n')
         #ret = data.read().split('\n')
         #data.close()
         return float(ret[0].split(" ")[-2])
@@ -100,35 +108,44 @@ class VME(UNIT):
     def getMeasurementSenseVoltage(self, channel):
         #data = os.popen("snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " outputMeasurementSenseVoltage" + channel)
         command = "snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " outputMeasurementSenseVoltage" + channel
-        output = self.execute_command(command)
-        ret = output.split('\n')
+        try:
+            output = self.execute_command(command)
+            ret = output.split('\n')
+        except AttributeError as e:
+            return None
         #ret = data.read().split('\n')
         #data.close()
         if ret and ret[0]:
-            return ret[0].split(" ")[-2]
+            return float(ret[0].split(" ")[-2])
         else:
             raise ValueError("Failed to retrieve measurement sense voltage")
         
     def getMeasurementTerminalVoltage(self, channel):
         #data = os.popen("snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " outputSupervisionMaxTerminalVoltage" + channel)
         command = "snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " outputSupervisionMaxTerminalVoltage" + channel
-        output = self.execute_command(command)
-        ret = output.split('\n')
+        try:
+            output = self.execute_command(command)
+            ret = output.split('\n')
+        except AttributeError as e:
+            return None
         #ret = data.read().split('\n')
         #data.close()
         if ret and ret[0]:
-            return ret[0].split(" ")[-2]
+            return float(ret[0].split(" ")[-2])
         else:
             raise ValueError("Failed to retrieve measurement terminal voltage")
         
     def getMeasurementCurrent(self, channel):
         #data = os.popen("snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " outputMeasurementCurrent" + channel)
         command = "snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " outputMeasurementCurrent" + channel
-        output = self.execute_command(command)
-        ret = output.split('\n')
+        try:
+            output = self.execute_command(command)
+            ret = output.split('\n')
+        except AttributeError as e:
+            return None
         #ret = data.read().split('\n')
         #data.close()
-        return ret[0].split(" ")[-2]
+        return float(ret[0].split(" ")[-2])
     
     def measure(self, powering_array):
         '''
@@ -137,23 +154,52 @@ class VME(UNIT):
         #Svalues, Status_message, V_sense_values, V_terminal_values, Ivalues = [], [], [], [], []
         #V_sense_values_RMS, V_terminal_values_RMS, Ivalues_RMS = [], [], []
         powering, channel = powering_array[0], powering_array[1]
+        Svalues, Status_message = [], []
         # Measuring sense voltage, terminal voltage, and current
         if powering == "electrical_params":
             V_sense_values, V_terminal_values, Ivalues = [], [], []
             V_sense_values_RMS, V_terminal_values_RMS, Ivalues_RMS = [], [], []
-            V_terminal_values += [float(self.getMeasurementTerminalVoltage(channel))]
-            V_sense_values += [float(self.getMeasurementSenseVoltage(channel))]
-            Ivalues += [float(self.getMeasurementCurrent(channel))]
+            V_terminal_values += [self.getMeasurementTerminalVoltage(channel)]
+            V_sense_values += [self.getMeasurementSenseVoltage(channel)]
+            Ivalues += [self.getMeasurementCurrent(channel)]
             V_sense_values_RMS += [0.000]      
             V_terminal_values_RMS += [0.000]   
-            Ivalues_RMS += [0.000]   
-            return V_terminal_values, V_terminal_values_RMS, V_sense_values, V_sense_values_RMS, Ivalues, Ivalues_RMS
+            Ivalues_RMS += [0.000]
+
+            # Measuring status
+            status_answer = self.getStatus(channel)
+            status = status_answer[0]
+            Status_message = [status]
+            if "WIENER-CRATE-MIB::outputStatus"+channel+" = BITS: 80 outputOn(0)" in status:
+                Svalues += ["ON"]
+            elif "WIENER-CRATE-MIB::outputStatus"+channel+" = BITS: 00" in status:
+                Svalues += ["OFF"]
+            elif "WIENER-CRATE-MIB::outputStatus"+channel+" = BITS: 40 outputInhibit(1)" in status:
+                Svalues += ["ILOCK"]
+            elif any(s in status for s in ["No Such Instance"]):
+                Svalues += ["OFF"]
+                Vvalues += ["0.000"]
+                Ivalues += ["0.000"]
+            elif any(s in status for s in ["Limited", "Failure"]):
+                #Svalues += ["OFF"]
+                Svalues += ["WARN"]
+            else:
+                Svalues += [status_answer] 
+                Status_message = [status_answer] 
+
+            return Svalues,Status_message,V_terminal_values, V_terminal_values_RMS, V_sense_values, V_sense_values_RMS, Ivalues, Ivalues_RMS
             
         elif powering == "temperature":
             temperature_value_RMS, temperature_value = [], []
             temperature_value += [self.getTemperature(channel)]
             temperature_value_RMS += [0.000]  
-            return temperature_value, temperature_value_RMS
+            if temperature_value[0] > 0:
+                Svalues += ["ON"]
+                Status_message = ["Sensor is operational."] 
+            else:
+                Svalues += ["OFF"]
+                Status_message = ["Nothing"] 
+            return Svalues,Status_message,temperature_value, temperature_value_RMS
         
         # Measuring crate status
         #self.measuring_status[powering][channel] = True 
@@ -213,12 +259,14 @@ class VME(UNIT):
                 measurement = powering,
                 channel_number = channel_number,
                 channel_name = channel_name,
+                status_message = data_column[1],
+                status = data_column[0],
                 fields = zip(measurements_list, 
-                             [float(element) for element in data_column])
+                             [float(element) for element in data_column[2:]])
             ))
         client.close()
 
-    def JSON_setup(self, measurement, channel_number, channel_name, fields):
+    def JSON_setup(self, measurement, channel_number, channel_name, status_message, status, fields):
             '''
             Inputs:         - Measurement (i.e. PACMAN&FANS)
                             - Channel name (i.e. .u100)
@@ -241,14 +289,14 @@ class VME(UNIT):
                     "channel_number" : channel_number,
                     "channel_name" : channel_name,
                     #"status" : status,
-                    #"status_message" : status_message
+                    "status_message" : status_message
                 },
                 # Time stamp
                 "time" : datetime.utcnow().strftime('%Y%m%d %H:%M:%S'),
                 # Data fields 
                 "fields" : dict(fields)
             }
-            data["fields"]["crate_status"] = self.getCrateStatus()
+            data["fields"]["status"] = status
             json_payload.append(data)
             return json_payload
     
@@ -276,19 +324,19 @@ class VME(UNIT):
                     elapsed_time = 0
                     start_time = time.time()
                     while elapsed_time < 10:
-                        measurement_values = self.measure(powering_array)
+                        time.sleep(2)
+                        measurement_values = self.measure(powering_array)[2:]
                         for index, measurement in enumerate(measurements_list):
                             sampled_values[measurement].append(measurement_values[index])
                         elapsed_time = time.time() - start_time
-
                     # Make array of mean and RMS values
                     data = np.array(self.measure(powering_array))
                     filtered_list = [element for element in measurements_list if "_STD" not in element]
                     for index, measurement in enumerate(filtered_list): 
                         mean = np.mean(sampled_values[measurement])
                         STD = np.std(sampled_values[measurement])
-                        data[2*index] = str(mean) 
-                        data[2*index+1] = str(STD) 
+                        data[2*index+2] = str(mean) 
+                        data[2*index+3] = str(STD) 
                     # Push data to InfluxDB
                     self.INFLUX_write(powering,channel_number,channel_name,data)
 

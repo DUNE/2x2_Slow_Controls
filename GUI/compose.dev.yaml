@@ -10,8 +10,7 @@ services:
       INFLUX_PORT: "8086"
     ports:
       - "${LOCAL_IP}:8001:8000"
-    user: 'root'
-      
+
   react-app-dev:
     build:
       context: ./Frontend
