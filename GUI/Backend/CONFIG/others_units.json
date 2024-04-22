@@ -23,7 +23,7 @@
         "powering" : {
             "temperature" : {
                 "measurements" : ["temperature","temperature_STD"], 
-                "grafana-link" : "",
+                "grafana-link" : "http://192.168.197.46:3001/d-solo/cdiitjsh968zkd/vme-crates?orgId=1&from=now-15m&to=now&refresh=10s&viewPanelId=1&panelId=1",
                 "channels" : {
                     ".temp1" : {"name" : "Sensor1"},
                     ".temp2" : {"name" : "Sensor2"},
@@ -53,7 +53,7 @@
         "powering" : {
             "temperature" : {
                 "measurements" : ["temperature","temperature_STD"], 
-                "grafana-link" : "",
+                "grafana-link" : "http://192.168.197.46:3001/d-solo/cdiitjsh968zkd/vme-crates?orgId=1&from=now-15m&to=now&refresh=10s&viewPanelId=21&panelId=21",
                 "channels" : {
                     ".temp1" : {"name" : "Sensor1"},
                     ".temp2" : {"name" : "Sensor2"},
@@ -82,7 +82,7 @@
         "powering" : {
             "temperature" : {
                 "measurements" : ["temperature","temperature_STD"], 
-                "grafana-link" : "",
+                "grafana-link" : "http://192.168.197.46:3001/d-solo/cdiitjsh968zkd/vme-crates?orgId=1&from=now-15m&to=now&refresh=10s&viewPanelId=25&panelId=25",
                 "channels" : {
                     ".temp1" : {"name" : "Sensor1"},
                     ".temp2" : {"name" : "Sensor2"},

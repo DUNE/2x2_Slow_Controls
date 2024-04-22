@@ -6,7 +6,7 @@
             "powering" :{
                 "PACMAN&FANS" : {
                     "measurements" : ["voltage", "voltage_STD", "voltage_terminal", "voltage_terminal_STD", "current", "current_STD"],
-                    "grafana-link" : "",
+                    "grafana-link" : "http://192.168.197.46:3001/d-solo/aJnWQK0Sk/mpods-in-develpment?orgId=1&refresh=5s&from=now-15m&to=now&panelId=224",
                     "channels" : {
                         ".u300" : {
                             "name" : "Mod2-TPC1_PACMAN",
@@ -48,7 +48,7 @@
                 },
                 "VGAs" : {
                     "measurements" : ["voltage", "voltage_STD", "voltage_terminal", "voltage_terminal_STD", "current", "current_STD"],
-                    "grafana-link" : "",
+                    "grafana-link" : "http://192.168.197.46:3001/d-solo/aJnWQK0Sk/mpods-in-develpment?orgId=1&refresh=5s&from=now-15m&to=now&panelId=270",
                     "channels" : {
                         ".u0" : {
                             "name" : "Mod2-VGA_Card_1",
@@ -90,7 +90,7 @@
                 },
                 "RTDs" : {
                     "measurements" : ["voltage", "voltage_STD", "voltage_terminal", "voltage_terminal_STD", "current", "current_STD"],
-                    "grafana-link" : "",
+                    "grafana-link" : "http://192.168.197.46:3001/d-solo/aJnWQK0Sk/mpods-in-develpment?orgId=1&refresh=5s&from=now-15m&to=now&panelId=301",
                     "channels" : {
                         ".u100" : {
                             "name" : "Mod2-RTD",

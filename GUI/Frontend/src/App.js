@@ -31,7 +31,6 @@ function App() {
         // Create modulesData based on modules_names,
         const newOthersData2 = [];
         const Others_left = [];
-        const Others_right = [];
 
         for (let i = 0; i < dict.length; i += 1) {
           const cardLeft = (
@@ -47,48 +46,16 @@ function App() {
             />
           );
         
-          // const cardRight = (
-          //   <Card
-          //     id={i + 1}
-          //     title={data[i + 1]["unit"].toUpperCase()}
-          //     on_message={data[i + 1]["dictionary"]["on_message"]}
-          //     off_message={data[i + 1]["dictionary"]["off_message"]}
-          //     crate_status={data[i + 1]["crate_status"]}
-          //   />
-          // );
-        
           // Check the title and push into the appropriate array
           if (data[i]["unit"].toUpperCase() === 'GIZMO' || data[i]["unit"].toUpperCase() === 'MPOD') {
             Others_left.push(cardLeft);
           } 
-          // Don't forget to change this to newOthersData2.push([cardLeft, cardRight]);  
           newOthersData2.push([cardLeft]);
-          //newOthersData2.push([cardLeft, cardRight]);
         }
 
         setOthersData2(newOthersData2);
       });
   };
-
-
-        //for (let i = 0; i < dict.length; i += 2) {
-        //  newOthersData2.push([
-            //console.log(JSON.stringify(othersNames.length))
-         //   <Card id={i}
-         //         title={data[i]["unit"].toUpperCase()}
-         //         on_message={data[i]["dictionary"]["on_message"]}
-         //         off_message={data[i]["dictionary"]["off_message"]}
-         //         crate_status={data[i]["crate_status"]}/>,
-            //<Card id={i+1}
-            //      title={data[i+1]["unit"].toUpperCase()}
-            //      on_message={data[i+1]["dictionary"]["on_message"]}
-            //      off_message={data[i+1]["dictionary"]["off_message"]}
-            //      crate_status={data[i+1]["crate_status"]}/>,
-         // ]);
-        //}
-        //setOthersData2(newOthersData2);
-      //});
-  //}
 
   // CONTINUOS JSON AQUISITION ATTACHED UNITS
   const [modulesData2, setModulesData2] = React.useState([]);
@@ -112,11 +79,6 @@ function App() {
                   crate_status={data[dict[i]][i]["crate_status"]}
                   measuring={data[dict[i]][i]["measuring_status"]}
                   powering_dict={data[dict[i]][i]["dictionary"]["powering"]}/>,
-            //<ModuleBox id={i+1}
-            //title={`Module ${numericValue+1}`}
-            //units={[data[dict[i+1]][i+1]["unit"]]}
-            //crate_status={data[dict[i+1]][i+1]["crate_status"]}
-            //measuring={data[dict[i+1]][i+1]["measuring_status"]}/>,
           ])
         }
         setModulesData2(newModulesData2);
@@ -144,9 +106,9 @@ function App() {
   //#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
     return (
       <div>
-        <Header />
         <div className="mother_container">
           <div className="main_column">
+            <Header />
             <CardList cardData={othersData2}/>
           </div>
 
