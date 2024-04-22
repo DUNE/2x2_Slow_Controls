@@ -9,8 +9,8 @@ function Header() {
         <div className="title-container">
           <div className="twobytwo-image"></div>
           <div>
-            <p className="title">Slow Controls Room</p>
-            <p className="subtitle">Monitoring and control tool</p>
+            <p className="title">2x2 Slow Controls</p>
+            <p className="subtitle">Remote control tool</p>
           </div>
         </div>
       );
