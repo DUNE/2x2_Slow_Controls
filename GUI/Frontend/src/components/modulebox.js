@@ -75,7 +75,7 @@ function ModuleBox({ id, title, units, crate_status, measuring, powering_dict })
                 <div className="grafana-card-module">
                   {powering_dict[readoutName]["grafana-link"] && powering_dict[readoutName]["grafana-link"].length > 0 && (
                     <a href={powering_dict[readoutName]["grafana-link"]} target="_blank" rel="noopener noreferrer">
-                      <iframe src={powering_dict[readoutName]["grafana-link"]} frameBorder="0"></iframe>
+                      <iframe src={powering_dict[readoutName]["grafana-link"]} frameBorder="0" height="240px"></iframe>
                     </a>
                   )}
                 </div>
