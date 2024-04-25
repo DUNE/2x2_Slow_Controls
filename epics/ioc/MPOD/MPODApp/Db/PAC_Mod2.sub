@@ -1,0 +1,7 @@
+file db/channel_slot1-3.tpl{
+ pattern {module, device, slot, channel, Ihihi, Ihhsv, Ihigh, Ihsv, Ilow, Ilsv, Ilolo, Illsv, Vhihi, Vhhsv, Vhigh, Vhsv, Vlow, Vlsv, Vlolo, Vllsv}
+       {2, TPC1_pacFAN, 2, 0, 0.6, MAJOR, 0.52, MINOR, -1.0, MINOR, -1.0, MAJOR, 10.0, MAJOR, 7.0, MINOR, -1.0, MINOR, -1.0, MAJOR}
+       {2, TPC2_pacFAN, 2, 1, 0.6, MAJOR, 0.52, MINOR, -1.0, MINOR, -1.0, MAJOR, 10.0, MAJOR, 7.0, MINOR, -1.0, MINOR, -1.0, MAJOR}
+       {2, TPC1_PACMAN, 3, 0, 2.5, MAJOR, 2.2, MINOR, -1.0, MINOR, -1.0, MAJOR, 24.01, MAJOR, 22.4, MINOR, -1.0, MINOR, -1.0, MAJOR}
+       {2, TPC2_PACMAN, 3, 1, 2.5, MAJOR, 2.2, MINOR, -1.0, MINOR, -1.0, MAJOR, 24.01, MAJOR, 22.4, MINOR, -1.0, MINOR, -1.0, MAJOR}
+}

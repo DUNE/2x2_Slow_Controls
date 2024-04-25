@@ -1,0 +1,7 @@
+file db/channel_slot0.tpl{
+ pattern {module, device, channel, Ihihi, Ihhsv, Ihigh, Ihsv, Ilow, Ilsv, Ilolo, Illsv, Vhihi, Vhhsv, Vhigh, Vhsv, Vlow, Vlsv, Vlolo, Vllsv}
+       {2, VGA_Card_1, 0, 1.5, MAJOR, 1.24, MINOR, -1.0, MINOR, -1.0, MAJOR, 5.0, MAJOR, 4.4, MINOR, -1.0, MINOR, -1.0, MAJOR}
+       {2, VGA_Card_2, 1, 1.5, MAJOR, 1.24, MINOR, -1.0, MINOR, -1.0, MAJOR, 5.0, MAJOR, 4.4, MINOR, -1.0, MINOR, -1.0, MAJOR}
+       {2, VGA_Card_3, 2, 1.5, MAJOR, 1.24, MINOR, -1.0, MINOR, -1.0, MAJOR, 5.0, MAJOR, 4.4, MINOR, -1.0, MINOR, -1.0, MAJOR}
+       {2, VGA_Card_4, 3, 1.5, MAJOR, 1.24, MINOR, -1.0, MINOR, -1.0, MAJOR, 5.0, MAJOR, 4.4, MINOR, -1.0, MINOR, -1.0, MAJOR}
+}

@@ -1,0 +1,5 @@
+file db/channel_slot1-3.tpl{
+ pattern {module, device, slot, channel, Ihihi, Ihhsv, Ihigh, Ihsv, Ilow, Ilsv, Ilolo, Illsv, Vhihi, Vhhsv, Vhigh, Vhsv, Vlow, Vlsv, Vlolo, Vllsv}
+       {0, RTD_1, 1, 0, 1.0, MAJOR, 0.84, MINOR, -1.0, MINOR, -1.0, MAJOR, 5.0, MAJOR, 4.16, MINOR, -1.0, MINOR, -1.0, MAJOR}
+       {0, RTD_2, 1, 1, 1.0, MAJOR, 0.84, MINOR, -1.0, MINOR, -1.0, MAJOR, 5.0, MAJOR, 4.16, MINOR, -1.0, MINOR, -1.0, MAJOR}
+}

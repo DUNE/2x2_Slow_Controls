@@ -1,0 +1,28 @@
+record(longout, "mpod$(crate)/sysMainSwitch")
+{
+  field(DTYP,"Snmp")
+  field(OUT,"@$(HOST) $(COMMUNITY) $(W)::sysMainSwitch.0 ( 100 i")
+  field(EGU,"on/off")
+  field(DESC,"MainSwitch Status")
+  field(FLNK,"")
+}
+
+record(stringin, "$mpod$(crate)/sysStatus")
+{
+  field(DTYP,"Snmp")
+  field(INP,"@$(HOST) $(COMMUNITY) $(W)::sysStatus.0 : 100")
+  field(DESC,"Power Supply Status")
+  field(SCAN,".5 second")
+  field(FLNK,"")
+}
+
+record(stringin, "mpod$(crate)/psSerialNumber")
+{
+  field(DTYP,"Snmp")
+  field(INP,"@$(HOST) $(COMMUNITY) $(W)::psSerialNumber.0 : 100")
+  field(DESC,"Power Supply Serial Number")
+  field(SCAN,".5 second")
+  field(FLNK,"")
+}
+
+

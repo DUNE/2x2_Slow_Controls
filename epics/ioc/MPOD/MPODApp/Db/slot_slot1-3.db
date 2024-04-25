@@ -1,0 +1,37 @@
+record(ai, "mpod$(crate)_slot$(slot)/outputConfigMaxSenseVoltage")
+{
+  field(DTYP,"Snmp")
+  field(INP,"@$(HOST) $(COMMUNITY) $(W)::outputConfigMaxSenseVoltage.u$(slot)00 Float: 100")
+  field(SCAN,"1 second")
+  field(EGU,"V")
+  field(DESC,"Max Sense Voltage HW")
+  field(MDEL,"0")
+  field(ADEL,"0")
+  field(PREC,"2")
+}
+
+record(ai, "mpod$(crate)_slot$(slot)/outputConfigMaxCurrent")
+{
+  field(DTYP,"Snmp")
+  field(INP,"@$(HOST) $(COMMUNITY) $(W)::outputConfigMaxCurrent.u$(slot)00 Float: 100")
+  field(SCAN,"1 second")
+  field(EGU,"mA")
+  field(DESC,"Max Sense Current HW")
+  field(MDEL,"0")
+  field(ADEL,"0")
+  field(PINI,"1")
+  field(PREC,"9")
+}
+
+record(ai, "mpod$(crate)_slot$(slot)/outputConfigMaxTerminalVoltage")
+{
+  field(DTYP,"Snmp")
+  field(INP,"@$(HOST) $(COMMUNITY) $(W)::outputConfigMaxTerminalVoltage.u$(slot)00 Float: 100")
+  field(SCAN,"1 second")
+  field(EGU,"V")
+  field(DESC,"Max Terminal Voltage HW")
+  field(MDEL,"0")
+  field(ADEL,"0")
+  field(PREC,"2")
+}
+
