@@ -96,13 +96,13 @@ record(longout, "Mod$(module)-$(device)/outputSupervisionBehavior")
     field(ADEL,"0")
 }
 
-record(stringin, "Mod$(module)-$(device)/outputSwitchStatus")
-{
-    field(DTYP,"Snmp")
-    field(INP,"@$(HOST) $(COMMUNITY) $(W)::outputSwitch.u$(channel) BITS:__ 100 I")
-    field(SCAN,".5 second")
-    field(DESC,"Output Switch Status")
-}
+#record(stringin, "Mod$(module)-$(device)/outputSwitchStatus")
+#{
+#    field(DTYP,"Snmp")
+#    field(INP,"@$(HOST) $(COMMUNITY) $(W)::outputSwitch.u$(channel) BITS:__ 100 I")
+#    field(SCAN,".5 second")
+#    field(DESC,"Output Switch Status")
+#}
 
 record(longout, "Mod$(module)-$(device)/outputSwitch")
 {
