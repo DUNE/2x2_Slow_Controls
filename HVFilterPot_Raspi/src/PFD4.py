@@ -24,8 +24,7 @@ import pytz
 from influxdb import InfluxDBClient
 
 conf = configparser.ConfigParser()
-
-conf.read('../config.ini')
+conf.read('/home/pi/Dune2x2_SlowControl/config.ini')
 
 db = conf["DATABASE"]
 meta = conf["METADATA"]
@@ -40,34 +39,26 @@ OFFSET_SENS_C = 0.0
 ped = [146.1,152.4,147.3,147.3]
 kv = [0.01106,0.01098,0.01094,0.01092]
 
-client = InfluxDBClient(host = '192.168.197.46', port = 8086, database = 'HVmonitoring')
+client = InfluxDBClient(host = db["IP"], port = int(db["PORT"]), database = db["NAME"])
 
 def main():
     """
     This function is executed automatically when the module is run directly.
     """
     tc_type = TcTypes.TYPE_K   # change this to the desired thermocouple type
-    delay_between_reads = 2  # Seconds
-    duration_to_read = 10 # Seconds
     channels_tc = {0}
     channels_adc = {0,1,2,3}
-
-    #db_ip  = "192.168.196.006"
-    db_port = 8086
-    db_name = "argoncube"
 
     try:
         # Get an instance of the selected hat device object.
         address_tc = select_hat_device(HatIDs.MCC_134)
         address_adc = select_hat_device(HatIDs.MCC_118)
-        #address = 0
         hat_tc = mcc134(address_tc)
         hat_adc = mcc118(address_adc)
         for channel in channels_tc:
             hat_tc.tc_type_write(channel, tc_type)
         
         print('    Thermocouple type: ' + tc_type_to_string(tc_type))
-
         print('\nAcquiring data ... Press Ctrl-C to abort')
 
         # Display the header row for the data table.
@@ -80,14 +71,12 @@ def main():
         
         try:
             samples_per_channel = 0
-
             json_payload = []
             
             while True:
                 # Display the updated samples per channel count
                 samples_per_channel += 1
                 print('\r{:8d}'.format(samples_per_channel), end='')
-                
                 
                 # Read TCs
                 for channel in channels_tc:
@@ -128,26 +117,19 @@ def main():
                 #Write data to json payload and send to InfluxDB
                 data = {#Table name
                         "measurement":"Raspi",
- 
                         #Time Stamp
                         "time": fermi_time_str,
-
                         #Data Fields
                         "fields":{"Temperature":temp_value, "CH0":values_adc[0], "CH1":values_adc[1],"CH2":values_adc[2],"CH3":values_adc[3]}
-
-
                         }
 
                 json_payload.append(data)
-
                 client.write_points(json_payload)
-
                 json_payload.clear()
-                
                 stdout.flush()
 
                 # Wait the specified interval between reads.
-                time.sleep(delay_between_reads)
+                time.sleep(int(para["CTIME"]))
 
         except KeyboardInterrupt:
             # Clear the '^C' from the display.
