@@ -5,6 +5,7 @@ from datetime import datetime
 import numpy as np
 import traceback
 import threading
+import os
 
 class VME(UNIT):
     '''
@@ -34,6 +35,18 @@ class VME(UNIT):
     #    os.popen("snmpset -v 2c -M " + str(self.miblib) + " -m +WIENER-CRATE-MIB -c guru " + str(self.ip[vmen]) + " sysMainSwitch.0 i " + str(switch))
         #os.popen("snmpset -v 2c -M ./mibs -m +WIENER-CRATE-MIB -c guru " + self.ip[0] + " sysMainSwitch.0 i " + str(switch))
 
+    def powerSwitch(self, switch):
+        '''
+        Powering ON/OFF power supply
+        '''
+        os.popen("snmpset -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c guru " + self.dictionary['ip'] + " sysMainSwitch" + ".0 i " + str(switch))
+        if switch == 0:
+            self.crate_status = False # OFF
+            self.measuring_status = {key: False for key in self.dictionary['powering'].keys()}
+        else:
+            self.crate_status = True # ON
+        time.sleep(2)
+        
     #---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
     # GET METHODS
     #---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#--- 
