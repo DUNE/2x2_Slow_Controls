@@ -222,6 +222,23 @@ async def turnON_attached_by_id(unit_id: int, measuring: str):
         threading.Thread(target=attached_units_dict[unit_id].ramp_up(100,1), args=([measuring]), kwargs={}).start()
     return {"message" : attached_units_dict[unit_id].getOnMessage() + " Measuring: " + measuring} 
 
+@app.put("/attached_units/{unit_id}/turn-on-crate", tags=["Update"])
+async def turnON_attached_by_id_crate(unit_id: int):
+    '''
+    Turn on crate 
+    '''
+    attached_units_dict[unit_id].powerSwitch(1)
+    return {"message" : attached_units_dict[unit_id].getOnMessage()} 
+
+@app.put("/attached_units/{unit_id}/turn-off-crate", tags=["Update"])
+async def turnON_attached_by_id_crate(unit_id: int):
+    '''
+    Turn off crate 
+    '''
+    attached_units_dict[unit_id].powerSwitch(0)
+    return {"message" : attached_units_dict[unit_id].getOffMessage()} 
+
+
 @app.put("/attached_units/{unit_id}/{measuring}/{channel}/turn-on", tags=["Update"])
 async def turnON_single_channel(unit_id: int, measuring: str, channel: str):
     '''
@@ -255,28 +272,17 @@ def turnOFF_attached_by_id(unit_id: int, measuring: str, channel : str):
 @app.put("/other_units/{unit_id}/turn-on", tags=["Update"])
 def turnON_other_by_id(unit_id: int):
     '''
-    Turn on unit NOT connected to module (i.e. MPOD Crate)
+    Turn ON unit NOT connected to module (i.e. VME Crate)
     '''
     # REMOTE MONITORING FOR MPOD CRATE
     others_dict[unit_id].powerSwitch(1)
-    if others_dict[unit_id].getClass() != "GIZMO":
-        modules = others_dict[unit_id].getModules()
-        for module in modules:
-            for id in attached_units_dict2[module].keys():
-                attached_units_dict2[module][id].powerSwitch(1)
-
-    # This will raise an error for the mpod crate!
     return {"message" : others_dict[unit_id].getOnMessage()} 
 
 
 @app.put("/other_units/{unit_id}/turn-off", tags=["Update"])
 def turnOFF_other_by_id(unit_id: int):
     '''
-    Turn off unit NOT connected to module (i.e. MPOD Crate)
+    Turn OFF unit NOT connected to module (i.e. VME Crate)
     '''
     others_dict[unit_id].powerSwitch(0)
-    modules = others_dict[unit_id].getModules()
-    for module in modules:
-        for id in attached_units_dict2[module].keys():
-            attached_units_dict2[module][id].powerSwitch(0)
     return {"message" : others_dict[unit_id].getOffMessage()} 

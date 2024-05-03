@@ -120,7 +120,7 @@ class MPOD(UNIT):
         return ret[0].split(" ")[-2]
     
     def getCrateStatus(self):
-        return True
+        #return True
         #first_channel = next(iter(self.getChannelList('PACMAN&FANS')))
         #try:
         #    return False if  "No Such Instance" in self.measure(['PACMAN&FANS',first_channel])[0][0][0] else True
@@ -133,13 +133,14 @@ class MPOD(UNIT):
         '''
         Getting MPOD crate status
         '''
-        #os.popen("snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " sysMainSwitch" + ".0")
-        if switch == 0:
+        command = "snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " sysMainSwitch" + ".0"
+        output = self.execute_command(command)
+        status = True if "on(1)" in output else False
+        if status:
             self.crate_status = False # OFF
             self.measuring_status = {key: False for key in self.dictionary['powering'].keys()}
         else:
             self.crate_status = True # ON
-        time.sleep(2)
 
     def getMeasuringStatus(self):
         '''

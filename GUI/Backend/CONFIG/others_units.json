@@ -45,7 +45,9 @@
                     ".u5" : {"name" : "Channel5"}
                 }
             }
-        }
+        },
+        "on_message" : "ADC crate powering is ON.",
+        "off_message" : "ADC crate powering is OFF."
     },
     "VME_crate01" : {
         "class" : "VME",
@@ -74,7 +76,9 @@
                     ".u5" : {"name" : "Channel5"}
                 }
             }
-        }
+        },
+        "on_message" : "VME_crate01 crate powering is ON.",
+        "off_message" : "VME_crate01 crate powering is OFF."
     },
     "VME_crate23" : {
         "class" : "VME",
@@ -103,6 +107,8 @@
                     ".u5" : {"name" : "Channel5"}
                 }
             }
-        }
+        },
+        "on_message" : "VME_crate23 crate powering is ON.",
+        "off_message" : "VME_crate23 crate powering is OFF."
     }
 }
