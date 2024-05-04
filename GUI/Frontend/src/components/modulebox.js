@@ -17,6 +17,9 @@ const theme = createTheme({
   }
 })
 
+// GET BACKEND URL
+const BACKEND_URL = process.env.REACT_APP_HOST_IP_ADDRESS;
+
 // COMPONENT FUNCTION
 function ModuleBox({ id, title, units, crate_status, measuring, powering_dict }) {
 
@@ -25,16 +28,16 @@ function ModuleBox({ id, title, units, crate_status, measuring, powering_dict })
     setStatus(crate_status);
   }, [crate_status]);
 
-  const handleClick = () => {
-    const message = "Are you sure you want to turn " + (status ? "OFF" : "ON") + " the MPOD crate?";
-    const confirmed = window.confirm(message);
-    if (confirmed) {
-      setClicked((prevClicked) => !prevClicked);
-      const endpoint = clicked ? `${BACKEND_URL}/attached_units/${id}/turn-on-crate` : `${BACKEND_URL}/attached_units/${id}/turn-off-crate`;
-      fetch(endpoint, {method: "PUT"})
-      .then(response => response.json())
-      }
-    }
+  //const handleClick = () => {
+  //  const message = "Are you sure you want to turn " + (status ? "OFF" : "ON") + " the MPOD crate?";
+  //  const confirmed = window.confirm(message);
+  //  if (confirmed) {
+  //    setStatus((prevClicked) => !prevClicked);
+  //    const endpoint = clicked ? `${BACKEND_URL}/attached_units/${id}/turn-on-crate` : `${BACKEND_URL}/attached_units/${id}/turn-off-crate`;
+  //    fetch(endpoint, {method: "PUT"})
+  //    .then(response => response.json())
+  //    }
+  //  }
 
   //#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
   //# RETURN CARD
@@ -54,7 +57,7 @@ function ModuleBox({ id, title, units, crate_status, measuring, powering_dict })
                           variant="contained"
                           style={{Width: '30px', height: 30, borderRadius: 0, fontSize: 10, boxShadow: 'none'}}
                           onClick={() => setStatus(!status)}
-                          disabled={false}>
+                          disabled={true}>
                           {!status ? 'Crate OFF' : 'Crate ON'}
                   </Button>
                 </div>
