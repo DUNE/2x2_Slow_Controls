@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  minerva_dqm_plots:
+    container_name: minerva_dqm_plots
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - /home/nfs/minerva/dqmtest_cpernas/SL7_testing/gmbrowser/plots/tmp/:/home/nfs/minerva/dqmtest_cpernas/SL7_testing/gmbrowser/plots/tmp/
+      - /data/grafana/Mx2/:/data/grafana/Mx2/
