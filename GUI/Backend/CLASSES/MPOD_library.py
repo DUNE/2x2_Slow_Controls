@@ -347,6 +347,16 @@ class MPOD(UNIT):
             }
             data["fields"]["channel_temperature"] = channel_temperature
             data["fields"]["status"] = status
+            # Assigning values to error messages
+            if status == "OFF":
+                status_number = 0
+            elif status == "ON":
+                status_number = 1
+            elif status == "WARN":
+                status_number = 2
+            elif status == "ERROR":
+                status_number = 3
+            data["fields"]["status_number"] = status_number
             data["fields"]["status_message"] = status_message
             data["fields"]["channel_name"] = channel_name
             data["fields"]["system_status"] = sys_status
