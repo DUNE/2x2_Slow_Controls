@@ -160,6 +160,18 @@ class VME(UNIT):
         #data.close()
         return float(ret[0].split(" ")[-2])
     
+    def getSysStatus(self):
+        command = "snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " sysStatus.0" 
+        output = self.execute_command(command)
+        options = ['mainOn', 'mainInhibit', 'localControlOnly', 'inputFailure', 'outputFailure', 'fantrayFailure', 'sensorFailure', 'vmeSysfail', 'plugAndPlayIncompatible', 'busReset', 'supplyDerating', 'supplyFailure', 'supplyDerating2', 'supplyFailure2']
+        for option in options:
+            if option in output:
+                return option
+            
+    #---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
+    # MEASURING METHODS
+    #---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
+    
     def measure(self, powering_array):
         '''
         Measures all channels in powering category
@@ -214,40 +226,6 @@ class VME(UNIT):
                 Status_message = ["Nothing"] 
             return Svalues,Status_message,temperature_value, temperature_value_RMS
         
-        # Measuring crate status
-        #self.measuring_status[powering][channel] = True 
-
-        # Measuring sense voltage, terminal voltage, and current
-        #V_terminal_values += [float(self.getMeasurementTerminalVoltage(channel))]
-        #V_sense_values += [float(self.getMeasurementSenseVoltage(channel))]
-        #Ivalues += [float(self.getMeasurementCurrent(channel))]
-
-        # Measuring status
-        #status = self.getStatus(channel)[0]
-        #Status_message = [status]
-        #if status == "WIENER-CRATE-MIB::outputStatus"+channel+" = BITS: 80 outputOn(0) ":
-        #    Svalues += ["ON"]
-        #elif status == "WIENER-CRATE-MIB::outputStatus"+channel+" = BITS: 00 ":
-        #    Svalues += ["OFF"]
-        #elif status == "WIENER-CRATE-MIB::outputStatus"+channel+" = BITS: 40 outputInhibit(1) ":
-        #    Svalues += ["ILOCK"]
-        #elif any(s in status for s in ["No Such Instance"]):
-        #    Svalues += ["OFF"]
-        #    Vvalues += ["0.000"]
-        #    Ivalues += ["0.000"]
-        #elif any(s in status for s in ["Limited", "Failure"]):
-            #Svalues += ["OFF"]
-        #    Svalues += ["WARN"]
-        #else:
-        #    Svalues += [self.getStatus(channel)] 
-        #    Status_message = [self.getStatus(channel)] 
-
-        # Setting object status (this is for GUI, not influxDB)
-        #if Svalues[0]=="ON" or Svalues[0]=="WARN":
-        #    self.measuring_status[powering][channel] = True 
-        #else:
-        #    self.measuring_status[powering][channel] = False  
-
         return temperature_value, temperature_value_RMS
 
     
@@ -266,12 +244,14 @@ class VME(UNIT):
         client = self.InitializeInfluxDB()
         measurements_list = self.getMeasurementsList(powering)
         data = np.array(data)
+        sys_status = self.getSysStatus()
         for i in range(0,data.shape[1]) :
             data_column = data[:,i]
             client.write_points(self.JSON_setup(
                 measurement = powering,
                 channel_number = channel_number,
                 channel_name = channel_name,
+                sys_status = sys_status,
                 status_message = data_column[1],
                 status = data_column[0],
                 fields = zip(measurements_list, 
@@ -279,7 +259,7 @@ class VME(UNIT):
             ))
         client.close()
 
-    def JSON_setup(self, measurement, channel_number, channel_name, status_message, status, fields):
+    def JSON_setup(self, measurement, channel_number, channel_name, sys_status, status_message, status, fields):
             '''
             Inputs:         - Measurement (i.e. PACMAN&FANS)
                             - Channel name (i.e. .u100)
@@ -301,8 +281,6 @@ class VME(UNIT):
                 "tags" : { 
                     "channel_number" : channel_number,
                     "channel_name" : channel_name,
-                    #"status" : status,
-                    "status_message" : status_message
                 },
                 # Time stamp
                 "time" : datetime.utcnow().strftime('%Y%m%d %H:%M:%S'),
@@ -310,6 +288,20 @@ class VME(UNIT):
                 "fields" : dict(fields)
             }
             data["fields"]["status"] = status
+            # Assigning values to error messages
+            if status == "OFF":
+                status_number = 0
+            elif status == "ON":
+                status_number = 1
+            elif status == "WARN":
+                status_number = 2
+            elif status == "ERROR":
+                status_number = 3
+            data["fields"]["status_number"] = status_number
+            data["fields"]["status_message"] = status_message
+            data["fields"]["channel_name"] = channel_name
+            data["fields"]["system_status"] = sys_status
+            data["fields"]["crate_status"] = self.crate_status
             json_payload.append(data)
             return json_payload
     
@@ -320,40 +312,42 @@ class VME(UNIT):
         Description:    Continuously record timestamp on InfluxDB only if MPOD crate is powered.
         '''
         powering, channel_number, channel_name = powering_array[0], powering_array[1], powering_array[2]
-        if self.getCrateStatus():
-            print("VME Continuous DAQ Activated: " + powering + ", " + channel_number+ ". Taking data in real time")
+        print("VME Continuous DAQ Activated: " + powering + ", " + channel_number+ ". Taking data in real time")
         measurements_list = self.getMeasurementsList(powering)
 
         # Run monitoring 
         while True:
-            if self.getCrateStatus():
-                try:
-                    # Creating dict for data 
-                    sampled_values = {}  
-                    for measurement in measurements_list:
-                        sampled_values[measurement] = [] 
 
-                    # Record data for 5 seconds
-                    elapsed_time = 0
-                    start_time = time.time()
-                    while elapsed_time < 10:
-                        time.sleep(2)
-                        measurement_values = self.measure(powering_array)[2:]
-                        for index, measurement in enumerate(measurements_list):
-                            sampled_values[measurement].append(measurement_values[index])
-                        elapsed_time = time.time() - start_time
-                    # Make array of mean and RMS values
-                    data = np.array(self.measure(powering_array))
-                    filtered_list = [element for element in measurements_list if "_STD" not in element]
-                    for index, measurement in enumerate(filtered_list): 
-                        mean = np.mean(sampled_values[measurement])
-                        STD = np.std(sampled_values[measurement])
-                        data[2*index+2] = str(mean) 
-                        data[2*index+3] = str(STD) 
-                    # Push data to InfluxDB
-                    self.INFLUX_write(powering,channel_number,channel_name,data)
+            try:
+                # Creating dict for data 
+                sampled_values = {}  
+                for measurement in measurements_list:
+                    sampled_values[measurement] = [] 
 
-                except Exception as e:
-                    print('*** Caught exception: %s: %s' % (e.__class__, e))
-                    print(powering)
-                    traceback.print_exc()
+                # Record data for 10 seconds
+                self.crate_status = self.getCrateStatus()
+                elapsed_time = 0
+                start_time = time.time()
+                while elapsed_time < 10:
+                    time.sleep(2)
+                    measurement_values = self.measure(powering_array)[2:]
+                    for index, measurement in enumerate(measurements_list):
+                        sampled_values[measurement].append(measurement_values[index])
+                    elapsed_time = time.time() - start_time
+                
+                # Make array of mean and STD values
+                data = np.array(self.measure(powering_array))
+                filtered_list = [element for element in measurements_list if "_STD" not in element]
+                for index, measurement in enumerate(filtered_list): 
+                    mean = np.mean(sampled_values[measurement])
+                    STD = np.std(sampled_values[measurement])
+                    data[2*index+2] = str(mean) 
+                    data[2*index+3] = str(STD) 
+                
+                # Push data to InfluxDB
+                self.INFLUX_write(powering,channel_number,channel_name,data)
+
+            except Exception as e:
+                print('*** Caught exception: %s: %s' % (e.__class__, e))
+                print(powering)
+                traceback.print_exc()
