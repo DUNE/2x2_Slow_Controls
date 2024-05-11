@@ -222,14 +222,15 @@ class MPOD(UNIT):
         '''
         Measures all channels in powering category
         '''
-        Svalues, Status_message, V_sense_values, V_terminal_values, Ivalues = [], [], [], [], []
+        Svalues, Status_message, V_sense_values, V_terminal_values, Ivalues, Vvalues = [], [], [], [], [], []
         V_sense_values_RMS, V_terminal_values_RMS, Ivalues_RMS = [], [], []
         powering, channel = powering_array[0], powering_array[1]
 
         # Measuring sense voltage, terminal voltage, and current
-        V_terminal_values += [float(self.getMeasurementTerminalVoltage(channel))]
-        V_sense_values += [float(self.getMeasurementSenseVoltage(channel))]
-        Ivalues += [float(self.getMeasurementCurrent(channel))]
+        if self.crate_status:
+            V_terminal_values += [float(self.getMeasurementTerminalVoltage(channel))]
+            V_sense_values += [float(self.getMeasurementSenseVoltage(channel))]
+            Ivalues += [float(self.getMeasurementCurrent(channel))]
 
         # Measuring status
         status_answer = self.getStatus(channel)
@@ -244,9 +245,11 @@ class MPOD(UNIT):
         elif "WIENER-CRATE-MIB::outputStatus"+channel+" = BITS: 40 outputInhibit(1)" in status:
             Svalues += ["WARN"]
         elif any(s in status for s in ["No Such Instance"]):
+            V_terminal_values += [0.0]
+            V_sense_values += [0.0]
             Svalues += ["OFF"]
-            Vvalues += ["0.000"]
-            Ivalues += ["0.000"]
+            Vvalues += [0.0]
+            Ivalues += [0.0]
         elif any(s in status for s in ["Failure"]):
             Svalues += ["ERROR"]
         elif any(s in status for s in ["Limited", "Ramp", "EnableKill", "EmergencyOff", "Adjusting", "Constant", "Current"]):
@@ -295,7 +298,7 @@ class MPOD(UNIT):
         measurements_list = self.getMeasurementsList(powering)
         data = np.array(data)
         channel_temperature = self.getMeasurementTemperature(channel_number)
-        if channel_temperature=='this':
+        if channel_temperature=='this' or self.crate_status == False:
             channel_temperature = None
         else:
             channel_temperature = float(channel_temperature)
@@ -360,6 +363,7 @@ class MPOD(UNIT):
             data["fields"]["status_message"] = status_message
             data["fields"]["channel_name"] = channel_name
             data["fields"]["system_status"] = sys_status
+            data["fields"]["crate_status"] = self.crate_status
             json_payload.append(data)
             return json_payload
     
@@ -370,43 +374,44 @@ class MPOD(UNIT):
         Description:    Continuously record timestamp on InfluxDB only if MPOD crate is powered.
         '''
         powering, channel_number, channel_name = powering_array[0], powering_array[1], powering_array[2]
-        if self.getCrateStatus():
-            print("MPOD Continuous DAQ Activated: " + str(self.module) + ", " + powering + ", " + channel_number+ ". Taking data in real time")
+        print("MPOD Continuous DAQ Activated: " + str(self.module) + ", " + powering + ", " + channel_number+ ". Taking data in real time")
         measurements_list = self.getMeasurementsList(powering)
 
         # Run monitoring
         while True:
             
             try:
-                if self.getCrateStatus():
-                    # Creating dict for data 
-                    sampled_values = {}  
-                    for measurement in measurements_list:
-                        sampled_values[measurement] = [] 
+                # Creating dict for data 
+                sampled_values = {}  
+                for measurement in measurements_list:
+                    sampled_values[measurement] = [] 
 
-                    # Record data for 5 seconds
-                    elapsed_time = 0
-                    start_time = time.time()
-                    while elapsed_time < 10:
-                        time.sleep(2)
-                        measurement_values = self.measure(powering_array)[2:]
-                        for index, measurement in enumerate(measurements_list):
-                            sampled_values[measurement].append(measurement_values[index])
-                        elapsed_time = time.time() - start_time
+                # Record data for 10 seconds
+                self.crate_status = self.getCrateStatus()
+                elapsed_time = 0
+                start_time = time.time()
+                while elapsed_time < 10:
+                    time.sleep(2)
+                    measurement_values = self.measure(powering_array)[2:]
+                    for index, measurement in enumerate(measurements_list):
+                        sampled_values[measurement].append(measurement_values[index])
+                    elapsed_time = time.time() - start_time
 
-                    # Make array of mean and RMS values
-                    data = np.array(self.measure(powering_array))
-                    filtered_list = [element for element in measurements_list if "_STD" not in element]
-                    for index, measurement in enumerate(filtered_list): 
-                        mean = np.mean(sampled_values[measurement])
-                        STD = np.std(sampled_values[measurement])
-                        data[2*index+2] = str(mean) 
-                        data[2*index+3] = str(STD) 
-                    # Push data to InfluxDB
-                    self.INFLUX_write(powering,channel_number,channel_name,data)
+                # Make array of mean and STD values
+                data = np.array(self.measure(powering_array))
+                filtered_list = [element for element in measurements_list if "_STD" not in element]
+                for index, measurement in enumerate(filtered_list): 
+                    mean = np.mean(sampled_values[measurement])
+                    STD = np.std(sampled_values[measurement])
+                    data[2*index+2] = str(mean) 
+                    data[2*index+3] = str(STD) 
+                
+                # Push data to InfluxDB
+                self.INFLUX_write(powering,channel_number,channel_name,data)
 
             except Exception as e:
                 print('*** Caught exception: %s: %s' % (e.__class__, e))
                 print(powering)
                 traceback.print_exc()
+                self.CONTINUOUS_monitoring(powering_array)
             
