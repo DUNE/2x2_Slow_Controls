@@ -30,7 +30,17 @@ for i in range(4): # JUST MODULE 0 FOR NOW
 with open('app/CONFIG/others_units.json', "r") as json_file:
     othersDB = json.load(json_file)
 
-# Get list of units  attached to modules
+# Get list of units not attached to modules
+id = 0
+others_dict = {}
+# Get list of units not attached to modules
+for unit in othersDB.keys():
+    kind = othersDB[unit]["class"]
+    object = classes_dictionary[kind]
+    others_dict[id] = object(None, unit, othersDB[unit])
+    time.sleep(1)
+    id += 1
+# Get list of units attached to modules
 id = 0
 attached_units_dict = {}
 attached_units_dict2 = {}
@@ -42,16 +52,6 @@ for module in moduleDB.keys():
         attached_units_dict[id] = object(module, unit, moduleDB[module][unit])
         attached_units_dict2[module] = {id : attached_units_dict[id]}
         id += 1 
-
-id = 0
-others_dict = {}
-# Get list of units not attached to modules
-for unit in othersDB.keys():
-    kind = othersDB[unit]["class"]
-    object = classes_dictionary[kind]
-    others_dict[id] = object(None, unit, othersDB[unit])
-    time.sleep(1)
-    id += 1
 
 # REMOTE MONITORING FOR GIZMO
 #threading.Thread(target=others_dict[0].CONTINUOUS_monitoring, args=(), kwargs={}).start()

@@ -21,4 +21,3 @@ services:
       - REACT_APP_HOST_IP_ADDRESS=http://${LOCAL_IP}:8000
     volumes:
       - ./Frontend/src:/app/src
-      - ./logs:/home/logs
