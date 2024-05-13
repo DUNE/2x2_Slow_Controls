@@ -118,7 +118,11 @@ class MPOD(UNIT):
             self.crate_status = True # ON
         else:
             self.crate_status = False # OFF
-            self.measuring_status = {key: False for key in self.dictionary['powering'].keys()}
+            #for key in self.dictionary['powering'].keys():
+            #    self.measuring_status[key] = {}
+            #    for channel in self.dictionary['powering'][key]['channels'].keys():
+            #        data = self.measure([key, channel])
+            #self.measuring_status = {key: False for key in self.dictionary['powering'].keys()}
         return status
 
     def getMeasuringStatus(self):
@@ -126,14 +130,11 @@ class MPOD(UNIT):
         Getting MPOD channels status
         '''
         try:
-            if self.unit != "mpod_crate":
-                self.measuring_status = {}
-                for key in self.dictionary['powering'].keys():
-                    self.measuring_status[key] = {}
-                    for channel in self.dictionary['powering'][key]['channels'].keys():
-                        data = self.measure([key, channel])
-            else:
-                self.measuring_status = None
+            self.measuring_status = {}
+            for key in self.dictionary['powering'].keys():
+                self.measuring_status[key] = {}
+                for channel in self.dictionary['powering'][key]['channels'].keys():
+                    data = self.measure([key, channel])
             return self.measuring_status
         
         except Exception as e:
@@ -259,7 +260,7 @@ class MPOD(UNIT):
             Status_message = [status_answer] 
 
         # Setting object status (this is for GUI, not influxDB)
-        if Svalues[0]=="ON" or Svalues[0]=="WARN":
+        if Svalues[0]=="ON":
             self.measuring_status[powering][channel] = True 
         else:
             self.measuring_status[powering][channel] = False  
