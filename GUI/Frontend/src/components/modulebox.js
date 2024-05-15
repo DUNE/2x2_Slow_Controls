@@ -12,7 +12,7 @@ const theme = createTheme({
       main: colors.green[700]
     },
     secondary:{
-      main: colors.red[700]
+      main: colors.grey[500]
     }
   }
 })
@@ -23,21 +23,29 @@ const BACKEND_URL = process.env.REACT_APP_HOST_IP_ADDRESS;
 // COMPONENT FUNCTION
 function ModuleBox({ id, title, units, crate_status, measuring, powering_dict }) {
 
-  const [status, setStatus] = useState();
+  const [clicked, setClicked] = React.useState(!crate_status);
+
   useEffect(() => {
-    setStatus(crate_status);
+    if (crate_status === false){
+      setClicked(!crate_status);
+    }
+    
   }, [crate_status]);
 
-  //const handleClick = () => {
-  //  const message = "Are you sure you want to turn " + (status ? "OFF" : "ON") + " the MPOD crate?";
-  //  const confirmed = window.confirm(message);
-  //  if (confirmed) {
-  //    setStatus((prevClicked) => !prevClicked);
-  //    const endpoint = clicked ? `${BACKEND_URL}/attached_units/${id}/turn-on-crate` : `${BACKEND_URL}/attached_units/${id}/turn-off-crate`;
-  //    fetch(endpoint, {method: "PUT"})
-  //    .then(response => response.json())
-  //    }
-  //  }
+  useEffect(() => {
+    setClicked(!crate_status);
+  }, [crate_status]);
+
+  const handleClick = () => {
+    const message = "Are you sure you want to turn " + (crate_status ? "OFF" : "ON") + " the MPOD crate?";
+    const confirmed = window.confirm(message);
+    if (confirmed) {
+      setClicked((prevClicked) => !prevClicked);
+      const endpoint = clicked ? `${BACKEND_URL}/attached_units/${id}/turn-on-crate` : `${BACKEND_URL}/attached_units/${id}/turn-off-crate`;
+      fetch(endpoint, {method: "PUT"})
+      .then(response => response.json())
+      }
+    }
 
   //#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
   //# RETURN CARD
@@ -53,12 +61,12 @@ function ModuleBox({ id, title, units, crate_status, measuring, powering_dict })
               <div className='unit-name'>{unitName.slice(0, -1).toUpperCase() + '-' + unitName.slice(-1).toUpperCase()}</div>
               <ThemeProvider theme={theme}>
                 <div> 
-                  <Button color={!status ? 'secondary' : 'primary'}
+                  <Button color={!crate_status ? 'secondary' : 'primary'}
                           variant="contained"
                           style={{Width: '30px', height: 30, borderRadius: 0, fontSize: 10, boxShadow: 'none'}}
-                          onClick={() => setStatus(!status)}
-                          disabled={true}>
-                          {!status ? 'Crate OFF' : 'Crate ON'}
+                          onClick={handleClick}
+                          disabled={false}>
+                          {!crate_status ? 'Crate OFF' : 'Crate ON'}
                   </Button>
                 </div>
               </ThemeProvider>
@@ -78,7 +86,7 @@ function ModuleBox({ id, title, units, crate_status, measuring, powering_dict })
                           channel={channel}
                           device_names={powering_dict[readoutName]["channels"][channel]["name"]}
                           status={Boolean(measuring[readoutName][channel])}
-                          button_status={status}    
+                          button_status={crate_status}    
                         />
                         <hr style={{ margin: '0.5px' }}></hr>
                       </div>

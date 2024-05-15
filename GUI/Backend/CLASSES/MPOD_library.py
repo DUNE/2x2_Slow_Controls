@@ -177,7 +177,7 @@ class MPOD(UNIT):
         os.popen("snmpset -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c guru " + self.dictionary['ip'] + " sysMainSwitch" + ".0 i " + str(switch))
         if switch == 0:
             self.crate_status = False # OFF
-            self.measuring_status = {key: False for key in self.dictionary['powering'].keys()}
+            #self.measuring_status = {key: False for key in self.dictionary['powering'].keys()}
         else:
             self.crate_status = True # ON
         time.sleep(2)
