@@ -180,7 +180,6 @@ class MPOD(UNIT):
             #self.measuring_status = {key: False for key in self.dictionary['powering'].keys()}
         else:
             self.crate_status = True # ON
-        time.sleep(2)
 
     def channelSwitch(self, switch, channel):
         '''
@@ -244,7 +243,7 @@ class MPOD(UNIT):
         elif "WIENER-CRATE-MIB::outputStatus"+channel+" = BITS: 00" in status:
             Svalues += ["OFF"]
         elif "WIENER-CRATE-MIB::outputStatus"+channel+" = BITS: 40 outputInhibit(1)" in status:
-            Svalues += ["WARN"]
+            Svalues += ["OFF"]
         elif any(s in status for s in ["No Such Instance"]):
             V_terminal_values += [0.0]
             V_sense_values += [0.0]
@@ -353,13 +352,13 @@ class MPOD(UNIT):
             data["fields"]["status"] = status
             # Assigning values to error messages
             if status == "OFF":
-                status_number = 0
-            elif status == "ON":
                 status_number = 1
-            elif status == "WARN":
+            elif status == "ON":
                 status_number = 2
+            elif status == "WARN":
+                status_number = 0
             elif status == "ERROR":
-                status_number = 3
+                status_number = 0
             data["fields"]["status_number"] = status_number
             data["fields"]["status_message"] = status_message
             data["fields"]["channel_name"] = channel_name
