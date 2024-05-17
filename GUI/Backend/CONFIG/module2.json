@@ -55,8 +55,8 @@
                             "max_current" : 1.55,
                             "current_limit" : 1.5,
                             "max_sense_voltage" : 5.5,
-                            "max_terminal_voltage" : 5.5,
-                            "rate" : 100,
+                            "max_terminal_voltage" : 6,
+                            "rate" : 50,
                             "sense_voltage" : 5
                         },
                         ".u1" : {
@@ -64,8 +64,8 @@
                             "max_current" : 1.55,
                             "current_limit" : 1.5,
                             "max_sense_voltage" : 5.5,
-                            "max_terminal_voltage" : 5.5,
-                            "rate" : 100,
+                            "max_terminal_voltage" : 6,
+                            "rate" : 50,
                             "sense_voltage" : 5
                         },
                         ".u2" : {
@@ -73,8 +73,8 @@
                             "max_current" : 1.55,
                             "current_limit" : 1.5,
                             "max_sense_voltage" : 5.5,
-                            "max_terminal_voltage" : 5.5,
-                            "rate" : 100,
+                            "max_terminal_voltage" : 6,
+                            "rate" : 50,
                             "sense_voltage" : 5
                         },
                         ".u3" : {
@@ -82,8 +82,8 @@
                             "max_current" : 1.55,
                             "current_limit" : 1.5,
                             "max_sense_voltage" : 5.5,
-                            "max_terminal_voltage" : 5.5,
-                            "rate" : 100,
+                            "max_terminal_voltage" : 6,
+                            "rate" : 50,
                             "sense_voltage" : 5
                         }
                     }
