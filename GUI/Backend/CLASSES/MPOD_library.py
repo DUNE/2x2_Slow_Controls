@@ -259,7 +259,7 @@ class MPOD(UNIT):
             Status_message = [status_answer] 
 
         # Setting object status (this is for GUI, not influxDB)
-        if Svalues[0]=="ON" or Svalues[0]=="ERROR":
+        if Svalues[0]=="ON":
             self.measuring_status[powering][channel] = True 
         else:
             self.measuring_status[powering][channel] = False  
