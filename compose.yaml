@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  minerva_daq_logs:
+    container_name: minerva_daq_logs
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - /work/logs/runcontrol.log:/work/logs/runcontrol.log
+      - /work/logs/readout_dispatcher.log:/work/logs/readout_dispatcher.log
+      - /home/nfs/minerva/Mx2_monitoring/last_log_entry.txt:/home/nfs/minerva/Mx2_monitoring/last_log_entry.txt
