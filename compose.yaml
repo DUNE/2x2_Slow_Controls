@@ -7,5 +7,6 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - /home/nfs/minerva/dqmtest_cpernas/SL7_testing/gmbrowser/plots/tmp/:/home/nfs/minerva/dqmtest_cpernas/SL7_testing/gmbrowser/plots/tmp/
+      - /home/nfs/minerva/dqmtest_cpernas/SL7_testing/gmbrowser/plots/:/home/nfs/minerva/dqmtest_cpernas/SL7_testing/gmbrowser/plots/
       - /data/grafana/Mx2/:/data/grafana/Mx2/
+      - /home/nfs/minerva/Mx2_monitoring/last_log_entry.txt:/home/nfs/minerva/Mx2_monitoring/last_log_entry.txt

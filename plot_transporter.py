@@ -4,6 +4,9 @@ import matplotlib.dates as mdates
 from datetime import datetime, timezone, timedelta
 import pytz
 import time
+from influxdb import InfluxDBClient
+import threading
+import json
 
 # GET TIME FROM FILE
 def get_modification_time(input_path):
@@ -32,10 +35,22 @@ def add_timestamp_to_image(input_path, output_path):
     plt.close()
 
 # EXECUTE CONTINUOUS PLOT TRANSFERING
-if __name__ == "__main__":
+def main():
 
     # Iterate over each file in the directory
-    directory = "/home/nfs/minerva/dqmtest_cpernas/SL7_testing/gmbrowser/plots/tmp/"
+    directory = "/home/nfs/minerva/dqmtest_cpernas/SL7_testing/gmbrowser/plots/"
+
+    # Log entry file
+    log_entry_file = "/home/nfs/minerva/Mx2_monitoring/last_log_entry.txt"
+
+    # Source InfluxDB connection settings
+    source_host = '192.168.197.46'
+    source_port = 8086
+
+    # Connect to the source InfluxDB instance
+    source_client = InfluxDBClient(source_host, source_port, "mx2_logs")
+    source_client.create_database("mx2_logs")
+    source_client.switch_database("mx2_logs")
 
     while True:
         for filename in os.listdir(directory):
@@ -49,5 +64,43 @@ if __name__ == "__main__":
         
         # Add timestamp to the image
         add_timestamp_to_image(input_path, output_path)
-        # Sleep for 5 minutes
-        time.sleep(5 * 60)
+
+        # Read JSON line from file
+        log_entry_file = "/home/nfs/minerva/Mx2_monitoring/last_log_entry.txt"
+        with open(log_entry_file, 'r') as file:
+            json_line = file.readline().strip()
+        data = json.loads(json_line)
+
+        # Extract elements
+        subrun_number = data['subrun_number']
+        run_number = data['run_number']
+        message = data['message']
+        message_type = data['type']
+        daq_status = data['DAQ_status']
+        mode = data['mode']
+        DAQ_summary_log = data['DAQ_summary_log']
+
+        # Define data point
+        data_point = {
+            "measurement": "logs",
+            "time": datetime.utcnow().strftime('%Y%m%d %H:%M:%S'),
+            "fields": {
+                "run_number": int(run_number),
+                "subrun_number": int(subrun_number),
+                "type": message_type,
+                "message": message,
+                "daq_status" : daq_status,
+                "daq_summary_log" : DAQ_summary_log,
+                "mode" : mode
+            }
+        }
+
+        # Write data point to InfluxDB
+        source_client.write_points([data_point])
+
+        # Sleep for 10 seconds
+        time.sleep(10)
+
+# EXECUTE CONTINUOUS LOG READER
+if __name__ == "__main__":
+    threading.Thread(target=main).start()
