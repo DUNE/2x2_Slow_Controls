@@ -101,7 +101,7 @@ class MPOD(UNIT):
     def getSysStatus(self):
         command = "snmpget -v 2c -M " + self.miblib + " -m +WIENER-CRATE-MIB -c public " + self.dictionary['ip'] + " sysStatus.0" 
         output = self.execute_command(command)
-        options = ['mainOn', 'mainInhibit', 'localControlOnly', 'inputFailure', 'outputFailure', 'fantrayFailure', 'sensorFailure', 'vmeSysfail', 'plugAndPlayIncompatible', 'busReset', 'supplyDerating', 'supplyFailure', 'supplyDerating2', 'supplyFailure2']
+        options = ['mainInhibit', 'localControlOnly', 'inputFailure', 'outputFailure', 'fantrayFailure', 'sensorFailure', 'vmeSysfail', 'plugAndPlayIncompatible', 'busReset', 'supplyDerating', 'supplyFailure', 'supplyDerating2', 'supplyFailure2', 'mainOn']
         for option in options:
             if option in output:
                 return option
