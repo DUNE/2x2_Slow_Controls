@@ -7,6 +7,7 @@ import time
 from influxdb import InfluxDBClient
 import threading
 import json
+import traceback
 
 # GET TIME FROM FILE
 def get_modification_time(input_path):
@@ -52,54 +53,60 @@ def main():
     source_client.create_database("mx2_logs")
     source_client.switch_database("mx2_logs")
 
-    while True:
-        for filename in os.listdir(directory):
-            if filename.endswith(".png"):
-                # Input and output paths for each file
-                input_path = os.path.join(directory, filename)
-                output_path = os.path.join("/data/grafana/Mx2/", os.path.basename(input_path))
-                
-                # Add timestamp to the image
-                add_timestamp_to_image(input_path, output_path)
-        
-        # Add timestamp to the image
-        add_timestamp_to_image(input_path, output_path)
+    try:
+        while True:
+            for filename in os.listdir(directory):
+                if filename.endswith(".png"):
+                    # Input and output paths for each file
+                    input_path = os.path.join(directory, filename)
+                    output_path = os.path.join("/data/grafana/Mx2/", os.path.basename(input_path))
+                    
+                    # Add timestamp to the image
+                    add_timestamp_to_image(input_path, output_path)
+            
+            # Add timestamp to the image
+            add_timestamp_to_image(input_path, output_path)
 
-        # Read JSON line from file
-        log_entry_file = "/home/nfs/minerva/Mx2_monitoring/last_log_entry.txt"
-        with open(log_entry_file, 'r') as file:
-            json_line = file.readline().strip()
-        data = json.loads(json_line)
+            # Read JSON line from file
+            log_entry_file = "/home/nfs/minerva/Mx2_monitoring/last_log_entry.txt"
+            with open(log_entry_file, 'r') as file:
+                json_line = file.readline().strip()
+            data = json.loads(json_line)
 
-        # Extract elements
-        subrun_number = data['subrun_number']
-        run_number = data['run_number']
-        message = data['message']
-        message_type = data['type']
-        daq_status = data['DAQ_status']
-        mode = data['mode']
-        DAQ_summary_log = data['DAQ_summary_log']
+            # Extract elements
+            subrun_number = data['subrun_number']
+            run_number = data['run_number']
+            message = data['message']
+            message_type = data['type']
+            daq_status = data['DAQ_status']
+            mode = data['mode']
+            DAQ_summary_log = data['DAQ_summary_log']
 
-        # Define data point
-        data_point = {
-            "measurement": "logs",
-            "time": datetime.utcnow().strftime('%Y%m%d %H:%M:%S'),
-            "fields": {
-                "run_number": int(run_number),
-                "subrun_number": int(subrun_number),
-                "type": message_type,
-                "message": message,
-                "daq_status" : daq_status,
-                "daq_summary_log" : DAQ_summary_log,
-                "mode" : mode
+            # Define data point
+            data_point = {
+                "measurement": "logs",
+                "time": datetime.utcnow().strftime('%Y%m%d %H:%M:%S'),
+                "fields": {
+                    "run_number": int(run_number),
+                    "subrun_number": int(subrun_number),
+                    "type": message_type,
+                    "message": message,
+                    "daq_status" : daq_status,
+                    "daq_summary_log" : DAQ_summary_log,
+                    "mode" : mode
+                }
             }
-        }
 
-        # Write data point to InfluxDB
-        source_client.write_points([data_point])
+            # Write data point to InfluxDB
+            source_client.write_points([data_point])
 
-        # Sleep for 10 seconds
-        time.sleep(10)
+            # Sleep for 10 seconds
+            time.sleep(10)
+
+    except Exception as e:
+        print('*** Caught exception: %s: %s' % (e.__class__, e))
+        traceback.print_exc()
+        main()
 
 # EXECUTE CONTINUOUS LOG READER
 if __name__ == "__main__":
