@@ -1,0 +1,4 @@
+matplotlib
+Pillow
+pytz
+influxdb
