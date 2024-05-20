@@ -7,6 +7,5 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - /work/logs/runcontrol.log:/work/logs/runcontrol.log
-      - /work/logs/readout_dispatcher.log:/work/logs/readout_dispatcher.log
+      - /work/logs/:/work/logs/
       - /home/nfs/minerva/Mx2_monitoring/last_log_entry.txt:/home/nfs/minerva/Mx2_monitoring/last_log_entry.txt

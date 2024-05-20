@@ -1,11 +1,14 @@
 import json, time
 import threading
+import traceback
+import glob, os
 
 # GET LAST LINE OF FILE
 def get_last_log_entry(file_path):
     with open(file_path, 'r') as file:
         lines = file.readlines()
         last_log = lines[-1].strip()
+    file.close()
     return last_log
 
 # SAVE TO LOG ENTRY
@@ -34,6 +37,7 @@ def save_last_log_entry(rc_file_path, dispatcher_file_path, output_file_path):
                     log["mode"] = "Light Injection"
                 elif "numi" in line:
                     log["mode"] = "Numi Beam"
+    file.close()
 
     # Saving log message
     log["message"] = last_log_entry.lstrip()
@@ -48,16 +52,22 @@ def save_last_log_entry(rc_file_path, dispatcher_file_path, output_file_path):
 
     with open(output_file_path, 'w') as output_file:
         json.dump(log, output_file)
+    output_file.close()
 
 # MAIN FUNCTION
 def main():
-    while True:
-        rc_file_path = '/work/logs/runcontrol.log'
-        dispatcher_file_path = '/work/logs/readout_dispatcher.log'
-        output_log_file_path = '/home/nfs/minerva/Mx2_monitoring/last_log_entry.txt'
-        save_last_log_entry(rc_file_path, dispatcher_file_path, output_log_file_path)
-        # Sleep for 10 seconds
-        time.sleep(10)
+    try:
+        while True:
+            rc_file_path = '/work/logs/runcontrol.log'
+            dispatcher_file_path = '/work/logs/readout_dispatcher.log'
+            output_log_file_path = '/home/nfs/minerva/Mx2_monitoring/last_log_entry.txt'
+            save_last_log_entry(rc_file_path, dispatcher_file_path, output_log_file_path)
+            # Sleep for 10 seconds
+            time.sleep(10)
+    except Exception as e:
+            print('*** Caught exception: %s: %s' % (e.__class__, e))
+            traceback.print_exc()
+            main()
 
 # EXECUTE CONTINUOUS LOG READER
 if __name__ == "__main__":

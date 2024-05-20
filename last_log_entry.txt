@@ -1,1 +1,1 @@
-{"DAQ_status": "[2024-05-17 22:49:28]     INFO:      ==> Started successfully.", "DAQ_summary_log": "==> Started successfully.", "mode": "Pedestal", "subrun_number": "60", "run_number": "1708", "message": "[2024-05-17 15:49:00]    DEBUG:  Panel shown:", "type": "DEBUG"}
+{"DAQ_status": "[2024-05-20 00:04:01]     INFO:      ==> Started successfully.", "DAQ_summary_log": "==> Started successfully.", "mode": "Numi Beam", "subrun_number": "3", "run_number": "1714", "message": "[2024-05-19 11:28:18]    DEBUG:  Panel stack state: {'main': [], 'status': []}", "type": "DEBUG"}
