@@ -1,4 +1,4 @@
-from app.CLASSES.UNIT_library import UNIT
+from UNIT_library import UNIT
 import socket
 from datetime import datetime
 import time 
@@ -115,6 +115,12 @@ class TTI(UNIT):
         cmd = 'V{}O?'.format(channel)
         v = self.send_receive_float(cmd)
         return v
+    
+    # Reads output voltage
+    def readOutputCurrent(self, channel):
+        cmd = 'I{}O?'.format(channel)
+        I = self.send_receive_float(cmd)
+        return I
     
     # Sends and recieves an integer
     def send_receive_integer(self, cmd):
@@ -364,6 +370,8 @@ class TTI(UNIT):
                 # Data fields 
                 "fields" : dict(fields)
             }
+            data["fields"]["crate_status"] = self.getCrateStatus()
+            data["fields"]["current_draw"] = self.readOutputCurrent(1)
             json_payload.append(data)
             return json_payload
     
@@ -373,15 +381,16 @@ class TTI(UNIT):
 
         Description:    Continuously record timestamp on InfluxDB
         '''
-        try:
-            print("Continuous DAQ Activated: " + powering + ". Taking data in real time")
-            while self.getCrateStatus():
-                data = self.readOutputVolts(1)
-                self.INFLUX_write(powering,data)
-                #self.write_log()
-                time.sleep(2)
+        print(self.getCrateStatus())
+        while True:
+            try:
+                if self.getCrateStatus():
+                    print("Continuous DAQ Activated: TTI -" + powering + ". Taking data in real time")
+                    voltage = self.readOutputVolts(1)
+                    self.INFLUX_write(powering,voltage)
+                    time.sleep(10)
 
-        except Exception as e:
-            print('*** Caught exception: %s: %s' % (e.__class__, e))
-            traceback.print_exc()
-            sys.exit(1)
+            except Exception as e:
+                print('*** Caught exception: %s: %s' % (e.__class__, e))
+                traceback.print_exc()
+                self.CONTINUOUS_monitoring(powering)
