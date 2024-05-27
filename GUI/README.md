@@ -64,6 +64,6 @@ ssh -J acdcs@acd-gw06.fnal.gov acdcs@acd-ops01.fnal.gov -L 11445:localhost:443
 
 Now you just need to go to your local browser (i.e. Chrome) and open localhost:11445. The password for the noVNC session is argoncube. Once you are there you open Firefox (on the remote vnc) and go to 192.168.197.46:3006, which is the official address of the GUI frontend.
 
-![image](https://github.com/DUNE/2x2_Slow_Controls/assets/34606228/71b02bae-99d2-48f9-aad6-66f4051c9a88)
+![image](https://github.com/DUNE/2x2_Slow_Controls/assets/34606228/48db63b7-f645-4b66-9453-25c80d558402)
 
 
