@@ -343,7 +343,7 @@ class TTI(UNIT):
             client.write_points(self.JSON_setup(
                 measurement = powering,
                 channel_name = channels[key]["name"],
-                fields = zip(measurements_list, [data])
+                fields = zip(measurements_list, data)
             ))
         client.close()
 
@@ -371,7 +371,6 @@ class TTI(UNIT):
                 "fields" : dict(fields)
             }
             data["fields"]["crate_status"] = self.getCrateStatus()
-            data["fields"]["current_draw"] = self.readOutputCurrent(1)
             json_payload.append(data)
             return json_payload
     
@@ -387,7 +386,8 @@ class TTI(UNIT):
                 if self.getCrateStatus():
                     print("Continuous DAQ Activated: TTI -" + powering + ". Taking data in real time")
                     voltage = self.readOutputVolts(1)
-                    self.INFLUX_write(powering,voltage)
+                    current = self.readOutputCurrent(1)
+                    self.INFLUX_write(powering,[voltage,current])
                     time.sleep(10)
 
             except Exception as e:

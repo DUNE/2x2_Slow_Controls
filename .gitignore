@@ -11,3 +11,4 @@
 .influxdb
 .prometheus
 /SpellmanHV/SPELLMAN/config.ini
+/GUI/logs
