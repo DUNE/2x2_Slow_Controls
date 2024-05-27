@@ -21,7 +21,7 @@ First let's ssh to acd-daq05 as acdcs user:
 ```bash
 ssh -J acdcs@acd-gw06.fnal.gov acdcs@acd-daq05.fnal.gov
 ```
-Go to /home/acd/acdcs/SlowControls2x2/GUI.
+Go to /home/acd/acdcs/2x2/SlowControls2x2/GUI.
 
 Here you have two options:
 
