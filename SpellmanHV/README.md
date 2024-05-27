@@ -1,7 +1,7 @@
 # Spellman High Voltage
 
 ## How to start the remote monitoring?
-Go to /home/acd/acdcs/SlowControls2x2/SpellmanHV on acd-daq05 logged as acdcs an run:
+Go to /home/acd/acdcs/2x2/SlowControls2x2/SpellmanHV on acd-daq05 logged as acdcs an run:
 
 ```bash
 ./monitor.sh
@@ -9,7 +9,7 @@ Go to /home/acd/acdcs/SlowControls2x2/SpellmanHV on acd-daq05 logged as acdcs an
 
 ## How to activate the controls?
 
-Go to /home/acd/acdcs/SlowControls2x2/SpellmanHV/SPELLMAN
+Go to /home/acd/acdcs/2x2/SlowControls2x2/SpellmanHV/SPELLMAN
 
 To control the Spellman, the SpellmanEnv must be activated. 
 ```bash
