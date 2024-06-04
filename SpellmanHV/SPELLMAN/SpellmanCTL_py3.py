@@ -7,6 +7,7 @@ from influxdb import InfluxDBClient
 from datetime import datetime
 import pytz
 from configparser import ConfigParser
+from confirmation import ask_confirmation, execute_command
 
 #print 'Number of arguments:', len(sys.argv), 'arguments.'
 #print 'Argument List:', str(sys.argv)
@@ -17,11 +18,12 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 #Get SpellmanIP
 conf = ConfigParser()
 try:
-     conf.read("config.ini")
+     conf.read("./config.ini")
 except FileNotFoundError:
-     conf.read("./SPELLMAN/config.ini")
+     conf.read("config.ini")
 
 Spellman = conf['SpellMan']
+
 # Connect the socket to the port where the server is listening
 server_address = (Spellman['IP'], 50001)
 #print >>sys.stderr, 'connecting to %s port %s' % server_address
@@ -63,22 +65,28 @@ try:
         else: print('Error')  
 
     elif str(sys.argv[1]) == 'Enable':     
-        message = b"\x02"+b'99,'+b"\x03"
-        sock.sendall(message)
-        data = str(sock.recv(32))
-        if len(data)==16: 
-             val=data[4:5] 
-             print(str(val))
-        else: print('Error')  
+        if ask_confirmation(sys.argv):
+            message = b"\x02"+b'99,'+b"\x03"
+            sock.sendall(message)
+            data = str(sock.recv(32))
+            if len(data)==16: 
+                val=data[4:5] 
+                print(str(val))
+            else: print('There was an error turning on the Spellman')
+        else:
+            pass
 
-    elif str(sys.argv[1]) == 'Disable':     
-        message = b"\x02"+b'98,'+b"\x03"
-        sock.sendall(message)
-        data = str(sock.recv(32))
-        if len(data)==16: 
-             val=data[4:5] 
-             print(str(val))
-        else: print('Error')  
+    elif str(sys.argv[1]) == 'Disable':    
+        if ask_confirmation(sys.argv):
+            message = b"\x02"+b'98,'+b"\x03"
+            sock.sendall(message)
+            data = str(sock.recv(32))
+            if len(data)==16: 
+                val=data[4:5] 
+                print(str(val))
+            else: print('There was an error turning off the Spellman.')
+        else:
+            pass
     
     elif str(sys.argv[1]) == 'GetSP_V':     
         message = b"\x02"+b'14,'+b"\x03"
@@ -113,7 +121,8 @@ try:
              fval=6.0 / 3983 * float(str(val))
              print(str(fval))
         else: print('Error')  
-
+    
+    '''
     elif str(sys.argv[1]) == 'SetSP_V': 
         if len(sys.argv) == 2: 
              val=0
@@ -142,6 +151,7 @@ try:
              val=data[4:5] 
              print(str(val))
         else: print('Error. Works only in remote mode')  
+    '''
 
     elif str(sys.argv[1]) == 'OpMode':     
         message = b"\x02"+b'69,'+b"\x03"
@@ -177,56 +187,58 @@ try:
         else: print('Error')  
 
     elif str(sys.argv[1]) == 'RampTo':
-        if len(sys.argv) == 2:
-             target_val=0
+        if ask_confirmation(sys.argv):
+            if len(sys.argv) == 2:
+                target_val=0
+            else:
+                target_val= float(sys.argv[2])
+        
+            #get current set point
+            message = b"\x02"+b'14,'+b"\x03"
+            sock.sendall(message)
+            data = str(sock.recv(32))
+            if len(data)>=7 and len(data)<=20: 
+                val=data.split(",")[1] 
+                cur_sp=50.0 / 4095 * float(str(val))
+                print('Current value'+ str(cur_sp))
+            else: print('Error')  
+            step=0.01
+            if cur_sp<target_val :
+                print('Ramping UP to '+str(target_val))
+                inc=step 
+            elif cur_sp>target_val :
+                print('Ramping DOWN to '+str(target_val))
+                inc=-step
+            else:
+                print('Already at '+str(target_val))
+                inc=0;
+            sp=cur_sp
+            while abs(sp-target_val) > step:
+                sp=sp+inc
+                val=int(sp/50.0*4095)
+                print('Ramping: '+ str(sp), end='\r')
+                message = b"\x02"+b'10,' + bytes(str(val), 'utf-8') + b','+b"\x03"
+                sock.sendall(message)
+                data = str(sock.recv(32))
+                if len(data)==16:
+                    val=data[9:10]
+                    #print( str(val))
+                else: print('Error. Works only in remote mode')
+                time.sleep(0.1)
+            if abs(sp-target_val) <= step:
+                val = int(target_val/50.0*4095)
+                message = b"\x02"+b'10,' + bytes(str(val), 'utf-8') + b','+b"\x03"
+                sock.sendall(message)
+                data = str(sock.recv(32))
+                if len(data)==16:
+                    val=data[9:10]
+                    print(str(val))
+                else: print('Error. Works only in remote mode')
+                time.sleep(0.5)
+
+            print('Voltage value is set to: ' + str(target_val))
         else:
-             target_val= float(sys.argv[2])
-
-        #get current set point
-        message = b"\x02"+b'14,'+b"\x03"
-        sock.sendall(message)
-        data = str(sock.recv(32))
-        if len(data)>=7 and len(data)<=20: 
-             val=data.split(",")[1] 
-             cur_sp=50.0 / 4095 * float(str(val))
-             print('Current value'+ str(cur_sp))
-        else: print('Error')  
-        step=0.01
-        if cur_sp<target_val :
-             print('Ramping UP to '+str(target_val))
-             inc=step 
-        elif cur_sp>target_val :
-             print('Ramping DOWN to '+str(target_val))
-             inc=-step
-        else:
-             print('Already at '+str(target_val))
-             inc=0;
-        sp=cur_sp
-        while abs(sp-target_val) > step:
-             sp=sp+inc
-             val=int(sp/50.0*4095)
-             print('Ramping: '+ str(sp), end='\r')
-             message = b"\x02"+b'10,' + bytes(str(val), 'utf-8') + b','+b"\x03"
-             sock.sendall(message)
-             data = str(sock.recv(32))
-             if len(data)==16:
-                val=data[9:10]
-                #print( str(val))
-             else: print('Error. Works only in remote mode')
-             time.sleep(0.1)
-        if abs(sp-target_val) <= step:
-             val = int(target_val/50.0*4095)
-             message = b"\x02"+b'10,' + bytes(str(val), 'utf-8') + b','+b"\x03"
-             sock.sendall(message)
-             data = str(sock.recv(32))
-             if len(data)==16:
-                val=data[9:10]
-                print(str(val))
-             else: print('Error. Works only in remote mode')
-             time.sleep(0.5)
-
-        print('Voltage value is set to: ' + str(target_val))
-
+            pass
     elif str(sys.argv[1]) == 'SendToDB':
 
         client = InfluxDBClient('192.168.197.46', 8086, 'HVmonitoring')
