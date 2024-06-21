@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  cryogenics_monitor:
+    network_mode: "host"
+    container_name: cryogenics_monitor
+    build: 
+      context: .
+      dockerfile: Dockerfile
