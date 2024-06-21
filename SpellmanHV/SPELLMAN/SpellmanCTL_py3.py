@@ -213,7 +213,7 @@ try:
                 print('Current value'+ str(cur_sp))
             else: 
                 print('Error')  
-            step=0.01
+            step=0.0025
             if cur_sp<target_val :
                 print('Ramping UP to '+str(target_val))
                 inc=step 
