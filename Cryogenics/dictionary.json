@@ -76,5 +76,11 @@
         "description" : "Vent status",
         "units" : "% open",
         "column" : "floatvalue"
+    },
+    "1223" : {
+        "name" : "LT-1007A-RPi",
+        "description" : "Liquid argon leven raspi",
+        "units" : "mm",
+        "column" : "floatvalue"
     }
 }
