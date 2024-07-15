@@ -50,7 +50,6 @@ const Measuring= ({ id, powering, channel, device_names, status, button_status }
       .then(response => response.json())
       }
     }
-
   
   //#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
   //# RETURN MEASURING ROW

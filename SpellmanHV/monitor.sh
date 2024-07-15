@@ -11,4 +11,4 @@ podman-compose -f compose.yaml down
 
 ###############################################################
 # Start podman container
-podman-compose -f compose.yaml up -d
+podman-compose -f compose.yaml build --no-cache && podman-compose -f compose.yaml up -d

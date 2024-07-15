@@ -1,0 +1,86 @@
+{
+    "37" : {
+        "name" : "LT-1007A",
+        "description" : "Liquid level",
+        "units" : "mm",
+        "column" : "floatvalue"
+    },
+    "34" : {
+        "name" : "PT-1069A",
+        "description" : "Cryostat pressure",
+        "units" : "Bar (a)",
+        "column" : "floatvalue"
+    },
+    "999" : {
+        "name" : "PumpMon",
+        "description" : "Pump running state",
+        "units" : "N/A",
+        "column" : "intvalue"
+    },
+    "216" : {
+        "name" : "AE-1012A",
+        "description" : "Data from the gas analyzers",
+        "units" : "ppb H2O",
+        "column" : "floatvalue"
+    },
+    "220" : {
+        "name" : "AE-1013A",
+        "description" : "Data from the gas analyzers",
+        "units" : "ppm O2",
+        "column" : "floatvalue"
+    },
+    "231" : {
+        "name" : "AE-1014A_DP",
+        "description" : "Data from the gas analyzers",
+        "units" : "°C",
+        "column" : "floatvalue"
+    },
+    "236" : {
+        "name" : "AE-1014A_H2O",
+        "description" : "Data from the gas analyzers",
+        "units" : "ppm H2O",
+        "column" : "floatvalue"
+    },
+    "237" : {
+        "name" : "AE-1015A",
+        "description" : "Data from the gas analyzers",
+        "units" : "ppb O2",
+        "column" : "floatvalue"
+    },
+    "247" : {
+        "name" : "AE-1016A",
+        "description" : "Data from the gas analyzers",
+        "units" : "ppm N2",
+        "column" : "floatvalue"
+    },
+    "725" : {
+        "name" : "C1004",
+        "description" : "Cryo cooler status",
+        "units" : "N/A",
+        "column" : "intvalue"
+    },
+    "741" : {
+        "name" : "C1005",
+        "description" : "Cryo cooler status",
+        "units" : "N/A",
+        "column" : "intvalue"
+    },
+    "756" : {
+        "name" : "C1006",
+        "description" : "Cryo cooler status",
+        "units" : "N/A",
+        "column" : "intvalue"
+    },
+    "89" : {
+        "name" : "FCV-1019A",
+        "description" : "Vent status",
+        "units" : "% open",
+        "column" : "floatvalue"
+    },
+    "1223" : {
+        "name" : "LT-1007A-RPi",
+        "description" : "Liquid argon leven raspi",
+        "units" : "mm",
+        "column" : "floatvalue"
+    }
+}

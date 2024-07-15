@@ -1,0 +1,26 @@
+{
+    "module1" : {
+        "TTI1" : {
+            "ip" : "192.168.197.57",
+            "class" : "TTI",
+            "sock_timeout_secs" : 60,
+            "port" : 9221,
+            "powering" : {
+                "voltage" : {
+                    "measurements" : ["voltage", "current"],
+                    "channels" : {
+                        "1" : {
+                            "name" : "CHANNEL_1",
+                            "max_current" : 0.0075,
+                            "tripAmps" : 0.01,
+                            "tripVolts" : 110,
+                            "stepSizeVolts" : 1
+                        }
+                    }
+                }
+            },
+            "on_message" : "TTI-1 voltage is on. Turn it off manually only.",
+            "off_message" : "TTI-1 voltage is off. Turn it on manually only."
+        }
+    }
+}

@@ -20,6 +20,8 @@ COPY ./SPELLMAN /code/SPELLMAN
 
 # Make your script executable
 RUN chmod +x SPELLMAN/SendSpellManHVToDB.sh
+COPY SPELLMAN/monitor_spellman.py /code/monitor_spellman.py
+COPY SPELLMAN/config.ini /code/config.ini
 
 # Define the command to run your script
 CMD ["/code/SPELLMAN/SendSpellManHVToDB.sh"]

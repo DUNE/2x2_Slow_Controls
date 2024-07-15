@@ -14,7 +14,7 @@
                             "current_limit" : 2.5,
                             "max_sense_voltage" : 28,
                             "max_terminal_voltage" : 28,
-                            "rate" : 1000,
+                            "rate" : 100,
                             "sense_voltage" : 24.01
                         },
                         ".u301" : {
@@ -23,7 +23,7 @@
                             "current_limit" : 2.5,
                             "max_sense_voltage" : 28,
                             "max_terminal_voltage" : 28,
-                            "rate" : 1000,
+                            "rate" : 100,
                             "sense_voltage" : 24.01
                         },
                         ".u200" : {
@@ -32,7 +32,7 @@
                             "current_limit" : 0.6,
                             "max_sense_voltage" : 12.5,
                             "max_terminal_voltage" : 12.5,
-                            "rate" : 1000,
+                            "rate" : 100,
                             "sense_voltage" : 7.0
                         },
                         ".u201" : {
@@ -41,7 +41,7 @@
                             "current_limit" : 0.6,
                             "max_sense_voltage" : 12.5,
                             "max_terminal_voltage" : 12.5,
-                            "rate" : 1000,
+                            "rate" : 100,
                             "sense_voltage" : 7.0
                         },
                         ".u202" : {
@@ -50,7 +50,7 @@
                             "current_limit" : 0.5,
                             "max_sense_voltage" : 5.2,
                             "max_terminal_voltage" : 5.5,
-                            "rate" : 1000,
+                            "rate" : 100,
                             "sense_voltage" : 5.0
                         }
                     }
@@ -65,7 +65,7 @@
                             "current_limit" : 1.5,
                             "max_sense_voltage" : 5.5,
                             "max_terminal_voltage" : 6,
-                            "rate" : 1000,
+                            "rate" : 50,
                             "sense_voltage" : 5
                         },
                         ".u1" : {
@@ -74,7 +74,7 @@
                             "current_limit" : 1.5,
                             "max_sense_voltage" : 5.5,
                             "max_terminal_voltage" : 6,
-                            "rate" : 1000,
+                            "rate" : 50,
                             "sense_voltage" : 5
                         },
                         ".u2" : {
@@ -83,7 +83,7 @@
                             "current_limit" : 1.5,
                             "max_sense_voltage" : 5.5,
                             "max_terminal_voltage" : 6,
-                            "rate" : 1000,
+                            "rate" : 50,
                             "sense_voltage" : 5
                         },
                         ".u3" : {
@@ -92,7 +92,7 @@
                             "current_limit" : 1.5,
                             "max_sense_voltage" : 5.5,
                             "max_terminal_voltage" : 6,
-                            "rate" : 1000,
+                            "rate" : 50,
                             "sense_voltage" : 5
                         }
                     }
@@ -105,19 +105,19 @@
                             "name" : "Mod0-RTD_1",
                             "max_current" : 1.05,
                             "current_limit" : 1.0,
-                            "max_sense_voltage" : 5.2,
-                            "max_terminal_voltage" : 6,
-                            "rate" : 1000,
-                            "sense_voltage" : 5
+                            "max_sense_voltage" : 5.5,
+                            "max_terminal_voltage" : 5.5,
+                            "rate" : 100,
+                            "sense_voltage" : 5.1
                         },
                         ".u101" : {
                             "name" : "Mod0-RTD_2",
                             "max_current" : 1.05,
                             "current_limit" : 1.0,
-                            "max_sense_voltage" : 5.2,
-                            "max_terminal_voltage" : 6,
-                            "rate" : 1000,
-                            "sense_voltage" : 5
+                            "max_sense_voltage" : 5.5,
+                            "max_terminal_voltage" : 5.5,
+                            "rate" : 100,
+                            "sense_voltage" : 5.1
                         }
                     }
                 

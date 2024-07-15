@@ -21,7 +21,7 @@ import os, time
 #---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
 # Reading modules JSON file
 moduleDB = {}
-for i in range(4): # JUST MODULE 0 FOR NOW
+for i in range(4): 
     file_path = f'app/CONFIG/module{i}.json'
     with open(file_path, "r") as json_file:
         moduleDB.update(json.load(json_file))
@@ -30,7 +30,17 @@ for i in range(4): # JUST MODULE 0 FOR NOW
 with open('app/CONFIG/others_units.json', "r") as json_file:
     othersDB = json.load(json_file)
 
-# Get list of units  attached to modules
+# Get list of units not attached to modules
+id = 0
+others_dict = {}
+# Get list of units not attached to modules
+for unit in othersDB.keys():
+    kind = othersDB[unit]["class"]
+    object = classes_dictionary[kind]
+    others_dict[id] = object(None, unit, othersDB[unit])
+    time.sleep(1)
+    id += 1
+# Get list of units attached to modules
 id = 0
 attached_units_dict = {}
 attached_units_dict2 = {}
@@ -42,16 +52,6 @@ for module in moduleDB.keys():
         attached_units_dict[id] = object(module, unit, moduleDB[module][unit])
         attached_units_dict2[module] = {id : attached_units_dict[id]}
         id += 1 
-
-id = 0
-others_dict = {}
-# Get list of units not attached to modules
-for unit in othersDB.keys():
-    kind = othersDB[unit]["class"]
-    object = classes_dictionary[kind]
-    others_dict[id] = object(None, unit, othersDB[unit])
-    time.sleep(1)
-    id += 1
 
 # REMOTE MONITORING FOR GIZMO
 #threading.Thread(target=others_dict[0].CONTINUOUS_monitoring, args=(), kwargs={}).start()
@@ -222,6 +222,23 @@ async def turnON_attached_by_id(unit_id: int, measuring: str):
         threading.Thread(target=attached_units_dict[unit_id].ramp_up(100,1), args=([measuring]), kwargs={}).start()
     return {"message" : attached_units_dict[unit_id].getOnMessage() + " Measuring: " + measuring} 
 
+@app.put("/attached_units/{unit_id}/turn-on-crate", tags=["Update"])
+async def turnON_attached_by_id_crate(unit_id: int):
+    '''
+    Turn on crate 
+    '''
+    attached_units_dict[unit_id].powerSwitch(1)
+    return {"message" : attached_units_dict[unit_id].getOnMessage()} 
+
+@app.put("/attached_units/{unit_id}/turn-off-crate", tags=["Update"])
+async def turnON_attached_by_id_crate(unit_id: int):
+    '''
+    Turn off crate 
+    '''
+    attached_units_dict[unit_id].powerSwitch(0)
+    return {"message" : attached_units_dict[unit_id].getOffMessage()} 
+
+
 @app.put("/attached_units/{unit_id}/{measuring}/{channel}/turn-on", tags=["Update"])
 async def turnON_single_channel(unit_id: int, measuring: str, channel: str):
     '''
@@ -255,28 +272,17 @@ def turnOFF_attached_by_id(unit_id: int, measuring: str, channel : str):
 @app.put("/other_units/{unit_id}/turn-on", tags=["Update"])
 def turnON_other_by_id(unit_id: int):
     '''
-    Turn on unit NOT connected to module (i.e. MPOD Crate)
+    Turn ON unit NOT connected to module (i.e. VME Crate)
     '''
     # REMOTE MONITORING FOR MPOD CRATE
     others_dict[unit_id].powerSwitch(1)
-    if others_dict[unit_id].getClass() != "GIZMO":
-        modules = others_dict[unit_id].getModules()
-        for module in modules:
-            for id in attached_units_dict2[module].keys():
-                attached_units_dict2[module][id].powerSwitch(1)
-
-    # This will raise an error for the mpod crate!
     return {"message" : others_dict[unit_id].getOnMessage()} 
 
 
 @app.put("/other_units/{unit_id}/turn-off", tags=["Update"])
 def turnOFF_other_by_id(unit_id: int):
     '''
-    Turn off unit NOT connected to module (i.e. MPOD Crate)
+    Turn OFF unit NOT connected to module (i.e. VME Crate)
     '''
     others_dict[unit_id].powerSwitch(0)
-    modules = others_dict[unit_id].getModules()
-    for module in modules:
-        for id in attached_units_dict2[module].keys():
-            attached_units_dict2[module][id].powerSwitch(0)
     return {"message" : others_dict[unit_id].getOffMessage()} 
