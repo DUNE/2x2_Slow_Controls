@@ -1,0 +1,8 @@
+#InTerminator = "\r\n\r\n";
+#OutTerminator = CR;
+
+get_power {
+    out STX,"22,",ETX
+    wait 100;
+    in STX,"22,%f,*f,*f,",ETX
+}
