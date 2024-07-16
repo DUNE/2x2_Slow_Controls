@@ -41,10 +41,11 @@ include $(TOP)/configure/RULES
 #  ADD RULES AFTER THIS LINE
 
 #DBD
+SpellmanHV_DBD += calcSupport.dbd
 SpellmanHV_DBD += stream.dbd
 SpellmanHV_DBD += drvAsynSerialPort.dbd
 SpellmanHV_DBD += drvAsynIPPort.dbd
-SpellmanHV_DBD += calcSupport.dbd
+#SpellmanHV_DBD += calcSupport.dbd
 SpellmanHV_DBD += asyn.dbd
 
 #LIB
