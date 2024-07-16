@@ -1,5 +1,5 @@
 record(bi, "spellmanhv/rSWITCH"){
-  field(DESC, "Read switch of $(WHICH_PDS)")
+  field(DESC, "Read switch of SpellmanHV")
   field(DTYP, "stream")
   field(INP,  "@devSpellmanHV.proto get_power $(PORT) $(BUS)")
   field(MASK, 1)

@@ -2,7 +2,7 @@
 #OutTerminator = CR;
 
 get_power {
-    out STX,"22,",ETX
+    out STX,"22,",ETX;
     wait 100;
-    in STX,"22,%f,*f,*f,",ETX
+    in STX,"22,%d,*d,*d,",ETX;
 }
