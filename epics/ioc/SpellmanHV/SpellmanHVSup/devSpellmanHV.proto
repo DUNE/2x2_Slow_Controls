@@ -1,8 +1,128 @@
-#InTerminator = "\r\n\r\n";
-#OutTerminator = CR;
+InTerminator = ETX;
+OutTerminator = ETX;
+
+get_set_v {
+    out STX,"14,";
+    wait 20;
+    in STX,"14,%d,";
+}
+
+get_set_i {
+    out STX,"15,";
+    wait 20;
+    in STX,"15,%d,";
+}
 
 get_power {
-    out STX,"22,",ETX;
-    wait 100;
-    in STX,"22,%d,*d,*d,",ETX;
+    out STX,"22,";
+    wait 20;
+    in STX,"22,%d,";
 }
+
+get_op_mode_i {
+    out STX,"69,";
+    wait 20;
+    in STX,"69,%d,%*d,";
+}
+
+get_op_mode_v {
+    out STX,"69,";
+    wait 20;
+    in STX,"69,%*d,%d,";
+}
+
+get_read_v {
+    out STX,"20,";
+    wait 20;
+    in STX,"20,%d,%*d,%*d,%*d,%*d,%*d,%*d,%*d,%*d,";
+}
+
+get_read_i {
+    out	STX,"20,";
+    wait 20;
+    in STX,"20,%*d,%d,%*d,%*d,%*d,%*d,%*d,%*d,%*d,";
+}
+
+get_status_interlock {
+    out STX,"32,";
+    wait 20;
+    in STX,"32,%d,%*d,%*d,%*d,%*d,%*d,%*d,%*d,%*d,%*d,%*d,";
+}
+
+get_status_hvinhibit {
+    out STX,"32,";
+    wait 20;
+    in STX,"32,%*d,%d,%*d,%*d,%*d,%*d,%*d,%*d,%*d,%*d,%*d,";
+}
+
+get_status_overvolt {
+    out STX,"32,";
+    wait 20;
+    in STX,"32,%*d,%*d,%d,%*d,%*d,%*d,%*d,%*d,%*d,%*d,%*d,";
+}
+
+get_status_overcurr {
+    out STX,"32,";
+    wait 20;
+    in STX,"32,%*d,%*d,%*d,%d,%*d,%*d,%*d,%*d,%*d,%*d,%*d,";
+}
+
+get_status_overpw {
+    out STX,"32,";
+    wait 20;
+    in STX,"32,%*d,%*d,%*d,%*d,%d,%*d,%*d,%*d,%*d,%*d,%*d,";
+}
+
+get_status_regerr {
+    out STX,"32,";
+    wait 20;
+    in STX,"32,%*d,%*d,%*d,%*d,%*d,%d,%*d,%*d,%*d,%*d,%*d,";
+}
+
+get_status_arcfault {
+    out STX,"32,";
+    wait 20;
+    in STX,"32,%*d,%*d,%*d,%*d,%*d,%*d,%d,%*d,%*d,%*d,%*d,";
+}
+
+get_status_overtemp {
+    out STX,"32,";
+    wait 20;
+    in STX,"32,%*d,%*d,%*d,%*d,%*d,%*d,%*d,%d,%*d,%*d,%*d,";
+}
+
+get_status_adjovldfault {
+    out STX,"32,";
+    wait 20;
+    in STX,"32,%*d,%*d,%*d,%*d,%*d,%*d,%*d,%*d,%d,%*d,%*d,";
+}
+
+get_status_sysfault {
+    out STX,"32,";
+    wait 20;
+    in STX,"32,%*d,%*d,%*d,%*d,%*d,%*d,%*d,%*d,%*d,%d,%*d,";
+}
+
+get_status_rlmode {
+    out STX,"32,";
+    wait 20;
+    in STX,"32,%*d,%*d,%*d,%*d,%*d,%*d,%*d,%*d,%*d,%*d,%d,";
+}
+
+set_v {
+    out	STX,"10,%d";
+    @init {get_set_v;}
+    wait 20;
+}
+
+set_i {
+    out STX,"11,%d";
+    @init {get_set_i;}
+    wait 20;
+}
+
+send_command {
+    out STX,"%d,";
+    wait 20;
+}
+
