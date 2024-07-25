@@ -33,7 +33,7 @@ async def main():
     objects = server.nodes.objects
     
     # Add a new object to the server
-    myobj = await objects.add_object(idx, "MyObject")
+    myobj = await objects.add_object(idx, "UPSSet")
     
     # Add a variables to store UPS data
     date_var = await myobj.add_variable(idx, "DateVar", 0, ua.String)

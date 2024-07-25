@@ -1,17 +1,42 @@
 import asyncio
 from asyncua import Client
 
+
+async def get_variable(obj,var_name):
+    '''
+    Function to retrieve a variable
+    from a node object 
+
+    Parameters:
+
+    obj: asyncua object
+    var_name: name of the variable
+
+    Returns:
+
+    var_val: value contained in the variable
+    '''
+    # Get a variable node
+    myvar = await obj.get_child([f"2:{var_name}"])
+    # Read the value of the variable
+    var_val = await myvar.read_value()
+    return var_val 
+
+
+
 async def retrieve_data():
     '''
     Function used to
     retrieve data from an OPC
     sever using asyncua
     '''
+
+
+
     url="opc.tcp://192.168.197.91:4840/freeopcua/server/"
     # Create a client instance
     async with Client(url) as client:
         print("Connected to the server")
-        
         # Get the root node
         root = client.nodes.root
         #print("Root node is: ", root)
@@ -21,26 +46,18 @@ async def retrieve_data():
         #print("Objects node is: ", objects)
         
         # Browse for a specific object/node
-        myobj = await objects.get_child(["2:MyObject"])
+        myobj = await objects.get_child(["2:UPSSet"])
         print("MyObject node is: ", myobj)
-        
-        # Get a variable node
-        myvar_date = await myobj.get_child(["2:DateVar"])
-        print("MyVariable node is: ", myvar_date)
-        
-        # Read the value of the variable
-        date = await myvar_date.read_value()
-
-        # Get a variable node
-        myvar_bat_time = await myobj.get_child(["2:BatTime"])
-        print("MyVariable node is: ", myvar_bat_time)
-        
-        # Read the value of the variable
-        bat_time = await myvar_bat_time.read_value()
 
 
-        print("Current date is: ", date)
-        print("Remaining battery time: ", bat_time)
+        print("Current date is: ", await get_variable(
+            myobj,
+            "DateVar"
+        ))
+        print("Remaining battery time: ", await get_variable(
+            myobj,
+            "BatTime"
+        ))
         
     
 
