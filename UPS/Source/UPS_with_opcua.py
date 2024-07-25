@@ -4,7 +4,10 @@ import datetime
 import subprocess
 import asyncio 
 from asyncua import Server, ua 
+from UPS_library import UPS
 import socket 
+
+
 
 async def main():
     '''
@@ -13,10 +16,11 @@ async def main():
     that stores the date and time after every second
     '''
 
+    # UPS to monitor
+    ups = UPS("192.168.197.92")
 
     # Create server instance
     server = Server() 
-
     # Set server endpoint
     await server.init()
     server.set_endpoint("opc.tcp://0.0.0.0:4840/freeopcua/server/")
@@ -31,11 +35,14 @@ async def main():
     # Add a new object to the server
     myobj = await objects.add_object(idx, "MyObject")
     
-    # Add a variable to the new object
-    myvar = await myobj.add_variable(idx, "MyVariable", 0, ua.String)
-    
+    # Add a variables to store UPS data
+    date_var = await myobj.add_variable(idx, "DateVar", 0, ua.String)
+    # Testing with string for now...
+    battery_time = await myobj.add_variable(idx,"BatTime",0,ua.String)
+
     # Make the variable writable by clients
-    await myvar.set_writable()
+    await date_var.set_writable()
+    await battery_time.set_writable()
     
     # Start the server
     await server.start()
@@ -47,9 +54,12 @@ async def main():
             time_now = datetime.datetime.now()
             # Format the date as a string
             date_string = time_now.strftime("%Y-%m-%d-%H-%M-%S")
-            await myvar.write_value(date_string)
-            print(f"Set variable value to {date_string}")
-            await asyncio.sleep(1)  # Sleep for 1 second
+            await date_var.write_value(date_string)
+            #print(f"Set variable value to {date_string}")
+            await battery_time.write_value(
+                ups.get_battery_time()
+            )
+            await asyncio.sleep(10)  # Sleep for 1 second
     except Exception as e:
         print(f"An error occurred: {e}")
     finally:
