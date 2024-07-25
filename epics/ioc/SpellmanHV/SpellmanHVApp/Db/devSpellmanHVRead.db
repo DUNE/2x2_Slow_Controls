@@ -38,7 +38,7 @@ record(ai, "spellmanhv/rI"){
   field(DESC, "Read back current")
   field(DTYP, "stream")
   field(INP, "@devSpellmanHV.proto get_read_i $(PORT) $(BUS)")
-  field(EGU, "kV")
+  field(EGU, "mA")
   field(SCAN, "2 second")
   field(LINR,"SLOPE")
   field(PREC, "2")
