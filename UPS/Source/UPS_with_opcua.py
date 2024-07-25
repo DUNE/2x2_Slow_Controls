@@ -57,7 +57,7 @@ async def main():
             await date_var.write_value(date_string)
             #print(f"Set variable value to {date_string}")
             await battery_time.write_value(
-                ups.get_battery_time()
+                ups.get_battery_time()['value']
             )
             await asyncio.sleep(10)  # Sleep for 1 second
     except Exception as e:
