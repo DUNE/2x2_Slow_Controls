@@ -71,8 +71,9 @@ class UPS(UNIT):
 
 
 
-ups_a = UPS()
-ups_a.CONTINUOUS_monitoring()
+if __name__ == "__main__":
+    ups_a = UPS()
+    ups_a.CONTINUOUS_monitoring()
 
 
 
