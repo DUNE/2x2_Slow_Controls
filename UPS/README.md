@@ -1,7 +1,7 @@
 # UPS 
 
-This directory containts scrips to setup an OPCUA server
-to monitor the status of the Uninterrumpted Power Supply (UPS)
+This directory containts scripts to setup an OPC UA server
+to monitor the status of the Uninterrumptible Power Supply (UPS)
 unit connected to module two. 
 
 ## Linux dependencies
@@ -28,7 +28,7 @@ source setup.sh
 python ${TOP_DIR}/Source/UPS_with_opcua.py
 ```
 
-## Monitroing
+## Monitoring
 ```bash
 python ${TOP_DIR}/Source/retrieve_server_data.py
 ```
