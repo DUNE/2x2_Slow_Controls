@@ -29,7 +29,7 @@ async def main():
     server = Server() 
     # Set server endpoint
     await server.init()
-    server.set_endpoint(f"opc.tcp://0.0.0.0:{PORT}freeopcua/server/")
+    server.set_endpoint(f"opc.tcp://0.0.0.0:{PORT}/freeopcua/server/")
     
     # Setup server namespaces
     uri = "http://examples.freeopcua.github.io"
