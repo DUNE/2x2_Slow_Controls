@@ -7,8 +7,6 @@ from asyncua import Server, ua
 from UPS_library import UPS
 import socket 
 
-
-
 async def main():
     '''
     This is just an example for now...
@@ -37,13 +35,20 @@ async def main():
     
     # Add a variables to store UPS data
     date_var = await myobj.add_variable(idx, "DateVar", 0, ua.String)
-    # Testing with string for now...
     battery_time = await myobj.add_variable(idx,"BatTime",0,ua.String)
+    battery_fail = await myobj.add_variable(idx,"BatFail",0,ua.String)
+    battery_cap = await myobj.add_variable(idx,"BatCap",0,ua.String)
+    battery_v = await myobj.add_variable(idx,"BatV",0,ua.String)
+    battery_age = await myobj.add_variable(idx,"BatAge",0,ua.String)
 
     # Make the variable writable by clients
     await date_var.set_writable()
     await battery_time.set_writable()
-    
+    await battery_fail.set_writable()
+    await battery_cap.set_writable()
+    await battery_v.set_writable()
+    await battery_age.set_writable()
+
     # Start the server
     await server.start()
     print("OPC UA Server is running...")
@@ -59,7 +64,20 @@ async def main():
             await battery_time.write_value(
                 ups.get_battery_time()['value']
             )
-            await asyncio.sleep(10)  # Sleep for 1 second
+
+            await battery_fail.write_value(
+                ups.get_battery_fail()['value']
+            )
+            await battery_cap.write_value(
+                ups.get_battery_cap()['value']
+            )
+            await battery_v.write_value(
+                ups.get_battery_voltage()['value']
+            )
+            await battery_age.write_value(
+                ups.get_battery_age()['value']
+            )
+            await asyncio.sleep(10)  # Sleep for 10 seconds
     except Exception as e:
         print(f"An error occurred: {e}")
     finally:

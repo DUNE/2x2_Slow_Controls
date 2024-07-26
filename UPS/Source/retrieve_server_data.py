@@ -3,18 +3,25 @@ from asyncua import Client
 
 
 async def get_variable(obj,var_name):
-    '''
-    Function to retrieve a variable
+    '''Function to retrieve a variable
     from a node object 
 
     Parameters:
+    ----------
 
-    obj: asyncua object
-    var_name: name of the variable
+    obj: asyncua node object
+         Object containing the variables
+
+    var_name: string
+         Name of the variable that 
+         will be retrieved from the server
 
     Returns:
+    --------
 
-    var_val: value contained in the variable
+    var_val: string
+            Current value of
+            the variable 
     '''
     # Get a variable node
     myvar = await obj.get_child([f"2:{var_name}"])
@@ -47,16 +54,31 @@ async def retrieve_data():
         
         # Browse for a specific object/node
         myobj = await objects.get_child(["2:UPSSet"])
+
         print("MyObject node is: ", myobj)
-
-
         print("Current date is: ", await get_variable(
             myobj,
             "DateVar"
         ))
+        print("Battery Failing? ", await get_variable(
+            myobj,
+            "BatFail"
+        ))
         print("Remaining battery time: ", await get_variable(
             myobj,
             "BatTime"
+        ))
+        print("Battery capacity: ", await get_variable(
+            myobj,
+            "BatCap"
+        ))
+        print("Battery voltage: ", await get_variable(
+            myobj,
+            "BatV"
+        ))
+        print("Battery age: ", await get_variable(
+            myobj,
+            "BatAge"
         ))
         
     
