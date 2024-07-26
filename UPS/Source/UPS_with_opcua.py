@@ -6,14 +6,20 @@ import asyncio
 from asyncua import Server, ua 
 from UPS_library import UPS
 import socket 
+import os 
 
 async def main():
-    '''
-    This is just an example for now...
-    It creates a server with a variable
-    that stores the date and time after every second
-    '''
 
+    ''' This script starts a OPCUA server.
+    The server queries the UPS using snmp
+    and stores the values obtained into
+    variables. The variables can be accessed 
+    by other devices connected to the same
+    network
+    '''
+    top_dir = os.getenv('TOP_DIR')
+    cfg=+"/config/UPS.cfg"
+    print(top_dir)
     # UPS to monitor
     ups = UPS("192.168.197.92")
 
