@@ -75,7 +75,7 @@ async def main():
                 ups.get_battery_voltage()['value']
             )
             await battery_age.write_value(
-                ups.get_battery_age()['value']
+                ups.get_battery_age()['symbolic_name']
             )
             await asyncio.sleep(10)  # Sleep for 10 seconds
     except Exception as e:

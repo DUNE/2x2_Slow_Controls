@@ -57,6 +57,11 @@ class UPS(UNIT):
 
 if __name__ == "__main__":
     ups_a = UPS("192.168.197.92")
+    print(ups_a.get_battery_fail())
+    print(ups_a.get_battery_cap())
+    print(ups_a.get_battery_age())
+    print(ups_a.get_battery_voltage())
+    print(ups_a.get_battery_time())
 
 
 
