@@ -66,7 +66,7 @@ async def main():
             )
 
             await battery_fail.write_value(
-                ups.get_battery_fail()['value']
+                ups.get_battery_fail()['symbolic_name']
             )
             await battery_cap.write_value(
                 ups.get_battery_cap()['value']

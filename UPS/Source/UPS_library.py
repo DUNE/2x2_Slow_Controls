@@ -35,7 +35,7 @@ class UPS(UNIT):
     
     def get_battery_cap(self):
         ups_stat_var = "xupsBatCapacity.0"
-        command = f"snmpget -v 3 -M {self.mib_dir} -M +$HOME/mibs-m ALL -u readonly -c public {self.device_address} {ups_stat_var}" 
+        command = f"snmpget -v 3 -M {self.mib_dir} -M +$HOME/mibs -m ALL -u readonly -c public {self.device_address} {ups_stat_var}" 
         output_command = self.execute_command(command)
         temp_val = self.parse_snmpget_output(output_command)
         return temp_val['Value']
