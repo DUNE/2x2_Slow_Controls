@@ -5,6 +5,7 @@ import subprocess
 import asyncio 
 from asyncua import Server, ua 
 from UPS_library import UPS
+from utils import parse_config
 import socket 
 import os 
 
@@ -17,17 +18,18 @@ async def main():
     by other devices connected to the same
     network
     '''
-    top_dir = os.getenv('TOP_DIR')
-    cfg=+"/config/UPS.cfg"
-    print(top_dir)
+    cfg = os.getenv('TOP_DIR') +"/config/UPS.cfg"
+    input_par = parse_config(cfg)
+    IP = input_par['ups_ip']
+    PORT = input_par['port']
     # UPS to monitor
-    ups = UPS("192.168.197.92")
+    ups = UPS(IP)
 
     # Create server instance
     server = Server() 
     # Set server endpoint
     await server.init()
-    server.set_endpoint("opc.tcp://0.0.0.0:4840/freeopcua/server/")
+    server.set_endpoint(f"opc.tcp://0.0.0.0:{PORT}freeopcua/server/")
     
     # Setup server namespaces
     uri = "http://examples.freeopcua.github.io"

@@ -1,4 +1,4 @@
-# UPS 
+# UPS Monitoring
 
 This directory containts scripts to setup an OPC UA server
 to monitor the status of the Uninterrumptible Power Supply (UPS)
