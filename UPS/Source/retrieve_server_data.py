@@ -1,5 +1,7 @@
 import asyncio
 from asyncua import Client
+from utils import parse_config
+import os
 
 
 async def get_variable(obj,var_name):
@@ -30,32 +32,26 @@ async def get_variable(obj,var_name):
     return var_val 
 
 
-
 async def retrieve_data():
     '''
     Function used to
     retrieve data from an OPC
     sever using asyncua
     '''
-
-
-
-    url="opc.tcp://192.168.197.91:4840/freeopcua/server/"
+    cfg = os.getenv('TOP_DIR') +"/config/UPS.cfg"
+    input_par = parse_config(cfg)
+    IP = input_par['raspi_ip']
+    PORT = input_par['port']
+    url=f"opc.tcp://{IP}:{PORT}/freeopcua/server/"
     # Create a client instance
     async with Client(url) as client:
         print("Connected to the server")
         # Get the root node
         root = client.nodes.root
-        #print("Root node is: ", root)
-        
         # Browse the root node
         objects = await root.get_child(["0:Objects"])
-        #print("Objects node is: ", objects)
-        
         # Browse for a specific object/node
         myobj = await objects.get_child(["2:UPSSet"])
-
-        print("MyObject node is: ", myobj)
         print("Current date is: ", await get_variable(
             myobj,
             "DateVar"
