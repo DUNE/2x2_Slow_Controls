@@ -5,4 +5,5 @@ fastapi==0.83
 pysnmp==4.4.12
 numpy
 paramiko
+cryptography
 email-validator
