@@ -8,6 +8,7 @@ from UPS_library import UPS
 from utils import parse_config
 import socket 
 import os 
+from pytz import timezone 
 
 async def main():
 
@@ -43,11 +44,22 @@ async def main():
     
     # Add a variables to store UPS data
     date_var = await myobj.add_variable(idx, "DateVar", 0, ua.String)
+
+    # Battery variables 
     battery_time = await myobj.add_variable(idx,"BatTime",0,ua.String)
     battery_fail = await myobj.add_variable(idx,"BatFail",0,ua.String)
     battery_cap = await myobj.add_variable(idx,"BatCap",0,ua.String)
     battery_v = await myobj.add_variable(idx,"BatV",0,ua.String)
     battery_age = await myobj.add_variable(idx,"BatAge",0,ua.String)
+
+    # Input variables
+    input_voltage = await myobj.add_variable(idx,"InV",0,ua.String)
+    input_current = await myobj.add_variable(idx,"InC",0,ua.String)
+
+    # Output variables
+    output_voltage = await myobj.add_variable(idx,"OutV",0,ua.String) 
+    output_current = await myobj.add_variable(idx,"OutC",0,ua.String)
+    output_power = await myobj.add_variable(idx,"OutP",0,ua.String)
 
     # Make the variable writable by clients
     await date_var.set_writable()
@@ -56,6 +68,11 @@ async def main():
     await battery_cap.set_writable()
     await battery_v.set_writable()
     await battery_age.set_writable()
+    await input_voltage.set_writable()
+    await input_current.set_writable()
+    await output_voltage.set_writable()
+    await output_current.set_writable()
+    await output_power.set_writable()
 
     # Start the server
     await server.start()
@@ -64,11 +81,14 @@ async def main():
     try:
         # Update the variable in a loop
         while True:
-            time_now = datetime.datetime.now()
             # Format the date as a string
+            chicago_time = timezone("America/Chicago")
+            time_now = datetime.datetime.now(chicago_time)
             date_string = time_now.strftime("%Y-%m-%d-%H-%M-%S")
             await date_var.write_value(date_string)
             #print(f"Set variable value to {date_string}")
+
+            # Write variables 
             await battery_time.write_value(
                 ups.get_battery_time()['value']
             )
@@ -85,7 +105,28 @@ async def main():
             await battery_age.write_value(
                 ups.get_battery_age()['symbolic_name']
             )
-            await asyncio.sleep(10)  # Sleep for 10 seconds
+
+            await input_voltage.write_value(
+                ups.get_input_voltage()['value']
+            )
+            
+            await input_current.write_value(
+                ups.get_input_current(['value'])
+            )
+
+            await output_voltage.write_value(
+                ups.get_output_voltage(['value'])
+            )
+
+            await output_current.write_value(
+                ups.get_output_current(['value'])
+            )
+
+            await output_power.write_value(
+                ups.get_output_power(['value'])
+            )
+
+            await asyncio.sleep(5)  # Sleep for 10 seconds
     except Exception as e:
         print(f"An error occurred: {e}")
     finally:
