@@ -1,5 +1,5 @@
 
-EPICS_BASE = /home/acd/sungbino/epics/base-7.0.8
+EPICS_BASE = /home/acd/acdcs/2x2/EPICS/epics/base-7.0.8.1
 
 TEMPLATE_TOP = $(EPICS_BASE)/templates/makeBaseApp/top
 

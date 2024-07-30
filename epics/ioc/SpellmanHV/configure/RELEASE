@@ -29,10 +29,10 @@
 #SNCSEQ = $(MODULES)/seq-ver
 
 # EPICS_BASE should appear last so earlier modules can override stuff:
-EPICS_BASE = /home/acd/sungbino/epics/base-7.0.8
-ASYN = /home/acd/sungbino/epics/asyn-R4-43
-STREAM = /home/acd/sungbino/epics/StreamDevice
-CALC = /home/acd/sungbino/epics/calc
+EPICS_BASE = /home/acd/acdcs/2x2/EPICS/epics/base-7.0.8.1
+ASYN = /home/acd/acdcs/2x2/EPICS/epics/asyn-R4-43
+STREAM = /home/acd/acdcs/2x2/EPICS/epics/StreamDevice
+CALC = /home/acd/acdcs/2x2/EPICS/epics/calc
 
 # Set RULES here if you want to use build rules from somewhere
 # other than EPICS_BASE:
