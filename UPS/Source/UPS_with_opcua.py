@@ -111,19 +111,19 @@ async def main():
             )
             
             await input_current.write_value(
-                ups.get_input_current(['value'])
+                ups.get_input_current()['value']
             )
 
             await output_voltage.write_value(
-                ups.get_output_voltage(['value'])
+                ups.get_output_voltage()['value']
             )
 
             await output_current.write_value(
-                ups.get_output_current(['value'])
+                ups.get_output_current()['value']
             )
 
             await output_power.write_value(
-                ups.get_output_power(['value'])
+                ups.get_output_power()['value']
             )
 
             await asyncio.sleep(5)  # Sleep for 10 seconds

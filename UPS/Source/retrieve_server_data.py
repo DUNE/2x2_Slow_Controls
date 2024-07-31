@@ -56,6 +56,8 @@ async def retrieve_data():
             myobj,
             "DateVar"
         ))
+
+        # Battery 
         print("Battery Failing? ", await get_variable(
             myobj,
             "BatFail"
@@ -76,8 +78,40 @@ async def retrieve_data():
             myobj,
             "BatAge"
         ))
-        
-    
+
+        # Input
+
+        print("Input voltage: ", await get_variable(
+            myobj,
+            "InV"
+        ))
+
+
+        print("Input current: ", await get_variable(
+            myobj,
+            "InC"
+        ))
+
+        # Output
+        print("Output voltage", await get_variable(
+            myobj,
+            "OutV"
+        ))
+
+
+        print("Output current", await get_variable(
+            myobj,
+            "OutC"
+        ))
+
+
+
+        print("Output power", await get_variable(
+            myobj,
+            "OutP"
+        ))   
+
+
 
 # Run the client script
 if __name__ == "__main__":
