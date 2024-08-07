@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<engineconfig>
+  <group>
+    <name>SpellmanHV</name>
+      <channel><name>spellmanhv/rI</name><period>0.2</period><monitor/></channel>
+      <channel><name>spellmanhv/rV</name><period>0.2</period><monitor/></channel>
+  </group>
+</engineconfig>
