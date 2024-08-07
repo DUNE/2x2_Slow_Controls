@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2024-04-26 13:40:19 by sungbino-->
+<!--Saved on 2024-07-29 14:13:18 by sungbino-->
 <display version="2.0.0">
   <name>VGA_Mod0_Mod1</name>
   <width>1450</width>
@@ -10,7 +10,7 @@
   <grid_step_y>6</grid_step_y>
   <widget type="label" version="2.0.0">
     <name>Label_10</name>
-    <text>MPOD1 / Slot0 : VGA for Module 0 and 1</text>
+    <text>MPOD0 / Slot0 : VGA for Module 0 and 1</text>
     <width>1450</width>
     <height>40</height>
     <font>
