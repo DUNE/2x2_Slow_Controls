@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2024-07-29 14:13:18 by sungbino-->
+<!--Saved on 2024-09-16 15:31:24 by sungbino-->
 <display version="2.0.0">
-  <name>VGA_Mod2_Mod3</name>
+  <name>PACFAN_Mod0_Mod1</name>
   <width>1450</width>
   <height>700</height>
   <actions>
@@ -10,7 +10,7 @@
   <grid_step_y>6</grid_step_y>
   <widget type="label" version="2.0.0">
     <name>Label_10</name>
-    <text>MPOD1 / Slot0 : VGA for Module 2 and 3</text>
+    <text>MPOD0 / Slot2 : PACFAN for Module 0 and 1</text>
     <width>1450</width>
     <height>40</height>
     <font>
@@ -135,7 +135,7 @@
     </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update_33</name>
-      <pv_name>Mod2-VGA_Card_1/outputStatus</pv_name>
+      <pv_name>Mod0-TPC1_pacFAN/outputStatus</pv_name>
       <x>250</x>
       <y>50</y>
       <width>190</width>
@@ -155,7 +155,7 @@
     </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update_38</name>
-      <pv_name>Mod2-VGA_Card_2/outputStatus</pv_name>
+      <pv_name>Mod0-TPC2_pacFAN/outputStatus</pv_name>
       <x>250</x>
       <y>90</y>
       <width>190</width>
@@ -175,7 +175,7 @@
     </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update_42</name>
-      <pv_name>Mod2-VGA_Card_3/outputStatus</pv_name>
+      <pv_name>Mod0-Interlock/outputStatus</pv_name>
       <x>250</x>
       <y>130</y>
       <width>190</width>
@@ -195,7 +195,7 @@
     </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update_46</name>
-      <pv_name>Mod2-VGA_Card_4/outputStatus</pv_name>
+      <pv_name>Mod0-pac_res3/outputStatus</pv_name>
       <x>250</x>
       <y>170</y>
       <width>190</width>
@@ -257,7 +257,7 @@
     </widget>
     <widget type="label" version="2.0.0">
       <name>Label_106</name>
-      <text>Mod2-VGA_Card_1</text>
+      <text>Mod0-TPC1_pacFAN</text>
       <x>100</x>
       <y>50</y>
       <width>130</width>
@@ -274,7 +274,7 @@
     </widget>
     <widget type="label" version="2.0.0">
       <name>Label_107</name>
-      <text>Mod2-VGA_Card_2</text>
+      <text>Mod0-TPC2_pacFAN</text>
       <x>100</x>
       <y>90</y>
       <width>130</width>
@@ -291,7 +291,7 @@
     </widget>
     <widget type="label" version="2.0.0">
       <name>Label_108</name>
-      <text>Mod2-VGA_Card_3</text>
+      <text>Mod0-Interlock</text>
       <x>100</x>
       <y>130</y>
       <width>130</width>
@@ -308,7 +308,7 @@
     </widget>
     <widget type="label" version="2.0.0">
       <name>Label_109</name>
-      <text>Mod2-VGA_Card_4</text>
+      <text>Not connected</text>
       <x>100</x>
       <y>170</y>
       <width>130</width>
@@ -346,7 +346,7 @@
     </widget>
     <widget type="bool_button" version="2.0.0">
       <name>Boolean Button</name>
-      <pv_name>Mod2-VGA_Card_1/outputSwitch</pv_name>
+      <pv_name>Mod0-TPC1_pacFAN/outputSwitch</pv_name>
       <bit>-1</bit>
       <x>470</x>
       <y>50</y>
@@ -371,7 +371,7 @@
     </widget>
     <widget type="bool_button" version="2.0.0">
       <name>Boolean Button_2</name>
-      <pv_name>Mod2-VGA_Card_2/outputSwitch</pv_name>
+      <pv_name>Mod0-TPC2_pacFAN/outputSwitch</pv_name>
       <bit>-1</bit>
       <x>470</x>
       <y>90</y>
@@ -396,7 +396,7 @@
     </widget>
     <widget type="bool_button" version="2.0.0">
       <name>Boolean Button_3</name>
-      <pv_name>Mod2-VGA_Card_3/outputSwitch</pv_name>
+      <pv_name>Mod0-Interlock/outputSwitch</pv_name>
       <bit>-1</bit>
       <x>470</x>
       <y>130</y>
@@ -421,7 +421,7 @@
     </widget>
     <widget type="bool_button" version="2.0.0">
       <name>Boolean Button_4</name>
-      <pv_name>Mod2-VGA_Card_4/outputSwitch</pv_name>
+      <pv_name>Mod0-pac_res3/outputSwitch</pv_name>
       <bit>-1</bit>
       <x>470</x>
       <y>170</y>
@@ -467,7 +467,7 @@
     </widget>
     <widget type="textentry" version="3.0.0">
       <name>Text Input_18</name>
-      <pv_name>Mod2-VGA_Card_1/outputVoltage</pv_name>
+      <pv_name>Mod0-TPC1_pacFAN/outputVoltage</pv_name>
       <x>550</x>
       <y>50</y>
       <width>90</width>
@@ -486,7 +486,7 @@
     </widget>
     <widget type="textentry" version="3.0.0">
       <name>Text Input_303</name>
-      <pv_name>Mod2-VGA_Card_2/outputVoltage</pv_name>
+      <pv_name>Mod0-TPC2_pacFAN/outputVoltage</pv_name>
       <x>550</x>
       <y>90</y>
       <width>90</width>
@@ -505,7 +505,7 @@
     </widget>
     <widget type="textentry" version="3.0.0">
       <name>Text Input_307</name>
-      <pv_name>Mod2-VGA_Card_3/outputVoltage</pv_name>
+      <pv_name>Mod0-Interlock/outputVoltage</pv_name>
       <x>550</x>
       <y>130</y>
       <width>91</width>
@@ -524,7 +524,7 @@
     </widget>
     <widget type="textentry" version="3.0.0">
       <name>Text Input_311</name>
-      <pv_name>Mod2-VGA_Card_4/outputVoltage</pv_name>
+      <pv_name>Mod0-pac_res3/outputVoltage</pv_name>
       <x>550</x>
       <y>170</y>
       <width>91</width>
@@ -564,7 +564,7 @@
     </widget>
     <widget type="textentry" version="3.0.0">
       <name>Text Input_301</name>
-      <pv_name>Mod2-VGA_Card_1/outputCurrent</pv_name>
+      <pv_name>Mod0-TPC1_pacFAN/outputCurrent</pv_name>
       <x>665</x>
       <y>50</y>
       <width>90</width>
@@ -587,7 +587,7 @@
     </widget>
     <widget type="textentry" version="3.0.0">
       <name>Text Input_306</name>
-      <pv_name>Mod2-VGA_Card_2/outputCurrent</pv_name>
+      <pv_name>Mod0-TPC2_pacFAN/outputCurrent</pv_name>
       <x>665</x>
       <y>90</y>
       <width>90</width>
@@ -610,7 +610,7 @@
     </widget>
     <widget type="textentry" version="3.0.0">
       <name>Text Input_310</name>
-      <pv_name>Mod2-VGA_Card_3/outputCurrent</pv_name>
+      <pv_name>Mod0-Interlock/outputCurrent</pv_name>
       <x>665</x>
       <y>130</y>
       <width>90</width>
@@ -633,7 +633,7 @@
     </widget>
     <widget type="textentry" version="3.0.0">
       <name>Text Input_314</name>
-      <pv_name>Mod2-VGA_Card_4/outputCurrent</pv_name>
+      <pv_name>Mod0-pac_res3/outputCurrent</pv_name>
       <x>665</x>
       <y>170</y>
       <width>90</width>
@@ -677,7 +677,7 @@
     </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update</name>
-      <pv_name>Mod2-VGA_Card_1/outputMeasurementSenseVoltage</pv_name>
+      <pv_name>Mod0-TPC1_pacFAN/outputMeasurementSenseVoltage</pv_name>
       <x>780</x>
       <y>50</y>
       <width>80</width>
@@ -697,7 +697,7 @@
     </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update_35</name>
-      <pv_name>Mod2-VGA_Card_2/outputMeasurementSenseVoltage</pv_name>
+      <pv_name>Mod0-TPC2_pacFAN/outputMeasurementSenseVoltage</pv_name>
       <x>780</x>
       <y>90</y>
       <width>80</width>
@@ -717,7 +717,7 @@
     </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update_39</name>
-      <pv_name>Mod2-VGA_Card_3/outputMeasurementSenseVoltage</pv_name>
+      <pv_name>Mod0-Interlock/outputMeasurementSenseVoltage</pv_name>
       <x>780</x>
       <y>130</y>
       <width>80</width>
@@ -737,7 +737,7 @@
     </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update_43</name>
-      <pv_name>Mod2-VGA_Card_4/outputMeasurementSenseVoltage</pv_name>
+      <pv_name>Mod0-pac_res3/outputMeasurementSenseVoltage</pv_name>
       <x>780</x>
       <y>170</y>
       <width>80</width>
@@ -778,7 +778,7 @@
     </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update_1</name>
-      <pv_name>Mod2-VGA_Card_1/outputMeasurementTerminalVoltage</pv_name>
+      <pv_name>Mod0-TPC1_pacFAN/outputMeasurementTerminalVoltage</pv_name>
       <x>890</x>
       <y>50</y>
       <width>80</width>
@@ -798,7 +798,7 @@
     </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update_36</name>
-      <pv_name>Mod2-VGA_Card_2/outputMeasurementTerminalVoltage</pv_name>
+      <pv_name>Mod0-TPC2_pacFAN/outputMeasurementTerminalVoltage</pv_name>
       <x>890</x>
       <y>90</y>
       <width>80</width>
@@ -818,7 +818,7 @@
     </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update_40</name>
-      <pv_name>Mod2-VGA_Card_3/outputMeasurementTerminalVoltage</pv_name>
+      <pv_name>Mod0-Interlock/outputMeasurementTerminalVoltage</pv_name>
       <x>890</x>
       <y>130</y>
       <width>80</width>
@@ -838,7 +838,7 @@
     </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update_44</name>
-      <pv_name>Mod2-VGA_Card_4/outputMeasurementTerminalVoltage</pv_name>
+      <pv_name>Mod0-pac_res3/outputMeasurementTerminalVoltage</pv_name>
       <x>890</x>
       <y>170</y>
       <width>80</width>
@@ -879,7 +879,7 @@
     </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update_2</name>
-      <pv_name>Mod2-VGA_Card_1/outputMeasurementCurrent</pv_name>
+      <pv_name>Mod0-TPC1_pacFAN/outputMeasurementCurrent</pv_name>
       <x>1000</x>
       <y>50</y>
       <width>80</width>
@@ -903,7 +903,7 @@
     </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update_37</name>
-      <pv_name>Mod2-VGA_Card_2/outputMeasurementCurrent</pv_name>
+      <pv_name>Mod0-TPC2_pacFAN/outputMeasurementCurrent</pv_name>
       <x>1000</x>
       <y>90</y>
       <width>80</width>
@@ -928,7 +928,7 @@
     </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update_41</name>
-      <pv_name>Mod2-VGA_Card_3/outputMeasurementCurrent</pv_name>
+      <pv_name>Mod0-Interlock/outputMeasurementCurrent</pv_name>
       <x>1000</x>
       <y>130</y>
       <width>80</width>
@@ -952,7 +952,7 @@
     </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update_45</name>
-      <pv_name>Mod2-VGA_Card_4/outputMeasurementCurrent</pv_name>
+      <pv_name>Mod0-pac_res3/outputMeasurementCurrent</pv_name>
       <x>1000</x>
       <y>170</y>
       <width>80</width>
@@ -997,7 +997,7 @@
     </widget>
     <widget type="textentry" version="3.0.0">
       <name>Text Input_244</name>
-      <pv_name>Mod2-VGA_Card_1/outputTripTimeMaxCurrent</pv_name>
+      <pv_name>Mod0-TPC1_pacFAN/outputTripTimeMaxCurrent</pv_name>
       <x>1110</x>
       <y>50</y>
       <width>90</width>
@@ -1016,7 +1016,7 @@
     </widget>
     <widget type="textentry" version="3.0.0">
       <name>Text Input_304</name>
-      <pv_name>Mod2-VGA_Card_2/outputTripTimeMaxCurrent</pv_name>
+      <pv_name>Mod0-TPC2_pacFAN/outputTripTimeMaxCurrent</pv_name>
       <x>1110</x>
       <y>90</y>
       <width>90</width>
@@ -1035,7 +1035,7 @@
     </widget>
     <widget type="textentry" version="3.0.0">
       <name>Text Input_308</name>
-      <pv_name>Mod2-VGA_Card_3/outputTripTimeMaxCurrent</pv_name>
+      <pv_name>Mod0-Interlock/outputTripTimeMaxCurrent</pv_name>
       <x>1110</x>
       <y>130</y>
       <width>90</width>
@@ -1054,7 +1054,7 @@
     </widget>
     <widget type="textentry" version="3.0.0">
       <name>Text Input_312</name>
-      <pv_name>Mod2-VGA_Card_4/outputTripTimeMaxCurrent</pv_name>
+      <pv_name>Mod0-pac_res3/outputTripTimeMaxCurrent</pv_name>
       <x>1110</x>
       <y>170</y>
       <width>90</width>
@@ -1094,7 +1094,7 @@
     </widget>
     <widget type="textentry" version="3.0.0">
       <name>Text Input_261</name>
-      <pv_name>Mod2-VGA_Card_1/outputSupervisionBehavior</pv_name>
+      <pv_name>Mod0-TPC1_pacFAN/outputSupervisionBehavior</pv_name>
       <x>1230</x>
       <y>50</y>
       <width>90</width>
@@ -1114,7 +1114,7 @@
     </widget>
     <widget type="textentry" version="3.0.0">
       <name>Text Input_305</name>
-      <pv_name>Mod2-VGA_Card_2/outputSupervisionBehavior</pv_name>
+      <pv_name>Mod0-TPC2_pacFAN/outputSupervisionBehavior</pv_name>
       <x>1230</x>
       <y>90</y>
       <width>90</width>
@@ -1134,7 +1134,7 @@
     </widget>
     <widget type="textentry" version="3.0.0">
       <name>Text Input_309</name>
-      <pv_name>Mod2-VGA_Card_3/outputSupervisionBehavior</pv_name>
+      <pv_name>Mod0-Interlock/outputSupervisionBehavior</pv_name>
       <x>1230</x>
       <y>130</y>
       <width>90</width>
@@ -1154,7 +1154,7 @@
     </widget>
     <widget type="textentry" version="3.0.0">
       <name>Text Input_313</name>
-      <pv_name>Mod2-VGA_Card_4/outputSupervisionBehavior</pv_name>
+      <pv_name>Mod0-pac_res3/outputSupervisionBehavior</pv_name>
       <x>1230</x>
       <y>170</y>
       <width>90</width>
@@ -1176,7 +1176,7 @@
       <name>Action Button</name>
       <actions>
         <action type="write_pv">
-          <pv_name>Mod2-VGA_Card_1/outputSwitch</pv_name>
+          <pv_name>Mod0-TPC1_pacFAN/outputSwitch</pv_name>
           <value>10</value>
           <description>Reset</description>
         </action>
@@ -1193,7 +1193,7 @@
       <name>Action Button_1</name>
       <actions>
         <action type="write_pv">
-          <pv_name>Mod2-VGA_Card_2/outputSwitch</pv_name>
+          <pv_name>Mod0-TPC2_pacFAN/outputSwitch</pv_name>
           <value>10</value>
           <description>Reset</description>
         </action>
@@ -1210,7 +1210,7 @@
       <name>Action Button_2</name>
       <actions>
         <action type="write_pv">
-          <pv_name>Mod2-VGA_Card_3/outputSwitch</pv_name>
+          <pv_name>Mod0-Interlock/outputSwitch</pv_name>
           <value>10</value>
           <description>Reset</description>
         </action>
@@ -1227,7 +1227,7 @@
       <name>Action Button_3</name>
       <actions>
         <action type="write_pv">
-          <pv_name>Mod2-VGA_Card_4/outputSwitch</pv_name>
+          <pv_name>Mod0-pac_res3/outputSwitch</pv_name>
           <value>10</value>
           <description>Reset</description>
         </action>
@@ -1342,7 +1342,7 @@
     </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update_34</name>
-      <pv_name>Mod3-VGA_Card_1/outputStatus</pv_name>
+      <pv_name>Mod1-TPC1_pacFAN/outputStatus</pv_name>
       <x>250</x>
       <y>50</y>
       <width>190</width>
@@ -1362,7 +1362,7 @@
     </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update_68</name>
-      <pv_name>Mod3-VGA_Card_2/outputStatus</pv_name>
+      <pv_name>Mod1-TPC2_pacFAN/outputStatus</pv_name>
       <x>250</x>
       <y>90</y>
       <width>190</width>
@@ -1382,7 +1382,7 @@
     </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update_69</name>
-      <pv_name>Mod3-VGA_Card_3/outputStatus</pv_name>
+      <pv_name>Mod1-Interlock/outputStatus</pv_name>
       <x>250</x>
       <y>130</y>
       <width>190</width>
@@ -1402,7 +1402,7 @@
     </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update_70</name>
-      <pv_name>Mod3-VGA_Card_4/outputStatus</pv_name>
+      <pv_name>Mod1-pac_res3/outputStatus</pv_name>
       <x>250</x>
       <y>170</y>
       <width>190</width>
@@ -1464,7 +1464,7 @@
     </widget>
     <widget type="label" version="2.0.0">
       <name>Label_117</name>
-      <text>Mod3-VGA_Card_1</text>
+      <text>Mod1-TPC1_pacFAN</text>
       <x>100</x>
       <y>50</y>
       <width>130</width>
@@ -1481,7 +1481,7 @@
     </widget>
     <widget type="label" version="2.0.0">
       <name>Label_118</name>
-      <text>Mod3-VGA_Card_2</text>
+      <text>Mod1-TPC2_pacFAN</text>
       <x>100</x>
       <y>90</y>
       <width>130</width>
@@ -1498,7 +1498,7 @@
     </widget>
     <widget type="label" version="2.0.0">
       <name>Label_119</name>
-      <text>Mod3-VGA_Card_3</text>
+      <text>Mod1-Interlock</text>
       <x>100</x>
       <y>130</y>
       <width>130</width>
@@ -1515,7 +1515,7 @@
     </widget>
     <widget type="label" version="2.0.0">
       <name>Label_120</name>
-      <text>Mod3-VGA_Card_4</text>
+      <text>Not connected</text>
       <x>100</x>
       <y>170</y>
       <width>130</width>
@@ -1553,7 +1553,7 @@
     </widget>
     <widget type="bool_button" version="2.0.0">
       <name>Boolean Button_32</name>
-      <pv_name>Mod3-VGA_Card_1/outputSwitch</pv_name>
+      <pv_name>Mod1-TPC1_pacFAN/outputSwitch</pv_name>
       <bit>-1</bit>
       <x>470</x>
       <y>50</y>
@@ -1578,7 +1578,7 @@
     </widget>
     <widget type="bool_button" version="2.0.0">
       <name>Boolean Button_33</name>
-      <pv_name>Mod3-VGA_Card_2/outputSwitch</pv_name>
+      <pv_name>Mod1-TPC2_pacFAN/outputSwitch</pv_name>
       <bit>-1</bit>
       <x>470</x>
       <y>90</y>
@@ -1603,7 +1603,7 @@
     </widget>
     <widget type="bool_button" version="2.0.0">
       <name>Boolean Button_34</name>
-      <pv_name>Mod3-VGA_Card_3/outputSwitch</pv_name>
+      <pv_name>Mod1-Interlock/outputSwitch</pv_name>
       <bit>-1</bit>
       <x>470</x>
       <y>130</y>
@@ -1628,7 +1628,7 @@
     </widget>
     <widget type="bool_button" version="2.0.0">
       <name>Boolean Button_35</name>
-      <pv_name>Mod3-VGA_Card_4/outputSwitch</pv_name>
+      <pv_name>Mod1-pac_res3/outputSwitch</pv_name>
       <bit>-1</bit>
       <x>470</x>
       <y>170</y>
@@ -1674,7 +1674,7 @@
     </widget>
     <widget type="textentry" version="3.0.0">
       <name>Text Input_419</name>
-      <pv_name>Mod3-VGA_Card_1/outputVoltage</pv_name>
+      <pv_name>Mod1-TPC1_pacFAN/outputVoltage</pv_name>
       <x>550</x>
       <y>50</y>
       <width>90</width>
@@ -1693,7 +1693,7 @@
     </widget>
     <widget type="textentry" version="3.0.0">
       <name>Text Input_420</name>
-      <pv_name>Mod3-VGA_Card_2/outputVoltage</pv_name>
+      <pv_name>Mod1-TPC2_pacFAN/outputVoltage</pv_name>
       <x>550</x>
       <y>90</y>
       <width>90</width>
@@ -1712,7 +1712,7 @@
     </widget>
     <widget type="textentry" version="3.0.0">
       <name>Text Input_421</name>
-      <pv_name>Mod3-VGA_Card_3/outputVoltage</pv_name>
+      <pv_name>Mod1-Interlock/outputVoltage</pv_name>
       <x>550</x>
       <y>130</y>
       <width>91</width>
@@ -1731,7 +1731,7 @@
     </widget>
     <widget type="textentry" version="3.0.0">
       <name>Text Input_422</name>
-      <pv_name>Mod3-VGA_Card_4/outputVoltage</pv_name>
+      <pv_name>Mod1-pac_res3/outputVoltage</pv_name>
       <x>550</x>
       <y>170</y>
       <width>91</width>
@@ -1771,7 +1771,7 @@
     </widget>
     <widget type="textentry" version="3.0.0">
       <name>Text Input_423</name>
-      <pv_name>Mod3-VGA_Card_1/outputCurrent</pv_name>
+      <pv_name>Mod1-TPC1_pacFAN/outputCurrent</pv_name>
       <x>665</x>
       <y>50</y>
       <width>90</width>
@@ -1794,7 +1794,7 @@
     </widget>
     <widget type="textentry" version="3.0.0">
       <name>Text Input_424</name>
-      <pv_name>Mod3-VGA_Card_2/outputCurrent</pv_name>
+      <pv_name>Mod1-TPC2_pacFAN/outputCurrent</pv_name>
       <x>665</x>
       <y>90</y>
       <width>90</width>
@@ -1817,7 +1817,7 @@
     </widget>
     <widget type="textentry" version="3.0.0">
       <name>Text Input_425</name>
-      <pv_name>Mod3-VGA_Card_3/outputCurrent</pv_name>
+      <pv_name>Mod1-Interlock/outputCurrent</pv_name>
       <x>665</x>
       <y>130</y>
       <width>90</width>
@@ -1840,7 +1840,7 @@
     </widget>
     <widget type="textentry" version="3.0.0">
       <name>Text Input_426</name>
-      <pv_name>Mod3-VGA_Card_4/outputCurrent</pv_name>
+      <pv_name>Mod1-pac_res3/outputCurrent</pv_name>
       <x>665</x>
       <y>170</y>
       <width>90</width>
@@ -1884,7 +1884,7 @@
     </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update_71</name>
-      <pv_name>Mod3-VGA_Card_1/outputMeasurementSenseVoltage</pv_name>
+      <pv_name>Mod1-TPC1_pacFAN/outputMeasurementSenseVoltage</pv_name>
       <x>780</x>
       <y>50</y>
       <width>80</width>
@@ -1904,7 +1904,7 @@
     </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update_72</name>
-      <pv_name>Mod3-VGA_Card_2/outputMeasurementSenseVoltage</pv_name>
+      <pv_name>Mod1-TPC2_pacFAN/outputMeasurementSenseVoltage</pv_name>
       <x>780</x>
       <y>90</y>
       <width>80</width>
@@ -1924,7 +1924,7 @@
     </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update_73</name>
-      <pv_name>Mod3-VGA_Card_3/outputMeasurementSenseVoltage</pv_name>
+      <pv_name>Mod1-Interlock/outputMeasurementSenseVoltage</pv_name>
       <x>780</x>
       <y>130</y>
       <width>80</width>
@@ -1944,7 +1944,7 @@
     </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update_74</name>
-      <pv_name>Mod3-VGA_Card_4/outputMeasurementSenseVoltage</pv_name>
+      <pv_name>Mod1-pac_res3/outputMeasurementSenseVoltage</pv_name>
       <x>780</x>
       <y>170</y>
       <width>80</width>
@@ -1985,7 +1985,7 @@
     </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update_75</name>
-      <pv_name>Mod3-VGA_Card_1/outputMeasurementTerminalVoltage</pv_name>
+      <pv_name>Mod1-TPC1_pacFAN/outputMeasurementTerminalVoltage</pv_name>
       <x>890</x>
       <y>50</y>
       <width>80</width>
@@ -2005,7 +2005,7 @@
     </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update_76</name>
-      <pv_name>Mod3-VGA_Card_2/outputMeasurementTerminalVoltage</pv_name>
+      <pv_name>Mod1-TPC2_pacFAN/outputMeasurementTerminalVoltage</pv_name>
       <x>890</x>
       <y>90</y>
       <width>80</width>
@@ -2025,7 +2025,7 @@
     </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update_77</name>
-      <pv_name>Mod3-VGA_Card_3/outputMeasurementTerminalVoltage</pv_name>
+      <pv_name>Mod1-Interlock/outputMeasurementTerminalVoltage</pv_name>
       <x>890</x>
       <y>130</y>
       <width>80</width>
@@ -2045,7 +2045,7 @@
     </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update_78</name>
-      <pv_name>Mod3-VGA_Card_4/outputMeasurementTerminalVoltage</pv_name>
+      <pv_name>Mod1-pac_res3/outputMeasurementTerminalVoltage</pv_name>
       <x>890</x>
       <y>170</y>
       <width>80</width>
@@ -2086,7 +2086,7 @@
     </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update_79</name>
-      <pv_name>Mod3-VGA_Card_1/outputMeasurementCurrent</pv_name>
+      <pv_name>Mod1-TPC1_pacFAN/outputMeasurementCurrent</pv_name>
       <x>1000</x>
       <y>50</y>
       <width>80</width>
@@ -2110,7 +2110,7 @@
     </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update_80</name>
-      <pv_name>Mod3-VGA_Card_2/outputMeasurementCurrent</pv_name>
+      <pv_name>Mod1-TPC2_pacFAN/outputMeasurementCurrent</pv_name>
       <x>1000</x>
       <y>90</y>
       <width>80</width>
@@ -2135,7 +2135,7 @@
     </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update_81</name>
-      <pv_name>Mod3-VGA_Card_3/outputMeasurementCurrent</pv_name>
+      <pv_name>Mod1-Interlock/outputMeasurementCurrent</pv_name>
       <x>1000</x>
       <y>130</y>
       <width>80</width>
@@ -2159,7 +2159,7 @@
     </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update_82</name>
-      <pv_name>Mod3-VGA_Card_4/outputMeasurementCurrent</pv_name>
+      <pv_name>Mod1-pac_res3/outputMeasurementCurrent</pv_name>
       <x>1000</x>
       <y>170</y>
       <width>80</width>
@@ -2204,7 +2204,7 @@
     </widget>
     <widget type="textentry" version="3.0.0">
       <name>Text Input_427</name>
-      <pv_name>Mod3-VGA_Card_1/outputTripTimeMaxCurrent</pv_name>
+      <pv_name>Mod1-TPC1_pacFAN/outputTripTimeMaxCurrent</pv_name>
       <x>1110</x>
       <y>50</y>
       <width>90</width>
@@ -2223,7 +2223,7 @@
     </widget>
     <widget type="textentry" version="3.0.0">
       <name>Text Input_428</name>
-      <pv_name>Mod3-VGA_Card_2/outputTripTimeMaxCurrent</pv_name>
+      <pv_name>Mod1-TPC2_pacFAN/outputTripTimeMaxCurrent</pv_name>
       <x>1110</x>
       <y>90</y>
       <width>90</width>
@@ -2242,7 +2242,7 @@
     </widget>
     <widget type="textentry" version="3.0.0">
       <name>Text Input_429</name>
-      <pv_name>Mod3-VGA_Card_3/outputTripTimeMaxCurrent</pv_name>
+      <pv_name>Mod1-Interlock/outputTripTimeMaxCurrent</pv_name>
       <x>1110</x>
       <y>130</y>
       <width>90</width>
@@ -2261,7 +2261,7 @@
     </widget>
     <widget type="textentry" version="3.0.0">
       <name>Text Input_430</name>
-      <pv_name>Mod3-VGA_Card_4/outputTripTimeMaxCurrent</pv_name>
+      <pv_name>Mod1-pac_res3/outputTripTimeMaxCurrent</pv_name>
       <x>1110</x>
       <y>170</y>
       <width>90</width>
@@ -2301,7 +2301,7 @@
     </widget>
     <widget type="textentry" version="3.0.0">
       <name>Text Input_431</name>
-      <pv_name>Mod3-VGA_Card_1/outputSupervisionBehavior</pv_name>
+      <pv_name>Mod1-TPC1_pacFAN/outputSupervisionBehavior</pv_name>
       <x>1230</x>
       <y>50</y>
       <width>90</width>
@@ -2321,7 +2321,7 @@
     </widget>
     <widget type="textentry" version="3.0.0">
       <name>Text Input_432</name>
-      <pv_name>Mod3-VGA_Card_2/outputSupervisionBehavior</pv_name>
+      <pv_name>Mod1-TPC2_pacFAN/outputSupervisionBehavior</pv_name>
       <x>1230</x>
       <y>90</y>
       <width>90</width>
@@ -2341,7 +2341,7 @@
     </widget>
     <widget type="textentry" version="3.0.0">
       <name>Text Input_433</name>
-      <pv_name>Mod3-VGA_Card_3/outputSupervisionBehavior</pv_name>
+      <pv_name>Mod1-Interlock/outputSupervisionBehavior</pv_name>
       <x>1230</x>
       <y>130</y>
       <width>90</width>
@@ -2361,7 +2361,7 @@
     </widget>
     <widget type="textentry" version="3.0.0">
       <name>Text Input_434</name>
-      <pv_name>Mod3-VGA_Card_4/outputSupervisionBehavior</pv_name>
+      <pv_name>Mod1-pac_res3/outputSupervisionBehavior</pv_name>
       <x>1230</x>
       <y>170</y>
       <width>90</width>
@@ -2383,7 +2383,7 @@
       <name>Action Button_8</name>
       <actions>
         <action type="write_pv">
-          <pv_name>Mod3-VGA_Card_1/outputSwitch</pv_name>
+          <pv_name>Mod1-TPC1_pacFAN/outputSwitch</pv_name>
           <value>10</value>
           <description>Reset</description>
         </action>
@@ -2400,7 +2400,7 @@
       <name>Action Button_9</name>
       <actions>
         <action type="write_pv">
-          <pv_name>Mod3-VGA_Card_2/outputSwitch</pv_name>
+          <pv_name>Mod1-TPC2_pacFAN/outputSwitch</pv_name>
           <value>10</value>
           <description>Reset</description>
         </action>
@@ -2417,7 +2417,7 @@
       <name>Action Button_10</name>
       <actions>
         <action type="write_pv">
-          <pv_name>Mod3-VGA_Card_3/outputSwitch</pv_name>
+          <pv_name>Mod1-Interlock/outputSwitch</pv_name>
           <value>10</value>
           <description>Reset</description>
         </action>
@@ -2434,7 +2434,7 @@
       <name>Action Button_11</name>
       <actions>
         <action type="write_pv">
-          <pv_name>Mod3-VGA_Card_4/outputSwitch</pv_name>
+          <pv_name>Mod1-pac_res3/outputSwitch</pv_name>
           <value>10</value>
           <description>Reset</description>
         </action>
@@ -2450,7 +2450,7 @@
   </widget>
   <widget type="label" version="2.0.0">
     <name>Label_129</name>
-    <text>Module 2</text>
+    <text>Module 0</text>
     <y>40</y>
     <width>1450</width>
     <height>30</height>
@@ -2476,7 +2476,7 @@
   </widget>
   <widget type="label" version="2.0.0">
     <name>Label_130</name>
-    <text>Module 3</text>
+    <text>Module 1</text>
     <y>300</y>
     <width>1450</width>
     <height>30</height>
@@ -2533,7 +2533,7 @@
     </widget>
     <widget type="bool_button" version="2.0.0">
       <name>LED_12</name>
-      <pv_name>mpod1/sysMainSwitch</pv_name>
+      <pv_name>mpod0/sysMainSwitch</pv_name>
       <bit>-1</bit>
       <x>20</x>
       <y>50</y>
@@ -2582,7 +2582,7 @@
     </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update_59</name>
-      <pv_name>mpod1/sysStatus</pv_name>
+      <pv_name>mpod0/sysStatus</pv_name>
       <x>130</x>
       <y>50</y>
       <width>110</width>
@@ -2602,7 +2602,7 @@
     </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update_60</name>
-      <pv_name>mpod1/psSerialNumber</pv_name>
+      <pv_name>mpod0/psSerialNumber</pv_name>
       <x>260</x>
       <y>50</y>
       <width>110</width>
@@ -2644,7 +2644,7 @@
   </widget>
   <widget type="label" version="2.0.0">
     <name>Label_133</name>
-    <text>MPOD1</text>
+    <text>MPOD0</text>
     <y>560</y>
     <width>390</width>
     <height>30</height>
@@ -2723,7 +2723,7 @@
     </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update_62</name>
-      <pv_name>mpod1_slot0/outputConfigMaxSenseVoltage</pv_name>
+      <pv_name>mpod0_slot2/outputConfigMaxSenseVoltage</pv_name>
       <x>35</x>
       <y>40</y>
       <width>90</width>
@@ -2743,7 +2743,7 @@
     </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update_64</name>
-      <pv_name>mpod1_slot0/outputConfigMaxTerminalVoltage</pv_name>
+      <pv_name>mpod0_slot2/outputConfigMaxTerminalVoltage</pv_name>
       <x>170</x>
       <y>40</y>
       <width>90</width>
@@ -2763,7 +2763,7 @@
     </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update_63</name>
-      <pv_name>mpod1_slot0/outputConfigMaxCurrent</pv_name>
+      <pv_name>mpod0_slot2/outputConfigMaxCurrent</pv_name>
       <x>310</x>
       <y>40</y>
       <width>90</width>
@@ -2804,7 +2804,7 @@
     </widget>
     <widget type="textentry" version="3.0.0">
       <name>Text Input_439</name>
-      <pv_name>Mod2-VGA_Card_1/outputVoltageRiseRate</pv_name>
+      <pv_name>Mod0-TPC1_pacFAN/outputVoltageRiseRate</pv_name>
       <x>440</x>
       <y>40</y>
       <width>110</width>
@@ -2845,7 +2845,7 @@
   </widget>
   <widget type="label" version="2.0.0">
     <name>Label_137</name>
-    <text>MPOD1 / Slot0</text>
+    <text>MPOD0 / Slot2</text>
     <x>440</x>
     <y>560</y>
     <width>580</width>

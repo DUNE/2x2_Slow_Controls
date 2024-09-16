@@ -7,7 +7,7 @@ record(longout, "mpod$(crate)/sysMainSwitch")
   field(FLNK,"")
 }
 
-record(stringin, "$mpod$(crate)/sysStatus")
+record(stringin, "mpod$(crate)/sysStatus")
 {
   field(DTYP,"Snmp")
   field(INP,"@$(HOST) $(COMMUNITY) $(W)::sysStatus.0 : 100")

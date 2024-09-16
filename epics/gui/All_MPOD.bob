@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Saved on 2024-09-16 16:30:10 by sungbino-->
+<display version="2.0.0">
+  <name>Summary</name>
+  <width>1000</width>
+  <height>1000</height>
+  <background_color>
+    <color red="255" green="255" blue="255" alpha="0">
+    </color>
+  </background_color>
+  <widget type="group" version="3.0.0">
+    <name>MPOD0 - Mod 0 &amp; 1</name>
+    <font>
+      <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
+      </font>
+    </font>
+    <widget type="action_button" version="3.0.0">
+      <name>VGA</name>
+      <actions>
+        <action type="open_file">
+          <file>MPOD0_Slot0.bob</file>
+          <description>VGA</description>
+        </action>
+      </actions>
+      <x>10</x>
+      <y>10</y>
+      <width>250</width>
+      <tooltip>$(actions)</tooltip>
+    </widget>
+    <widget type="action_button" version="3.0.0">
+      <name>RTD</name>
+      <actions>
+        <action type="open_file">
+          <file>MPOD0_Slot1.bob</file>
+          <description>RTD</description>
+        </action>
+      </actions>
+      <x>10</x>
+      <y>50</y>
+      <width>250</width>
+      <tooltip>$(actions)</tooltip>
+    </widget>
+    <widget type="action_button" version="3.0.0">
+      <name>RTD_1</name>
+      <actions>
+        <action type="open_file">
+          <file>MPOD0_Slot2.bob</file>
+          <description>PACFAN</description>
+        </action>
+      </actions>
+      <x>10</x>
+      <y>90</y>
+      <width>250</width>
+      <tooltip>$(actions)</tooltip>
+    </widget>
+    <widget type="action_button" version="3.0.0">
+      <name>RTD_2</name>
+      <actions>
+        <action type="open_file">
+          <file>MPOD0_Slot3.bob</file>
+          <description>PACMAN</description>
+        </action>
+      </actions>
+      <x>10</x>
+      <y>130</y>
+      <width>250</width>
+      <tooltip>$(actions)</tooltip>
+    </widget>
+  </widget>
+  <widget type="group" version="3.0.0">
+    <name>MPOD1 - Mod 2 &amp; 3</name>
+    <x>320</x>
+    <font>
+      <font name="Default Bold" family="Liberation Sans" style="BOLD" size="14.0">
+      </font>
+    </font>
+    <widget type="action_button" version="3.0.0">
+      <name>VGA_1</name>
+      <actions>
+        <action type="open_file">
+          <file>MPOD1_Slot0.bob</file>
+          <description>VGA</description>
+        </action>
+      </actions>
+      <x>10</x>
+      <y>10</y>
+      <width>250</width>
+      <tooltip>$(actions)</tooltip>
+    </widget>
+    <widget type="action_button" version="3.0.0">
+      <name>RTD_3</name>
+      <actions>
+        <action type="open_file">
+          <file>MPOD1_Slot1.bob</file>
+          <description>RTD</description>
+        </action>
+      </actions>
+      <x>10</x>
+      <y>50</y>
+      <width>250</width>
+      <tooltip>$(actions)</tooltip>
+    </widget>
+    <widget type="action_button" version="3.0.0">
+      <name>RTD_4</name>
+      <actions>
+        <action type="open_file">
+          <file>MPOD1_Slot2.bob</file>
+          <description>PACFAN</description>
+        </action>
+      </actions>
+      <x>10</x>
+      <y>90</y>
+      <width>250</width>
+      <tooltip>$(actions)</tooltip>
+    </widget>
+    <widget type="action_button" version="3.0.0">
+      <name>RTD_5</name>
+      <actions>
+        <action type="open_file">
+          <file>MPOD1_Slot3.bob</file>
+          <description>PACMAN</description>
+        </action>
+      </actions>
+      <x>10</x>
+      <y>130</y>
+      <width>250</width>
+      <tooltip>$(actions)</tooltip>
+    </widget>
+  </widget>
+</display>

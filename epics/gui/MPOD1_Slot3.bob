@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2024-07-29 14:13:18 by sungbino-->
+<!--Saved on 2024-09-16 16:23:10 by sungbino-->
 <display version="2.0.0">
-  <name>VGA_Mod2_Mod3</name>
+  <name>PACMAN_Mod2_Mod3</name>
   <width>1450</width>
-  <height>700</height>
+  <height>550</height>
   <actions>
   </actions>
   <grid_step_x>6</grid_step_x>
   <grid_step_y>6</grid_step_y>
   <widget type="label" version="2.0.0">
     <name>Label_10</name>
-    <text>MPOD1 / Slot0 : VGA for Module 2 and 3</text>
+    <text>MPOD1 / Slot3 : PACMAN for Module 2 and 3</text>
     <width>1450</width>
     <height>40</height>
     <font>
@@ -38,7 +38,7 @@
     <name>MPOD Status</name>
     <y>70</y>
     <width>1450</width>
-    <height>220</height>
+    <height>140</height>
     <style>2</style>
     <background_color>
       <color red="240" green="240" blue="240">
@@ -99,43 +99,9 @@
         </color>
       </border_color>
     </widget>
-    <widget type="label" version="2.0.0">
-      <name>Label_14</name>
-      <text>2</text>
-      <x>20</x>
-      <y>130</y>
-      <width>70</width>
-      <height>25</height>
-      <horizontal_alignment>1</horizontal_alignment>
-      <vertical_alignment>1</vertical_alignment>
-      <wrap_words>false</wrap_words>
-      <actions>
-      </actions>
-      <border_color>
-        <color red="0" green="128" blue="255">
-        </color>
-      </border_color>
-    </widget>
-    <widget type="label" version="2.0.0">
-      <name>Label_15</name>
-      <text>3</text>
-      <x>20</x>
-      <y>170</y>
-      <width>70</width>
-      <height>25</height>
-      <horizontal_alignment>1</horizontal_alignment>
-      <vertical_alignment>1</vertical_alignment>
-      <wrap_words>false</wrap_words>
-      <actions>
-      </actions>
-      <border_color>
-        <color red="0" green="128" blue="255">
-        </color>
-      </border_color>
-    </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update_33</name>
-      <pv_name>Mod2-VGA_Card_1/outputStatus</pv_name>
+      <pv_name>Mod2-TPC1_PACMAN/outputStatus</pv_name>
       <x>250</x>
       <y>50</y>
       <width>190</width>
@@ -155,49 +121,9 @@
     </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update_38</name>
-      <pv_name>Mod2-VGA_Card_2/outputStatus</pv_name>
+      <pv_name>Mod2-TPC2_PACMAN/outputStatus</pv_name>
       <x>250</x>
       <y>90</y>
-      <width>190</width>
-      <height>25</height>
-      <background_color>
-        <color red="255" green="255" blue="255">
-        </color>
-      </background_color>
-      <vertical_alignment>1</vertical_alignment>
-      <wrap_words>false</wrap_words>
-      <actions>
-      </actions>
-      <border_color>
-        <color red="0" green="128" blue="255">
-        </color>
-      </border_color>
-    </widget>
-    <widget type="textupdate" version="2.0.0">
-      <name>Text Update_42</name>
-      <pv_name>Mod2-VGA_Card_3/outputStatus</pv_name>
-      <x>250</x>
-      <y>130</y>
-      <width>190</width>
-      <height>25</height>
-      <background_color>
-        <color red="255" green="255" blue="255">
-        </color>
-      </background_color>
-      <vertical_alignment>1</vertical_alignment>
-      <wrap_words>false</wrap_words>
-      <actions>
-      </actions>
-      <border_color>
-        <color red="0" green="128" blue="255">
-        </color>
-      </border_color>
-    </widget>
-    <widget type="textupdate" version="2.0.0">
-      <name>Text Update_46</name>
-      <pv_name>Mod2-VGA_Card_4/outputStatus</pv_name>
-      <x>250</x>
-      <y>170</y>
       <width>190</width>
       <height>25</height>
       <background_color>
@@ -257,7 +183,7 @@
     </widget>
     <widget type="label" version="2.0.0">
       <name>Label_106</name>
-      <text>Mod2-VGA_Card_1</text>
+      <text>Mod2-TPC1_PACMAN</text>
       <x>100</x>
       <y>50</y>
       <width>130</width>
@@ -274,43 +200,9 @@
     </widget>
     <widget type="label" version="2.0.0">
       <name>Label_107</name>
-      <text>Mod2-VGA_Card_2</text>
+      <text>Mod2-TPC2_PACMAN</text>
       <x>100</x>
       <y>90</y>
-      <width>130</width>
-      <height>25</height>
-      <horizontal_alignment>1</horizontal_alignment>
-      <vertical_alignment>1</vertical_alignment>
-      <wrap_words>false</wrap_words>
-      <actions>
-      </actions>
-      <border_color>
-        <color red="0" green="128" blue="255">
-        </color>
-      </border_color>
-    </widget>
-    <widget type="label" version="2.0.0">
-      <name>Label_108</name>
-      <text>Mod2-VGA_Card_3</text>
-      <x>100</x>
-      <y>130</y>
-      <width>130</width>
-      <height>25</height>
-      <horizontal_alignment>1</horizontal_alignment>
-      <vertical_alignment>1</vertical_alignment>
-      <wrap_words>false</wrap_words>
-      <actions>
-      </actions>
-      <border_color>
-        <color red="0" green="128" blue="255">
-        </color>
-      </border_color>
-    </widget>
-    <widget type="label" version="2.0.0">
-      <name>Label_109</name>
-      <text>Mod2-VGA_Card_4</text>
-      <x>100</x>
-      <y>170</y>
       <width>130</width>
       <height>25</height>
       <horizontal_alignment>1</horizontal_alignment>
@@ -346,7 +238,7 @@
     </widget>
     <widget type="bool_button" version="2.0.0">
       <name>Boolean Button</name>
-      <pv_name>Mod2-VGA_Card_1/outputSwitch</pv_name>
+      <pv_name>Mod2-TPC1_PACMAN/outputSwitch</pv_name>
       <bit>-1</bit>
       <x>470</x>
       <y>50</y>
@@ -371,60 +263,10 @@
     </widget>
     <widget type="bool_button" version="2.0.0">
       <name>Boolean Button_2</name>
-      <pv_name>Mod2-VGA_Card_2/outputSwitch</pv_name>
+      <pv_name>Mod2-TPC2_PACMAN/outputSwitch</pv_name>
       <bit>-1</bit>
       <x>470</x>
       <y>90</y>
-      <width>55</width>
-      <height>25</height>
-      <off_label></off_label>
-      <off_color>
-        <color red="0" green="100" blue="0">
-        </color>
-      </off_color>
-      <on_label></on_label>
-      <on_color>
-        <color red="0" green="255" blue="0">
-        </color>
-      </on_color>
-      <background_color>
-        <color red="240" green="240" blue="240">
-        </color>
-      </background_color>
-      <actions>
-      </actions>
-    </widget>
-    <widget type="bool_button" version="2.0.0">
-      <name>Boolean Button_3</name>
-      <pv_name>Mod2-VGA_Card_3/outputSwitch</pv_name>
-      <bit>-1</bit>
-      <x>470</x>
-      <y>130</y>
-      <width>55</width>
-      <height>25</height>
-      <off_label></off_label>
-      <off_color>
-        <color red="0" green="100" blue="0">
-        </color>
-      </off_color>
-      <on_label></on_label>
-      <on_color>
-        <color red="0" green="255" blue="0">
-        </color>
-      </on_color>
-      <background_color>
-        <color red="240" green="240" blue="240">
-        </color>
-      </background_color>
-      <actions>
-      </actions>
-    </widget>
-    <widget type="bool_button" version="2.0.0">
-      <name>Boolean Button_4</name>
-      <pv_name>Mod2-VGA_Card_4/outputSwitch</pv_name>
-      <bit>-1</bit>
-      <x>470</x>
-      <y>170</y>
       <width>55</width>
       <height>25</height>
       <off_label></off_label>
@@ -467,7 +309,7 @@
     </widget>
     <widget type="textentry" version="3.0.0">
       <name>Text Input_18</name>
-      <pv_name>Mod2-VGA_Card_1/outputVoltage</pv_name>
+      <pv_name>Mod2-TPC1_PACMAN/outputVoltage</pv_name>
       <x>550</x>
       <y>50</y>
       <width>90</width>
@@ -486,48 +328,10 @@
     </widget>
     <widget type="textentry" version="3.0.0">
       <name>Text Input_303</name>
-      <pv_name>Mod2-VGA_Card_2/outputVoltage</pv_name>
+      <pv_name>Mod2-TPC2_PACMAN/outputVoltage</pv_name>
       <x>550</x>
       <y>90</y>
       <width>90</width>
-      <height>25</height>
-      <background_color>
-        <color red="255" green="255" blue="255">
-        </color>
-      </background_color>
-      <actions>
-      </actions>
-      <border_alarm_sensitive>false</border_alarm_sensitive>
-      <border_color>
-        <color red="0" green="128" blue="255">
-        </color>
-      </border_color>
-    </widget>
-    <widget type="textentry" version="3.0.0">
-      <name>Text Input_307</name>
-      <pv_name>Mod2-VGA_Card_3/outputVoltage</pv_name>
-      <x>550</x>
-      <y>130</y>
-      <width>91</width>
-      <height>25</height>
-      <background_color>
-        <color red="255" green="255" blue="255">
-        </color>
-      </background_color>
-      <actions>
-      </actions>
-      <border_alarm_sensitive>false</border_alarm_sensitive>
-      <border_color>
-        <color red="0" green="128" blue="255">
-        </color>
-      </border_color>
-    </widget>
-    <widget type="textentry" version="3.0.0">
-      <name>Text Input_311</name>
-      <pv_name>Mod2-VGA_Card_4/outputVoltage</pv_name>
-      <x>550</x>
-      <y>170</y>
-      <width>91</width>
       <height>25</height>
       <background_color>
         <color red="255" green="255" blue="255">
@@ -564,7 +368,7 @@
     </widget>
     <widget type="textentry" version="3.0.0">
       <name>Text Input_301</name>
-      <pv_name>Mod2-VGA_Card_1/outputCurrent</pv_name>
+      <pv_name>Mod2-TPC1_PACMAN/outputCurrent</pv_name>
       <x>665</x>
       <y>50</y>
       <width>90</width>
@@ -587,55 +391,9 @@
     </widget>
     <widget type="textentry" version="3.0.0">
       <name>Text Input_306</name>
-      <pv_name>Mod2-VGA_Card_2/outputCurrent</pv_name>
+      <pv_name>Mod2-TPC2_PACMAN/outputCurrent</pv_name>
       <x>665</x>
       <y>90</y>
-      <width>90</width>
-      <height>25</height>
-      <font>
-        <font family="Liberation Sans" style="REGULAR" size="11.0">
-        </font>
-      </font>
-      <background_color>
-        <color red="255" green="255" blue="255">
-        </color>
-      </background_color>
-      <actions>
-      </actions>
-      <border_alarm_sensitive>false</border_alarm_sensitive>
-      <border_color>
-        <color red="0" green="128" blue="255">
-        </color>
-      </border_color>
-    </widget>
-    <widget type="textentry" version="3.0.0">
-      <name>Text Input_310</name>
-      <pv_name>Mod2-VGA_Card_3/outputCurrent</pv_name>
-      <x>665</x>
-      <y>130</y>
-      <width>90</width>
-      <height>25</height>
-      <font>
-        <font family="Liberation Sans" style="REGULAR" size="11.0">
-        </font>
-      </font>
-      <background_color>
-        <color red="255" green="255" blue="255">
-        </color>
-      </background_color>
-      <actions>
-      </actions>
-      <border_alarm_sensitive>false</border_alarm_sensitive>
-      <border_color>
-        <color red="0" green="128" blue="255">
-        </color>
-      </border_color>
-    </widget>
-    <widget type="textentry" version="3.0.0">
-      <name>Text Input_314</name>
-      <pv_name>Mod2-VGA_Card_4/outputCurrent</pv_name>
-      <x>665</x>
-      <y>170</y>
       <width>90</width>
       <height>25</height>
       <font>
@@ -677,7 +435,7 @@
     </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update</name>
-      <pv_name>Mod2-VGA_Card_1/outputMeasurementSenseVoltage</pv_name>
+      <pv_name>Mod2-TPC1_PACMAN/outputMeasurementSenseVoltage</pv_name>
       <x>780</x>
       <y>50</y>
       <width>80</width>
@@ -697,49 +455,9 @@
     </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update_35</name>
-      <pv_name>Mod2-VGA_Card_2/outputMeasurementSenseVoltage</pv_name>
+      <pv_name>Mod2-TPC2_PACMAN/outputMeasurementSenseVoltage</pv_name>
       <x>780</x>
       <y>90</y>
-      <width>80</width>
-      <height>25</height>
-      <background_color>
-        <color red="255" green="255" blue="255">
-        </color>
-      </background_color>
-      <vertical_alignment>1</vertical_alignment>
-      <wrap_words>false</wrap_words>
-      <actions>
-      </actions>
-      <border_color>
-        <color red="0" green="128" blue="255">
-        </color>
-      </border_color>
-    </widget>
-    <widget type="textupdate" version="2.0.0">
-      <name>Text Update_39</name>
-      <pv_name>Mod2-VGA_Card_3/outputMeasurementSenseVoltage</pv_name>
-      <x>780</x>
-      <y>130</y>
-      <width>80</width>
-      <height>25</height>
-      <background_color>
-        <color red="255" green="255" blue="255">
-        </color>
-      </background_color>
-      <vertical_alignment>1</vertical_alignment>
-      <wrap_words>false</wrap_words>
-      <actions>
-      </actions>
-      <border_color>
-        <color red="0" green="128" blue="255">
-        </color>
-      </border_color>
-    </widget>
-    <widget type="textupdate" version="2.0.0">
-      <name>Text Update_43</name>
-      <pv_name>Mod2-VGA_Card_4/outputMeasurementSenseVoltage</pv_name>
-      <x>780</x>
-      <y>170</y>
       <width>80</width>
       <height>25</height>
       <background_color>
@@ -778,7 +496,7 @@
     </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update_1</name>
-      <pv_name>Mod2-VGA_Card_1/outputMeasurementTerminalVoltage</pv_name>
+      <pv_name>Mod2-TPC1_PACMAN/outputMeasurementTerminalVoltage</pv_name>
       <x>890</x>
       <y>50</y>
       <width>80</width>
@@ -798,49 +516,9 @@
     </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update_36</name>
-      <pv_name>Mod2-VGA_Card_2/outputMeasurementTerminalVoltage</pv_name>
+      <pv_name>Mod2-TPC2_PACMAN/outputMeasurementTerminalVoltage</pv_name>
       <x>890</x>
       <y>90</y>
-      <width>80</width>
-      <height>25</height>
-      <background_color>
-        <color red="255" green="255" blue="255">
-        </color>
-      </background_color>
-      <vertical_alignment>1</vertical_alignment>
-      <wrap_words>false</wrap_words>
-      <actions>
-      </actions>
-      <border_color>
-        <color red="0" green="128" blue="255">
-        </color>
-      </border_color>
-    </widget>
-    <widget type="textupdate" version="2.0.0">
-      <name>Text Update_40</name>
-      <pv_name>Mod2-VGA_Card_3/outputMeasurementTerminalVoltage</pv_name>
-      <x>890</x>
-      <y>130</y>
-      <width>80</width>
-      <height>25</height>
-      <background_color>
-        <color red="255" green="255" blue="255">
-        </color>
-      </background_color>
-      <vertical_alignment>1</vertical_alignment>
-      <wrap_words>false</wrap_words>
-      <actions>
-      </actions>
-      <border_color>
-        <color red="0" green="128" blue="255">
-        </color>
-      </border_color>
-    </widget>
-    <widget type="textupdate" version="2.0.0">
-      <name>Text Update_44</name>
-      <pv_name>Mod2-VGA_Card_4/outputMeasurementTerminalVoltage</pv_name>
-      <x>890</x>
-      <y>170</y>
       <width>80</width>
       <height>25</height>
       <background_color>
@@ -879,7 +557,7 @@
     </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update_2</name>
-      <pv_name>Mod2-VGA_Card_1/outputMeasurementCurrent</pv_name>
+      <pv_name>Mod2-TPC1_PACMAN/outputMeasurementCurrent</pv_name>
       <x>1000</x>
       <y>50</y>
       <width>80</width>
@@ -903,7 +581,7 @@
     </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update_37</name>
-      <pv_name>Mod2-VGA_Card_2/outputMeasurementCurrent</pv_name>
+      <pv_name>Mod2-TPC2_PACMAN/outputMeasurementCurrent</pv_name>
       <x>1000</x>
       <y>90</y>
       <width>80</width>
@@ -917,54 +595,6 @@
         </color>
       </background_color>
       <format>1</format>
-      <vertical_alignment>1</vertical_alignment>
-      <wrap_words>false</wrap_words>
-      <actions>
-      </actions>
-      <border_color>
-        <color red="0" green="128" blue="255">
-        </color>
-      </border_color>
-    </widget>
-    <widget type="textupdate" version="2.0.0">
-      <name>Text Update_41</name>
-      <pv_name>Mod2-VGA_Card_3/outputMeasurementCurrent</pv_name>
-      <x>1000</x>
-      <y>130</y>
-      <width>80</width>
-      <height>25</height>
-      <font>
-        <font family="Liberation Sans" style="REGULAR" size="11.0">
-        </font>
-      </font>
-      <background_color>
-        <color red="255" green="255" blue="255">
-        </color>
-      </background_color>
-      <vertical_alignment>1</vertical_alignment>
-      <wrap_words>false</wrap_words>
-      <actions>
-      </actions>
-      <border_color>
-        <color red="0" green="128" blue="255">
-        </color>
-      </border_color>
-    </widget>
-    <widget type="textupdate" version="2.0.0">
-      <name>Text Update_45</name>
-      <pv_name>Mod2-VGA_Card_4/outputMeasurementCurrent</pv_name>
-      <x>1000</x>
-      <y>170</y>
-      <width>80</width>
-      <height>25</height>
-      <font>
-        <font family="Liberation Sans" style="REGULAR" size="11.0">
-        </font>
-      </font>
-      <background_color>
-        <color red="255" green="255" blue="255">
-        </color>
-      </background_color>
       <vertical_alignment>1</vertical_alignment>
       <wrap_words>false</wrap_words>
       <actions>
@@ -997,7 +627,7 @@
     </widget>
     <widget type="textentry" version="3.0.0">
       <name>Text Input_244</name>
-      <pv_name>Mod2-VGA_Card_1/outputTripTimeMaxCurrent</pv_name>
+      <pv_name>Mod2-TPC1_PACMAN/outputTripTimeMaxCurrent</pv_name>
       <x>1110</x>
       <y>50</y>
       <width>90</width>
@@ -1016,47 +646,9 @@
     </widget>
     <widget type="textentry" version="3.0.0">
       <name>Text Input_304</name>
-      <pv_name>Mod2-VGA_Card_2/outputTripTimeMaxCurrent</pv_name>
+      <pv_name>Mod2-TPC2_PACMAN/outputTripTimeMaxCurrent</pv_name>
       <x>1110</x>
       <y>90</y>
-      <width>90</width>
-      <height>25</height>
-      <background_color>
-        <color red="255" green="255" blue="255">
-        </color>
-      </background_color>
-      <actions>
-      </actions>
-      <border_alarm_sensitive>false</border_alarm_sensitive>
-      <border_color>
-        <color red="0" green="128" blue="255">
-        </color>
-      </border_color>
-    </widget>
-    <widget type="textentry" version="3.0.0">
-      <name>Text Input_308</name>
-      <pv_name>Mod2-VGA_Card_3/outputTripTimeMaxCurrent</pv_name>
-      <x>1110</x>
-      <y>130</y>
-      <width>90</width>
-      <height>25</height>
-      <background_color>
-        <color red="255" green="255" blue="255">
-        </color>
-      </background_color>
-      <actions>
-      </actions>
-      <border_alarm_sensitive>false</border_alarm_sensitive>
-      <border_color>
-        <color red="0" green="128" blue="255">
-        </color>
-      </border_color>
-    </widget>
-    <widget type="textentry" version="3.0.0">
-      <name>Text Input_312</name>
-      <pv_name>Mod2-VGA_Card_4/outputTripTimeMaxCurrent</pv_name>
-      <x>1110</x>
-      <y>170</y>
       <width>90</width>
       <height>25</height>
       <background_color>
@@ -1094,7 +686,7 @@
     </widget>
     <widget type="textentry" version="3.0.0">
       <name>Text Input_261</name>
-      <pv_name>Mod2-VGA_Card_1/outputSupervisionBehavior</pv_name>
+      <pv_name>Mod2-TPC1_PACMAN/outputSupervisionBehavior</pv_name>
       <x>1230</x>
       <y>50</y>
       <width>90</width>
@@ -1114,49 +706,9 @@
     </widget>
     <widget type="textentry" version="3.0.0">
       <name>Text Input_305</name>
-      <pv_name>Mod2-VGA_Card_2/outputSupervisionBehavior</pv_name>
+      <pv_name>Mod2-TPC2_PACMAN/outputSupervisionBehavior</pv_name>
       <x>1230</x>
       <y>90</y>
-      <width>90</width>
-      <height>25</height>
-      <background_color>
-        <color red="255" green="255" blue="255">
-        </color>
-      </background_color>
-      <format>4</format>
-      <actions>
-      </actions>
-      <border_alarm_sensitive>false</border_alarm_sensitive>
-      <border_color>
-        <color red="0" green="128" blue="255">
-        </color>
-      </border_color>
-    </widget>
-    <widget type="textentry" version="3.0.0">
-      <name>Text Input_309</name>
-      <pv_name>Mod2-VGA_Card_3/outputSupervisionBehavior</pv_name>
-      <x>1230</x>
-      <y>130</y>
-      <width>90</width>
-      <height>25</height>
-      <background_color>
-        <color red="255" green="255" blue="255">
-        </color>
-      </background_color>
-      <format>4</format>
-      <actions>
-      </actions>
-      <border_alarm_sensitive>false</border_alarm_sensitive>
-      <border_color>
-        <color red="0" green="128" blue="255">
-        </color>
-      </border_color>
-    </widget>
-    <widget type="textentry" version="3.0.0">
-      <name>Text Input_313</name>
-      <pv_name>Mod2-VGA_Card_4/outputSupervisionBehavior</pv_name>
-      <x>1230</x>
-      <y>170</y>
       <width>90</width>
       <height>25</height>
       <background_color>
@@ -1176,7 +728,7 @@
       <name>Action Button</name>
       <actions>
         <action type="write_pv">
-          <pv_name>Mod2-VGA_Card_1/outputSwitch</pv_name>
+          <pv_name>Mod2-TPC1_PACMAN/outputSwitch</pv_name>
           <value>10</value>
           <description>Reset</description>
         </action>
@@ -1193,7 +745,7 @@
       <name>Action Button_1</name>
       <actions>
         <action type="write_pv">
-          <pv_name>Mod2-VGA_Card_2/outputSwitch</pv_name>
+          <pv_name>Mod2-TPC2_PACMAN/outputSwitch</pv_name>
           <value>10</value>
           <description>Reset</description>
         </action>
@@ -1206,46 +758,12 @@
       <show_confirm_dialog>true</show_confirm_dialog>
       <confirm_message>Are your sure you want to reset this channel?</confirm_message>
     </widget>
-    <widget type="action_button" version="3.0.0">
-      <name>Action Button_2</name>
-      <actions>
-        <action type="write_pv">
-          <pv_name>Mod2-VGA_Card_3/outputSwitch</pv_name>
-          <value>10</value>
-          <description>Reset</description>
-        </action>
-      </actions>
-      <x>1350</x>
-      <y>130</y>
-      <width>70</width>
-      <height>25</height>
-      <tooltip>$(actions)</tooltip>
-      <show_confirm_dialog>true</show_confirm_dialog>
-      <confirm_message>Are your sure you want to reset this channel?</confirm_message>
-    </widget>
-    <widget type="action_button" version="3.0.0">
-      <name>Action Button_3</name>
-      <actions>
-        <action type="write_pv">
-          <pv_name>Mod2-VGA_Card_4/outputSwitch</pv_name>
-          <value>10</value>
-          <description>Reset</description>
-        </action>
-      </actions>
-      <x>1350</x>
-      <y>170</y>
-      <width>70</width>
-      <height>25</height>
-      <tooltip>$(actions)</tooltip>
-      <show_confirm_dialog>true</show_confirm_dialog>
-      <confirm_message>Are your sure you want to reset this channel?</confirm_message>
-    </widget>
   </widget>
   <widget type="group" version="3.0.0">
     <name>MPOD Status_1</name>
-    <y>330</y>
+    <y>250</y>
     <width>1446</width>
-    <height>216</height>
+    <height>140</height>
     <style>2</style>
     <background_color>
       <color red="240" green="240" blue="240">
@@ -1306,43 +824,9 @@
         </color>
       </border_color>
     </widget>
-    <widget type="label" version="2.0.0">
-      <name>Label_113</name>
-      <text>2</text>
-      <x>20</x>
-      <y>130</y>
-      <width>70</width>
-      <height>25</height>
-      <horizontal_alignment>1</horizontal_alignment>
-      <vertical_alignment>1</vertical_alignment>
-      <wrap_words>false</wrap_words>
-      <actions>
-      </actions>
-      <border_color>
-        <color red="0" green="128" blue="255">
-        </color>
-      </border_color>
-    </widget>
-    <widget type="label" version="2.0.0">
-      <name>Label_114</name>
-      <text>3</text>
-      <x>20</x>
-      <y>170</y>
-      <width>70</width>
-      <height>25</height>
-      <horizontal_alignment>1</horizontal_alignment>
-      <vertical_alignment>1</vertical_alignment>
-      <wrap_words>false</wrap_words>
-      <actions>
-      </actions>
-      <border_color>
-        <color red="0" green="128" blue="255">
-        </color>
-      </border_color>
-    </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update_34</name>
-      <pv_name>Mod3-VGA_Card_1/outputStatus</pv_name>
+      <pv_name>Mod3-TPC1_PACMAN/outputStatus</pv_name>
       <x>250</x>
       <y>50</y>
       <width>190</width>
@@ -1362,49 +846,9 @@
     </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update_68</name>
-      <pv_name>Mod3-VGA_Card_2/outputStatus</pv_name>
+      <pv_name>Mod3-TPC2_PACMAN/outputStatus</pv_name>
       <x>250</x>
       <y>90</y>
-      <width>190</width>
-      <height>25</height>
-      <background_color>
-        <color red="255" green="255" blue="255">
-        </color>
-      </background_color>
-      <vertical_alignment>1</vertical_alignment>
-      <wrap_words>false</wrap_words>
-      <actions>
-      </actions>
-      <border_color>
-        <color red="0" green="128" blue="255">
-        </color>
-      </border_color>
-    </widget>
-    <widget type="textupdate" version="2.0.0">
-      <name>Text Update_69</name>
-      <pv_name>Mod3-VGA_Card_3/outputStatus</pv_name>
-      <x>250</x>
-      <y>130</y>
-      <width>190</width>
-      <height>25</height>
-      <background_color>
-        <color red="255" green="255" blue="255">
-        </color>
-      </background_color>
-      <vertical_alignment>1</vertical_alignment>
-      <wrap_words>false</wrap_words>
-      <actions>
-      </actions>
-      <border_color>
-        <color red="0" green="128" blue="255">
-        </color>
-      </border_color>
-    </widget>
-    <widget type="textupdate" version="2.0.0">
-      <name>Text Update_70</name>
-      <pv_name>Mod3-VGA_Card_4/outputStatus</pv_name>
-      <x>250</x>
-      <y>170</y>
       <width>190</width>
       <height>25</height>
       <background_color>
@@ -1464,7 +908,7 @@
     </widget>
     <widget type="label" version="2.0.0">
       <name>Label_117</name>
-      <text>Mod3-VGA_Card_1</text>
+      <text>Mod3-TPC1_PACMAN</text>
       <x>100</x>
       <y>50</y>
       <width>130</width>
@@ -1481,43 +925,9 @@
     </widget>
     <widget type="label" version="2.0.0">
       <name>Label_118</name>
-      <text>Mod3-VGA_Card_2</text>
+      <text>Mod3-TPC2_PACMAN</text>
       <x>100</x>
       <y>90</y>
-      <width>130</width>
-      <height>25</height>
-      <horizontal_alignment>1</horizontal_alignment>
-      <vertical_alignment>1</vertical_alignment>
-      <wrap_words>false</wrap_words>
-      <actions>
-      </actions>
-      <border_color>
-        <color red="0" green="128" blue="255">
-        </color>
-      </border_color>
-    </widget>
-    <widget type="label" version="2.0.0">
-      <name>Label_119</name>
-      <text>Mod3-VGA_Card_3</text>
-      <x>100</x>
-      <y>130</y>
-      <width>130</width>
-      <height>25</height>
-      <horizontal_alignment>1</horizontal_alignment>
-      <vertical_alignment>1</vertical_alignment>
-      <wrap_words>false</wrap_words>
-      <actions>
-      </actions>
-      <border_color>
-        <color red="0" green="128" blue="255">
-        </color>
-      </border_color>
-    </widget>
-    <widget type="label" version="2.0.0">
-      <name>Label_120</name>
-      <text>Mod3-VGA_Card_4</text>
-      <x>100</x>
-      <y>170</y>
       <width>130</width>
       <height>25</height>
       <horizontal_alignment>1</horizontal_alignment>
@@ -1553,7 +963,7 @@
     </widget>
     <widget type="bool_button" version="2.0.0">
       <name>Boolean Button_32</name>
-      <pv_name>Mod3-VGA_Card_1/outputSwitch</pv_name>
+      <pv_name>Mod3-TPC1_PACMAN/outputSwitch</pv_name>
       <bit>-1</bit>
       <x>470</x>
       <y>50</y>
@@ -1578,60 +988,10 @@
     </widget>
     <widget type="bool_button" version="2.0.0">
       <name>Boolean Button_33</name>
-      <pv_name>Mod3-VGA_Card_2/outputSwitch</pv_name>
+      <pv_name>Mod3-TPC2_PACMAN/outputSwitch</pv_name>
       <bit>-1</bit>
       <x>470</x>
       <y>90</y>
-      <width>55</width>
-      <height>25</height>
-      <off_label></off_label>
-      <off_color>
-        <color red="0" green="100" blue="0">
-        </color>
-      </off_color>
-      <on_label></on_label>
-      <on_color>
-        <color red="0" green="255" blue="0">
-        </color>
-      </on_color>
-      <background_color>
-        <color red="240" green="240" blue="240">
-        </color>
-      </background_color>
-      <actions>
-      </actions>
-    </widget>
-    <widget type="bool_button" version="2.0.0">
-      <name>Boolean Button_34</name>
-      <pv_name>Mod3-VGA_Card_3/outputSwitch</pv_name>
-      <bit>-1</bit>
-      <x>470</x>
-      <y>130</y>
-      <width>55</width>
-      <height>25</height>
-      <off_label></off_label>
-      <off_color>
-        <color red="0" green="100" blue="0">
-        </color>
-      </off_color>
-      <on_label></on_label>
-      <on_color>
-        <color red="0" green="255" blue="0">
-        </color>
-      </on_color>
-      <background_color>
-        <color red="240" green="240" blue="240">
-        </color>
-      </background_color>
-      <actions>
-      </actions>
-    </widget>
-    <widget type="bool_button" version="2.0.0">
-      <name>Boolean Button_35</name>
-      <pv_name>Mod3-VGA_Card_4/outputSwitch</pv_name>
-      <bit>-1</bit>
-      <x>470</x>
-      <y>170</y>
       <width>55</width>
       <height>25</height>
       <off_label></off_label>
@@ -1674,7 +1034,7 @@
     </widget>
     <widget type="textentry" version="3.0.0">
       <name>Text Input_419</name>
-      <pv_name>Mod3-VGA_Card_1/outputVoltage</pv_name>
+      <pv_name>Mod3-TPC1_PACMAN/outputVoltage</pv_name>
       <x>550</x>
       <y>50</y>
       <width>90</width>
@@ -1693,48 +1053,10 @@
     </widget>
     <widget type="textentry" version="3.0.0">
       <name>Text Input_420</name>
-      <pv_name>Mod3-VGA_Card_2/outputVoltage</pv_name>
+      <pv_name>Mod3-TPC2_PACMAN/outputVoltage</pv_name>
       <x>550</x>
       <y>90</y>
       <width>90</width>
-      <height>25</height>
-      <background_color>
-        <color red="255" green="255" blue="255">
-        </color>
-      </background_color>
-      <actions>
-      </actions>
-      <border_alarm_sensitive>false</border_alarm_sensitive>
-      <border_color>
-        <color red="0" green="128" blue="255">
-        </color>
-      </border_color>
-    </widget>
-    <widget type="textentry" version="3.0.0">
-      <name>Text Input_421</name>
-      <pv_name>Mod3-VGA_Card_3/outputVoltage</pv_name>
-      <x>550</x>
-      <y>130</y>
-      <width>91</width>
-      <height>25</height>
-      <background_color>
-        <color red="255" green="255" blue="255">
-        </color>
-      </background_color>
-      <actions>
-      </actions>
-      <border_alarm_sensitive>false</border_alarm_sensitive>
-      <border_color>
-        <color red="0" green="128" blue="255">
-        </color>
-      </border_color>
-    </widget>
-    <widget type="textentry" version="3.0.0">
-      <name>Text Input_422</name>
-      <pv_name>Mod3-VGA_Card_4/outputVoltage</pv_name>
-      <x>550</x>
-      <y>170</y>
-      <width>91</width>
       <height>25</height>
       <background_color>
         <color red="255" green="255" blue="255">
@@ -1771,7 +1093,7 @@
     </widget>
     <widget type="textentry" version="3.0.0">
       <name>Text Input_423</name>
-      <pv_name>Mod3-VGA_Card_1/outputCurrent</pv_name>
+      <pv_name>Mod3-TPC1_PACMAN/outputCurrent</pv_name>
       <x>665</x>
       <y>50</y>
       <width>90</width>
@@ -1794,55 +1116,9 @@
     </widget>
     <widget type="textentry" version="3.0.0">
       <name>Text Input_424</name>
-      <pv_name>Mod3-VGA_Card_2/outputCurrent</pv_name>
+      <pv_name>Mod3-TPC2_PACMAN/outputCurrent</pv_name>
       <x>665</x>
       <y>90</y>
-      <width>90</width>
-      <height>25</height>
-      <font>
-        <font family="Liberation Sans" style="REGULAR" size="11.0">
-        </font>
-      </font>
-      <background_color>
-        <color red="255" green="255" blue="255">
-        </color>
-      </background_color>
-      <actions>
-      </actions>
-      <border_alarm_sensitive>false</border_alarm_sensitive>
-      <border_color>
-        <color red="0" green="128" blue="255">
-        </color>
-      </border_color>
-    </widget>
-    <widget type="textentry" version="3.0.0">
-      <name>Text Input_425</name>
-      <pv_name>Mod3-VGA_Card_3/outputCurrent</pv_name>
-      <x>665</x>
-      <y>130</y>
-      <width>90</width>
-      <height>25</height>
-      <font>
-        <font family="Liberation Sans" style="REGULAR" size="11.0">
-        </font>
-      </font>
-      <background_color>
-        <color red="255" green="255" blue="255">
-        </color>
-      </background_color>
-      <actions>
-      </actions>
-      <border_alarm_sensitive>false</border_alarm_sensitive>
-      <border_color>
-        <color red="0" green="128" blue="255">
-        </color>
-      </border_color>
-    </widget>
-    <widget type="textentry" version="3.0.0">
-      <name>Text Input_426</name>
-      <pv_name>Mod3-VGA_Card_4/outputCurrent</pv_name>
-      <x>665</x>
-      <y>170</y>
       <width>90</width>
       <height>25</height>
       <font>
@@ -1884,7 +1160,7 @@
     </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update_71</name>
-      <pv_name>Mod3-VGA_Card_1/outputMeasurementSenseVoltage</pv_name>
+      <pv_name>Mod3-TPC1_PACMAN/outputMeasurementSenseVoltage</pv_name>
       <x>780</x>
       <y>50</y>
       <width>80</width>
@@ -1904,49 +1180,9 @@
     </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update_72</name>
-      <pv_name>Mod3-VGA_Card_2/outputMeasurementSenseVoltage</pv_name>
+      <pv_name>Mod3-TPC2_PACMAN/outputMeasurementSenseVoltage</pv_name>
       <x>780</x>
       <y>90</y>
-      <width>80</width>
-      <height>25</height>
-      <background_color>
-        <color red="255" green="255" blue="255">
-        </color>
-      </background_color>
-      <vertical_alignment>1</vertical_alignment>
-      <wrap_words>false</wrap_words>
-      <actions>
-      </actions>
-      <border_color>
-        <color red="0" green="128" blue="255">
-        </color>
-      </border_color>
-    </widget>
-    <widget type="textupdate" version="2.0.0">
-      <name>Text Update_73</name>
-      <pv_name>Mod3-VGA_Card_3/outputMeasurementSenseVoltage</pv_name>
-      <x>780</x>
-      <y>130</y>
-      <width>80</width>
-      <height>25</height>
-      <background_color>
-        <color red="255" green="255" blue="255">
-        </color>
-      </background_color>
-      <vertical_alignment>1</vertical_alignment>
-      <wrap_words>false</wrap_words>
-      <actions>
-      </actions>
-      <border_color>
-        <color red="0" green="128" blue="255">
-        </color>
-      </border_color>
-    </widget>
-    <widget type="textupdate" version="2.0.0">
-      <name>Text Update_74</name>
-      <pv_name>Mod3-VGA_Card_4/outputMeasurementSenseVoltage</pv_name>
-      <x>780</x>
-      <y>170</y>
       <width>80</width>
       <height>25</height>
       <background_color>
@@ -1985,7 +1221,7 @@
     </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update_75</name>
-      <pv_name>Mod3-VGA_Card_1/outputMeasurementTerminalVoltage</pv_name>
+      <pv_name>Mod3-TPC1_PACMAN/outputMeasurementTerminalVoltage</pv_name>
       <x>890</x>
       <y>50</y>
       <width>80</width>
@@ -2005,49 +1241,9 @@
     </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update_76</name>
-      <pv_name>Mod3-VGA_Card_2/outputMeasurementTerminalVoltage</pv_name>
+      <pv_name>Mod3-TPC2_PACMAN/outputMeasurementTerminalVoltage</pv_name>
       <x>890</x>
       <y>90</y>
-      <width>80</width>
-      <height>25</height>
-      <background_color>
-        <color red="255" green="255" blue="255">
-        </color>
-      </background_color>
-      <vertical_alignment>1</vertical_alignment>
-      <wrap_words>false</wrap_words>
-      <actions>
-      </actions>
-      <border_color>
-        <color red="0" green="128" blue="255">
-        </color>
-      </border_color>
-    </widget>
-    <widget type="textupdate" version="2.0.0">
-      <name>Text Update_77</name>
-      <pv_name>Mod3-VGA_Card_3/outputMeasurementTerminalVoltage</pv_name>
-      <x>890</x>
-      <y>130</y>
-      <width>80</width>
-      <height>25</height>
-      <background_color>
-        <color red="255" green="255" blue="255">
-        </color>
-      </background_color>
-      <vertical_alignment>1</vertical_alignment>
-      <wrap_words>false</wrap_words>
-      <actions>
-      </actions>
-      <border_color>
-        <color red="0" green="128" blue="255">
-        </color>
-      </border_color>
-    </widget>
-    <widget type="textupdate" version="2.0.0">
-      <name>Text Update_78</name>
-      <pv_name>Mod3-VGA_Card_4/outputMeasurementTerminalVoltage</pv_name>
-      <x>890</x>
-      <y>170</y>
       <width>80</width>
       <height>25</height>
       <background_color>
@@ -2086,7 +1282,7 @@
     </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update_79</name>
-      <pv_name>Mod3-VGA_Card_1/outputMeasurementCurrent</pv_name>
+      <pv_name>Mod3-TPC1_PACMAN/outputMeasurementCurrent</pv_name>
       <x>1000</x>
       <y>50</y>
       <width>80</width>
@@ -2110,7 +1306,7 @@
     </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update_80</name>
-      <pv_name>Mod3-VGA_Card_2/outputMeasurementCurrent</pv_name>
+      <pv_name>Mod3-TPC2_PACMAN/outputMeasurementCurrent</pv_name>
       <x>1000</x>
       <y>90</y>
       <width>80</width>
@@ -2124,54 +1320,6 @@
         </color>
       </background_color>
       <format>1</format>
-      <vertical_alignment>1</vertical_alignment>
-      <wrap_words>false</wrap_words>
-      <actions>
-      </actions>
-      <border_color>
-        <color red="0" green="128" blue="255">
-        </color>
-      </border_color>
-    </widget>
-    <widget type="textupdate" version="2.0.0">
-      <name>Text Update_81</name>
-      <pv_name>Mod3-VGA_Card_3/outputMeasurementCurrent</pv_name>
-      <x>1000</x>
-      <y>130</y>
-      <width>80</width>
-      <height>25</height>
-      <font>
-        <font family="Liberation Sans" style="REGULAR" size="11.0">
-        </font>
-      </font>
-      <background_color>
-        <color red="255" green="255" blue="255">
-        </color>
-      </background_color>
-      <vertical_alignment>1</vertical_alignment>
-      <wrap_words>false</wrap_words>
-      <actions>
-      </actions>
-      <border_color>
-        <color red="0" green="128" blue="255">
-        </color>
-      </border_color>
-    </widget>
-    <widget type="textupdate" version="2.0.0">
-      <name>Text Update_82</name>
-      <pv_name>Mod3-VGA_Card_4/outputMeasurementCurrent</pv_name>
-      <x>1000</x>
-      <y>170</y>
-      <width>80</width>
-      <height>25</height>
-      <font>
-        <font family="Liberation Sans" style="REGULAR" size="11.0">
-        </font>
-      </font>
-      <background_color>
-        <color red="255" green="255" blue="255">
-        </color>
-      </background_color>
       <vertical_alignment>1</vertical_alignment>
       <wrap_words>false</wrap_words>
       <actions>
@@ -2204,7 +1352,7 @@
     </widget>
     <widget type="textentry" version="3.0.0">
       <name>Text Input_427</name>
-      <pv_name>Mod3-VGA_Card_1/outputTripTimeMaxCurrent</pv_name>
+      <pv_name>Mod3-TPC1_PACMAN/outputTripTimeMaxCurrent</pv_name>
       <x>1110</x>
       <y>50</y>
       <width>90</width>
@@ -2223,47 +1371,9 @@
     </widget>
     <widget type="textentry" version="3.0.0">
       <name>Text Input_428</name>
-      <pv_name>Mod3-VGA_Card_2/outputTripTimeMaxCurrent</pv_name>
+      <pv_name>Mod3-TPC2_PACMAN/outputTripTimeMaxCurrent</pv_name>
       <x>1110</x>
       <y>90</y>
-      <width>90</width>
-      <height>25</height>
-      <background_color>
-        <color red="255" green="255" blue="255">
-        </color>
-      </background_color>
-      <actions>
-      </actions>
-      <border_alarm_sensitive>false</border_alarm_sensitive>
-      <border_color>
-        <color red="0" green="128" blue="255">
-        </color>
-      </border_color>
-    </widget>
-    <widget type="textentry" version="3.0.0">
-      <name>Text Input_429</name>
-      <pv_name>Mod3-VGA_Card_3/outputTripTimeMaxCurrent</pv_name>
-      <x>1110</x>
-      <y>130</y>
-      <width>90</width>
-      <height>25</height>
-      <background_color>
-        <color red="255" green="255" blue="255">
-        </color>
-      </background_color>
-      <actions>
-      </actions>
-      <border_alarm_sensitive>false</border_alarm_sensitive>
-      <border_color>
-        <color red="0" green="128" blue="255">
-        </color>
-      </border_color>
-    </widget>
-    <widget type="textentry" version="3.0.0">
-      <name>Text Input_430</name>
-      <pv_name>Mod3-VGA_Card_4/outputTripTimeMaxCurrent</pv_name>
-      <x>1110</x>
-      <y>170</y>
       <width>90</width>
       <height>25</height>
       <background_color>
@@ -2301,7 +1411,7 @@
     </widget>
     <widget type="textentry" version="3.0.0">
       <name>Text Input_431</name>
-      <pv_name>Mod3-VGA_Card_1/outputSupervisionBehavior</pv_name>
+      <pv_name>Mod3-TPC1_PACMAN/outputSupervisionBehavior</pv_name>
       <x>1230</x>
       <y>50</y>
       <width>90</width>
@@ -2321,49 +1431,9 @@
     </widget>
     <widget type="textentry" version="3.0.0">
       <name>Text Input_432</name>
-      <pv_name>Mod3-VGA_Card_2/outputSupervisionBehavior</pv_name>
+      <pv_name>Mod3-TPC2_PACMAN/outputSupervisionBehavior</pv_name>
       <x>1230</x>
       <y>90</y>
-      <width>90</width>
-      <height>25</height>
-      <background_color>
-        <color red="255" green="255" blue="255">
-        </color>
-      </background_color>
-      <format>4</format>
-      <actions>
-      </actions>
-      <border_alarm_sensitive>false</border_alarm_sensitive>
-      <border_color>
-        <color red="0" green="128" blue="255">
-        </color>
-      </border_color>
-    </widget>
-    <widget type="textentry" version="3.0.0">
-      <name>Text Input_433</name>
-      <pv_name>Mod3-VGA_Card_3/outputSupervisionBehavior</pv_name>
-      <x>1230</x>
-      <y>130</y>
-      <width>90</width>
-      <height>25</height>
-      <background_color>
-        <color red="255" green="255" blue="255">
-        </color>
-      </background_color>
-      <format>4</format>
-      <actions>
-      </actions>
-      <border_alarm_sensitive>false</border_alarm_sensitive>
-      <border_color>
-        <color red="0" green="128" blue="255">
-        </color>
-      </border_color>
-    </widget>
-    <widget type="textentry" version="3.0.0">
-      <name>Text Input_434</name>
-      <pv_name>Mod3-VGA_Card_4/outputSupervisionBehavior</pv_name>
-      <x>1230</x>
-      <y>170</y>
       <width>90</width>
       <height>25</height>
       <background_color>
@@ -2383,7 +1453,7 @@
       <name>Action Button_8</name>
       <actions>
         <action type="write_pv">
-          <pv_name>Mod3-VGA_Card_1/outputSwitch</pv_name>
+          <pv_name>Mod3-TPC1_PACMAN/outputSwitch</pv_name>
           <value>10</value>
           <description>Reset</description>
         </action>
@@ -2400,7 +1470,7 @@
       <name>Action Button_9</name>
       <actions>
         <action type="write_pv">
-          <pv_name>Mod3-VGA_Card_2/outputSwitch</pv_name>
+          <pv_name>Mod3-TPC2_PACMAN/outputSwitch</pv_name>
           <value>10</value>
           <description>Reset</description>
         </action>
@@ -2413,44 +1483,10 @@
       <show_confirm_dialog>true</show_confirm_dialog>
       <confirm_message>Are your sure you want to reset this channel?</confirm_message>
     </widget>
-    <widget type="action_button" version="3.0.0">
-      <name>Action Button_10</name>
-      <actions>
-        <action type="write_pv">
-          <pv_name>Mod3-VGA_Card_3/outputSwitch</pv_name>
-          <value>10</value>
-          <description>Reset</description>
-        </action>
-      </actions>
-      <x>1350</x>
-      <y>130</y>
-      <width>70</width>
-      <height>25</height>
-      <tooltip>$(actions)</tooltip>
-      <show_confirm_dialog>true</show_confirm_dialog>
-      <confirm_message>Are your sure you want to reset this channel?</confirm_message>
-    </widget>
-    <widget type="action_button" version="3.0.0">
-      <name>Action Button_11</name>
-      <actions>
-        <action type="write_pv">
-          <pv_name>Mod3-VGA_Card_4/outputSwitch</pv_name>
-          <value>10</value>
-          <description>Reset</description>
-        </action>
-      </actions>
-      <x>1350</x>
-      <y>170</y>
-      <width>70</width>
-      <height>25</height>
-      <tooltip>$(actions)</tooltip>
-      <show_confirm_dialog>true</show_confirm_dialog>
-      <confirm_message>Are your sure you want to reset this channel?</confirm_message>
-    </widget>
   </widget>
   <widget type="label" version="2.0.0">
     <name>Label_129</name>
-    <text>Module 2</text>
+    <text>Module 0</text>
     <y>40</y>
     <width>1450</width>
     <height>30</height>
@@ -2476,8 +1512,8 @@
   </widget>
   <widget type="label" version="2.0.0">
     <name>Label_130</name>
-    <text>Module 3</text>
-    <y>300</y>
+    <text>Module 1</text>
+    <y>220</y>
     <width>1450</width>
     <height>30</height>
     <font>
@@ -2502,7 +1538,7 @@
   </widget>
   <widget type="group" version="3.0.0">
     <name>MPOD Mini-crates</name>
-    <y>590</y>
+    <y>430</y>
     <width>390</width>
     <height>100</height>
     <style>2</style>
@@ -2645,7 +1681,7 @@
   <widget type="label" version="2.0.0">
     <name>Label_133</name>
     <text>MPOD1</text>
-    <y>560</y>
+    <y>400</y>
     <width>390</width>
     <height>30</height>
     <font>
@@ -2670,8 +1706,8 @@
   </widget>
   <widget type="group" version="3.0.0">
     <name>MPOD Mini-crates_1</name>
-    <x>440</x>
-    <y>590</y>
+    <x>441</x>
+    <y>430</y>
     <width>580</width>
     <height>100</height>
     <style>2</style>
@@ -2723,7 +1759,7 @@
     </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update_62</name>
-      <pv_name>mpod1_slot0/outputConfigMaxSenseVoltage</pv_name>
+      <pv_name>mpod1_slot3/outputConfigMaxSenseVoltage</pv_name>
       <x>35</x>
       <y>40</y>
       <width>90</width>
@@ -2743,7 +1779,7 @@
     </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update_64</name>
-      <pv_name>mpod1_slot0/outputConfigMaxTerminalVoltage</pv_name>
+      <pv_name>mpod1_slot3/outputConfigMaxTerminalVoltage</pv_name>
       <x>170</x>
       <y>40</y>
       <width>90</width>
@@ -2763,7 +1799,7 @@
     </widget>
     <widget type="textupdate" version="2.0.0">
       <name>Text Update_63</name>
-      <pv_name>mpod1_slot0/outputConfigMaxCurrent</pv_name>
+      <pv_name>mpod1_slot3/outputConfigMaxCurrent</pv_name>
       <x>310</x>
       <y>40</y>
       <width>90</width>
@@ -2804,7 +1840,7 @@
     </widget>
     <widget type="textentry" version="3.0.0">
       <name>Text Input_439</name>
-      <pv_name>Mod2-VGA_Card_1/outputVoltageRiseRate</pv_name>
+      <pv_name>Mod2-TPC1_PACMAN/outputVoltageRiseRate</pv_name>
       <x>440</x>
       <y>40</y>
       <width>110</width>
@@ -2845,9 +1881,9 @@
   </widget>
   <widget type="label" version="2.0.0">
     <name>Label_137</name>
-    <text>MPOD1 / Slot0</text>
-    <x>440</x>
-    <y>560</y>
+    <text>MPOD1 / Slot3</text>
+    <x>441</x>
+    <y>400</y>
     <width>580</width>
     <height>30</height>
     <font>
