@@ -1,6 +1,6 @@
 # UPS Monitoring
 
-This directory containts scripts to setup an OPC UA server
+This directory contains scripts to setup an OPC UA server
 to monitor the status of the Uninterrumptible Power Supply (UPS)
 unit connected to module two. 
 
@@ -22,9 +22,9 @@ to create a virtual environment to install these packages.
 NOTE: This assumes that you are working on the RasPi used for 
 the UPS monitoring. 
 
-
-From the directory where this README is located do
 ## Setup paths
+From the directory where this README is located do
+
 ```bash
 source setup.sh
 ```
@@ -44,24 +44,24 @@ To start the OPC-UA server do
 python ${TOP_DIR}/Source/UPS_with_opcua.py
 ```
 
-Nevertheless, we recommend using nohup to keep the process running
+We recommend using nohup to keep the process running
 on the background
 
 ```bash
-nohup python Source/UPS_with_opcua.py > ups_server.log 2>&1 &
+nohup python ${TOP_DIR}/Source/UPS_with_opcua.py > ups_server.log 2>&1 &
 ```
 
 ## Check if the server is working
 
-If you want to check that the data is correctly being send
+If you want to check that the data is being sent
 to the OPC-UA server, you can run 
 
 ```bash
 python ${TOP_DIR}/Source/retrieve_server_data.py
 ```
 
-If the data shows up successfuly, it will also be visible 
-to the PostgreSQL DB. Then, you should check if data is being
-correctly displayed in Grafana and Ignition. 
+If the data shows up successfuly, it should also be visible 
+to the PostgreSQL DB. You can check this by looking at Grafana
+and Ignition. 
 
 
