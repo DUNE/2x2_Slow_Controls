@@ -65,3 +65,13 @@ to the PostgreSQL DB. You can check this by looking at Grafana
 and Ignition. 
 
 
+## Start server after RasPi reboot
+
+The following script is used to start the OPC-UA server after a reboot
+
+```bash
+start_server_on_raspi.sh
+```
+
+Instructions on how to configure the RasPi to do so can be found [here](https://medium.com/@girishbhasinofficial/configuring-a-script-to-run-at-startup-on-ubuntu-22-04-ffe1f3e649d1)
+
