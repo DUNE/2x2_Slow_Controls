@@ -28,8 +28,8 @@ class GIZMO(UNIT):
         #self.chan = None
 
         # START CONTINUOUS MONITORING ON OBJECT CREATION
-        if self.crate_status:
-            threading.Thread(target=self.CONTINUOUS_monitoring, args=([]), kwargs={}).start()
+        #if self.crate_status:
+        #    threading.Thread(target=self.CONTINUOUS_monitoring, args=([]), kwargs={}).start()
 
     #---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---#---
     # GET METHODS
