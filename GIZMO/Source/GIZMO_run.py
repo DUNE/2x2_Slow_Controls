@@ -13,7 +13,6 @@ others_dict = {}
 for unit in othersDB.keys():
     kind = othersDB[unit]["class"]
     others_dict[id] = GIZMO(None, unit, othersDB[unit])
-    print(othersDB[unit])
     id += 1
 
 # Continuous monitoring

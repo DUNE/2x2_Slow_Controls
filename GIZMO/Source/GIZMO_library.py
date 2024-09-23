@@ -126,8 +126,9 @@ class GIZMO(UNIT):
             client.connect(self.dictionary["host-name"], self.dictionary["port"], self.dictionary["username"], self.dictionary["password"], timeout=200)
             chan = client.invoke_shell()
             chan.send('./GIZMO.elf 1\n')
+            print(chan)
         except Exception as e:
-            print("Something is wrong!")
+            print("Something is wrong on the ssh connection!")
             #self.crate_status = False
             self.error_status = True
             print('*** Caught exception: %s: %s' % (e.__class__, e))
@@ -174,7 +175,7 @@ class GIZMO(UNIT):
                     #print("ELAPSED TIME : " + str(elapsed_time))
 
             except Exception as e:
-                print("Something is wrong!")
+                print("Something is wrong on the measurement!")
                 #self.crate_status = False
                 self.error_status = True
                 print('*** Caught exception: %s: %s' % (e.__class__, e))

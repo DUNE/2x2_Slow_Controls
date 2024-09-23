@@ -47,7 +47,7 @@ class UNIT():
         # Setup InfluxDB client
         IP = "192.168.197.46"
         INFLUX_PORT = "8086"
-        db_name = self.module + "_" + self.unit + "_TEST"
+        db_name = self.unit
         client = InfluxDBClient(IP, INFLUX_PORT, db_name)
 
         # Create database
