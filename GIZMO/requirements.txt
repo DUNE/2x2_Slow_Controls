@@ -1,0 +1,3 @@
+influxdb
+numpy
+paramiko
