@@ -24,4 +24,4 @@ done
 
 ###############################################################
 # Start podman container
-podman-compose -f compose.yaml build --no-cache && podman-compose -f compose.yaml up 
+podman-compose -f compose.yaml build --no-cache && podman-compose -f compose.yaml up -d
