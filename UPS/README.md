@@ -100,7 +100,7 @@ ps -ef | grep UPS_with_opcua.py
 Then 
 
 ```bash 
-kill sever-code 
+kill server-code 
 ```
 
 Where server-code is the PID returned by ps.
