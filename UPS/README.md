@@ -89,3 +89,18 @@ in the crontab and then reboot the RasPi from the terminal doing
 ```bash
 sudo reboot 
 ```
+
+## Kill the server manually
+
+To kill the process associated with the server, first find its process code doing
+
+```bash 
+ps -ef | grep UPS_with_opcua.py
+```
+Then 
+
+```bash 
+kill <sever-code> 
+```
+
+Where server-code is the PID returned by ps.
