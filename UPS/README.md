@@ -79,7 +79,7 @@ ups_crontab_cmd.txt
 
 If you need to modify the crontab config file, once logged in the RasPi you should do
 
-``bash
+```bash
 crontab -e 
 ```
 
