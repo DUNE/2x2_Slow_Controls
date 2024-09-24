@@ -64,14 +64,28 @@ If the data shows up successfuly, it should also be visible
 to the PostgreSQL DB. You can check this by looking at Grafana
 and Ignition. 
 
+Note: After a restart, it will take a few minutes before the data
+shows up in Grafana and Ignition. 
+
 
 ## Start server after RasPi reboot
 
-The following script is used to start the OPC-UA server after a reboot
+To restart the server after a RasPi reboot we use a crontab. The command
+that is currently configured in the RasPi is described in 
 
 ```bash
-start_server_on_raspi.sh
+ups_crontab_cmd.txt
 ```
 
-Instructions on how to configure the RasPi to do so can be found [here](https://medium.com/@girishbhasinofficial/configuring-a-script-to-run-at-startup-on-ubuntu-22-04-ffe1f3e649d1)
+If you need to modify the crontab config file, once logged in the RasPi you should do
 
+``bash
+crontab -e 
+```
+
+To test your modifications after a reboot we suggest to create a log file
+in the crontab and then reboot the RasPi from the terminal doing
+
+```bash
+sudo reboot 
+```

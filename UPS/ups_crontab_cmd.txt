@@ -1,0 +1,1 @@
+@reboot /bin/bash -c "source /home/acd-pi-01/WorkDir/ups_env/bin/activate && source /home/acd-pi-01/WorkDir/2x2_Slow_Controls/UPS/start_server_on_raspi.sh"
