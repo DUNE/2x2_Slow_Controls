@@ -103,4 +103,4 @@ Then
 kill <sever-code> 
 ```
 
-Where server-code is the PID returned by ps.
+Where <server-code> is the PID returned by ps.
