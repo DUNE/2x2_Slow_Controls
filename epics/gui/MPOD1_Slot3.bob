@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2024-09-16 16:23:10 by sungbino-->
+<!--Saved on 2024-09-30 15:10:13 by sungbino-->
 <display version="2.0.0">
   <name>PACMAN_Mod2_Mod3</name>
   <width>1450</width>
@@ -1486,7 +1486,7 @@
   </widget>
   <widget type="label" version="2.0.0">
     <name>Label_129</name>
-    <text>Module 0</text>
+    <text>Module 2</text>
     <y>40</y>
     <width>1450</width>
     <height>30</height>
@@ -1512,7 +1512,7 @@
   </widget>
   <widget type="label" version="2.0.0">
     <name>Label_130</name>
-    <text>Module 1</text>
+    <text>Module 3</text>
     <y>220</y>
     <width>1450</width>
     <height>30</height>
