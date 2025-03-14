@@ -127,7 +127,7 @@ try:
              fval=6.0 / 3983 * float(str(val))
              print(str(fval))
         else: 
-            print('Error')  
+            print('Error')
     
     
     elif str(sys.argv[1]) == 'SetSP_V': 
@@ -170,8 +170,7 @@ try:
              val=data.split(",")[2] 
              print("Voltage mode " + str(val))
         else: 
-            print('Error')  
-
+            print('Error')
 
     elif str(sys.argv[1]) == 'Status':     
         message = b"\x02"+b'32,'+b"\x03"

@@ -35,7 +35,7 @@ get_op_mode_v {
 get_read_v {
     out STX,"20,";
     wait 1;
-    in STX,"20,%d,%*d,%*d,%*d,%*d,%*d,%*d,%*d,%*d,";
+    in STX,"20,%*d,%*d,%*d,%*d,%*d,%*d,%*d,%*d,%d,";
 }
 
 get_read_i {
