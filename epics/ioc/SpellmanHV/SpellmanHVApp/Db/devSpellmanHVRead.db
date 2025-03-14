@@ -1,13 +1,22 @@
 record(ai, "spellmanhv/rVSet"){
   field(DESC, "Set voltage")
   field(DTYP, "stream")
-  field(INP, "@devSpellmanHV.proto get_set_i $(PORT) $(BUS)")
+  field(INP, "@devSpellmanHV.proto get_set_v $(PORT) $(BUS)")
   field(EGU, "kV")
   field(SCAN, "2 second")
   field(LINR,"SLOPE")
-  field(PREC, "2")
+  field(PREC, "3")
   field(AOFF,"0.00")
   field(ASLO, "0.01221")
+}
+
+record(ai, "spellmanhv/rVSet_bit"){
+  field(DESC, "Set voltage")
+  field(DTYP, "stream")
+  field(INP, "@devSpellmanHV.proto get_set_v $(PORT) $(BUS)")
+  field(EGU, "Bits")
+  field(SCAN, "2 second")
+  field(PREC, "3")
 }
 
 record(ai, "spellmanhv/rISet"){
@@ -17,7 +26,7 @@ record(ai, "spellmanhv/rISet"){
   field(EGU, "mA")
   field(SCAN, "2 second")
   field(LINR,"SLOPE")
-  field(PREC, "2")
+  field(PREC, "3")
   field(AOFF,"0.00")
   field(ASLO, "0.0014652")
 }
@@ -29,11 +38,22 @@ record(ai, "spellmanhv/rV"){
   field(EGU, "kV")
   field(SCAN, "2 second")
   field(LINR,"SLOPE")
-  field(PREC, "2")
+  field(PREC, "3")
   field(AOFF,"0.00")
-  field(ASLO, "0.012553352")
+  field(ASLO, "0.012553253")
   field(ADEL, 0.1)
   field(MDEL, 0.01)
+}
+
+record(ai, "spellmanhv/rV_bit"){
+  field(DESC, "Read back voltage")
+  field(DTYP, "stream")
+  field(INP, "@devSpellmanHV.proto get_read_v $(PORT) $(BUS)")
+  field(EGU, "Bits")
+  field(SCAN, "2 second")
+  field(PREC, "1")
+  field(ADEL, 0.1)
+  field(MDEL, 0.1)
 }
 
 record(ai, "spellmanhv/rI"){
@@ -43,7 +63,7 @@ record(ai, "spellmanhv/rI"){
   field(EGU, "mA")
   field(SCAN, "2 second")
   field(LINR,"SLOPE")
-  field(PREC, "2")
+  field(PREC, "3")
   field(AOFF,"0.00")
   field(ASLO, "0.0015064022")
   field(ADEL, 0.02)

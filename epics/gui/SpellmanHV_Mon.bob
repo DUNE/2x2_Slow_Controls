@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--Saved on 2024-07-25 10:41:44 by sungbino-->
+<!--Saved on 2024-11-11 10:42:03 by sungbino-->
 <display version="2.0.0">
   <name>SpellmanHVMon</name>
-  <width>1150</width>
+  <width>1500</width>
   <height>550</height>
   <actions>
   </actions>
@@ -202,12 +202,12 @@
       <height>50</height>
       <off_label>Open</off_label>
       <off_color>
-        <color name="OK" red="0" green="255" blue="0">
+        <color name="MAJOR" red="255" green="0" blue="0">
         </color>
       </off_color>
       <on_label>Clossd</on_label>
       <on_color>
-        <color name="MAJOR" red="255" green="0" blue="0">
+        <color name="OK" red="0" green="255" blue="0">
         </color>
       </on_color>
       <square>true</square>
@@ -606,7 +606,7 @@
     <text>Settings</text>
     <x>591</x>
     <y>40</y>
-    <width>550</width>
+    <width>735</width>
     <height>30</height>
     <font>
       <font family="Liberation Sans" style="BOLD" size="18.0">
@@ -632,7 +632,7 @@
     <name>MPOD Status_1</name>
     <x>591</x>
     <y>70</y>
-    <width>550</width>
+    <width>735</width>
     <height>470</height>
     <style>2</style>
     <background_color>
@@ -761,7 +761,7 @@
       <name>Label_151</name>
       <text>Current</text>
       <x>10</x>
-      <y>100</y>
+      <y>150</y>
       <height>25</height>
       <font>
         <font family="Liberation Sans" style="BOLD" size="14.0">
@@ -781,7 +781,7 @@
       <name>Text Update_69</name>
       <pv_name>spellmanhv/rI</pv_name>
       <x>430</x>
-      <y>100</y>
+      <y>150</y>
       <height>30</height>
       <background_color>
         <color red="255" green="255" blue="255">
@@ -800,7 +800,7 @@
       <name>Label_152</name>
       <text>Curr. Limit</text>
       <x>10</x>
-      <y>150</y>
+      <y>200</y>
       <height>25</height>
       <font>
         <font family="Liberation Sans" style="BOLD" size="14.0">
@@ -820,7 +820,45 @@
       <name>Text Update_70</name>
       <pv_name>spellmanhv/rISet</pv_name>
       <x>290</x>
-      <y>150</y>
+      <y>200</y>
+      <height>30</height>
+      <background_color>
+        <color red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <vertical_alignment>1</vertical_alignment>
+      <wrap_words>false</wrap_words>
+      <actions>
+      </actions>
+      <border_color>
+        <color red="0" green="128" blue="255">
+        </color>
+      </border_color>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_68</name>
+      <pv_name>spellmanhv/setV_kV</pv_name>
+      <x>150</x>
+      <y>50</y>
+      <height>30</height>
+      <background_color>
+        <color red="255" green="255" blue="255">
+        </color>
+      </background_color>
+      <vertical_alignment>1</vertical_alignment>
+      <wrap_words>false</wrap_words>
+      <actions>
+      </actions>
+      <border_color>
+        <color red="0" green="128" blue="255">
+        </color>
+      </border_color>
+    </widget>
+    <widget type="textupdate" version="2.0.0">
+      <name>Text Update_71</name>
+      <pv_name>spellmanhv/setV_bit</pv_name>
+      <x>150</x>
+      <y>100</y>
       <height>30</height>
       <background_color>
         <color red="255" green="255" blue="255">

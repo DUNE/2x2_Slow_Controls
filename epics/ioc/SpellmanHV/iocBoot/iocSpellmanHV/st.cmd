@@ -18,13 +18,14 @@ SpellmanHV_registerRecordDeviceDriver pdbbase
 drvAsynIPPortConfigure("SpellmanHV", "192.168.197.84:50001", 0,0,0)
 
 ## Debugging
-asynSetTraceIOMask("SpellmanHV",-1,0xff) # check what 0x4 is doing
-asynSetTraceIOMask("SpellmanHV",0,HEX|ESCAPE)
-asynSetTraceMask("SpellmanHV",-1,0xff)
-asynSetTraceIOTruncateSize("SpellmanHV",-1, 1024)
+#asynSetTraceIOMask("SpellmanHV",-1,0xff) # check what 0x4 is doing
+#asynSetTraceIOMask("SpellmanHV",0,HEX|ESCAPE)
+#asynSetTraceMask("SpellmanHV",-1,0xff)
+#asynSetTraceIOTruncateSize("SpellmanHV",-1, 1024)
 
 ## Load record instances
 dbLoadRecords("db/devSpellmanHVRead.db", "PORT=SpellmanHV,BUS=0")
+dbLoadRecords("db/devSpellmanHVWrite.db", "PORT=SpellmanHV,BUS=0")
 
 cd "${TOP}/iocBoot/${IOC}"
 iocInit
