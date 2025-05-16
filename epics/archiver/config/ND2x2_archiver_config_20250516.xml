@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<engineconfig>
+  <group><name>testioc</name>
+    <channel><name>nd2x2_testioc/archive_test</name><period>0.2</period><monitor/></channel>
+  </group>
+  <group><name>SpellmanHV</name>
+    <channel><name>spellmanhv/rI</name><period>0.2</period><monitor/></channel>
+    <channel><name>spellmanhv/rV</name><period>0.2</period><monitor/></channel>
+  </group>
+</engineconfig>
