@@ -11,30 +11,30 @@ include $(TOP)/configure/CONFIG
 #=============================
 # Build the IOC application
 
-PROD_IOC = testiocApp
-# testiocApp.dbd will be created and installed
-DBD += testiocApp.dbd
+PROD_IOC = testioc
+# testioc.dbd will be created and installed
+DBD += testioc.dbd
 
-# testiocApp.dbd will be made up from these files:
-testiocApp_DBD += base.dbd
+# testioc.dbd will be made up from these files:
+testioc_DBD += base.dbd
 
 # Include dbd files from all support applications:
-#testiocApp_DBD += xxx.dbd
+#testioc_DBD += xxx.dbd
 
 # Add all the support libraries needed by this IOC
 
-# testiocApp_registerRecordDeviceDriver.cpp derives from testiocApp.dbd
-testiocApp_SRCS += testiocApp_registerRecordDeviceDriver.cpp
+# testioc_registerRecordDeviceDriver.cpp derives from testioc.dbd
+testioc_SRCS += testioc_registerRecordDeviceDriver.cpp
 
 # Build the main IOC entry point on workstation OSs.
-testiocApp_SRCS_DEFAULT += testiocAppMain.cpp
-testiocApp_SRCS_vxWorks += -nil-
+testioc_SRCS_DEFAULT += testiocMain.cpp
+testioc_SRCS_vxWorks += -nil-
 
 # Add support from base/src/vxWorks if needed
-testiocApp_OBJS_vxWorks += $(EPICS_BASE_BIN)/vxComLibrary
+testioc_OBJS_vxWorks += $(EPICS_BASE_BIN)/vxComLibrary
 
 # Finally link to the EPICS Base libraries
-testiocApp_LIBS += $(EPICS_BASE_IOC_LIBS)
+testioc_LIBS += $(EPICS_BASE_IOC_LIBS)
 
 #===========================
 
