@@ -27,35 +27,35 @@ class UPS(UNIT):
     # Battery variables 
     def get_battery_fail(self):
         ups_stat_var = "xupsBatteryFailure.0"
-        command = f"snmpget -v 3 -M {self.mib_dir} -M +{self.GLOBAL_MIBS} -m ALL -u readonly -c public {self.device_address} {ups_stat_var}" 
+        command = f"snmpget -v 3 -M +{self.mib_dir} -m ALL -u readonly -c public {self.device_address} {ups_stat_var}" 
         output_command = self.execute_command(command)
         temp_val = self.parse_snmpget_output(output_command)
         return temp_val['Value']
     
     def get_battery_time(self):
         ups_stat_var = "xupsBatTimeRemaining.0"
-        command = f"snmpget -v 3 -M {self.mib_dir} -M +{self.GLOBAL_MIBS} -m ALL -u readonly -c public {self.device_address} {ups_stat_var}" 
+        command = f"snmpget -v 3 -M +{self.mib_dir} -m ALL -u readonly -c public {self.device_address} {ups_stat_var}" 
         output_command = self.execute_command(command)
         temp_val = self.parse_snmpget_output(output_command)
         return temp_val['Value']
     
     def get_battery_cap(self):
         ups_stat_var = "xupsBatCapacity.0"
-        command = f"snmpget -v 3 -M {self.mib_dir} -M +{self.GLOBAL_MIBS} -m ALL -u readonly -c public {self.device_address} {ups_stat_var}" 
+        command = f"snmpget -v 3 -M +{self.mib_dir} -m ALL -u readonly -c public {self.device_address} {ups_stat_var}" 
         output_command = self.execute_command(command)
         temp_val = self.parse_snmpget_output(output_command)
         return temp_val['Value']
     
     def get_battery_voltage(self):
         ups_stat_var = "xupsBatVoltage.0"
-        command = f"snmpget -v 3 -M {self.mib_dir} -M +{self.GLOBAL_MIBS} -m ALL -u readonly -c public {self.device_address} {ups_stat_var}" 
+        command = f"snmpget -v 3 -M +{self.mib_dir} -m ALL -u readonly -c public {self.device_address} {ups_stat_var}" 
         output_command = self.execute_command(command)
         temp_val = self.parse_snmpget_output(output_command)
         return temp_val['Value']
     
     def get_battery_age(self):
         ups_stat_var = "xupsBatteryAged.0"
-        command = f"snmpget -v 3 -M {self.mib_dir} -M +{self.GLOBAL_MIBS} -m ALL -u readonly -c public {self.device_address} {ups_stat_var}" 
+        command = f"snmpget -v 3 -M +{self.mib_dir} -m ALL -u readonly -c public {self.device_address} {ups_stat_var}" 
         output_command = self.execute_command(command)
         temp_val = self.parse_snmpget_output(output_command)
         return temp_val['Value']
@@ -63,14 +63,14 @@ class UPS(UNIT):
     # Inputs 
     def get_input_voltage(self):
         ups_stat_var = "xupsInputVoltage.1"
-        command = f"snmpget -v 3 -M {self.mib_dir} -M +{self.GLOBAL_MIBS} -m ALL -u readonly -c public {self.device_address} {ups_stat_var}" 
+        command = f"snmpget -v 3 -M +{self.mib_dir} -m ALL -u readonly -c public {self.device_address} {ups_stat_var}" 
         output_command = self.execute_command(command)
         temp_val = self.parse_snmpget_output(output_command)
         return temp_val['Value']
     
     def get_input_current(self):
         ups_stat_var = "xupsInputCurrent.1"
-        command = f"snmpget -v 3 -M {self.mib_dir} -M +{self.GLOBAL_MIBS} -m ALL -u readonly -c public {self.device_address} {ups_stat_var}" 
+        command = f"snmpget -v 3 -M +{self.mib_dir} -m ALL -u readonly -c public {self.device_address} {ups_stat_var}" 
         output_command = self.execute_command(command)
         temp_val = self.parse_snmpget_output(output_command)
         return temp_val['Value']
@@ -78,21 +78,21 @@ class UPS(UNIT):
     # Outputs
     def get_output_voltage(self):
         ups_stat_var = "xupsOutputVoltage.1"
-        command = f"snmpget -v 3 -M {self.mib_dir} -M +{self.GLOBAL_MIBS} -m ALL -u readonly -c public {self.device_address} {ups_stat_var}" 
+        command = f"snmpget -v 3 -M +{self.mib_dir} -m ALL -u readonly -c public {self.device_address} {ups_stat_var}" 
         output_command = self.execute_command(command)
         temp_val = self.parse_snmpget_output(output_command)
         return temp_val['Value']
     
     def get_output_current(self):
         ups_stat_var = "xupsOutputCurrent.1"
-        command = f"snmpget -v 3 -M {self.mib_dir} -M +{self.GLOBAL_MIBS} -m ALL -u readonly -c public {self.device_address} {ups_stat_var}" 
+        command = f"snmpget -v 3 -M +{self.mib_dir} -m ALL -u readonly -c public {self.device_address} {ups_stat_var}" 
         output_command = self.execute_command(command)
         temp_val = self.parse_snmpget_output(output_command)
         return temp_val['Value']
     
     def get_output_power(self):
         ups_stat_var = "xupsOutputWatts.1"
-        command = f"snmpget -v 3 -M {self.mib_dir} -M +{self.GLOBAL_MIBS} -m ALL -u readonly -c public {self.device_address} {ups_stat_var}" 
+        command = f"snmpget -v 3 -M +{self.mib_dir} -m ALL -u readonly -c public {self.device_address} {ups_stat_var}" 
         output_command = self.execute_command(command)
         temp_val = self.parse_snmpget_output(output_command)
         return temp_val['Value']
