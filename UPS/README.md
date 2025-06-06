@@ -29,13 +29,6 @@ From the directory where this README is located do
 source setup.sh
 ```
 
-Note that on the RasPi the global mibs directory
-is located in
-
-```bash
-$HOME/mibs
-```
-
 ## Initialize server
 
 To start the OPC-UA server do 
@@ -141,11 +134,11 @@ The two commands that we typicaly use for monitoring are snmpwalk and snmpget.
 ```bash
 snmpwalk -v 3 -M +./mibs_ups/ -m ALL  -u readonly -c public 192.168.197.92 xupsMIB
 ```
-In this example, we tell snmp to use version 3 since which is the one required to read the UPS mibs. We also tell snmp to look at the mib files contained in the /mibs_ups directory and to include all other visible mibs using -m ALL. The last two arguments are the IP address of the network device (in this example the UPS) and the subset of OIDs you want to query (In this case snmp will print all OIDs associated to xups). If you don't specify a subset OIDs it will just scan all the OIDs.
+In this example, we tell snmp to use v3 since it is the version equired to read the UPS mibs. We also tell snmp to look at the mib files contained in the /mibs_ups directory and to include all other visible mibs using -m ALL. The last two arguments are the IP address of the network device (in this example the UPS) and the subset of OIDs you want to query (In this case snmp will print all OIDs associated to xups). If you don't specify a subset OIDs it will just scan all the OIDs.
 
 ```bash
 snmpget -v 3 -M +./mibs_ups -m all -u readonly -c public 192.168.197.92 xupsBatteryFailure.0
 ```
 
-In this example the configuration is almost identical to snmpwalk, but this time we are just quering one specific value. In this example we are asking snmp if the batery of the UPS is failing or not. This action will return a boolean value. 
+In this example the configuration is almost identical to snmpwalk, but this time we are just quering one specific value. This command asks snmp if the batery of the UPS is failing or not. This action will return a boolean value. 
 
