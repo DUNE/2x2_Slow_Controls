@@ -104,3 +104,48 @@ kill server-code
 ```
 
 Where server-code is the PID returned by ps.
+
+
+## Appendix
+
+### SNMP installation
+
+1.- To install snmp run: 
+
+```bash
+sudo apt install snmpd snmp libsnmp-dev
+```
+
+2.- Standard mib files do not come with snmp, you need to install them:
+
+```bash
+sudo apt-get install snmp-mibs-downloader
+sudo download-mibs
+```
+by default mibs files are installed in the following path:
+
+```bash
+/usr/share/snmp/mibs
+```
+
+### SNMP commands 
+
+The two commands that we typicaly use for monitoring are snmpwalk and snmpget. 
+
+- snmpwalk: This command navigates the tree of Object Identifiers (OIDs) of a network device and prints the value retrieved for each OID.
+
+- snmpget: This command retrieves the value of just one OID that you have to specify at the moment of executing the command. 
+
+### UPS examples 
+
+```bash
+snmpwalk -v 3 -M +./mibs_ups/ -m ALL  -u readonly -c public 192.168.197.92 xupsMIB
+```
+In this example, we tell snmp to use version 3 since which is the one required to read the UPS mibs. We also tell snmp to look at the mib files contained in the /mibs_ups directory and to include all other visible mibs using -m ALL. The last two arguments are the IP address of the network device (in this example the UPS) and the subset of OIDs you want to query (In this case snmp will print all OIDs associated to xups). If you don't specify a subset OIDs it will just scan all the OIDs.
+
+```bash
+snmpget -v 3 -M +./mibs_ups -m all -u readonly -c public 192.168.197.92 xupsBatteryFailure.0
+```
+
+In this example the configuration is almost identical to snmpwalk, but this time we are just quering one specific value. In this example we are asking snmp if the batery of the UPS is failing or not. This action will return a boolean value. 
+
