@@ -1,1 +1,1 @@
-screen -dmS Temp  /home/pi/Dune2x2_SlowControl/RTD/start_rtd_opcua.sh
+screen -dmS Temp  /home/pi/SlowControls2x2/RTDs/RTD/start_rtd_opcua.sh
