@@ -60,8 +60,8 @@ end_group(filename, 1)
 #################################
 ### == add MPODs
 #################################
-channel_pvs = ["outputMeasurementCurrent", "outputMeasurementSenseVoltage", "outputMeasurementTerminalVoltage"] #, "outputStatus"]
-#crate_pvs = ["sysStatus"]
+channel_pvs = ["outputMeasurementCurrent", "outputMeasurementSenseVoltage", "outputMeasurementTerminalVoltage", "outputStatus"]
+crate_pvs = ["sysStatus"]
 start_group(filename, "MPOD", 1)
 for module in range(0, 4):
     this_module = "Mod" + str(module)
@@ -102,7 +102,12 @@ for module in range(0, 4):
         for channel_pv in channel_pvs:
             this_pv = this_interlock  + "_pacFAN/" + channel_pv
             add_pv(filename, this_pv, "0.2", 2)
-            
+
+for mpod in range(0, 2):
+    this_mpod = "mpod" + str(mpod)
+    for crate_pv in crate_pvs:
+        this_pv = this_mpod + "/" + crate_pv
+        add_pv(filename, this_pv, "0.2", 2)
 end_group(filename, 1)
 
 #################################
