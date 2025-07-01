@@ -1,6 +1,8 @@
 # About this GUI
 This repository contains the code used for setting up the 2x2 slow controls monitoring and controls. The goal of this GUI is to provide a graphical interface that allows shifters and run coordinators to power different power supplies as well as monitoring their respective outcomes.
 
+In this feature branch we include code to acces the UPS output data 
+
 ## Technology Stack:
 
 - Backend: FastAPI. Go to `192.168.197.46:8000/docs` for more details on the noVNC.

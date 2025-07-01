@@ -1,0 +1,20 @@
+{
+    "gizmo" : {
+        "class" : "GIZMO",
+        "host-name" : "192.168.197.30",
+        "username" : "root",
+        "password" : "",
+        "port" : 22,
+        "powering" :{
+            "resistance" : {"measurements" : "resistance", "grafana-link" : "http://192.168.197.46:3001/d-solo/W6fcPQhSk/gizmo-impedance-monitor?orgId=1&from=now-15m&to=now&refresh=10s&panelId=29"},
+            "threshold" : {"measurements" : "threshold", "grafana-link" : ""},
+            "magnitude" : {"measurements" : "magnitude", "grafana-link" : "http://192.168.197.46:3001/d-solo/W6fcPQhSk/gizmo-impedance-monitor?orgId=1&from=now-15m&to=now&refresh=10s&panelId=28"},
+            "current" : {"measurements" : "current", "grafana-link" : ""},
+            "charge" : {"measurements" : "charge","grafana-link" : ""},
+            "phase" : {"measurements" : "phase","grafana-link" : "http://192.168.197.46:3001/d-solo/W6fcPQhSk/gizmo-impedance-monitor?orgId=1&from=now-15m&to=now&refresh=10s&panelId=6"}
+        },
+        "on_message" : "Measuring impedance, magnitude, and phase.",
+        "off_message" : "Turn ON/OFF GIZMO manually.",
+        "error_message" : "Error: Cannot make ssh connection with unit. Review local IP address."
+    }
+}

@@ -1,0 +1,8 @@
+version: '3.8'
+
+services:      
+  gizmo-monitoring:
+    container_name: gizmo-monitoring
+    build:
+      context: .
+      dockerfile: Dockerfile

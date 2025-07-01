@@ -1,4 +1,4 @@
-# Run the Cryogenics Monitoring (NEED UPDATES!)
+# Run the Cryogenics Monitoring
 This branch contains the podman image that reads the cryo data from their PostgreSQL database.
 
 First let's ssh to acd-daq05 as acdcs user:

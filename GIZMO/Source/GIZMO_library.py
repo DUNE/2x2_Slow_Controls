@@ -1,4 +1,4 @@
-from app.CLASSES.UNIT_library import UNIT
+from UNIT_library import UNIT
 import time 
 from datetime import datetime
 import numpy as np
@@ -126,12 +126,12 @@ class GIZMO(UNIT):
             client.connect(self.dictionary["host-name"], self.dictionary["port"], self.dictionary["username"], self.dictionary["password"], timeout=200)
             chan = client.invoke_shell()
             chan.send('./GIZMO.elf 1\n')
+            print(chan)
         except Exception as e:
-            print("Something is wrong!")
-            self.crate_status = False
+            print("Something is wrong on the ssh connection!")
+            #self.crate_status = False
             self.error_status = True
             print('*** Caught exception: %s: %s' % (e.__class__, e))
-
         # Take data while gizmo is ON
         while self.crate_status:
             try:
@@ -175,12 +175,13 @@ class GIZMO(UNIT):
                     #print("ELAPSED TIME : " + str(elapsed_time))
 
             except Exception as e:
-                print("Something is wrong!")
-                self.crate_status = False
+                print("Something is wrong on the measurement!")
+                #self.crate_status = False
                 self.error_status = True
                 print('*** Caught exception: %s: %s' % (e.__class__, e))
                 chan.close()
                 client.close()
+                self.CONTINUOUS_monitoring()
                 #traceback.print_exc()
                 #sys.exit(1)
 
