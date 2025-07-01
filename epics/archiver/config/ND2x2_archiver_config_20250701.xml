@@ -11,122 +11,164 @@
     <channel><name>Mod0-VGA_Card_1/outputMeasurementCurrent</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod0-VGA_Card_1/outputMeasurementSenseVoltage</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod0-VGA_Card_1/outputMeasurementTerminalVoltage</name><period>0.2</period><monitor/></channel>
+    <channel><name>Mod0-VGA_Card_1/outputStatus</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod0-VGA_Card_2/outputMeasurementCurrent</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod0-VGA_Card_2/outputMeasurementSenseVoltage</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod0-VGA_Card_2/outputMeasurementTerminalVoltage</name><period>0.2</period><monitor/></channel>
+    <channel><name>Mod0-VGA_Card_2/outputStatus</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod0-VGA_Card_3/outputMeasurementCurrent</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod0-VGA_Card_3/outputMeasurementSenseVoltage</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod0-VGA_Card_3/outputMeasurementTerminalVoltage</name><period>0.2</period><monitor/></channel>
+    <channel><name>Mod0-VGA_Card_3/outputStatus</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod0-VGA_Card_4/outputMeasurementCurrent</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod0-VGA_Card_4/outputMeasurementSenseVoltage</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod0-VGA_Card_4/outputMeasurementTerminalVoltage</name><period>0.2</period><monitor/></channel>
+    <channel><name>Mod0-VGA_Card_4/outputStatus</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod0-RTD_1/outputMeasurementCurrent</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod0-RTD_1/outputMeasurementSenseVoltage</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod0-RTD_1/outputMeasurementTerminalVoltage</name><period>0.2</period><monitor/></channel>
+    <channel><name>Mod0-RTD_1/outputStatus</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod0-RTD_2/outputMeasurementCurrent</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod0-RTD_2/outputMeasurementSenseVoltage</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod0-RTD_2/outputMeasurementTerminalVoltage</name><period>0.2</period><monitor/></channel>
+    <channel><name>Mod0-RTD_2/outputStatus</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod0-TPC1_pacFAN/outputMeasurementCurrent</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod0-TPC1_PACMAN/outputMeasurementCurrent</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod0-TPC1_pacFAN/outputMeasurementSenseVoltage</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod0-TPC1_PACMAN/outputMeasurementSenseVoltage</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod0-TPC1_pacFAN/outputMeasurementTerminalVoltage</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod0-TPC1_PACMAN/outputMeasurementTerminalVoltage</name><period>0.2</period><monitor/></channel>
+    <channel><name>Mod0-TPC1_pacFAN/outputStatus</name><period>0.2</period><monitor/></channel>
+    <channel><name>Mod0-TPC1_PACMAN/outputStatus</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod0-TPC2_pacFAN/outputMeasurementCurrent</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod0-TPC2_PACMAN/outputMeasurementCurrent</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod0-TPC2_pacFAN/outputMeasurementSenseVoltage</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod0-TPC2_PACMAN/outputMeasurementSenseVoltage</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod0-TPC2_pacFAN/outputMeasurementTerminalVoltage</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod0-TPC2_PACMAN/outputMeasurementTerminalVoltage</name><period>0.2</period><monitor/></channel>
+    <channel><name>Mod0-TPC2_pacFAN/outputStatus</name><period>0.2</period><monitor/></channel>
+    <channel><name>Mod0-TPC2_PACMAN/outputStatus</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod0-interlock_pacFAN/outputMeasurementCurrent</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod0-interlock_pacFAN/outputMeasurementSenseVoltage</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod0-interlock_pacFAN/outputMeasurementTerminalVoltage</name><period>0.2</period><monitor/></channel>
+    <channel><name>Mod0-interlock_pacFAN/outputStatus</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod1-VGA_Card_1/outputMeasurementCurrent</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod1-VGA_Card_1/outputMeasurementSenseVoltage</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod1-VGA_Card_1/outputMeasurementTerminalVoltage</name><period>0.2</period><monitor/></channel>
+    <channel><name>Mod1-VGA_Card_1/outputStatus</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod1-VGA_Card_2/outputMeasurementCurrent</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod1-VGA_Card_2/outputMeasurementSenseVoltage</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod1-VGA_Card_2/outputMeasurementTerminalVoltage</name><period>0.2</period><monitor/></channel>
+    <channel><name>Mod1-VGA_Card_2/outputStatus</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod1-VGA_Card_3/outputMeasurementCurrent</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod1-VGA_Card_3/outputMeasurementSenseVoltage</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod1-VGA_Card_3/outputMeasurementTerminalVoltage</name><period>0.2</period><monitor/></channel>
+    <channel><name>Mod1-VGA_Card_3/outputStatus</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod1-VGA_Card_4/outputMeasurementCurrent</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod1-VGA_Card_4/outputMeasurementSenseVoltage</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod1-VGA_Card_4/outputMeasurementTerminalVoltage</name><period>0.2</period><monitor/></channel>
+    <channel><name>Mod1-VGA_Card_4/outputStatus</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod1-RTD/outputMeasurementCurrent</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod1-RTD/outputMeasurementSenseVoltage</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod1-RTD/outputMeasurementTerminalVoltage</name><period>0.2</period><monitor/></channel>
+    <channel><name>Mod1-RTD/outputStatus</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod1-TPC1_pacFAN/outputMeasurementCurrent</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod1-TPC1_PACMAN/outputMeasurementCurrent</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod1-TPC1_pacFAN/outputMeasurementSenseVoltage</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod1-TPC1_PACMAN/outputMeasurementSenseVoltage</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod1-TPC1_pacFAN/outputMeasurementTerminalVoltage</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod1-TPC1_PACMAN/outputMeasurementTerminalVoltage</name><period>0.2</period><monitor/></channel>
+    <channel><name>Mod1-TPC1_pacFAN/outputStatus</name><period>0.2</period><monitor/></channel>
+    <channel><name>Mod1-TPC1_PACMAN/outputStatus</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod1-TPC2_pacFAN/outputMeasurementCurrent</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod1-TPC2_PACMAN/outputMeasurementCurrent</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod1-TPC2_pacFAN/outputMeasurementSenseVoltage</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod1-TPC2_PACMAN/outputMeasurementSenseVoltage</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod1-TPC2_pacFAN/outputMeasurementTerminalVoltage</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod1-TPC2_PACMAN/outputMeasurementTerminalVoltage</name><period>0.2</period><monitor/></channel>
+    <channel><name>Mod1-TPC2_pacFAN/outputStatus</name><period>0.2</period><monitor/></channel>
+    <channel><name>Mod1-TPC2_PACMAN/outputStatus</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod1-interlock_pacFAN/outputMeasurementCurrent</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod1-interlock_pacFAN/outputMeasurementSenseVoltage</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod1-interlock_pacFAN/outputMeasurementTerminalVoltage</name><period>0.2</period><monitor/></channel>
+    <channel><name>Mod1-interlock_pacFAN/outputStatus</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod2-VGA_Card_1/outputMeasurementCurrent</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod2-VGA_Card_1/outputMeasurementSenseVoltage</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod2-VGA_Card_1/outputMeasurementTerminalVoltage</name><period>0.2</period><monitor/></channel>
+    <channel><name>Mod2-VGA_Card_1/outputStatus</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod2-VGA_Card_2/outputMeasurementCurrent</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod2-VGA_Card_2/outputMeasurementSenseVoltage</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod2-VGA_Card_2/outputMeasurementTerminalVoltage</name><period>0.2</period><monitor/></channel>
+    <channel><name>Mod2-VGA_Card_2/outputStatus</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod2-VGA_Card_3/outputMeasurementCurrent</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod2-VGA_Card_3/outputMeasurementSenseVoltage</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod2-VGA_Card_3/outputMeasurementTerminalVoltage</name><period>0.2</period><monitor/></channel>
+    <channel><name>Mod2-VGA_Card_3/outputStatus</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod2-VGA_Card_4/outputMeasurementCurrent</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod2-VGA_Card_4/outputMeasurementSenseVoltage</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod2-VGA_Card_4/outputMeasurementTerminalVoltage</name><period>0.2</period><monitor/></channel>
+    <channel><name>Mod2-VGA_Card_4/outputStatus</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod2-RTD/outputMeasurementCurrent</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod2-RTD/outputMeasurementSenseVoltage</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod2-RTD/outputMeasurementTerminalVoltage</name><period>0.2</period><monitor/></channel>
+    <channel><name>Mod2-RTD/outputStatus</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod2-TPC1_pacFAN/outputMeasurementCurrent</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod2-TPC1_PACMAN/outputMeasurementCurrent</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod2-TPC1_pacFAN/outputMeasurementSenseVoltage</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod2-TPC1_PACMAN/outputMeasurementSenseVoltage</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod2-TPC1_pacFAN/outputMeasurementTerminalVoltage</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod2-TPC1_PACMAN/outputMeasurementTerminalVoltage</name><period>0.2</period><monitor/></channel>
+    <channel><name>Mod2-TPC1_pacFAN/outputStatus</name><period>0.2</period><monitor/></channel>
+    <channel><name>Mod2-TPC1_PACMAN/outputStatus</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod2-TPC2_pacFAN/outputMeasurementCurrent</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod2-TPC2_PACMAN/outputMeasurementCurrent</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod2-TPC2_pacFAN/outputMeasurementSenseVoltage</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod2-TPC2_PACMAN/outputMeasurementSenseVoltage</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod2-TPC2_pacFAN/outputMeasurementTerminalVoltage</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod2-TPC2_PACMAN/outputMeasurementTerminalVoltage</name><period>0.2</period><monitor/></channel>
+    <channel><name>Mod2-TPC2_pacFAN/outputStatus</name><period>0.2</period><monitor/></channel>
+    <channel><name>Mod2-TPC2_PACMAN/outputStatus</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod3-VGA_Card_1/outputMeasurementCurrent</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod3-VGA_Card_1/outputMeasurementSenseVoltage</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod3-VGA_Card_1/outputMeasurementTerminalVoltage</name><period>0.2</period><monitor/></channel>
+    <channel><name>Mod3-VGA_Card_1/outputStatus</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod3-VGA_Card_2/outputMeasurementCurrent</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod3-VGA_Card_2/outputMeasurementSenseVoltage</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod3-VGA_Card_2/outputMeasurementTerminalVoltage</name><period>0.2</period><monitor/></channel>
+    <channel><name>Mod3-VGA_Card_2/outputStatus</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod3-VGA_Card_3/outputMeasurementCurrent</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod3-VGA_Card_3/outputMeasurementSenseVoltage</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod3-VGA_Card_3/outputMeasurementTerminalVoltage</name><period>0.2</period><monitor/></channel>
+    <channel><name>Mod3-VGA_Card_3/outputStatus</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod3-VGA_Card_4/outputMeasurementCurrent</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod3-VGA_Card_4/outputMeasurementSenseVoltage</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod3-VGA_Card_4/outputMeasurementTerminalVoltage</name><period>0.2</period><monitor/></channel>
+    <channel><name>Mod3-VGA_Card_4/outputStatus</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod3-RTD/outputMeasurementCurrent</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod3-RTD/outputMeasurementSenseVoltage</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod3-RTD/outputMeasurementTerminalVoltage</name><period>0.2</period><monitor/></channel>
+    <channel><name>Mod3-RTD/outputStatus</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod3-TPC1_pacFAN/outputMeasurementCurrent</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod3-TPC1_PACMAN/outputMeasurementCurrent</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod3-TPC1_pacFAN/outputMeasurementSenseVoltage</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod3-TPC1_PACMAN/outputMeasurementSenseVoltage</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod3-TPC1_pacFAN/outputMeasurementTerminalVoltage</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod3-TPC1_PACMAN/outputMeasurementTerminalVoltage</name><period>0.2</period><monitor/></channel>
+    <channel><name>Mod3-TPC1_pacFAN/outputStatus</name><period>0.2</period><monitor/></channel>
+    <channel><name>Mod3-TPC1_PACMAN/outputStatus</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod3-TPC2_pacFAN/outputMeasurementCurrent</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod3-TPC2_PACMAN/outputMeasurementCurrent</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod3-TPC2_pacFAN/outputMeasurementSenseVoltage</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod3-TPC2_PACMAN/outputMeasurementSenseVoltage</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod3-TPC2_pacFAN/outputMeasurementTerminalVoltage</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod3-TPC2_PACMAN/outputMeasurementTerminalVoltage</name><period>0.2</period><monitor/></channel>
+    <channel><name>Mod3-TPC2_pacFAN/outputStatus</name><period>0.2</period><monitor/></channel>
+    <channel><name>Mod3-TPC2_PACMAN/outputStatus</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod3-interlock_pacFAN/outputMeasurementCurrent</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod3-interlock_pacFAN/outputMeasurementSenseVoltage</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod3-interlock_pacFAN/outputMeasurementTerminalVoltage</name><period>0.2</period><monitor/></channel>
+    <channel><name>Mod3-interlock_pacFAN/outputStatus</name><period>0.2</period><monitor/></channel>
+    <channel><name>mpod0/sysStatus</name><period>0.2</period><monitor/></channel>
+    <channel><name>mpod1/sysStatus</name><period>0.2</period><monitor/></channel>
   </group>
 </engineconfig>
