@@ -61,7 +61,7 @@ end_group(filename, 1)
 ### == add MPODs
 #################################
 channel_pvs = ["outputMeasurementCurrent", "outputMeasurementSenseVoltage", "outputMeasurementTerminalVoltage", "outputStatus"]
-crate_pvs = ["sysStatus"]
+crate_pvs = ["sysStatus", "sysMainSwitch"]
 start_group(filename, "MPOD", 1)
 for module in range(0, 4):
     this_module = "Mod" + str(module)
