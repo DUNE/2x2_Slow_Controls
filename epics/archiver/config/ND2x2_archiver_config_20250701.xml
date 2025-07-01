@@ -169,6 +169,8 @@
     <channel><name>Mod3-interlock_pacFAN/outputMeasurementTerminalVoltage</name><period>0.2</period><monitor/></channel>
     <channel><name>Mod3-interlock_pacFAN/outputStatus</name><period>0.2</period><monitor/></channel>
     <channel><name>mpod0/sysStatus</name><period>0.2</period><monitor/></channel>
+    <channel><name>mpod0/sysMainSwitch</name><period>0.2</period><monitor/></channel>
     <channel><name>mpod1/sysStatus</name><period>0.2</period><monitor/></channel>
+    <channel><name>mpod1/sysMainSwitch</name><period>0.2</period><monitor/></channel>
   </group>
 </engineconfig>
