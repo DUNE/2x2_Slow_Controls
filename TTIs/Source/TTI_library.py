@@ -162,7 +162,7 @@ class TTI(UNIT):
 
     # Set current limit of output
     def setMaxAmps(self, amps, channel):
-        cmd = 'I{0} {1:1.3f}'.format(channel, amps)
+        cmd = 'I{0} {1:1.4f}'.format(channel, amps)
         self.send(cmd)
 
     # Set over current protection trip point
