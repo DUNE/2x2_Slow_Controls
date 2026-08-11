@@ -1,7 +1,7 @@
 """
     Script to automatically ramp the desired TTis. The monitoring will be turned off during the procedure.
 
-    Last modification:  2025-09-29
+    Last modification:  2026-08-11
     by:                 Nicolas Sallin, nicolas.sallin@unibe.ch
 
     Usage:  -Ramp up all the TTIs:
@@ -22,6 +22,8 @@ from Source.tti_library_old import ttiPsu
 from Source.tti_control import ramp_down, ramp_up
 
 CONFIG_PATH = os.path.join(TTI_path, "CONFIG/")
+
+OPS_VOLTAGE = 100
 
 def _check_args(modules):
     # Delete the duplicate and check that the correct numbers were given
@@ -132,7 +134,7 @@ def _ramp_up(module):
     print(f"The current voltage on the TTI is: {V_start}\t V\nCurrently the output status is: {status}\nThe current limit on the TTI is: {max_amp}")
 
     # Ramp up
-    ramp_up(ip_tti,0,100)
+    ramp_up(ip_tti,0,OPS_VOLTAGE)
 
     return 0
 
