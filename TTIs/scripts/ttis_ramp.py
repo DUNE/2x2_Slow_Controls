@@ -36,12 +36,24 @@ def _get_confirmation_proceed(modules, command):
     while True:
         reply = input(prompt).strip().lower()
         if reply in ("y", "yes"):
-            return 0
+            break
         elif reply in ("n", "no"):
             print("Then please inform the concerned people and run the script when it is done.")
             sys.exit(0)
         else:
             print("Please answer with 'y' or 'n'.")
+
+    if command == "up":
+        prompt = f"TTIs {modules} will be ramped {command}. Did you confirm that the VGA crate is on? (y/n): "
+        while True:
+            reply = input(prompt).strip().lower()
+            if reply in ("y", "yes"):
+                return 0
+            elif reply in ("n", "no"):
+                print("Then please turn on the VGA crate and run the script when it is done.")
+                sys.exit(0)
+            else:
+                print("Please answer with 'y' or 'n'.")
 
 
 def _turn_off_monitoring(): 
