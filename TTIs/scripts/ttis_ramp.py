@@ -50,12 +50,13 @@ def _get_confirmation_proceed(modules, command):
         while True:
             reply = input(prompt).strip().lower()
             if reply in ("y", "yes"):
-                return 0
+                return
             elif reply in ("n", "no"):
                 print("Then please turn on the VGA crate and run the script when it is done.")
                 sys.exit(0)
             else:
                 print("Please answer with 'y' or 'n'.")
+    else: return
 
 
 def _turn_off_monitoring(): 
